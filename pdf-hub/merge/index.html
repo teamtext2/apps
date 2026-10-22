@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — Merge PDF — Combine Multiple Files Online</title>
+    <meta name="title" content="Spac2 PDF — Merge PDF — Combine Multiple Files Online">
+    <meta name="description"
+        content="Free online PDF merger: Combine multiple PDF documents into a single unified file. Drag and drop to reorder pages, filter ranges, and merge with 100% client-side privacy.">
+    <meta name="keywords" content="Merge PDF, combine PDF, join PDF files, PDF merger, free PDF binder, client-side PDF">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/merge/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/merge/">
+    <meta property="og:title" content="Spac2 PDF — Merge PDF — Combine Multiple Files Online">
+    <meta property="og:description"
+        content="Combine multiple PDF documents into a single unified file right in your browser. Fast, private, and unlimited.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        /* Base Tool Layout */
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+            transition: opacity 0.3s ease, margin 0.3s ease;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        /* SVG Icon Utilities */
+        .svg-icon {
+            display: inline-block;
+            vertical-align: middle;
+            width: 1.15em;
+            height: 1.15em;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, stroke 0.2s ease;
+        }
+
+        /* In-Studio App Mode */
+        body.in-studio-mode .tool-header-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .tool-info-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .workspace-wrap {
+            max-width: 960px;
+            padding-top: 1rem;
+        }
+
+        /* Initial Dropzone Enhancements */
+        .dropzone-container {
+            background: var(--bg-card);
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dropzone-container:hover,
+        .dropzone-container.drag-over {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.03);
+            box-shadow: 0 12px 36px -10px rgba(239, 68, 68, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .dropzone-icon-wrap {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .dropzone-container:hover .dropzone-icon-wrap {
+            transform: scale(1.08) rotate(-3deg);
+        }
+
+        .dropzone-main-svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .dropzone-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .dropzone-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.75rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .dropzone-badge-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.75rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .badge-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        /* Merge Studio App Container */
+        #merge-studio {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.45);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInStudio {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Studio Header Row */
+        .studio-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.15rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .studio-meta-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .count-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .summary-subtext {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .studio-quick-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+        }
+
+        /* Action Buttons */
+        .sub-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            padding: 0.45rem 0.8rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+
+        .sub-btn:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .sub-btn:active {
+            transform: scale(0.97);
+        }
+
+        .sub-btn.btn-action-add {
+            color: #4ade80;
+            border-color: rgba(74, 222, 128, 0.25);
+            background: rgba(74, 222, 128, 0.06);
+        }
+
+        .sub-btn.btn-action-add:hover {
+            background: rgba(74, 222, 128, 0.15);
+            border-color: rgba(74, 222, 128, 0.5);
+            color: #86efac;
+        }
+
+        .sub-btn.btn-danger-action {
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .sub-btn.btn-danger-action:hover {
+            background: rgba(239, 68, 68, 0.12);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+        }
+
+        /* Files List */
+        .merge-list-container {
+            margin-bottom: 1.75rem;
+        }
+
+        .merge-hint-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            padding: 0 0.25rem;
+        }
+
+        .merge-hint-bar span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .merge-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-height: 50px;
+        }
+
+        /* App-Like File Card */
+        .file-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1.15rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .file-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.35);
+        }
+
+        .file-card.dragging {
+            opacity: 0.35;
+            border: 2px dashed var(--accent-red);
+            box-shadow: 0 12px 30px rgba(239, 68, 68, 0.2);
+            cursor: grabbing;
+        }
+
+        .file-card.drag-over {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.08);
+            transform: scale(1.01);
+        }
+
+        .file-card-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+            flex-grow: 1;
+        }
+
+        .grip-handle {
+            color: var(--text-muted);
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: color 0.15s ease, background 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .grip-handle:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .grip-handle:active {
+            cursor: grabbing;
+        }
+
+        .order-badge {
+            min-width: 28px;
+            height: 28px;
+            padding: 0 6px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 0.78rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            letter-spacing: -0.01em;
+        }
+
+        .pdf-icon-tag {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.22);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .file-details {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            flex-grow: 1;
+        }
+
+        .file-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.3;
+        }
+
+        .file-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.12rem 0.45rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .badge-rotation {
+            background: rgba(249, 115, 22, 0.12);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            color: #fb923c;
+            border-radius: 4px;
+            padding: 0.12rem 0.45rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .file-range-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+        }
+
+        .file-range-input {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-primary);
+            padding: 0.2rem 0.45rem;
+            font-size: 0.76rem;
+            font-weight: 600;
+            width: 100px;
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .file-range-input:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+        }
+
+        .file-card-right {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            flex-shrink: 0;
+        }
+
+        /* Native App SVG Mini Action Buttons */
+        .btn-mini {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0;
+        }
+
+        .btn-mini:hover:not([disabled]) {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-mini:active:not([disabled]) {
+            transform: scale(0.94);
+        }
+
+        .btn-mini[disabled] {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+
+        .btn-mini.danger {
+            color: var(--text-muted);
+        }
+
+        .btn-mini.danger:hover:not([disabled]) {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.35);
+        }
+
+        /* Desktop vs Mobile Card Tiers */
+        .mobile-only-row {
+            display: none !important;
+        }
+
+        .mobile-delete-btn {
+            display: none !important;
+        }
+
+        .desktop-only-meta {
+            display: flex !important;
+        }
+
+        .desktop-only-actions {
+            display: flex !important;
+        }
+
+        /* Bottom Studio Controls / Dock */
+        .merge-bottom-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.35rem;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+
+        .output-filename-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-grow: 1;
+        }
+
+        .output-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            white-space: nowrap;
+        }
+
+        .output-input-wrap {
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0 0.75rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            max-width: 320px;
+            width: 100%;
+        }
+
+        .output-input-wrap:focus-within {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+        }
+
+        .output-input {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            padding: 0.55rem 0;
+            font-size: 0.88rem;
+            font-weight: 600;
+            outline: none;
+            width: 100%;
+        }
+
+        .output-input-ext {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            user-select: none;
+        }
+
+        .btn-execute-app {
+            padding: 0.8rem 1.85rem;
+            font-size: 0.98rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px -4px rgba(239, 68, 68, 0.4);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .btn-execute-app:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px -4px rgba(239, 68, 68, 0.5);
+        }
+
+        .btn-execute-app:active {
+            transform: scale(0.98);
+        }
+
+        /* Progress Card */
+        #progress-card {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-glow);
+            animation: fadeInStudio 0.3s ease;
+        }
+
+        .progress-pulse-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            animation: pulseIcon 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.12); opacity: 0.75; }
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-main);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 1.5rem auto;
+            max-width: 480px;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            transition: width 0.2s ease;
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================================
+           MOBILE APP OPTIMIZATIONS (<= 768px)
+           ============================================================ */
+        @media (max-width: 768px) {
+            .workspace-wrap {
+                padding: 0 0.85rem 5rem;
+            }
+
+            body.in-studio-mode .workspace-wrap {
+                padding: 0 0.65rem 6.5rem;
+            }
+
+            .tool-header-section {
+                padding: 2rem 1rem 1.5rem;
+            }
+
+            .dropzone-container {
+                padding: 2.5rem 1.25rem;
+                border-radius: 16px;
+            }
+
+            .dropzone-icon-wrap {
+                width: 60px;
+                height: 60px;
+                border-radius: 16px;
+                margin-bottom: 1rem;
+            }
+
+            .dropzone-title {
+                font-size: 1.15rem;
+            }
+
+            .dropzone-subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 1.25rem;
+            }
+
+            #merge-studio {
+                padding: 1.15rem 0.95rem;
+                border-radius: 16px;
+                margin-bottom: 1rem;
+            }
+
+            /* Studio Header on Mobile: clean 2-tier stacked bar */
+            .studio-header-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.85rem;
+                padding-bottom: 0.85rem;
+                margin-bottom: 1rem;
+            }
+
+            .studio-meta-area {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            /* Horizontal scrollable action ribbon on mobile */
+            .studio-quick-actions {
+                width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 0.4rem;
+            }
+
+            .studio-quick-actions::-webkit-scrollbar {
+                display: none;
+            }
+
+            .sub-btn {
+                flex-shrink: 0;
+                padding: 0.45rem 0.65rem;
+                font-size: 0.78rem;
+            }
+
+            /* 2-tier App Card on Mobile */
+            .file-card {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0.85rem 0.9rem;
+                gap: 0.75rem;
+            }
+
+            .file-card-left {
+                width: 100%;
+                gap: 0.65rem;
+            }
+
+            .file-card-top-row {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                width: 100%;
+            }
+
+            .file-card-bottom-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                width: 100%;
+                padding-top: 0.6rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .mobile-only-row {
+                display: flex !important;
+            }
+
+            .mobile-delete-btn {
+                display: inline-flex !important;
+            }
+
+            .desktop-only-meta {
+                display: none !important;
+            }
+
+            .desktop-only-actions {
+                display: none !important;
+            }
+
+            .file-range-input {
+                width: 80px;
+            }
+
+            .btn-mini {
+                width: 36px;
+                height: 36px;
+                border-radius: 9px;
+            }
+
+            /* Sticky Floating Bottom Bar on Mobile */
+            .merge-bottom-bar {
+                position: sticky;
+                bottom: 12px;
+                z-index: 100;
+                background: rgba(30, 30, 30, 0.94);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                border: 1px solid rgba(255, 255, 255, 0.16);
+                border-radius: 16px;
+                padding: 0.85rem 1rem;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+                margin-top: 0.5rem;
+            }
+
+            [data-theme="light"] .merge-bottom-bar {
+                background: rgba(255, 255, 255, 0.95);
+                border: 1px solid rgba(0, 0, 0, 0.12);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .output-filename-group {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.35rem;
+            }
+
+            .output-input-wrap {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .btn-execute-app {
+                width: 100%;
+                justify-content: center;
+                padding: 0.85rem;
+                font-size: 1rem;
+            }
+
+            .steps-section {
+                margin-top: 2rem;
+                padding-top: 1.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px;"><polyline points="15 18 9 12 15 6"/></svg>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Merge PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Merge PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                        <span>All tools</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">Merge PDF</h1>
+        <p class="tool-desc">Combine multiple PDF documents into a single file in seconds.</p>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" multiple style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <svg class="dropzone-main-svg" viewBox="0 0 48 48" fill="none">
+                    <rect x="8" y="12" width="22" height="28" rx="4" stroke="currentColor" stroke-width="2.5" opacity="0.35" fill="none"/>
+                    <rect x="18" y="6" width="22" height="28" rx="4" stroke="currentColor" stroke-width="2.5" fill="var(--bg-card)"/>
+                    <path d="M24 16h10M24 21h10M24 26h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="34" cy="34" r="9" fill="var(--accent-red)"/>
+                    <path d="M34 29v10M29 34h10" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h3 class="dropzone-title">Drag & drop multiple PDF files here</h3>
+            <p class="dropzone-subtitle">Select 2 or more documents to combine into a single clean file. 100% private in your browser.</p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 19px; height: 19px;"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+                <span>Select PDF Files</span>
+            </button>
+            <div class="dropzone-badge-strip">
+                <span class="badge-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-icon" style="width:13px;height:13px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 
+                    Client-Side Privacy
+                </span>
+                <span class="badge-item">•</span>
+                <span class="badge-item">No Size Limits</span>
+                <span class="badge-item">•</span>
+                <span class="badge-item">Vector Quality Intact</span>
+            </div>
+        </div>
+
+        <!-- Hidden input for adding more files in studio -->
+        <input type="file" id="add-more-input" accept=".pdf,application/pdf" multiple style="display: none;">
+
+        <!-- 2. Interactive Merge Studio -->
+        <div id="merge-studio">
+            <!-- Studio Header Bar -->
+            <div class="studio-header-row">
+                <div class="studio-meta-area">
+                    <button type="button" class="sub-btn btn-ghost-back" id="btn-back-upload" title="Clear all and return to upload">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 14px; height: 14px;"><polyline points="15 18 9 12 15 6"/></svg>
+                        <span>Reset</span>
+                    </button>
+                    <div class="count-pill">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; color: var(--accent-red);"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+                        <strong id="files-count-text">2 Files Selected</strong>
+                        <span id="total-pages-summary" class="summary-subtext">(0 total pages)</span>
+                    </div>
+                </div>
+
+                <div class="studio-quick-actions" role="toolbar" aria-label="Batch Actions">
+                    <button type="button" class="sub-btn btn-action-add" id="btn-add-more">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 14px; height: 14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        <span>Add Files</span>
+                    </button>
+                    <button type="button" class="sub-btn" id="btn-sort-name" title="Sort files alphabetically by name">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M20 8h-5"/><path d="M15 10V6.5a2.5 2.5 0 0 1 5 0V10"/><path d="M15 14h5l-5 6h5"/></svg>
+                        <span>Sort A-Z</span>
+                    </button>
+                    <button type="button" class="sub-btn" id="btn-reverse-order" title="Reverse current order">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+                        <span>Reverse</span>
+                    </button>
+                    <button type="button" class="sub-btn btn-danger-action" id="btn-clear-all" title="Remove all files">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                        <span>Clear All</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Draggable File Cards List Container -->
+            <div class="merge-list-container">
+                <div class="merge-hint-bar">
+                    <span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;"><circle cx="9" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="15" cy="19" r="1.5"/></svg>
+                        Drag cards or use ↑ / ↓ arrows to arrange merging sequence
+                    </span>
+                </div>
+                <div class="merge-list" id="merge-list"></div>
+            </div>
+
+            <!-- Bottom Action Bar / Floating Dock -->
+            <div class="merge-bottom-bar">
+                <div class="output-filename-group">
+                    <label for="output-name" class="output-label">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <span>Output Name:</span>
+                    </label>
+                    <div class="output-input-wrap">
+                        <input type="text" id="output-name" class="output-input" value="merged-document.pdf" placeholder="document.pdf" spellcheck="false">
+                    </div>
+                </div>
+
+                <button type="button" class="btn-primary btn-execute-app" id="btn-execute-merge">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 19px; height: 19px;"><path d="m8 6 4-4 4 4"/><path d="M12 2v10.3a4 4 0 0 1-1.17 2.83L6 20"/><path d="m16 18 2 2"/><path d="M12 12.3a4 4 0 0 0 1.17 2.83l3.66 3.66"/></svg>
+                    <span>Merge PDFs Now</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Progress Card -->
+        <div id="progress-card">
+            <div class="progress-pulse-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 28px; height: 28px;"><path d="m8 6 4-4 4 4"/><path d="M12 2v10.3a4 4 0 0 1-1.17 2.83L6 20"/><path d="m16 18 2 2"/><path d="M12 12.3a4 4 0 0 0 1.17 2.83l3.66 3.66"/></svg>
+            </div>
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+                Combining PDF Documents...
+            </h3>
+            <p id="progress-status" style="font-size: 0.9rem; color: var(--text-secondary); max-width: 440px; margin: 0 auto;">
+                Extracting and merging pages into unified document...
+            </p>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <p id="progress-percent" style="font-size: 0.9rem; font-weight: 800; color: var(--accent-red);">0%</p>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>Combine PDF Files with Zero Quality Loss</h3>
+                <p>
+                    Merge unlimited PDF documents together locally in your browser with native vector preservation. Reorder sheets, specify custom page ranges, and keep hyperlinks and bookmarks intact without uploading files anywhere.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Merge PDF Files in 3 Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Documents</h4>
+                        <p>Select or drag 2 or more PDF documents into the upload box.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Arrange Order</h4>
+                        <p>Drag files to set your desired sequence, or filter specific page ranges.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Download Merged PDF</h4>
+                        <p>Click 'Merge PDFs Now' to instantly download your combined document.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+                <a href="/apps/pdf-hub/ocr">OCR PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native PDF vector copying. 100% in-browser processing.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF-Lib & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Merge Controller Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const addMoreInput = document.getElementById("add-more-input");
+            const mergeStudio = document.getElementById("merge-studio");
+            const mergeList = document.getElementById("merge-list");
+            const progressCard = document.getElementById("progress-card");
+            const progressBarFill = document.getElementById("progress-bar-fill");
+            const progressPercent = document.getElementById("progress-percent");
+            const progressStatus = document.getElementById("progress-status");
+
+            // Controls
+            const btnBackUpload = document.getElementById("btn-back-upload");
+            const filesCountText = document.getElementById("files-count-text");
+            const totalPagesSummary = document.getElementById("total-pages-summary");
+            const btnAddMore = document.getElementById("btn-add-more");
+            const btnSortName = document.getElementById("btn-sort-name");
+            const btnReverseOrder = document.getElementById("btn-reverse-order");
+            const btnClearAll = document.getElementById("btn-clear-all");
+            const btnExecuteMerge = document.getElementById("btn-execute-merge");
+            const outputNameInput = document.getElementById("output-name");
+
+            // State: array of file objects
+            // { id, file, buffer, pageCount, rangeText, rotation }
+            let fileEntries = [];
+
+            // Crisp Native SVG Library
+            const SVG_ICONS = {
+                grip: `<svg class="svg-icon grip-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px;"><circle cx="9" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="15" cy="19" r="1.5"/></svg>`,
+                pdf: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 17px; height: 17px;"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13v4"/><path d="M9 15h1.8a1.2 1.2 0 0 0 0-2.4H9"/></svg>`,
+                rotate: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 15px; height: 15px;"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.9 1 6.7 2.4L21 8"/><polyline points="21 3 21 8 16 8"/></svg>`,
+                up: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;"><polyline points="18 15 12 9 6 15"/></svg>`,
+                down: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;"><polyline points="6 9 12 15 18 9"/></svg>`,
+                delete: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>`
+            };
+
+            function escapeHtml(str) {
+                if (!str) return "";
+                return String(str)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            // Initial Dropzone
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                addFilesToBatch(files);
+            });
+
+            // Back / Reset button
+            if (btnBackUpload) {
+                btnBackUpload.addEventListener("click", () => {
+                    if (fileEntries.length > 0 && !confirm("Return to upload screen and clear all selected files?")) {
+                        return;
+                    }
+                    fileEntries = [];
+                    document.body.classList.remove("in-studio-mode");
+                    mergeStudio.style.display = "none";
+                    dropzone.style.display = "block";
+                    fileInput.value = "";
+                    showToast("Returned to file selection", "info");
+                });
+            }
+
+            // Add more files button
+            btnAddMore.addEventListener("click", () => {
+                addMoreInput.click();
+            });
+
+            addMoreInput.addEventListener("change", (e) => {
+                if (e.target.files && e.target.files.length > 0) {
+                    addFilesToBatch(e.target.files);
+                    addMoreInput.value = "";
+                }
+            });
+
+            async function addFilesToBatch(fileList) {
+                const pdfs = Array.from(fileList).filter(f => f.type === "application/pdf" || f.name.toLowerCase().endsWith(".pdf"));
+                if (pdfs.length === 0) {
+                    showToast("Please select valid PDF documents.", "error");
+                    return;
+                }
+
+                showToast(`Reading ${pdfs.length} file(s)...`, "info");
+
+                for (const f of pdfs) {
+                    try {
+                        const buffer = await f.arrayBuffer();
+                        const doc = await PDFLib.PDFDocument.load(buffer.slice(0));
+                        const pageCount = doc.getPageCount();
+
+                        fileEntries.push({
+                            id: "file_" + Math.random().toString(36).substr(2, 9),
+                            file: f,
+                            buffer: buffer,
+                            pageCount: pageCount,
+                            rangeText: `1-${pageCount}`,
+                            rotation: 0
+                        });
+                    } catch (err) {
+                        console.error("Failed to parse", f.name, err);
+                        showToast(`Could not load ${f.name}: ` + err.message, "error");
+                    }
+                }
+
+                if (fileEntries.length > 0) {
+                    document.body.classList.add("in-studio-mode");
+                    dropzone.style.display = "none";
+                    mergeStudio.style.display = "block";
+                    renderList();
+                }
+            }
+
+            // Render File Cards List
+            function renderList() {
+                mergeList.innerHTML = "";
+
+                let totalP = 0;
+
+                fileEntries.forEach((entry, idx) => {
+                    totalP += entry.pageCount;
+
+                    const card = document.createElement("div");
+                    card.className = "file-card";
+                    card.draggable = true;
+                    card.dataset.index = idx;
+
+                    const safeName = escapeHtml(entry.file.name);
+                    const safeRange = escapeHtml(entry.rangeText);
+                    const formattedSize = typeof formatBytes === "function" ? formatBytes(entry.file.size) : `${Math.round(entry.file.size / 1024)} KB`;
+                    const rotationBadgeHtml = entry.rotation ? `<span class="badge-rotation" title="Rotated ${entry.rotation}°">${SVG_ICONS.rotate} ${entry.rotation}°</span>` : '';
+
+                    card.innerHTML = `
+                        <!-- Top Row (Unified on Desktop, Top of 2-tier on Mobile) -->
+                        <div class="file-card-top-row">
+                            <div class="grip-handle" title="Drag to arrange" aria-label="Drag handle">
+                                ${SVG_ICONS.grip}
+                            </div>
+                            <div class="order-badge">#${idx + 1}</div>
+                            <div class="pdf-icon-tag" aria-hidden="true">
+                                ${SVG_ICONS.pdf}
+                            </div>
+                            <div class="file-details">
+                                <div class="file-name" title="${safeName}">${safeName}</div>
+                                
+                                <!-- Desktop Only Metadata (Hidden on Mobile) -->
+                                <div class="file-meta-row desktop-only-meta">
+                                    <span class="meta-pill">${formattedSize}</span>
+                                    <span class="meta-pill">${entry.pageCount} ${entry.pageCount === 1 ? 'page' : 'pages'}</span>
+                                    ${rotationBadgeHtml}
+                                    <div class="file-range-wrap">
+                                        <span>Pages:</span>
+                                        <input type="text" class="file-range-input" data-index="${idx}" value="${safeRange}" title="Page range (e.g. 1-5, 8)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Only Top Delete Button -->
+                            <button type="button" class="btn-mini danger btn-delete mobile-delete-btn" data-index="${idx}" title="Remove file" aria-label="Remove ${safeName}">
+                                ${SVG_ICONS.delete}
+                            </button>
+                        </div>
+
+                        <!-- Mobile Only Bottom Row (Hidden on Desktop) -->
+                        <div class="file-card-bottom-row mobile-only-row">
+                            <div class="file-meta-row">
+                                <span class="meta-pill">${formattedSize}</span>
+                                <span class="meta-pill">${entry.pageCount}p</span>
+                                ${rotationBadgeHtml}
+                                <div class="file-range-wrap">
+                                    <span>Pages:</span>
+                                    <input type="text" class="file-range-input" data-index="${idx}" value="${safeRange}" title="Page range (e.g. 1-5, 8)">
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.35rem;">
+                                <button type="button" class="btn-mini btn-rotate" data-index="${idx}" title="Rotate pages +90°">
+                                    ${SVG_ICONS.rotate}
+                                </button>
+                                <button type="button" class="btn-mini btn-up" data-index="${idx}" title="Move Up" ${idx === 0 ? 'disabled' : ''}>
+                                    ${SVG_ICONS.up}
+                                </button>
+                                <button type="button" class="btn-mini btn-down" data-index="${idx}" title="Move Down" ${idx === fileEntries.length - 1 ? 'disabled' : ''}>
+                                    ${SVG_ICONS.down}
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Desktop Only Right Action Cluster (Hidden on Mobile) -->
+                        <div class="file-card-right desktop-only-actions">
+                            <button type="button" class="btn-mini btn-rotate" data-index="${idx}" title="Rotate pages +90°">
+                                ${SVG_ICONS.rotate}
+                            </button>
+                            <button type="button" class="btn-mini btn-up" data-index="${idx}" title="Move Up" ${idx === 0 ? 'disabled' : ''}>
+                                ${SVG_ICONS.up}
+                            </button>
+                            <button type="button" class="btn-mini btn-down" data-index="${idx}" title="Move Down" ${idx === fileEntries.length - 1 ? 'disabled' : ''}>
+                                ${SVG_ICONS.down}
+                            </button>
+                            <button type="button" class="btn-mini danger btn-delete" data-index="${idx}" title="Remove file">
+                                ${SVG_ICONS.delete}
+                            </button>
+                        </div>
+                    `;
+
+                    // Drag and Drop reordering events
+                    card.addEventListener("dragstart", (e) => {
+                        e.dataTransfer.setData("text/plain", idx);
+                        card.classList.add("dragging");
+                    });
+
+                    card.addEventListener("dragend", () => {
+                        card.classList.remove("dragging");
+                    });
+
+                    card.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        card.classList.add("drag-over");
+                    });
+
+                    card.addEventListener("dragleave", () => {
+                        card.classList.remove("drag-over");
+                    });
+
+                    card.addEventListener("drop", (e) => {
+                        e.preventDefault();
+                        card.classList.remove("drag-over");
+                        const fromIdx = parseInt(e.dataTransfer.getData("text/plain"), 10);
+                        const toIdx = idx;
+
+                        if (fromIdx !== toIdx && !isNaN(fromIdx)) {
+                            const [moved] = fileEntries.splice(fromIdx, 1);
+                            fileEntries.splice(toIdx, 0, moved);
+                            renderList();
+                        }
+                    });
+
+                    mergeList.appendChild(card);
+                });
+
+                // Update Counters
+                filesCountText.textContent = `${fileEntries.length} ${fileEntries.length === 1 ? 'File' : 'Files'} Selected`;
+                totalPagesSummary.textContent = `(${totalP} total pages)`;
+
+                // Event Listeners for row controls (querying all matches for both desktop & mobile rendered buttons)
+                mergeList.querySelectorAll(".btn-up").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = parseInt(btn.dataset.index, 10);
+                        if (i > 0) {
+                            const temp = fileEntries[i];
+                            fileEntries[i] = fileEntries[i - 1];
+                            fileEntries[i - 1] = temp;
+                            renderList();
+                        }
+                    });
+                });
+
+                mergeList.querySelectorAll(".btn-down").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = parseInt(btn.dataset.index, 10);
+                        if (i < fileEntries.length - 1) {
+                            const temp = fileEntries[i];
+                            fileEntries[i] = fileEntries[i + 1];
+                            fileEntries[i + 1] = temp;
+                            renderList();
+                        }
+                    });
+                });
+
+                mergeList.querySelectorAll(".btn-delete").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = parseInt(btn.dataset.index, 10);
+                        fileEntries.splice(i, 1);
+                        if (fileEntries.length === 0) {
+                            document.body.classList.remove("in-studio-mode");
+                            mergeStudio.style.display = "none";
+                            dropzone.style.display = "block";
+                            fileInput.value = "";
+                        } else {
+                            renderList();
+                        }
+                    });
+                });
+
+                mergeList.querySelectorAll(".btn-rotate").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = parseInt(btn.dataset.index, 10);
+                        fileEntries[i].rotation = (fileEntries[i].rotation + 90) % 360;
+                        renderList();
+                        showToast(`Rotated pages in ${fileEntries[i].file.name} to ${fileEntries[i].rotation}°`, "info");
+                    });
+                });
+
+                mergeList.querySelectorAll(".file-range-input").forEach(inp => {
+                    inp.addEventListener("change", (e) => {
+                        const i = parseInt(inp.dataset.index, 10);
+                        fileEntries[i].rangeText = e.target.value.trim();
+                    });
+                });
+            }
+
+            // Quick Sort A-Z
+            btnSortName.addEventListener("click", () => {
+                fileEntries.sort((a, b) => a.file.name.localeCompare(b.file.name));
+                renderList();
+                showToast("Sorted files alphabetically", "info");
+            });
+
+            // Quick Reverse
+            btnReverseOrder.addEventListener("click", () => {
+                fileEntries.reverse();
+                renderList();
+                showToast("Reversed file order", "info");
+            });
+
+            // Clear All
+            btnClearAll.addEventListener("click", () => {
+                if (confirm("Remove all selected PDF files?")) {
+                    fileEntries = [];
+                    document.body.classList.remove("in-studio-mode");
+                    mergeStudio.style.display = "none";
+                    dropzone.style.display = "block";
+                    fileInput.value = "";
+                    showToast("Cleared file list", "info");
+                }
+            });
+
+            // Parse Page Ranges helper (e.g., "1-3, 5, 7-9") -> returns 0-based index array
+            function parseRangeIndices(str, maxCount) {
+                if (!str) return Array.from({ length: maxCount }, (_, i) => i);
+                const indices = [];
+                const parts = str.split(",");
+
+                for (let part of parts) {
+                    part = part.trim();
+                    if (!part) continue;
+
+                    if (part.includes("-")) {
+                        const [startStr, endStr] = part.split("-");
+                        const start = Math.max(1, parseInt(startStr, 10) || 1);
+                        const end = Math.min(maxCount, parseInt(endStr, 10) || maxCount);
+                        for (let p = start; p <= end; p++) {
+                            if (!indices.includes(p - 1)) indices.push(p - 1);
+                        }
+                    } else {
+                        const p = parseInt(part, 10);
+                        if (p >= 1 && p <= maxCount && !indices.includes(p - 1)) {
+                            indices.push(p - 1);
+                        }
+                    }
+                }
+
+                return indices.length > 0 ? indices : Array.from({ length: maxCount }, (_, i) => i);
+            }
+
+            // ============================================================
+            // EXECUTE MERGE WITH PDF-LIB
+            // ============================================================
+            btnExecuteMerge.addEventListener("click", async () => {
+                if (fileEntries.length === 0) return;
+
+                mergeStudio.style.display = "none";
+                progressCard.style.display = "block";
+                progressBarFill.style.width = "0%";
+                progressPercent.textContent = "0%";
+                progressStatus.textContent = "Initializing unified PDF document...";
+
+                try {
+                    const mergedDoc = await PDFLib.PDFDocument.create();
+                    const totalFiles = fileEntries.length;
+
+                    for (let fIdx = 0; fIdx < totalFiles; fIdx++) {
+                        const entry = fileEntries[fIdx];
+                        progressStatus.textContent = `Merging file ${fIdx + 1} of ${totalFiles}: ${entry.file.name}...`;
+
+                        const pct = Math.round((fIdx / totalFiles) * 90);
+                        progressBarFill.style.width = `${pct}%`;
+                        progressPercent.textContent = `${pct}%`;
+
+                        // Load document
+                        const srcDoc = await PDFLib.PDFDocument.load(entry.buffer.slice(0));
+                        const pageIndices = parseRangeIndices(entry.rangeText, entry.pageCount);
+
+                        // Copy pages
+                        const copiedPages = await mergedDoc.copyPages(srcDoc, pageIndices);
+
+                        // Add and rotate if needed
+                        copiedPages.forEach(p => {
+                            if (entry.rotation) {
+                                const currentRot = p.getRotation().angle;
+                                p.setRotation(PDFLib.degrees((currentRot + entry.rotation) % 360));
+                            }
+                            mergedDoc.addPage(p);
+                        });
+                    }
+
+                    progressStatus.textContent = "Compressing and finalizing output file...";
+                    progressBarFill.style.width = "95%";
+                    progressPercent.textContent = "95%";
+
+                    // Save unified PDF
+                    const mergedBytes = await mergedDoc.save({ useObjectStreams: true });
+                    progressBarFill.style.width = "100%";
+                    progressPercent.textContent = "100%";
+
+                    // Download
+                    let outName = outputNameInput.value.trim() || "merged-document.pdf";
+                    if (!outName.toLowerCase().endsWith(".pdf")) outName += ".pdf";
+
+                    downloadBlob(new Blob([mergedBytes], { type: "application/pdf" }), outName);
+
+                    showToast(`Successfully merged ${totalFiles} documents into ${outName}!`, "success");
+
+                    setTimeout(() => {
+                        progressCard.style.display = "none";
+                        mergeStudio.style.display = "block";
+                    }, 1200);
+                } catch (err) {
+                    console.error("Merge error:", err);
+                    progressCard.style.display = "none";
+                    mergeStudio.style.display = "block";
+                    showToast("Merge failed: " + err.message, "error");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

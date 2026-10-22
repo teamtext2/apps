@@ -1,0 +1,3284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — Crop & Resize PDF — Trim Margins & Paper Sizes</title>
+    <meta name="title" content="Spac2 PDF — Crop & Resize PDF — Trim Margins & Paper Sizes">
+    <meta name="description"
+        content="Free online tool to crop white margins from PDF documents, trim excess borders, and resize pages to standard A4, Letter, A3, or custom dimensions. 100% client-side privacy.">
+    <meta name="keywords" content="Crop PDF, resize PDF, trim PDF margins, change PDF page size, A4 PDF resize, client-side PDF cropper">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/crop-resize/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/crop-resize/">
+    <meta property="og:title" content="Spac2 PDF — Crop & Resize PDF — Trim Margins & Paper Sizes">
+    <meta property="og:description"
+        content="Visually trim PDF margins and resize documents to A4, Letter, A3 or custom formats. Fast, free, and completely private in your browser.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        /* ============================================================
+           Full-Screen Pro Studio Workstation Architecture
+        ============================================================ */
+        body.in-studio-mode {
+            padding-top: 0 !important;
+            overflow: hidden !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+        }
+
+        body.in-studio-mode .spac2-header-wrapper,
+        body.in-studio-mode .spac2-header-overlay,
+        body.in-studio-mode .pdf-footer {
+            display: none !important;
+        }
+
+        #crop-studio {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2500;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            background: #111214;
+            flex-direction: column;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Top Studio Bar (Glassmorphic Pro Toolbar) */
+        .studio-top-bar {
+            height: 56px;
+            background: rgba(22, 23, 26, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .studio-bar-left,
+        .studio-bar-center,
+        .studio-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .studio-bar-left {
+            min-width: 0;
+        }
+
+        /* Document Badge */
+        .studio-doc-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 9999px;
+            padding: 0.25rem 0.7rem 0.25rem 0.35rem;
+            min-width: 0;
+            max-width: 240px;
+        }
+
+        .doc-format-tag {
+            font-size: 0.68rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            color: #ffffff;
+            padding: 0.15rem 0.45rem;
+            border-radius: 9999px;
+            letter-spacing: 0.04em;
+            flex-shrink: 0;
+        }
+
+        .studio-filename {
+            font-weight: 600;
+            font-size: 0.84rem;
+            color: #e4e4e7;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Pro Buttons with bespoke SVG styling */
+        .studio-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            height: 36px;
+            padding: 0 0.85rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f4f4f5;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .studio-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .studio-nav-btn svg {
+            stroke: currentColor;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .studio-nav-btn:hover svg {
+            transform: scale(1.08);
+        }
+
+        /* Control Capsules (Segmented pill groups) */
+        .studio-control-capsule {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 10px;
+            padding: 3px;
+            gap: 2px;
+        }
+
+        .capsule-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            height: 30px;
+            padding: 0 0.85rem;
+            border-radius: 7px;
+            border: none;
+            background: transparent;
+            color: #a1a1aa;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+        }
+
+        .capsule-tab-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            opacity: 0.85;
+            transition: transform 0.2s ease;
+        }
+
+        .capsule-tab-btn:hover:not(.active) {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .capsule-tab-btn.active {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(239, 68, 68, 0.38);
+        }
+
+        .capsule-tab-btn.active svg {
+            opacity: 1;
+        }
+
+        /* Tool Action Buttons inside Capsules */
+        .studio-icon-btn {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 7px;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .studio-icon-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+
+        .studio-icon-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .studio-icon-btn svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+        }
+
+        .studio-indicator-text {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            padding: 0 0.5rem;
+            white-space: nowrap;
+            letter-spacing: 0.02em;
+        }
+
+        .studio-zoom-val {
+            min-width: 44px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 0.15rem 0.3rem;
+            transition: background 0.15s ease;
+        }
+
+        .studio-zoom-val:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .studio-divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 2px;
+        }
+
+        /* Hero Primary Action Button */
+        .studio-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            height: 36px;
+            padding: 0 1.15rem;
+            border-radius: 10px;
+            background: var(--accent-gradient);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .studio-cta-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            transition: transform 0.2s ease;
+        }
+
+        .studio-cta-btn:hover {
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.55);
+            transform: translateY(-1px);
+            filter: brightness(1.06);
+        }
+
+        .studio-cta-btn:hover svg {
+            transform: translateY(1px);
+        }
+
+        .studio-cta-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Studio Body Layout */
+        .studio-body {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 92px);
+            height: calc(100dvh - 92px);
+            position: relative;
+            overflow: hidden;
+            background: #111214;
+        }
+
+        /* Sidebar Inspector Panel */
+        .studio-sidebar {
+            width: 320px;
+            background: #18191c;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
+            overflow-y: auto;
+            flex-shrink: 0;
+            z-index: 50;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .sidebar-card-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #94a3b8;
+        }
+
+        .sidebar-card-title svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            opacity: 0.8;
+        }
+
+        /* Aspect Preset Chips */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.4rem;
+        }
+
+        .preset-chip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            padding: 0.5rem 0.25rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: #cbd5e1;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .preset-chip svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+        }
+
+        .preset-chip:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+        }
+
+        .preset-chip.active {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+            color: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Smart Auto-Trim Feature Button */
+        .btn-smart-trim {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            width: 100%;
+            padding: 0.65rem 1rem;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(249, 115, 22, 0.12) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            border-radius: 10px;
+            color: #fca5a5;
+            font-size: 0.84rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-smart-trim svg {
+            width: 16px;
+            height: 16px;
+            stroke: #f87171;
+            transition: transform 0.25s ease;
+        }
+
+        .btn-smart-trim:hover {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.22) 0%, rgba(249, 115, 22, 0.22) 100%);
+            border-color: #ef4444;
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-smart-trim:hover svg {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* Precise Margin Direction Inputs */
+        .margin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.55rem;
+        }
+
+        .margin-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            padding: 0.45rem 0.55rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .margin-box:focus-within {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3);
+        }
+
+        .margin-box-label {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .margin-box-label svg {
+            width: 11px;
+            height: 11px;
+            stroke: currentColor;
+        }
+
+        .margin-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .margin-num-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            outline: none;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        .margin-unit-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        /* Quick Trim Chips */
+        .quick-trim-row {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-trim-chip {
+            padding: 0.25rem 0.55rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: #94a3b8;
+            font-size: 0.74rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .quick-trim-chip:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        /* Reset Crop Button */
+        .btn-reset-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            width: 100%;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: #cbd5e1;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-reset-box svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-reset-box:hover {
+            background: rgba(255, 255, 255, 0.09);
+            color: #ffffff;
+        }
+
+        .btn-reset-box:hover svg {
+            transform: rotate(-90deg);
+        }
+
+        /* Resize Controls Specific */
+        .studio-select {
+            width: 100%;
+            background: #111214;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #ffffff;
+            padding: 0.55rem 0.7rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .studio-select:focus {
+            border-color: #ef4444;
+        }
+
+        .orientation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .orientation-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .orientation-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+        }
+
+        .orientation-btn:hover {
+            background: rgba(255, 255, 255, 0.09);
+            color: #ffffff;
+        }
+
+        .orientation-btn.active {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* Scope Segmented Control */
+        .scope-segment {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .scope-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.45rem;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .scope-btn svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+        }
+
+        .scope-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        /* Privacy & Quality Pill */
+        .quality-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.45rem;
+            padding: 0.65rem;
+            background: rgba(16, 185, 129, 0.06);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            font-size: 0.74rem;
+            color: #a7f3d0;
+            line-height: 1.45;
+        }
+
+        .quality-note svg {
+            width: 14px;
+            height: 14px;
+            stroke: #34d399;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* Canvas Viewport */
+        .studio-canvas-container {
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            background: radial-gradient(circle at center, #1a1c20 0%, #101114 100%);
+            position: relative;
+        }
+
+        .pdf-page-container {
+            position: relative;
+            background: #ffffff;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            user-select: none;
+            border-radius: 2px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        #pdf-base-canvas {
+            display: block;
+        }
+
+        /* Interactive Crop Overlay */
+        #crop-overlay-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .crop-mask {
+            position: absolute;
+            background: rgba(10, 10, 12, 0.68);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            pointer-events: auto;
+            transition: background 0.15s ease;
+        }
+
+        .crop-box {
+            position: absolute;
+            border: 2px solid #ef4444;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 0 24px rgba(239, 68, 68, 0.25);
+            pointer-events: auto;
+            cursor: move;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .crop-box.is-dragging {
+            border-color: #f87171;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 35px rgba(239, 68, 68, 0.45);
+        }
+
+        /* Rule-of-Thirds Grid inside Crop Box */
+        .crop-grid-line {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.22);
+            transition: opacity 0.2s ease;
+        }
+
+        .crop-grid-h1 { top: 33.333%; left: 0; width: 100%; height: 1px; }
+        .crop-grid-h2 { top: 66.666%; left: 0; width: 100%; height: 1px; }
+        .crop-grid-v1 { left: 33.333%; top: 0; height: 100%; width: 1px; }
+        .crop-grid-v2 { left: 66.666%; top: 0; height: 100%; width: 1px; }
+
+        .crop-box.is-dragging .crop-grid-line {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Modern Ergonomic Crop Handles */
+        .crop-handle {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #ef4444;
+            border: 2.5px solid #ffffff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            transition: transform 0.15s ease, background-color 0.15s ease;
+            z-index: 10;
+        }
+
+        .crop-handle::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+        }
+
+        .crop-handle:hover {
+            transform: translate(-50%, -50%) scale(1.25);
+            background: #dc2626;
+        }
+
+        .handle-nw { top: 0; left: 0; cursor: nwse-resize; }
+        .handle-n  { top: 0; left: 50%; cursor: ns-resize; }
+        .handle-ne { top: 0; left: 100%; cursor: nesw-resize; }
+        .handle-e  { top: 50%; left: 100%; cursor: ew-resize; }
+        .handle-se { top: 100%; left: 100%; cursor: nwse-resize; }
+        .handle-s  { top: 100%; left: 50%; cursor: ns-resize; }
+        .handle-sw { top: 100%; left: 0; cursor: nesw-resize; }
+        .handle-w  { top: 50%; left: 0; cursor: ew-resize; }
+
+        /* Floating Dimension Badge */
+        .crop-info-pill {
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(18, 19, 22, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            white-space: nowrap;
+            pointer-events: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .crop-info-pill svg {
+            width: 12px;
+            height: 12px;
+            stroke: #ef4444;
+        }
+
+        /* ============================================================
+           ROW 2: SECONDARY WORKSTATION RIBBON (Scrollable across both sides)
+        ============================================================ */
+        .studio-sub-ribbon {
+            height: 44px;
+            background: #151619;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.6rem;
+            flex-shrink: 0;
+            z-index: 95;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            scrollbar-width: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .studio-sub-ribbon::-webkit-scrollbar {
+            display: none;
+        }
+
+        .ribbon-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            flex-shrink: 0;
+        }
+
+        .ribbon-tools-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            flex-shrink: 0;
+        }
+
+        .ribbon-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            height: 30px;
+            padding: 0 0.75rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .ribbon-action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .ribbon-action-btn.primary {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%);
+            border-color: rgba(239, 68, 68, 0.45);
+            color: #fca5a5;
+        }
+
+        .ribbon-action-btn.primary:hover {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.35) 0%, rgba(249, 115, 22, 0.35) 100%);
+            color: #ffffff;
+        }
+
+        .ribbon-action-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            flex-shrink: 0;
+        }
+
+        .ribbon-pill-group {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 2px;
+            gap: 2px;
+            flex-shrink: 0;
+        }
+
+        .ribbon-pill-chip {
+            height: 26px;
+            padding: 0 0.6rem;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .ribbon-pill-chip:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+        }
+
+        .ribbon-pill-chip.active {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.35);
+        }
+
+        /* Sidebar backdrop for mobile */
+        #sidebar-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2900;
+        }
+
+        #sidebar-backdrop.active {
+            display: block;
+        }
+
+        .sidebar-header-mobile {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .sidebar-header-mobile h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .btn-close-sidebar {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-close-sidebar:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Sidebar Toggle Button */
+        .mobile-sidebar-toggle {
+            display: inline-flex;
+        }
+
+        /* ============================================================
+           MOBILE & TABLET RESPONSIVE SYSTEM (<= 992px)
+           Strict 2-Row Horizontal Scrollable Workstation & Optimized Preview
+        ============================================================ */
+        @media (max-width: 992px) {
+            body.in-studio-mode {
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: hidden !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+                width: 100vw !important;
+            }
+
+            body.in-studio-mode #crop-studio {
+                width: 100vw !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                z-index: 2500 !important;
+            }
+
+            /* DÒNG 1: TOP BAR (Strictly 1 horizontal row, scrollable) */
+            .studio-top-bar {
+                height: 44px !important;
+                min-height: 44px !important;
+                max-height: 44px !important;
+                width: 100% !important;
+                padding: 0 0.5rem !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                gap: 0.45rem !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                white-space: nowrap !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-x !important;
+                scrollbar-width: none !important;
+                flex-wrap: nowrap !important;
+                flex-shrink: 0 !important;
+                background: #1a1b1d !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+                z-index: 120 !important;
+            }
+
+            .studio-top-bar::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .studio-bar-left,
+            .studio-bar-center,
+            .studio-bar-right {
+                display: inline-flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 0.35rem !important;
+                flex-shrink: 0 !important;
+                flex-wrap: nowrap !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .studio-nav-btn {
+                height: 30px !important;
+                padding: 0 0.6rem !important;
+                font-size: 0.78rem !important;
+                border-radius: 8px !important;
+                gap: 0.3rem !important;
+                flex-shrink: 0 !important;
+            }
+
+            .studio-doc-badge {
+                max-width: 110px !important;
+                height: 30px !important;
+                padding: 0 0.45rem 0 0.25rem !important;
+                flex-shrink: 0 !important;
+            }
+
+            .studio-filename {
+                font-size: 0.74rem !important;
+                max-width: 60px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+            }
+
+            .capsule-tab-btn {
+                height: 28px !important;
+                padding: 0 0.65rem !important;
+                font-size: 0.78rem !important;
+                gap: 0.3rem !important;
+                flex-shrink: 0 !important;
+            }
+
+            .capsule-tab-btn span {
+                display: inline !important;
+            }
+
+            .studio-cta-btn {
+                height: 30px !important;
+                padding: 0 0.75rem !important;
+                font-size: 0.78rem !important;
+                gap: 0.35rem !important;
+                flex-shrink: 0 !important;
+            }
+
+            .studio-cta-btn span {
+                display: inline !important;
+            }
+
+            /* DÒNG 2: SUB RIBBON (Strictly 1 horizontal row, scrollable) */
+            .studio-sub-ribbon {
+                height: 42px !important;
+                min-height: 42px !important;
+                max-height: 42px !important;
+                width: 100% !important;
+                padding: 0 0.5rem !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                gap: 0.4rem !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                white-space: nowrap !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-x !important;
+                scrollbar-width: none !important;
+                flex-wrap: nowrap !important;
+                flex-shrink: 0 !important;
+                background: #141517 !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+                z-index: 110 !important;
+            }
+
+            .studio-sub-ribbon::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            /* Studio Body Layout on Mobile */
+            .studio-body {
+                height: calc(100vh - 86px) !important;
+                height: calc(100dvh - 86px) !important;
+                width: 100% !important;
+                flex: 1 !important;
+                position: relative !important;
+                overflow: hidden !important;
+            }
+
+            /* Canvas Container on Mobile (Optimized Preview) */
+            .studio-canvas-container {
+                width: 100% !important;
+                height: 100% !important;
+                padding: 0.5rem !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                overflow: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+
+            .pdf-page-container {
+                margin: auto !important;
+                flex-shrink: 0 !important;
+                box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+            }
+
+            /* Sidebar Drawer on Mobile (Hidden completely until opened) */
+            .studio-sidebar {
+                position: fixed !important;
+                top: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 320px !important;
+                max-width: 85vw !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+                z-index: 3000 !important;
+                box-shadow: -8px 0 35px rgba(0, 0, 0, 0.8) !important;
+                transform: translateX(105%) !important;
+                transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                pointer-events: none !important;
+                visibility: hidden !important;
+            }
+
+            .studio-sidebar.open {
+                transform: translateX(0) !important;
+                pointer-events: auto !important;
+                visibility: visible !important;
+            }
+
+            .sidebar-header-mobile {
+                display: flex !important;
+            }
+        }
+
+        /* Loading */
+        .studio-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(31, 31, 31, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-red);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Draft Resume Card */
+        .draft-resume-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(249, 115, 22, 0.05) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 12px;
+            padding: 0.85rem 1.15rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .draft-card-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+
+        .draft-badge-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .draft-info {
+            min-width: 0;
+        }
+
+        .draft-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .draft-meta {
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .draft-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .btn-resume-draft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            height: 34px;
+            padding: 0 1rem;
+            background: var(--accent-gradient);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(239, 68, 68, 0.35);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-resume-draft:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.5);
+        }
+
+        .btn-discard-draft {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-discard-draft:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Crop & Resize PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Crop & Resize PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+                        <span>All tools</span>
+                        <i data-lucide="chevron-down" style="width: 13px; height: 13px;"></i>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <i data-lucide="home" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- INITIAL DROPZONE SCREEN -->
+    <div id="upload-screen">
+        <section class="tool-header-section">
+            <h1 class="tool-title">Crop & Resize PDF</h1>
+            <p class="tool-desc">Auto-crop white margins, manually trim borders, or resize to standard paper sizes.</p>
+        </section>
+
+        <!-- Dropzone Workspace -->
+        <main class="workspace-wrap">
+            <!-- Saved Project Draft (Local 24h Auto-Expiry) -->
+            <div id="recent-draft-container" style="display: none; width: 100%; max-width: 860px; margin: 0 auto 1.5rem auto;">
+                <div class="draft-resume-card">
+                    <div class="draft-card-left">
+                        <div class="draft-badge-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                        </div>
+                        <div class="draft-info">
+                            <div class="draft-title" id="draft-file-name">document.pdf</div>
+                            <div class="draft-meta" id="draft-meta-info">Saved recently • 24h auto-expiry</div>
+                        </div>
+                    </div>
+                    <div class="draft-actions">
+                        <button type="button" class="btn-resume-draft" id="btn-resume-draft" title="Resume editing project">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <span>Resume</span>
+                        </button>
+                        <button type="button" class="btn-discard-draft" id="btn-discard-draft" title="Discard saved draft">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dropzone" class="dropzone-container">
+                <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+                <div class="dropzone-icon-wrap">
+                    <i data-lucide="crop" style="width: 32px; height: 32px;"></i>
+                </div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                    Drag and drop your PDF file here
+                </h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Instant browser-based processing with zero server uploads
+                </p>
+                <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                    <i data-lucide="folder-open" style="width: 18px; height: 18px;"></i>
+                    <span>Select PDF File</span>
+                </button>
+            </div>
+
+            <!-- Bottom Information & Guide Section -->
+            <section class="tool-info-section">
+
+                <div class="tool-info-header">
+                    <h3>Smart Auto-Crop, Precision Trimming & Resizing</h3>
+                    <p>
+                        Automatically detect and remove white borders, manually crop with pixel-perfect visual handles, or resize pages to international standards (A4, Letter, A3, Legal).
+                    </p>
+                </div>
+
+                <!-- How it works -->
+                <div class="steps-section">
+                    <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                        How to Crop & Resize PDF in 3 Easy Steps
+                    </h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <h4>Open Document</h4>
+                            <p>Upload the PDF you want to crop or resize. Rendered directly in your browser.</p>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <h4>Auto or Manual Crop</h4>
+                            <p>Choose Auto Crop to detect white margins instantly, or Manual Crop for custom bounding boxes.</p>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <h4>Download Result</h4>
+                            <p>Click 'Apply & Download' to export your cropped PDF with 100% preserved vector text layers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FULL INTERACTIVE STUDIO -->
+    <div id="crop-studio">
+        <!-- Studio Top Bar -->
+        <header class="studio-top-bar">
+            <!-- Left: Back & Export & Doc Info -->
+            <div class="studio-bar-left">
+                <button class="studio-nav-btn" id="btn-close-studio" title="Back to file upload">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Back</span>
+                </button>
+                <button class="studio-cta-btn" id="btn-apply-export" title="Export PDF">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Export</span>
+                </button>
+                <div class="studio-doc-badge" title="Active PDF Document">
+                    <span class="doc-format-tag">PDF</span>
+                    <span class="studio-filename" id="studio-doc-name">document.pdf</span>
+                </div>
+            </div>
+
+            <!-- Center: Mode Switcher -->
+            <div class="studio-bar-center">
+                <div class="studio-control-capsule">
+                    <button class="capsule-tab-btn active" id="tab-auto-crop" data-mode="auto-crop" title="Automatically detect and trim white margins">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m15 4-2 2 4 4 2-2a2.828 2.828 0 0 0 0-4l-4-4Z"></path>
+                            <path d="m13 6-9.5 9.5a2.121 2.121 0 0 0 0 3l1 1a2.121 2.121 0 0 0 3 0L17 10"></path>
+                            <line x1="19" y1="14" x2="19" y2="16"></line>
+                            <line x1="18" y1="15" x2="20" y2="15"></line>
+                            <line x1="6" y1="4" x2="6" y2="6"></line>
+                            <line x1="5" y1="5" x2="7" y2="5"></line>
+                        </svg>
+                        <span>Auto Crop</span>
+                    </button>
+                    <button class="capsule-tab-btn" id="tab-manual-crop" data-mode="manual-crop" title="Manually adjust crop handles & margins">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2v14a2 2 0 0 0 2 2h14"></path>
+                            <path d="M18 22V8a2 2 0 0 0-2-2H2"></path>
+                        </svg>
+                        <span>Manual Crop</span>
+                    </button>
+                    <button class="capsule-tab-btn" id="tab-resize-mode" data-mode="resize" title="Resize to standard paper format">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                        </svg>
+                        <span>Resize Page</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Inspector Toggle -->
+            <div class="studio-bar-right">
+                <button class="studio-nav-btn mobile-sidebar-toggle" id="btn-toggle-sidebar" title="Toggle Sidebar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                    </svg>
+                    <span>Settings</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Studio Row 2: Secondary Tool & Action Ribbon -->
+        <div class="studio-sub-ribbon" id="studio-sub-ribbon">
+            <!-- Page Navigation -->
+            <div class="ribbon-group">
+                <div class="studio-control-capsule">
+                    <button class="studio-icon-btn" id="btn-prev-page" title="Previous page">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="studio-indicator-text" id="page-indicator">1 / 1</span>
+                    <button class="studio-icon-btn" id="btn-next-page" title="Next page">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="studio-divider"></div>
+
+            <!-- Zoom Controls -->
+            <div class="ribbon-group">
+                <div class="studio-control-capsule">
+                    <button class="studio-icon-btn" id="btn-zoom-out" title="Zoom out">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            <line x1="8" y1="11" x2="14" y2="11"></line>
+                        </svg>
+                    </button>
+                    <span class="studio-indicator-text studio-zoom-val" id="zoom-text" title="Click to reset zoom to 100%">100%</span>
+                    <button class="studio-icon-btn" id="btn-zoom-in" title="Zoom in">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            <line x1="11" y1="8" x2="11" y2="14"></line>
+                            <line x1="8" y1="11" x2="14" y2="11"></line>
+                        </svg>
+                    </button>
+                    <button class="studio-icon-btn" id="btn-fit-screen" title="Fit to view">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="studio-divider"></div>
+
+            <!-- Mode Quick Action Tools Ribbon -->
+            <!-- 1. Auto Crop Ribbon Tools -->
+            <div class="ribbon-tools-container" id="ribbon-auto-tools">
+                <button type="button" class="ribbon-action-btn primary" id="btn-ribbon-autotrim" title="Detect & trim white margins">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 4-2 2 4 4 2-2a2.828 2.828 0 0 0 0-4l-4-4Z"></path>
+                        <path d="m13 6-9.5 9.5a2.121 2.121 0 0 0 0 3l1 1a2.121 2.121 0 0 0 3 0L17 10"></path>
+                    </svg>
+                    <span>Auto-Trim</span>
+                </button>
+                <div class="ribbon-pill-group">
+                    <button type="button" class="ribbon-pill-chip auto-pad-chip-ribbon" data-pad="0" title="Tight 0pt">0 pt</button>
+                    <button type="button" class="ribbon-pill-chip auto-pad-chip-ribbon active" data-pad="12" title="Standard 12pt">12 pt</button>
+                    <button type="button" class="ribbon-pill-chip auto-pad-chip-ribbon" data-pad="24" title="Relaxed 24pt">24 pt</button>
+                </div>
+                <button type="button" class="ribbon-action-btn" id="btn-ribbon-reset-auto" title="Reset to full page">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                    <span>Reset</span>
+                </button>
+            </div>
+
+            <!-- 2. Manual Crop Ribbon Tools -->
+            <div class="ribbon-tools-container" id="ribbon-manual-tools" style="display: none;">
+                <div class="ribbon-pill-group">
+                    <button type="button" class="ribbon-pill-chip ribbon-aspect-chip active" data-aspect="free">Free</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-aspect-chip" data-aspect="1:1">1:1</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-aspect-chip" data-aspect="4:3">4:3</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-aspect-chip" data-aspect="16:9">16:9</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-aspect-chip" data-aspect="a4">A4</button>
+                </div>
+                <div class="ribbon-pill-group">
+                    <button type="button" class="ribbon-pill-chip ribbon-trim-chip" data-trim="10">+10 pt</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-trim-chip" data-trim="20">+20 pt</button>
+                </div>
+                <button type="button" class="ribbon-action-btn" id="btn-ribbon-reset-manual" title="Reset to full page">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                    <span>Reset</span>
+                </button>
+            </div>
+
+            <!-- 3. Resize Ribbon Tools -->
+            <div class="ribbon-tools-container" id="ribbon-resize-tools" style="display: none;">
+                <div class="ribbon-pill-group">
+                    <button type="button" class="ribbon-pill-chip ribbon-paper-chip active" data-paper="A4">A4</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-paper-chip" data-paper="LETTER">Letter</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-paper-chip" data-paper="A3">A3</button>
+                </div>
+                <div class="ribbon-pill-group">
+                    <button type="button" class="ribbon-pill-chip ribbon-orient-chip active" data-orient="portrait">Portrait</button>
+                    <button type="button" class="ribbon-pill-chip ribbon-orient-chip" data-orient="landscape">Landscape</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Backdrop for Sidebar Drawer -->
+        <div id="sidebar-backdrop"></div>
+
+        <!-- Studio Body Layout -->
+        <div class="studio-body">
+            <!-- Sidebar Inspector -->
+            <aside class="studio-sidebar" id="studio-sidebar">
+                <!-- Mobile Drawer Header -->
+                <div class="sidebar-header-mobile">
+                    <h3>Document Settings</h3>
+                    <button type="button" class="btn-close-sidebar" id="btn-close-sidebar-mobile" title="Close Settings">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <!-- AUTO CROP MODE CONTROLS -->
+                <div id="auto-crop-controls-panel" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Smart Auto-Trim Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Auto Margin Detection</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p style="font-size: 0.77rem; color: #94a3b8; line-height: 1.45; margin: 0;">
+                            Automatically scans content boundaries to trim away empty whitespace margins.
+                        </p>
+                        <button type="button" class="btn-smart-trim" id="btn-auto-trim" title="Detect and trim empty white borders">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 4-2 2 4 4 2-2a2.828 2.828 0 0 0 0-4l-4-4Z"></path>
+                                <path d="m13 6-9.5 9.5a2.121 2.121 0 0 0 0 3l1 1a2.121 2.121 0 0 0 3 0L17 10"></path>
+                                <line x1="19" y1="14" x2="19" y2="16"></line>
+                                <line x1="18" y1="15" x2="20" y2="15"></line>
+                                <line x1="6" y1="4" x2="6" y2="6"></line>
+                                <line x1="5" y1="5" x2="7" y2="5"></line>
+                            </svg>
+                            <span>Auto-Trim White Margins</span>
+                        </button>
+                    </div>
+
+                    <!-- Safe Padding Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Margin Padding</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                        </div>
+                        <div class="preset-grid">
+                            <button type="button" class="preset-chip auto-pad-chip" data-pad="0">
+                                <span>0 pt</span>
+                                <span style="font-size: 0.66rem; opacity: 0.7;">Tight</span>
+                            </button>
+                            <button type="button" class="preset-chip auto-pad-chip active" data-pad="12">
+                                <span>12 pt</span>
+                                <span style="font-size: 0.66rem; opacity: 0.7;">Normal</span>
+                            </button>
+                            <button type="button" class="preset-chip auto-pad-chip" data-pad="24">
+                                <span>24 pt</span>
+                                <span style="font-size: 0.66rem; opacity: 0.7;">Relaxed</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Detection Sensitivity Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Detection Sensitivity</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
+                        </div>
+                        <select class="studio-select" id="select-auto-sensitivity">
+                            <option value="248">Strict (Pure White)</option>
+                            <option value="240" selected>Balanced (Standard White & Scans)</option>
+                            <option value="230">High Tolerance (Light Gray Borders)</option>
+                        </select>
+                    </div>
+
+                    <!-- Reset Auto Crop Button -->
+                    <button type="button" class="btn-reset-box" id="btn-reset-auto-crop" title="Reset crop to full page">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                            <path d="M3 3v5h5"></path>
+                        </svg>
+                        <span>Reset to Full Page</span>
+                    </button>
+                </div>
+
+                <!-- MANUAL CROP MODE CONTROLS -->
+                <div id="manual-crop-controls-panel" style="display: none; flex-direction: column; gap: 1rem;">
+                    <!-- Aspect Ratio Presets Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Aspect Ratio</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                        </div>
+                        <div class="preset-grid">
+                            <button type="button" class="preset-chip active" data-aspect="free">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                                <span>Freehand</span>
+                            </button>
+                            <button type="button" class="preset-chip" data-aspect="1:1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                <span>1 : 1</span>
+                            </button>
+                            <button type="button" class="preset-chip" data-aspect="4:3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+                                <span>4 : 3</span>
+                            </button>
+                            <button type="button" class="preset-chip" data-aspect="16:9">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+                                <span>16 : 9</span>
+                            </button>
+                            <button type="button" class="preset-chip" data-aspect="a4">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/></svg>
+                                <span>A4 Ratio</span>
+                            </button>
+                            <button type="button" class="preset-chip" id="btn-custom-aspect-chip" data-aspect="custom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                                <span>More...</span>
+                            </button>
+                        </div>
+                        <select class="studio-select" id="select-crop-aspect" style="display: none;">
+                            <option value="free" selected>Freehand Selection</option>
+                            <option value="1:1">1:1 Square</option>
+                            <option value="4:3">4:3 Standard</option>
+                            <option value="16:9">16:9 Widescreen</option>
+                            <option value="a4">A4 Ratio (1 : 1.414)</option>
+                        </select>
+                    </div>
+
+                    <!-- Crop Margins Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Crop Margins (pt)</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 3H3v18h18V3zM9 9h6v6H9V9z"/></svg>
+                        </div>
+                        <div class="margin-grid">
+                            <div class="margin-box">
+                                <div class="margin-box-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                    <span>Top</span>
+                                </div>
+                                <div class="margin-input-wrap">
+                                    <input type="number" id="inp-margin-top" class="margin-num-input" value="0" min="0">
+                                    <span class="margin-unit-tag">pt</span>
+                                </div>
+                            </div>
+                            <div class="margin-box">
+                                <div class="margin-box-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    <span>Bottom</span>
+                                </div>
+                                <div class="margin-input-wrap">
+                                    <input type="number" id="inp-margin-bottom" class="margin-num-input" value="0" min="0">
+                                    <span class="margin-unit-tag">pt</span>
+                                </div>
+                            </div>
+                            <div class="margin-box">
+                                <div class="margin-box-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                    <span>Left</span>
+                                </div>
+                                <div class="margin-input-wrap">
+                                    <input type="number" id="inp-margin-left" class="margin-num-input" value="0" min="0">
+                                    <span class="margin-unit-tag">pt</span>
+                                </div>
+                            </div>
+                            <div class="margin-box">
+                                <div class="margin-box-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    <span>Right</span>
+                                </div>
+                                <div class="margin-input-wrap">
+                                    <input type="number" id="inp-margin-right" class="margin-num-input" value="0" min="0">
+                                    <span class="margin-unit-tag">pt</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Trim Options -->
+                        <div class="quick-trim-row">
+                            <span style="font-size: 0.72rem; color: #64748b; font-weight: 600;">Presets:</span>
+                            <button type="button" class="quick-trim-chip" data-trim="10">+10 pt</button>
+                            <button type="button" class="quick-trim-chip" data-trim="20">+20 pt</button>
+                            <button type="button" class="quick-trim-chip" data-trim="36">+36 pt (½")</button>
+                        </div>
+
+                        <!-- Reset Box Button -->
+                        <button type="button" class="btn-reset-box" id="btn-reset-crop" title="Reset crop to full page">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                            </svg>
+                            <span>Reset to Full Page</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- RESIZE MODE CONTROLS -->
+                <div id="resize-controls-panel" style="display: none; flex-direction: column; gap: 1rem;">
+                    <!-- Paper Format Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Standard Paper Size</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        </div>
+                        <select class="studio-select" id="select-target-paper">
+                            <option value="A4" selected>A4 (210 × 297 mm)</option>
+                            <option value="LETTER">US Letter (8.5 × 11 in)</option>
+                            <option value="A3">A3 (297 × 420 mm)</option>
+                            <option value="LEGAL">US Legal (8.5 × 14 in)</option>
+                            <option value="A5">A5 (148 × 210 mm)</option>
+                        </select>
+                    </div>
+
+                    <!-- Orientation Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Orientation</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path></svg>
+                        </div>
+                        <div class="orientation-grid">
+                            <button type="button" class="orientation-btn active" id="btn-orient-portrait" data-orient="portrait">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect></svg>
+                                <span>Portrait</span>
+                            </button>
+                            <button type="button" class="orientation-btn" id="btn-orient-landscape" data-orient="landscape">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect></svg>
+                                <span>Landscape</span>
+                            </button>
+                        </div>
+                        <select class="studio-select" id="select-orientation" style="display: none;">
+                            <option value="portrait" selected>Portrait (Vertical)</option>
+                            <option value="landscape">Landscape (Horizontal)</option>
+                        </select>
+                    </div>
+
+                    <!-- Content Scaling Card -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-title">
+                            <span>Content Scaling</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline></svg>
+                        </div>
+                        <select class="studio-select" id="select-content-scale">
+                            <option value="fit" selected>Fit & Center (Keep Proportions)</option>
+                            <option value="stretch">Stretch to Fill Whole Page</option>
+                            <option value="original">Keep 100% Original Scale (Center)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Scope Control Card (Common) -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-title">
+                        <span>Apply Scope</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="14" height="14" rx="2"></rect><path d="M8 3h10a2 2 0 0 1 2 2v10"></path></svg>
+                    </div>
+                    <div class="scope-segment">
+                        <button type="button" class="scope-btn active" data-scope="all">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="14" height="14" rx="2"></rect><path d="M8 3h10a2 2 0 0 1 2 2v10"></path></svg>
+                            <span>All Pages</span>
+                        </button>
+                        <button type="button" class="scope-btn" data-scope="current">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"></rect></svg>
+                            <span>Current Page</span>
+                        </button>
+                    </div>
+                    <select class="studio-select" id="select-apply-scope" style="display: none;">
+                        <option value="all" selected>All pages in document</option>
+                        <option value="current">Current page only</option>
+                    </select>
+                </div>
+
+                <!-- Quality & Vector Preservation Note -->
+                <div class="quality-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <polyline points="9 12 11 14 15 10"/>
+                    </svg>
+                    <div>
+                        <strong>100% Vector Sharpness</strong>
+                        <div style="font-size: 0.7rem; color: #94a3b8; margin-top: 2px;">
+                            Preserves original PDF vector text layers, hyperlinks, and font outlines without re-compressing.
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Canvas Viewport -->
+            <main class="studio-canvas-container" id="canvas-container">
+                <div class="pdf-page-container" id="page-container">
+                    <canvas id="pdf-base-canvas"></canvas>
+                    <!-- Interactive crop overlay -->
+                    <div id="crop-overlay-layer">
+                        <div class="crop-mask" id="mask-top"></div>
+                        <div class="crop-mask" id="mask-bottom"></div>
+                        <div class="crop-mask" id="mask-left"></div>
+                        <div class="crop-mask" id="mask-right"></div>
+
+                        <div class="crop-box" id="crop-box">
+                            <!-- Rule-of-Thirds Grid Lines -->
+                            <div class="crop-grid-line crop-grid-h1"></div>
+                            <div class="crop-grid-line crop-grid-h2"></div>
+                            <div class="crop-grid-line crop-grid-v1"></div>
+                            <div class="crop-grid-line crop-grid-v2"></div>
+
+                            <!-- 8 Ergonomic Handles -->
+                            <div class="crop-handle handle-nw" data-handle="nw"></div>
+                            <div class="crop-handle handle-n" data-handle="n"></div>
+                            <div class="crop-handle handle-ne" data-handle="ne"></div>
+                            <div class="crop-handle handle-e" data-handle="e"></div>
+                            <div class="crop-handle handle-se" data-handle="se"></div>
+                            <div class="crop-handle handle-s" data-handle="s"></div>
+                            <div class="crop-handle handle-sw" data-handle="sw"></div>
+                            <div class="crop-handle handle-w" data-handle="w"></div>
+
+                            <!-- Dimension Badge -->
+                            <div class="crop-info-pill" id="crop-info-pill">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2v14a2 2 0 0 0 2 2h14"></path><path d="M18 22V8a2 2 0 0 0-2-2H2"></path></svg>
+                                <span id="crop-info-text">595 × 842 pt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Studio Loading Overlay -->
+        <div class="studio-loader" id="studio-loader">
+            <div class="spinner"></div>
+            <p id="loader-status" style="font-weight: 600; font-size: 0.95rem; color: #ffffff;">Rendering page...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pdf-footer" id="main-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+                <a href="/apps/pdf-hub/ocr">OCR PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native PDF CropBox & MediaBox geometry modifications. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js & PDF-Lib & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Crop & Resize Controller -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        // Paper dimensions in points (1 pt = 1/72 inch)
+        const PAPER_SIZES = {
+            A4: { width: 595.28, height: 841.89 },
+            LETTER: { width: 612.00, height: 792.00 },
+            A3: { width: 841.89, height: 1190.55 },
+            LEGAL: { width: 612.00, height: 1008.00 },
+            A5: { width: 419.53, height: 595.28 }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Screens
+            const uploadScreen = document.getElementById("upload-screen");
+            const cropStudio = document.getElementById("crop-studio");
+            const mainFooter = document.getElementById("main-footer");
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const studioLoader = document.getElementById("studio-loader");
+            const loaderStatus = document.getElementById("loader-status");
+            const studioDocName = document.getElementById("studio-doc-name");
+            const btnCloseStudio = document.getElementById("btn-close-studio");
+
+            // Canvas & Elements
+            const pageContainer = document.getElementById("page-container");
+            const baseCanvas = document.getElementById("pdf-base-canvas");
+            const baseCtx = baseCanvas.getContext("2d");
+            const cropOverlayLayer = document.getElementById("crop-overlay-layer");
+            const cropBox = document.getElementById("crop-box");
+            const cropInfoPill = document.getElementById("crop-info-pill");
+
+            // Masks
+            const maskTop = document.getElementById("mask-top");
+            const maskBottom = document.getElementById("mask-bottom");
+            const maskLeft = document.getElementById("mask-left");
+            const maskRight = document.getElementById("mask-right");
+
+            // Navigation & Zoom
+            const btnPrevPage = document.getElementById("btn-prev-page");
+            const btnNextPage = document.getElementById("btn-next-page");
+            const pageIndicator = document.getElementById("page-indicator");
+            const btnZoomIn = document.getElementById("btn-zoom-in");
+            const btnZoomOut = document.getElementById("btn-zoom-out");
+            const btnFitScreen = document.getElementById("btn-fit-screen");
+            const zoomText = document.getElementById("zoom-text");
+
+            // Modes & Panels
+            const tabAutoCrop = document.getElementById("tab-auto-crop");
+            const tabManualCrop = document.getElementById("tab-manual-crop");
+            const tabResizeMode = document.getElementById("tab-resize-mode");
+            const autoCropControlsPanel = document.getElementById("auto-crop-controls-panel");
+            const manualCropControlsPanel = document.getElementById("manual-crop-controls-panel");
+            const resizeControlsPanel = document.getElementById("resize-controls-panel");
+            const studioSidebar = document.getElementById("studio-sidebar");
+            const btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
+
+            // Auto Crop Controls
+            const btnAutoTrim = document.getElementById("btn-auto-trim");
+            const btnResetAutoCrop = document.getElementById("btn-reset-auto-crop");
+            const autoPadChips = document.querySelectorAll(".auto-pad-chip");
+            const selectAutoSensitivity = document.getElementById("select-auto-sensitivity");
+            let autoPaddingPt = 12;
+
+            // Manual Crop Controls
+            const selectCropAspect = document.getElementById("select-crop-aspect");
+            const aspectChips = document.querySelectorAll("#manual-crop-controls-panel .preset-chip");
+            const btnResetCrop = document.getElementById("btn-reset-crop");
+            const inpMarginTop = document.getElementById("inp-margin-top");
+            const inpMarginBottom = document.getElementById("inp-margin-bottom");
+            const inpMarginLeft = document.getElementById("inp-margin-left");
+            const inpMarginRight = document.getElementById("inp-margin-right");
+            const quickTrimChips = document.querySelectorAll(".quick-trim-chip");
+
+            // Resize Controls
+            const selectTargetPaper = document.getElementById("select-target-paper");
+            const selectOrientation = document.getElementById("select-orientation");
+            const btnOrientPortrait = document.getElementById("btn-orient-portrait");
+            const btnOrientLandscape = document.getElementById("btn-orient-landscape");
+            const selectContentScale = document.getElementById("select-content-scale");
+
+            // Common Controls
+            const selectApplyScope = document.getElementById("select-apply-scope");
+            const scopeBtns = document.querySelectorAll(".scope-btn");
+            const btnApplyExport = document.getElementById("btn-apply-export");
+            const cropInfoText = document.getElementById("crop-info-text");
+
+            // Document State
+            let originalBuffer = null;
+            let originalFileName = "document.pdf";
+            let pdfDoc = null;
+            let totalPages = 0;
+            let currentPageNum = 1;
+            let currentScale = 1.0;
+            let currentMode = "auto-crop"; // 'auto-crop' | 'manual-crop' | 'resize'
+
+            // Crop box state in normalized coordinates [0..1]
+            let cropCoords = { l: 0.05, t: 0.05, r: 0.95, b: 0.95 };
+            let activeHandle = null;
+            let isDraggingBox = false;
+            let dragStart = { x: 0, y: 0 };
+            let cropStart = { ...cropCoords };
+
+            function showLoader(msg) {
+                if (loaderStatus) loaderStatus.textContent = msg;
+                if (studioLoader) studioLoader.style.display = "flex";
+            }
+
+            function hideLoader() {
+                if (studioLoader) studioLoader.style.display = "none";
+            }
+
+            // ============================================================
+            // IndexedDB Local Draft Project Persistence (Auto-expire in 24h)
+            // ============================================================
+            const DRAFT_DB_NAME = "Spac2_CropResize_DB";
+            const DRAFT_DB_VERSION = 1;
+            const DRAFT_STORE_NAME = "crop_drafts";
+            const DRAFT_KEY = "active_crop_project";
+            const DRAFT_MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+            const recentDraftContainer = document.getElementById("recent-draft-container");
+            const draftFileName = document.getElementById("draft-file-name");
+            const draftMetaInfo = document.getElementById("draft-meta-info");
+            const btnResumeDraft = document.getElementById("btn-resume-draft");
+            const btnDiscardDraft = document.getElementById("btn-discard-draft");
+
+            function openDraftDB() {
+                return new Promise((resolve, reject) => {
+                    const req = indexedDB.open(DRAFT_DB_NAME, DRAFT_DB_VERSION);
+                    req.onupgradeneeded = (e) => {
+                        const db = e.target.result;
+                        if (!db.objectStoreNames.contains(DRAFT_STORE_NAME)) {
+                            db.createObjectStore(DRAFT_STORE_NAME, { keyPath: "id" });
+                        }
+                    };
+                    req.onsuccess = () => resolve(req.result);
+                    req.onerror = () => reject(req.error);
+                });
+            }
+
+            async function saveDraftLocally() {
+                if (!originalBuffer || !pdfDoc) return;
+                try {
+                    const db = await openDraftDB();
+                    const tx = db.transaction(DRAFT_STORE_NAME, "readwrite");
+                    const store = tx.objectStore(DRAFT_STORE_NAME);
+
+                    const draftData = {
+                        id: DRAFT_KEY,
+                        fileName: originalFileName || "document.pdf",
+                        buffer: originalBuffer.slice(0),
+                        timestamp: Date.now(),
+                        cropCoords: { ...cropCoords },
+                        currentMode: currentMode || "auto-crop",
+                        currentPageNum: currentPageNum || 1,
+                        totalPages: totalPages || 1,
+                        autoPaddingPt: autoPaddingPt || 12,
+                        targetPaper: selectTargetPaper ? selectTargetPaper.value : "a4"
+                    };
+
+                    await new Promise((resolve, reject) => {
+                        const putReq = store.put(draftData);
+                        putReq.onsuccess = resolve;
+                        putReq.onerror = () => reject(putReq.error);
+                    });
+                } catch (err) {
+                    console.warn("Could not save project draft locally:", err);
+                }
+            }
+
+            async function getDraftLocally() {
+                try {
+                    const db = await openDraftDB();
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(DRAFT_STORE_NAME, "readonly");
+                        const store = tx.objectStore(DRAFT_STORE_NAME);
+                        const getReq = store.get(DRAFT_KEY);
+                        getReq.onsuccess = () => {
+                            const draft = getReq.result;
+                            if (!draft) return resolve(null);
+                            // 24h expiration check
+                            if (Date.now() - draft.timestamp > DRAFT_MAX_AGE_MS) {
+                                deleteDraftLocally();
+                                return resolve(null);
+                            }
+                            resolve(draft);
+                        };
+                        getReq.onerror = () => reject(getReq.error);
+                    });
+                } catch (err) {
+                    console.warn("Could not retrieve local project draft:", err);
+                    return null;
+                }
+            }
+
+            async function deleteDraftLocally() {
+                try {
+                    const db = await openDraftDB();
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(DRAFT_STORE_NAME, "readwrite");
+                        const store = tx.objectStore(DRAFT_STORE_NAME);
+                        const delReq = store.delete(DRAFT_KEY);
+                        delReq.onsuccess = resolve;
+                        delReq.onerror = () => reject(delReq.error);
+                    });
+                } catch (err) {
+                    console.warn("Could not delete draft:", err);
+                }
+            }
+
+            function formatDraftTimeAgo(timestamp) {
+                const elapsedMin = Math.floor((Date.now() - timestamp) / 60000);
+                if (elapsedMin < 1) return "Just now";
+                if (elapsedMin < 60) return `${elapsedMin}m ago`;
+                const hours = Math.floor(elapsedMin / 60);
+                return `${hours}h ago`;
+            }
+
+            async function checkAndRenderRecentDraft() {
+                if (!recentDraftContainer) return;
+                const draft = await getDraftLocally();
+                if (draft && draft.buffer) {
+                    if (draftFileName) draftFileName.textContent = draft.fileName;
+                    const timeAgo = formatDraftTimeAgo(draft.timestamp);
+                    const remainingHours = Math.max(1, Math.round((DRAFT_MAX_AGE_MS - (Date.now() - draft.timestamp)) / 3600000));
+                    if (draftMetaInfo) {
+                        draftMetaInfo.textContent = `Saved ${timeAgo} • ${draft.totalPages || 1} pages • Auto-expires in ${remainingHours}h`;
+                    }
+                    recentDraftContainer.style.display = "block";
+                } else {
+                    recentDraftContainer.style.display = "none";
+                }
+            }
+
+            if (btnResumeDraft) {
+                btnResumeDraft.addEventListener("click", async () => {
+                    const draft = await getDraftLocally();
+                    if (!draft || !draft.buffer) {
+                        showToast("Draft expired or no longer available.", "warning");
+                        if (recentDraftContainer) recentDraftContainer.style.display = "none";
+                        return;
+                    }
+                    try {
+                        await loadFile(draft.buffer, draft.fileName, true);
+                        if (draft.cropCoords) {
+                            cropCoords = { ...draft.cropCoords };
+                        }
+                        if (draft.autoPaddingPt !== undefined) {
+                            autoPaddingPt = draft.autoPaddingPt;
+                        }
+                        if (draft.currentMode) {
+                            setMode(draft.currentMode);
+                        }
+                        if (draft.currentPageNum && draft.currentPageNum <= totalPages) {
+                            currentPageNum = draft.currentPageNum;
+                            await renderPage(currentPageNum);
+                        }
+                        updateCropBoxVisuals();
+                        showToast(`Project resumed: ${draft.fileName}`, "success");
+                    } catch (e) {
+                        console.error("Resume error:", e);
+                        showToast("Failed to restore project: " + e.message, "error");
+                    }
+                });
+            }
+
+            if (btnDiscardDraft) {
+                btnDiscardDraft.addEventListener("click", async () => {
+                    await deleteDraftLocally();
+                    if (recentDraftContainer) recentDraftContainer.style.display = "none";
+                    showToast("Draft removed from local storage.", "info");
+                });
+            }
+
+            // Check for existing saved draft on initialization
+            checkAndRenderRecentDraft();
+
+            // ============================================================
+            // File Initialization & Studio Mode
+            // ============================================================
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please upload a valid PDF document.", "error");
+                    return;
+                }
+                loadFile(file);
+            });
+
+            async function loadFile(source, customName, isResumeDraft = false) {
+                try {
+                    showLoader("Reading PDF file...");
+                    if (source instanceof ArrayBuffer) {
+                        originalBuffer = source;
+                        originalFileName = customName || "document.pdf";
+                    } else {
+                        originalFileName = source.name;
+                        originalBuffer = await source.arrayBuffer();
+                    }
+
+                    const task = pdfjsLib.getDocument({ data: originalBuffer.slice(0) });
+                    pdfDoc = await task.promise;
+                    totalPages = pdfDoc.numPages;
+                    if (!isResumeDraft) {
+                        currentPageNum = 1;
+                        resetCropToDefault();
+                    }
+
+                    // Activate Studio Mode
+                    document.body.classList.add("in-studio-mode");
+                    uploadScreen.style.display = "none";
+                    mainFooter.style.display = "none";
+                    cropStudio.style.display = "flex";
+                    studioDocName.textContent = originalFileName;
+
+                    await autoFitPageScale();
+                    await renderPage(currentPageNum);
+
+                    // If in auto-crop mode and fresh upload, automatically run auto trim detection
+                    if (!isResumeDraft && currentMode === "auto-crop") {
+                        setTimeout(() => performAutoTrim(false), 120);
+                    }
+
+                    showToast(isResumeDraft ? `Resumed ${originalFileName}` : `Loaded ${originalFileName} (${totalPages} pages)`, "success");
+                } catch (err) {
+                    console.error("Load error:", err);
+                    showToast("Failed to load PDF: " + err.message, "error");
+                    hideLoader();
+                }
+            }
+
+            btnCloseStudio.addEventListener("click", async () => {
+                // Save draft locally before exiting studio
+                if (originalBuffer && pdfDoc) {
+                    await saveDraftLocally();
+                    showToast("Project saved locally (auto-expires in 24h)", "info");
+                }
+
+                document.body.classList.remove("in-studio-mode");
+                pdfDoc = null;
+                originalBuffer = null;
+                cropStudio.style.display = "none";
+                uploadScreen.style.display = "block";
+                mainFooter.style.display = "block";
+                fileInput.value = "";
+
+                // Show saved draft card on the upload screen
+                await checkAndRenderRecentDraft();
+            });
+
+            // Mobile Sidebar Drawer & Backdrop Handlers
+            const sidebarBackdrop = document.getElementById("sidebar-backdrop");
+            const btnCloseSidebarMobile = document.getElementById("btn-close-sidebar-mobile");
+
+            function toggleSidebar(open) {
+                const isOpen = open !== undefined ? open : !studioSidebar.classList.contains("open");
+                if (isOpen) {
+                    studioSidebar.classList.add("open");
+                    if (sidebarBackdrop) sidebarBackdrop.classList.add("active");
+                } else {
+                    studioSidebar.classList.remove("open");
+                    if (sidebarBackdrop) sidebarBackdrop.classList.remove("active");
+                }
+            }
+
+            if (btnToggleSidebar) {
+                btnToggleSidebar.addEventListener("click", () => toggleSidebar());
+            }
+            if (btnCloseSidebarMobile) {
+                btnCloseSidebarMobile.addEventListener("click", () => toggleSidebar(false));
+            }
+            if (sidebarBackdrop) {
+                sidebarBackdrop.addEventListener("click", () => toggleSidebar(false));
+            }
+
+            // Quick Tool Ribbon Elements
+            const ribbonAutoTools = document.getElementById("ribbon-auto-tools");
+            const ribbonManualTools = document.getElementById("ribbon-manual-tools");
+            const ribbonResizeTools = document.getElementById("ribbon-resize-tools");
+
+            const btnRibbonAutoTrim = document.getElementById("btn-ribbon-autotrim");
+            const autoPadChipsRibbon = document.querySelectorAll(".auto-pad-chip-ribbon");
+            const btnRibbonResetAuto = document.getElementById("btn-ribbon-reset-auto");
+
+            const ribbonAspectChips = document.querySelectorAll(".ribbon-aspect-chip");
+            const ribbonTrimChips = document.querySelectorAll(".ribbon-trim-chip");
+            const btnRibbonResetManual = document.getElementById("btn-ribbon-reset-manual");
+
+            const ribbonPaperChips = document.querySelectorAll(".ribbon-paper-chip");
+            const ribbonOrientChips = document.querySelectorAll(".ribbon-orient-chip");
+
+            // Optimized Auto-fit Scale calculation for Mobile & Desktop
+            async function autoFitPageScale() {
+                if (!pdfDoc) return;
+                try {
+                    const page = await pdfDoc.getPage(currentPageNum);
+                    const unscaled = page.getViewport({ scale: 1.0 });
+                    const container = document.getElementById("canvas-container");
+                    
+                    const isMobile = window.innerWidth <= 992;
+                    const padX = isMobile ? 16 : 48;
+                    const padY = isMobile ? 16 : 48;
+                    
+                    const availW = Math.max(120, (container.clientWidth || window.innerWidth) - padX);
+                    const availH = Math.max(120, (container.clientHeight || (window.innerHeight - 88)) - padY);
+
+                    const scaleW = availW / unscaled.width;
+                    const scaleH = availH / unscaled.height;
+                    const idealScale = Math.min(scaleW, scaleH);
+
+                    // Clamp to comfortable reading range [0.35, 2.5]
+                    currentScale = Math.max(0.35, Math.min(2.5, Math.round(idealScale * 100) / 100));
+                } catch (e) {
+                    currentScale = 1.0;
+                }
+            }
+
+            window.addEventListener("resize", () => {
+                if (pdfDoc && document.body.classList.contains("in-studio-mode")) {
+                    autoFitPageScale().then(() => renderPage(currentPageNum));
+                }
+            });
+
+            // ============================================================
+            // Page Rendering
+            // ============================================================
+            async function renderPage(pageNum) {
+                if (!pdfDoc) return;
+                showLoader(`Rendering page ${pageNum} of ${totalPages}...`);
+
+                try {
+                    const page = await pdfDoc.getPage(pageNum);
+                    const viewport = page.getViewport({ scale: currentScale });
+
+                    baseCanvas.width = viewport.width;
+                    baseCanvas.height = viewport.height;
+                    pageContainer.style.width = `${viewport.width}px`;
+                    pageContainer.style.height = `${viewport.height}px`;
+
+                    await page.render({
+                        canvasContext: baseCtx,
+                        viewport: viewport
+                    }).promise;
+
+                    // Update UI readouts
+                    pageIndicator.textContent = `${pageNum} / ${totalPages}`;
+                    btnPrevPage.disabled = pageNum <= 1;
+                    btnNextPage.disabled = pageNum >= totalPages;
+                    zoomText.textContent = `${Math.round(currentScale * 100)}%`;
+
+                    updateCropBoxVisuals();
+                } catch (err) {
+                    console.error("Render error:", err);
+                    showToast("Page render error: " + err.message, "error");
+                } finally {
+                    hideLoader();
+                }
+            }
+
+            // Navigation
+            btnPrevPage.addEventListener("click", async () => {
+                if (currentPageNum > 1) {
+                    currentPageNum--;
+                    await renderPage(currentPageNum);
+                    if (currentMode === "auto-crop") {
+                        performAutoTrim(false);
+                    }
+                }
+            });
+
+            btnNextPage.addEventListener("click", async () => {
+                if (currentPageNum < totalPages) {
+                    currentPageNum++;
+                    await renderPage(currentPageNum);
+                    if (currentMode === "auto-crop") {
+                        performAutoTrim(false);
+                    }
+                }
+            });
+
+            // Zoom Controls
+            btnZoomIn.addEventListener("click", () => {
+                if (currentScale < 2.5) {
+                    currentScale = Math.round((currentScale + 0.15) * 20) / 20;
+                    renderPage(currentPageNum);
+                }
+            });
+
+            btnZoomOut.addEventListener("click", () => {
+                if (currentScale > 0.35) {
+                    currentScale = Math.round((currentScale - 0.15) * 20) / 20;
+                    renderPage(currentPageNum);
+                }
+            });
+
+            if (btnFitScreen) {
+                btnFitScreen.addEventListener("click", async () => {
+                    await autoFitPageScale();
+                    renderPage(currentPageNum);
+                });
+            }
+
+            zoomText.addEventListener("click", () => {
+                currentScale = 1.0;
+                renderPage(currentPageNum);
+            });
+
+            // ============================================================
+            // Mode Switching (Auto Crop vs Manual Crop vs Resize Format)
+            // ============================================================
+            function setMode(mode) {
+                currentMode = mode;
+                [tabAutoCrop, tabManualCrop, tabResizeMode].forEach(btn => {
+                    if (btn) btn.classList.remove("active");
+                });
+
+                if (autoCropControlsPanel) autoCropControlsPanel.style.display = "none";
+                if (manualCropControlsPanel) manualCropControlsPanel.style.display = "none";
+                if (resizeControlsPanel) resizeControlsPanel.style.display = "none";
+
+                if (ribbonAutoTools) ribbonAutoTools.style.display = "none";
+                if (ribbonManualTools) ribbonManualTools.style.display = "none";
+                if (ribbonResizeTools) ribbonResizeTools.style.display = "none";
+
+                if (mode === "auto-crop") {
+                    if (tabAutoCrop) tabAutoCrop.classList.add("active");
+                    if (autoCropControlsPanel) autoCropControlsPanel.style.display = "flex";
+                    if (ribbonAutoTools) ribbonAutoTools.style.display = "inline-flex";
+                    cropOverlayLayer.style.display = "block";
+                    performAutoTrim(false);
+                } else if (mode === "manual-crop") {
+                    if (tabManualCrop) tabManualCrop.classList.add("active");
+                    if (manualCropControlsPanel) manualCropControlsPanel.style.display = "flex";
+                    if (ribbonManualTools) ribbonManualTools.style.display = "inline-flex";
+                    cropOverlayLayer.style.display = "block";
+                    updateCropBoxVisuals();
+                } else if (mode === "resize") {
+                    if (tabResizeMode) tabResizeMode.classList.add("active");
+                    if (resizeControlsPanel) resizeControlsPanel.style.display = "flex";
+                    if (ribbonResizeTools) ribbonResizeTools.style.display = "inline-flex";
+                    cropOverlayLayer.style.display = "none";
+                }
+            }
+
+            if (tabAutoCrop) tabAutoCrop.addEventListener("click", () => setMode("auto-crop"));
+            if (tabManualCrop) tabManualCrop.addEventListener("click", () => setMode("manual-crop"));
+            if (tabResizeMode) tabResizeMode.addEventListener("click", () => setMode("resize"));
+
+            // Wire up Ribbon Quick Action listeners
+            if (btnRibbonAutoTrim) {
+                btnRibbonAutoTrim.addEventListener("click", () => {
+                    showLoader("Scanning white margins...");
+                    setTimeout(() => {
+                        performAutoTrim(true);
+                        hideLoader();
+                    }, 80);
+                });
+            }
+
+            autoPadChipsRibbon.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    autoPadChipsRibbon.forEach(c => c.classList.remove("active"));
+                    chip.classList.add("active");
+                    autoPaddingPt = parseFloat(chip.dataset.pad) || 0;
+
+                    // Sync with sidebar chips
+                    autoPadChips.forEach(sc => {
+                        if (sc.dataset.pad === chip.dataset.pad) sc.classList.add("active");
+                        else sc.classList.remove("active");
+                    });
+
+                    performAutoTrim(false);
+                });
+            });
+
+            if (btnRibbonResetAuto) {
+                btnRibbonResetAuto.addEventListener("click", () => {
+                    resetCropToDefault();
+                    showToast("Crop box reset to full page", "info");
+                });
+            }
+
+            ribbonAspectChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    const aspect = chip.dataset.aspect;
+                    if (!aspect) return;
+
+                    ribbonAspectChips.forEach(c => c.classList.remove("active"));
+                    chip.classList.add("active");
+
+                    aspectChips.forEach(c => {
+                        if (c.dataset.aspect === aspect) c.classList.add("active");
+                        else c.classList.remove("active");
+                    });
+
+                    applyAspectConstraint(aspect);
+                });
+            });
+
+            ribbonTrimChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    const pts = parseFloat(chip.dataset.trim) || 0;
+                    const W = baseCanvas.width / currentScale;
+                    const H = baseCanvas.height / currentScale;
+
+                    cropCoords.l = Math.min(0.4, pts / W);
+                    cropCoords.r = Math.max(0.6, 1 - (pts / W));
+                    cropCoords.t = Math.min(0.4, pts / H);
+                    cropCoords.b = Math.max(0.6, 1 - (pts / H));
+
+                    updateCropBoxVisuals();
+                    showToast(`Trimmed margins by ${pts} pt`, "info");
+                });
+            });
+
+            if (btnRibbonResetManual) {
+                btnRibbonResetManual.addEventListener("click", () => {
+                    resetCropToDefault();
+                    showToast("Crop box reset to full page", "info");
+                });
+            }
+
+            ribbonPaperChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    ribbonPaperChips.forEach(c => c.classList.remove("active"));
+                    chip.classList.add("active");
+                    if (selectTargetPaper) selectTargetPaper.value = chip.dataset.paper;
+                    showToast(`Paper size: ${chip.dataset.paper}`, "info");
+                });
+            });
+
+            ribbonOrientChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    ribbonOrientChips.forEach(c => c.classList.remove("active"));
+                    chip.classList.add("active");
+                    if (selectOrientation) selectOrientation.value = chip.dataset.orient;
+                    if (btnOrientPortrait && btnOrientLandscape) {
+                        if (chip.dataset.orient === "portrait") {
+                            btnOrientPortrait.classList.add("active");
+                            btnOrientLandscape.classList.remove("active");
+                        } else {
+                            btnOrientLandscape.classList.add("active");
+                            btnOrientPortrait.classList.remove("active");
+                        }
+                    }
+                    showToast(`Orientation: ${chip.dataset.orient}`, "info");
+                });
+            });
+
+            // ============================================================
+            // Visual Crop Box & Drag Mechanics
+            // ============================================================
+            function resetCropToDefault() {
+                cropCoords = { l: 0.05, t: 0.05, r: 0.95, b: 0.95 };
+                updateCropBoxVisuals();
+            }
+
+            if (btnResetCrop) {
+                btnResetCrop.addEventListener("click", () => {
+                    resetCropToDefault();
+                    showToast("Crop box reset to full page", "info");
+                });
+            }
+
+            if (btnResetAutoCrop) {
+                btnResetAutoCrop.addEventListener("click", () => {
+                    resetCropToDefault();
+                    showToast("Crop box reset to full page", "info");
+                });
+            }
+
+            function updateCropBoxVisuals() {
+                const W = baseCanvas.width;
+                const H = baseCanvas.height;
+                if (!W || !H) return;
+
+                const leftPx = cropCoords.l * W;
+                const topPx = cropCoords.t * H;
+                const widthPx = (cropCoords.r - cropCoords.l) * W;
+                const heightPx = (cropCoords.b - cropCoords.t) * H;
+
+                // Position crop box
+                cropBox.style.left = `${leftPx}px`;
+                cropBox.style.top = `${topPx}px`;
+                cropBox.style.width = `${widthPx}px`;
+                cropBox.style.height = `${heightPx}px`;
+
+                // Update surrounding dark masks
+                maskTop.style.top = "0";
+                maskTop.style.left = "0";
+                maskTop.style.width = "100%";
+                maskTop.style.height = `${topPx}px`;
+
+                maskBottom.style.top = `${topPx + heightPx}px`;
+                maskBottom.style.left = "0";
+                maskBottom.style.width = "100%";
+                maskBottom.style.height = `${H - (topPx + heightPx)}px`;
+
+                maskLeft.style.top = `${topPx}px`;
+                maskLeft.style.left = "0";
+                maskLeft.style.width = `${leftPx}px`;
+                maskLeft.style.height = `${heightPx}px`;
+
+                maskRight.style.top = `${topPx}px`;
+                maskRight.style.left = `${leftPx + widthPx}px`;
+                maskRight.style.width = `${W - (leftPx + widthPx)}px`;
+                maskRight.style.height = `${heightPx}px`;
+
+                // Calculate dimensions in PDF points (unscaled)
+                const ptWidth = Math.round(widthPx / currentScale);
+                const ptHeight = Math.round(heightPx / currentScale);
+                const mmWidth = Math.round(ptWidth * 0.3528);
+                const mmHeight = Math.round(ptHeight * 0.3528);
+
+                const label = `${ptWidth} × ${ptHeight} pt (${mmWidth} × ${mmHeight} mm)`;
+                if (cropInfoText) {
+                    cropInfoText.textContent = label;
+                } else if (cropInfoPill) {
+                    cropInfoPill.textContent = label;
+                }
+
+                // Update input values
+                if (inpMarginTop) inpMarginTop.value = Math.round((cropCoords.t * H) / currentScale);
+                if (inpMarginBottom) inpMarginBottom.value = Math.round(((1 - cropCoords.b) * H) / currentScale);
+                if (inpMarginLeft) inpMarginLeft.value = Math.round((cropCoords.l * W) / currentScale);
+                if (inpMarginRight) inpMarginRight.value = Math.round(((1 - cropCoords.r) * W) / currentScale);
+            }
+
+            // Sync margin inputs back to cropCoords
+            [inpMarginTop, inpMarginBottom, inpMarginLeft, inpMarginRight].forEach(inp => {
+                if (!inp) return;
+                inp.addEventListener("change", () => {
+                    const W = baseCanvas.width / currentScale;
+                    const H = baseCanvas.height / currentScale;
+                    const t = parseFloat(inpMarginTop.value) || 0;
+                    const b = parseFloat(inpMarginBottom.value) || 0;
+                    const l = parseFloat(inpMarginLeft.value) || 0;
+                    const r = parseFloat(inpMarginRight.value) || 0;
+
+                    cropCoords.t = Math.max(0, Math.min(0.9, t / H));
+                    cropCoords.b = Math.max(cropCoords.t + 0.05, Math.min(1.0, 1 - (b / H)));
+                    cropCoords.l = Math.max(0, Math.min(0.9, l / W));
+                    cropCoords.r = Math.max(cropCoords.l + 0.05, Math.min(1.0, 1 - (r / W)));
+
+                    updateCropBoxVisuals();
+                });
+            });
+
+            // Quick Trim Chips
+            quickTrimChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    const pts = parseFloat(chip.dataset.trim) || 0;
+                    const W = baseCanvas.width / currentScale;
+                    const H = baseCanvas.height / currentScale;
+
+                    cropCoords.l = Math.min(0.4, pts / W);
+                    cropCoords.r = Math.max(0.6, 1 - (pts / W));
+                    cropCoords.t = Math.min(0.4, pts / H);
+                    cropCoords.b = Math.max(0.6, 1 - (pts / H));
+
+                    updateCropBoxVisuals();
+                    showToast(`Trimmed margins by ${pts} pt`, "info");
+                });
+            });
+
+            // Crop Handles Pointer Events
+            document.querySelectorAll(".crop-handle").forEach(handle => {
+                handle.addEventListener("pointerdown", (e) => {
+                    e.stopPropagation();
+                    activeHandle = handle.dataset.handle;
+                    dragStart = { x: e.clientX, y: e.clientY };
+                    cropStart = { ...cropCoords };
+                    cropBox.classList.add("is-dragging");
+                    window.addEventListener("pointermove", handlePointerMove);
+                    window.addEventListener("pointerup", handlePointerUp);
+                });
+            });
+
+            // Drag whole box
+            cropBox.addEventListener("pointerdown", (e) => {
+                if (e.target.classList.contains("crop-handle")) return;
+                isDraggingBox = true;
+                dragStart = { x: e.clientX, y: e.clientY };
+                cropStart = { ...cropCoords };
+                cropBox.classList.add("is-dragging");
+                window.addEventListener("pointermove", handlePointerMove);
+                window.addEventListener("pointerup", handlePointerUp);
+            });
+
+            function handlePointerMove(e) {
+                const W = baseCanvas.width;
+                const H = baseCanvas.height;
+                if (!W || !H) return;
+
+                const dx = (e.clientX - dragStart.x) / W;
+                const dy = (e.clientY - dragStart.y) / H;
+
+                if (isDraggingBox) {
+                    const boxW = cropStart.r - cropStart.l;
+                    const boxH = cropStart.b - cropStart.t;
+
+                    let newL = Math.max(0, Math.min(1 - boxW, cropStart.l + dx));
+                    let newT = Math.max(0, Math.min(1 - boxH, cropStart.t + dy));
+
+                    cropCoords.l = newL;
+                    cropCoords.t = newT;
+                    cropCoords.r = newL + boxW;
+                    cropCoords.b = newT + boxH;
+                } else if (activeHandle) {
+                    const minSize = 0.05;
+
+                    if (activeHandle.includes("w")) {
+                        cropCoords.l = Math.min(cropStart.r - minSize, Math.max(0, cropStart.l + dx));
+                    }
+                    if (activeHandle.includes("e")) {
+                        cropCoords.r = Math.max(cropStart.l + minSize, Math.min(1, cropStart.r + dx));
+                    }
+                    if (activeHandle.includes("n")) {
+                        cropCoords.t = Math.min(cropStart.b - minSize, Math.max(0, cropStart.t + dy));
+                    }
+                    if (activeHandle.includes("s")) {
+                        cropCoords.b = Math.max(cropStart.t + minSize, Math.min(1, cropStart.b + dy));
+                    }
+                }
+
+                updateCropBoxVisuals();
+            }
+
+            function handlePointerUp() {
+                isDraggingBox = false;
+                activeHandle = null;
+                cropBox.classList.remove("is-dragging");
+                window.removeEventListener("pointermove", handlePointerMove);
+                window.removeEventListener("pointerup", handlePointerUp);
+            }
+
+            // Aspect Ratio Chips Controller
+            aspectChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    const aspect = chip.dataset.aspect;
+                    if (!aspect) return;
+
+                    aspectChips.forEach(c => c.classList.remove("active"));
+                    chip.classList.add("active");
+
+                    if (aspect === "custom") {
+                        selectCropAspect.style.display = "block";
+                        return;
+                    } else {
+                        selectCropAspect.style.display = "none";
+                    }
+
+                    selectCropAspect.value = aspect;
+                    applyAspectConstraint(aspect);
+                });
+            });
+
+            if (selectCropAspect) {
+                selectCropAspect.addEventListener("change", () => {
+                    applyAspectConstraint(selectCropAspect.value);
+                });
+            }
+
+            function applyAspectConstraint(val) {
+                if (val === "free") return;
+
+                let ratio = 1.0;
+                if (val === "1:1") ratio = 1.0;
+                if (val === "4:3") ratio = 4 / 3;
+                if (val === "16:9") ratio = 16 / 9;
+                if (val === "a4") ratio = 1 / 1.414;
+
+                const W = baseCanvas.width;
+                const H = baseCanvas.height;
+                const boxW = cropCoords.r - cropCoords.l;
+                const newHeight = (boxW * W / ratio) / H;
+
+                if (cropCoords.t + newHeight <= 1.0) {
+                    cropCoords.b = cropCoords.t + newHeight;
+                } else {
+                    cropCoords.b = 1.0;
+                    cropCoords.r = Math.min(1.0, cropCoords.l + (cropCoords.b - cropCoords.t) * H * ratio / W);
+                }
+                updateCropBoxVisuals();
+            }
+
+            // Orientation Visual Buttons
+            if (btnOrientPortrait && btnOrientLandscape) {
+                btnOrientPortrait.addEventListener("click", () => {
+                    btnOrientPortrait.classList.add("active");
+                    btnOrientLandscape.classList.remove("active");
+                    selectOrientation.value = "portrait";
+                });
+
+                btnOrientLandscape.addEventListener("click", () => {
+                    btnOrientLandscape.classList.add("active");
+                    btnOrientPortrait.classList.remove("active");
+                    selectOrientation.value = "landscape";
+                });
+            }
+
+            // Scope Buttons
+            scopeBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    scopeBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    selectApplyScope.value = btn.dataset.scope;
+                });
+            });
+
+            // ============================================================
+            // Auto Margin Detection Engine
+            // ============================================================
+            function performAutoTrim(showFeedback = true) {
+                const W = baseCanvas.width;
+                const H = baseCanvas.height;
+                if (!W || !H) return;
+
+                try {
+                    const imgData = baseCtx.getImageData(0, 0, W, H);
+                    const d = imgData.data;
+                    const threshold = parseInt(selectAutoSensitivity ? selectAutoSensitivity.value : "240") || 240;
+
+                    let top = H, bottom = 0, left = W, right = 0;
+
+                    for (let y = 0; y < H; y += 4) {
+                        for (let x = 0; x < W; x += 4) {
+                            const idx = (y * W + x) * 4;
+                            const r = d[idx];
+                            const g = d[idx + 1];
+                            const b = d[idx + 2];
+
+                            if (r < threshold || g < threshold || b < threshold) {
+                                if (x < left) left = x;
+                                if (x > right) right = x;
+                                if (y < top) top = y;
+                                if (y > bottom) bottom = y;
+                            }
+                        }
+                    }
+
+                    if (right > left && bottom > top) {
+                        const padPx = autoPaddingPt * currentScale;
+                        cropCoords.l = Math.max(0, (left - padPx) / W);
+                        cropCoords.r = Math.min(1, (right + padPx) / W);
+                        cropCoords.t = Math.max(0, (top - padPx) / H);
+                        cropCoords.b = Math.min(1, (bottom + padPx) / H);
+                        updateCropBoxVisuals();
+                        if (showFeedback) showToast("Auto-trimmed margins successfully!", "success");
+                    } else {
+                        if (showFeedback) showToast("No distinct content boundaries detected.", "info");
+                    }
+                } catch (e) {
+                    console.error("Auto trim error:", e);
+                    if (showFeedback) showToast("Auto-trim failed: " + e.message, "error");
+                }
+            }
+
+            if (btnAutoTrim) {
+                btnAutoTrim.addEventListener("click", () => {
+                    showLoader("Scanning white margins...");
+                    setTimeout(() => {
+                        performAutoTrim(true);
+                        hideLoader();
+                    }, 80);
+                });
+            }
+
+            // Auto-crop padding chips
+            autoPadChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    autoPadChips.forEach(c => c.classList.remove("active"));
+                    chip.classList.add("active");
+                    autoPaddingPt = parseFloat(chip.dataset.pad) || 0;
+                    performAutoTrim(false);
+                });
+            });
+
+            if (selectAutoSensitivity) {
+                selectAutoSensitivity.addEventListener("change", () => {
+                    performAutoTrim(false);
+                });
+            }
+
+            // ============================================================
+            // EXPORT VIA PDF-LIB (Native Vector Preservation)
+            // ============================================================
+            btnApplyExport.addEventListener("click", async () => {
+                if (!originalBuffer) return;
+
+                showLoader("Applying modifications & saving PDF...");
+                try {
+                    const pdfDocLib = await PDFLib.PDFDocument.load(originalBuffer.slice(0));
+                    const pages = pdfDocLib.getPages();
+                    const applyScope = selectApplyScope.value; // 'all' | 'current'
+
+                    const targetPages = applyScope === "all"
+                        ? pages
+                        : [pages[currentPageNum - 1]];
+
+                    if (currentMode === "auto-crop" || currentMode === "manual-crop") {
+                        // NATIVE VECTOR CROPBOX MODIFICATION
+                        if (currentMode === "auto-crop" && applyScope === "all") {
+                            // Smart per-page auto-detection
+                            showLoader("Auto-detecting margins across pages...");
+                            for (let i = 0; i < pages.length; i++) {
+                                const pageLib = pages[i];
+                                const { width: pW, height: pH } = pageLib.getSize();
+
+                                let pCoords = { ...cropCoords };
+                                try {
+                                    const jsPage = await pdfDoc.getPage(i + 1);
+                                    const offViewport = jsPage.getViewport({ scale: 0.5 });
+                                    const offCanvas = document.createElement("canvas");
+                                    offCanvas.width = offViewport.width;
+                                    offCanvas.height = offViewport.height;
+                                    const offCtx = offCanvas.getContext("2d");
+
+                                    await jsPage.render({ canvasContext: offCtx, viewport: offViewport }).promise;
+
+                                    const imgData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
+                                    const d = imgData.data;
+                                    const threshold = parseInt(selectAutoSensitivity ? selectAutoSensitivity.value : "240") || 240;
+                                    let top = offCanvas.height, bottom = 0, left = offCanvas.width, right = 0;
+
+                                    for (let y = 0; y < offCanvas.height; y += 4) {
+                                        for (let x = 0; x < offCanvas.width; x += 4) {
+                                            const idx = (y * offCanvas.width + x) * 4;
+                                            if (d[idx] < threshold || d[idx + 1] < threshold || d[idx + 2] < threshold) {
+                                                if (x < left) left = x;
+                                                if (x > right) right = x;
+                                                if (y < top) top = y;
+                                                if (y > bottom) bottom = y;
+                                            }
+                                        }
+                                    }
+
+                                    if (right > left && bottom > top) {
+                                        const padPx = autoPaddingPt * 0.5;
+                                        pCoords = {
+                                            l: Math.max(0, (left - padPx) / offCanvas.width),
+                                            r: Math.min(1, (right + padPx) / offCanvas.width),
+                                            t: Math.max(0, (top - padPx) / offCanvas.height),
+                                            b: Math.min(1, (bottom + padPx) / offCanvas.height)
+                                        };
+                                    }
+                                } catch (scanErr) {
+                                    pCoords = { ...cropCoords };
+                                }
+
+                                const pdfLeft = pCoords.l * pW;
+                                const pdfBottom = (1 - pCoords.b) * pH;
+                                const pdfWidth = (pCoords.r - pCoords.l) * pW;
+                                const pdfHeight = (pCoords.b - pCoords.t) * pH;
+
+                                pageLib.setCropBox(pdfLeft, pdfBottom, pdfWidth, pdfHeight);
+                                pageLib.setMediaBox(pdfLeft, pdfBottom, pdfWidth, pdfHeight);
+                            }
+                        } else {
+                            targetPages.forEach(p => {
+                                const { width: pW, height: pH } = p.getSize();
+
+                                const pdfLeft = cropCoords.l * pW;
+                                const pdfBottom = (1 - cropCoords.b) * pH;
+                                const pdfWidth = (cropCoords.r - cropCoords.l) * pW;
+                                const pdfHeight = (cropCoords.b - cropCoords.t) * pH;
+
+                                p.setCropBox(pdfLeft, pdfBottom, pdfWidth, pdfHeight);
+                                p.setMediaBox(pdfLeft, pdfBottom, pdfWidth, pdfHeight);
+                            });
+                        }
+                    } else if (currentMode === "resize") {
+                        // RESIZE PAGE FORMAT
+                        const paperKey = selectTargetPaper.value;
+                        const orientation = selectOrientation.value;
+                        const scaleType = selectContentScale.value;
+
+                        let std = PAPER_SIZES[paperKey] || PAPER_SIZES.A4;
+                        let targetW = orientation === "landscape" ? std.height : std.width;
+                        let targetH = orientation === "landscape" ? std.width : std.height;
+
+                        const newDoc = await PDFLib.PDFDocument.create();
+
+                        for (let i = 0; i < pages.length; i++) {
+                            const shouldResize = (applyScope === "all") || (i === currentPageNum - 1);
+                            const origPage = pages[i];
+                            const { width: origW, height: origH } = origPage.getSize();
+
+                            if (shouldResize) {
+                                const embedded = await newDoc.embedPage(origPage);
+                                const newP = newDoc.addPage([targetW, targetH]);
+
+                                if (scaleType === "fit") {
+                                    const scale = Math.min(targetW / origW, targetH / origH);
+                                    const drawW = origW * scale;
+                                    const drawH = origH * scale;
+                                    const offsetX = (targetW - drawW) / 2;
+                                    const offsetY = (targetH - drawH) / 2;
+
+                                    newP.drawPage(embedded, {
+                                        x: offsetX,
+                                        y: offsetY,
+                                        width: drawW,
+                                        height: drawH
+                                    });
+                                } else if (scaleType === "stretch") {
+                                    newP.drawPage(embedded, {
+                                        x: 0,
+                                        y: 0,
+                                        width: targetW,
+                                        height: targetH
+                                    });
+                                } else {
+                                    const offsetX = (targetW - origW) / 2;
+                                    const offsetY = (targetH - origH) / 2;
+                                    newP.drawPage(embedded, {
+                                        x: offsetX,
+                                        y: offsetY,
+                                        width: origW,
+                                        height: origH
+                                    });
+                                }
+                            } else {
+                                const [copied] = await newDoc.copyPages(pdfDocLib, [i]);
+                                newDoc.addPage(copied);
+                            }
+                        }
+
+                        const outBytes = await newDoc.save();
+                        const outName = originalFileName.replace(/\.pdf$/i, "") + `-${paperKey.toLowerCase()}.pdf`;
+                        downloadBlob(new Blob([outBytes], { type: "application/pdf" }), outName);
+                        showToast("Resized PDF downloaded successfully!", "success");
+                        hideLoader();
+                        return;
+                    }
+
+                    // Save cropped PDF
+                    const modifiedBytes = await pdfDocLib.save();
+                    const outName = originalFileName.replace(/\.pdf$/i, "") + "-cropped.pdf";
+                    downloadBlob(new Blob([modifiedBytes], { type: "application/pdf" }), outName);
+
+                    showToast("Cropped PDF exported successfully with 100% vector clarity!", "success");
+                } catch (err) {
+                    console.error("Export error:", err);
+                    showToast("Failed to process document: " + err.message, "error");
+                } finally {
+                    hideLoader();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

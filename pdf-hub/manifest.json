@@ -1,0 +1,21 @@
+{
+  "name": "Spac2 PDF Hub",
+  "short_name": "PDF Hub",
+  "description": "Fast, private client-side PDF utilities directly in your browser",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1F1F1F",
+  "theme_color": "#ef4444",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

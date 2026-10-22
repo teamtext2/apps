@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — OCR PDF — Extract Text from Scanned Documents</title>
+    <meta name="title" content="Spac2 PDF — OCR PDF — Extract Text from Scanned Documents">
+    <meta name="description"
+        content="Free online client-side OCR tool for PDF: Recognize and extract text from scanned documents, receipts, and photos using WebAssembly AI. Supports English, Vietnamese, and 10+ languages with 100% local privacy.">
+    <meta name="keywords" content="OCR PDF, optical character recognition, scan to text, extract text from scanned PDF, Tesseract PDF, client-side OCR, free OCR tool">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/ocr/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/ocr/">
+    <meta property="og:title" content="Spac2 PDF — OCR PDF — Extract Text from Scanned Documents">
+    <meta property="og:description"
+        content="Convert scanned PDF documents and image photos into searchable, editable text directly in your browser.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        /* OCR Studio */
+        #ocr-studio {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Config Card */
+        .ocr-config-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--card-glow);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .doc-summary-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .doc-info-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .doc-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-grid-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .setting-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .setting-col label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .setting-select,
+        .setting-input {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: var(--radius-sm);
+            padding: 0.55rem 0.75rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .setting-select:focus,
+        .setting-input:focus {
+            border-color: var(--accent-red);
+        }
+
+        /* Progress Card */
+        #progress-card {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-main);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 1.25rem auto 0.75rem;
+            max-width: 480px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            transition: width 0.2s ease;
+        }
+
+        /* Results Editor */
+        #results-card {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--card-glow);
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .results-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ocr-textarea {
+            width: 100%;
+            height: 480px;
+            background: #141414;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: #f3f4f6;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s ease;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .ocr-textarea:focus {
+            border-color: var(--accent-red);
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 OCR PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">OCR PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+                        <span>All tools</span>
+                        <i data-lucide="chevron-down" style="width: 13px; height: 13px;"></i>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <i data-lucide="home" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">OCR PDF</h1>
+        <p class="tool-desc">Extract editable text from scanned documents using WebAssembly AI.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <i data-lucide="scan" style="width: 32px; height: 32px;"></i>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your scanned PDF document here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Private optical text recognition via local Tesseract.js engine
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <i data-lucide="folder-open" style="width: 18px; height: 18px;"></i>
+                <span>Select Scanned PDF</span>
+            </button>
+        </div>
+
+        <!-- 2. OCR Studio -->
+        <div id="ocr-studio">
+            <!-- Config Card -->
+            <div class="ocr-config-card" id="config-card">
+                <div class="doc-summary-row">
+                    <div class="doc-info-left">
+                        <div class="doc-icon-box">
+                            <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 1rem; font-weight: 700; color: var(--text-primary);" id="doc-name-label">document.pdf</div>
+                            <div style="font-size: 0.82rem; color: var(--text-muted);" id="doc-meta-label">0 MB • 0 Pages</div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-secondary" id="btn-change-file" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+                        <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                        <span>Change File</span>
+                    </button>
+                </div>
+
+                <div class="settings-grid-row">
+                    <!-- Language Selection -->
+                    <div class="setting-col">
+                        <label for="select-ocr-lang">Document Language</label>
+                        <select class="setting-select" id="select-ocr-lang">
+                            <option value="eng" selected>English (Default)</option>
+                            <option value="vie">Vietnamese (Tiếng Việt)</option>
+                            <option value="fra">French (Français)</option>
+                            <option value="deu">German (Deutsch)</option>
+                            <option value="spa">Spanish (Español)</option>
+                            <option value="chi_sim">Chinese Simplified (简体中文)</option>
+                            <option value="jpn">Japanese (日本語)</option>
+                        </select>
+                    </div>
+
+                    <!-- Page Range -->
+                    <div class="setting-col">
+                        <label for="inp-page-scope">Page Range</label>
+                        <input type="text" class="setting-input" id="inp-page-scope" value="all" placeholder="all or e.g., 1-3, 5">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 0.5rem;">
+                    <button type="button" class="btn-primary" id="btn-start-ocr" style="padding: 0.75rem 2rem; font-size: 0.95rem;">
+                        <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+                        <span>Start Optical Recognition</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress Card -->
+            <div id="progress-card">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem;">
+                    Optical Character Recognition in Progress...
+                </h3>
+                <p id="progress-status-text" style="font-size: 0.9rem; color: var(--text-secondary);">
+                    Initializing Tesseract.js WebAssembly engine...
+                </p>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                </div>
+                <p id="progress-pct-label" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-red);">0%</p>
+            </div>
+
+            <!-- Results Card -->
+            <div id="results-card">
+                <div class="results-toolbar">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                        <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-primary);">Recognized Text</span>
+                        <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 9999px; padding: 0.2rem 0.6rem; font-size: 0.75rem; color: #10b981; font-weight: 700;" id="confidence-badge">
+                            98% Confidence
+                        </div>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);" id="stats-label">0 words</span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <button type="button" class="btn-secondary" id="btn-ocr-another" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">
+                            <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                            <span>OCR Another</span>
+                        </button>
+                        <button type="button" class="btn-secondary" id="btn-copy-ocr" style="padding: 0.4rem 0.95rem; font-size: 0.82rem;">
+                            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+                            <span id="copy-btn-text">Copy All</span>
+                        </button>
+                        <button type="button" class="btn-primary" id="btn-download-ocr-txt" style="padding: 0.4rem 1.15rem; font-size: 0.85rem;">
+                            <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+                            <span>Download .TXT</span>
+                        </button>
+                    </div>
+                </div>
+
+                <textarea class="ocr-textarea" id="ocr-textarea" spellcheck="false" placeholder="Recognized text will appear here..."></textarea>
+            </div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>Optical Character Recognition Engine</h3>
+                <p>
+                    Extract editable text from scanned documents, paper invoices, books, receipts, and photographed PDFs using WebAssembly neural networks directly in your browser without transmitting sensitive files to any cloud server.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to OCR PDF Documents in 3 Easy Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Scanned File</h4>
+                        <p>Select any PDF containing scanned pages, photos of documents, or receipts.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Select Language</h4>
+                        <p>Choose document language (English, Vietnamese, French, etc.) and start AI recognition.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Copy or Save Text</h4>
+                        <p>Copy recognized characters with 1-click or export to a clean plain text (.TXT) file.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/rotate">Rotate PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/ocr">OCR PDF</a>
+                <a href="/apps/pdf-hub/metadata">PDF Metadata</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Client-Side WebAssembly Neural OCR. 100% Privacy.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js & Tesseract.js & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- OCR Controller Script -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const ocrStudio = document.getElementById("ocr-studio");
+
+            const configCard = document.getElementById("config-card");
+            const progressCard = document.getElementById("progress-card");
+            const resultsCard = document.getElementById("results-card");
+
+            const docNameLabel = document.getElementById("doc-name-label");
+            const docMetaLabel = document.getElementById("doc-meta-label");
+            const selectOcrLang = document.getElementById("select-ocr-lang");
+            const inpPageScope = document.getElementById("inp-page-scope");
+            const btnStartOcr = document.getElementById("btn-start-ocr");
+            const btnChangeFile = document.getElementById("btn-change-file");
+            const btnOcrAnother = document.getElementById("btn-ocr-another");
+
+            const progressBarFill = document.getElementById("progress-bar-fill");
+            const progressPctLabel = document.getElementById("progress-pct-label");
+            const progressStatusText = document.getElementById("progress-status-text");
+
+            const ocrTextArea = document.getElementById("ocr-textarea");
+            const confidenceBadge = document.getElementById("confidence-badge");
+            const statsLabel = document.getElementById("stats-label");
+            const btnCopyOcr = document.getElementById("btn-copy-ocr");
+            const copyBtnText = document.getElementById("copy-btn-text");
+            const btnDownloadOcrTxt = document.getElementById("btn-download-ocr-txt");
+
+            let loadedFile = null;
+            let loadedBuffer = null;
+            let pdfDoc = null;
+            let totalPages = 0;
+
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please upload a valid PDF document.", "error");
+                    return;
+                }
+                loadFile(file);
+            });
+
+            async function loadFile(file) {
+                try {
+                    showToast("Loading document...", "info");
+                    loadedFile = file;
+                    loadedBuffer = await file.arrayBuffer();
+
+                    const loadingTask = pdfjsLib.getDocument({ data: loadedBuffer.slice(0) });
+                    pdfDoc = await loadingTask.promise;
+                    totalPages = pdfDoc.numPages;
+
+                    docNameLabel.textContent = file.name;
+                    docMetaLabel.textContent = `${formatBytes(file.size)} • ${totalPages} ${totalPages === 1 ? 'Page' : 'Pages'}`;
+
+                    dropzone.style.display = "none";
+                    resultsCard.style.display = "none";
+                    progressCard.style.display = "none";
+                    configCard.style.display = "flex";
+                    ocrStudio.style.display = "flex";
+
+                    showToast(`Loaded ${file.name} successfully`, "success");
+                } catch (err) {
+                    console.error("PDF load error:", err);
+                    showToast("Failed to load PDF: " + err.message, "error");
+                }
+            }
+
+            btnChangeFile.addEventListener("click", resetOcr);
+            btnOcrAnother.addEventListener("click", resetOcr);
+
+            function resetOcr() {
+                loadedFile = null;
+                loadedBuffer = null;
+                pdfDoc = null;
+                totalPages = 0;
+                fileInput.value = "";
+                ocrStudio.style.display = "none";
+                dropzone.style.display = "block";
+            }
+
+            function parseScope(scopeStr, maxPages) {
+                const s = scopeStr.trim().toLowerCase();
+                if (!s || s === "all") return Array.from({ length: maxPages }, (_, i) => i + 1);
+
+                const pages = [];
+                const parts = s.split(",");
+                for (let part of parts) {
+                    part = part.trim();
+                    if (!part) continue;
+                    if (part.includes("-")) {
+                        const [startS, endS] = part.split("-");
+                        const start = Math.max(1, parseInt(startS, 10) || 1);
+                        const end = Math.min(maxPages, parseInt(endS, 10) || maxPages);
+                        for (let p = start; p <= end; p++) {
+                            if (!pages.includes(p)) pages.push(p);
+                        }
+                    } else {
+                        const p = parseInt(part, 10);
+                        if (p >= 1 && p <= maxPages && !pages.includes(p)) pages.push(p);
+                    }
+                }
+                return pages.length > 0 ? pages : Array.from({ length: maxPages }, (_, i) => i + 1);
+            }
+
+            // Start OCR Process
+            btnStartOcr.addEventListener("click", async () => {
+                if (!pdfDoc) return;
+
+                const targetPages = parseScope(inpPageScope.value, totalPages);
+                const lang = selectOcrLang.value || "eng";
+
+                configCard.style.display = "none";
+                progressCard.style.display = "block";
+                progressBarFill.style.width = "0%";
+                progressPctLabel.textContent = "0%";
+                progressStatusText.textContent = `Initializing Tesseract.js engine (${lang})...`;
+
+                let recognizedFullText = "";
+                let confidenceSum = 0;
+                let recognizedCount = 0;
+
+                try {
+                    const worker = await Tesseract.createWorker(lang);
+
+                    const offscreenCanvas = document.createElement("canvas");
+                    const offCtx = offscreenCanvas.getContext("2d");
+
+                    for (let idx = 0; idx < targetPages.length; idx++) {
+                        const pageNum = targetPages[idx];
+                        progressStatusText.textContent = `Rendering and recognizing Page ${pageNum} (${idx + 1} of ${targetPages.length})...`;
+
+                        const page = await pdfDoc.getPage(pageNum);
+                        // Render at 2x resolution for optimal OCR accuracy
+                        const viewport = page.getViewport({ scale: 2.0 });
+
+                        offscreenCanvas.width = viewport.width;
+                        offscreenCanvas.height = viewport.height;
+                        offCtx.fillStyle = "#ffffff";
+                        offCtx.fillRect(0, 0, viewport.width, viewport.height);
+
+                        await page.render({
+                            canvasContext: offCtx,
+                            viewport: viewport
+                        }).promise;
+
+                        const ret = await worker.recognize(offscreenCanvas);
+                        recognizedFullText += `--- Page ${pageNum} ---\n\n${ret.data.text.trim()}\n\n`;
+
+                        if (ret.data.confidence) {
+                            confidenceSum += ret.data.confidence;
+                            recognizedCount++;
+                        }
+
+                        const overallPct = Math.round(((idx + 1) / targetPages.length) * 100);
+                        progressBarFill.style.width = `${overallPct}%`;
+                        progressPctLabel.textContent = `${overallPct}%`;
+                    }
+
+                    await worker.terminate();
+
+                    // Display Results
+                    progressCard.style.display = "none";
+                    resultsCard.style.display = "flex";
+
+                    ocrTextArea.value = recognizedFullText.trim();
+                    const words = ocrTextArea.value.trim() ? ocrTextArea.value.trim().split(/\s+/).length : 0;
+                    statsLabel.textContent = `${words.toLocaleString()} words`;
+
+                    const avgConfidence = recognizedCount > 0 ? Math.round(confidenceSum / recognizedCount) : 95;
+                    confidenceBadge.textContent = `${avgConfidence}% Confidence`;
+
+                    showToast("OCR recognition completed successfully!", "success");
+                } catch (err) {
+                    console.error("OCR error:", err);
+                    progressCard.style.display = "none";
+                    configCard.style.display = "flex";
+                    showToast("OCR processing failed: " + err.message, "error");
+                }
+            });
+
+            // Copy
+            btnCopyOcr.addEventListener("click", async () => {
+                const text = ocrTextArea.value;
+                if (!text) return;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    copyBtnText.textContent = "Copied!";
+                    showToast("Copied OCR text to clipboard!", "success");
+                    setTimeout(() => copyBtnText.textContent = "Copy All", 2000);
+                } catch (e) {
+                    ocrTextArea.select();
+                    document.execCommand("copy");
+                    showToast("Copied OCR text to clipboard!", "success");
+                }
+            });
+
+            // Download .TXT
+            btnDownloadOcrTxt.addEventListener("click", () => {
+                const text = ocrTextArea.value;
+                if (!text) return;
+                const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+                const baseName = loadedFile ? loadedFile.name.replace(/\.pdf$/i, "") : "ocr-text";
+                downloadBlob(blob, `${baseName}-ocr.txt`);
+                showToast("Downloaded OCR text file!", "success");
+            });
+        });
+    </script>
+</body>
+
+</html>

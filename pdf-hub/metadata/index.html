@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — PDF Metadata — View, Edit & Wipe Properties</title>
+    <meta name="title" content="Spac2 PDF — PDF Metadata — View, Edit & Wipe Properties">
+    <meta name="description"
+        content="Free online PDF metadata editor: Inspect and modify document title, author, subject, keywords, and creator info, or sanitize and wipe hidden metadata completely for privacy.">
+    <meta name="keywords" content="PDF metadata, edit PDF properties, remove PDF metadata, wipe PDF author, inspect PDF metadata, client-side PDF tool">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/metadata/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/metadata/">
+    <meta property="og:title" content="Spac2 PDF — PDF Metadata — View, Edit & Wipe Properties">
+    <meta property="og:description"
+        content="Inspect, modify, or strip hidden PDF metadata directly in your browser with zero server uploads. 100% private.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        /* Metadata Studio Container */
+        #metadata-studio {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--card-glow);
+            margin-bottom: 2.5rem;
+        }
+
+        /* File Summary Header */
+        .file-summary-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .file-summary-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .file-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .file-name-label {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-primary);
+            max-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .file-size-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        /* Studio Grid Layout */
+        .studio-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1.1fr;
+            gap: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .studio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-panel,
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .panel-heading {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            padding: 0.65rem 0.85rem;
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--accent-red);
+            background: var(--bg-card-hover);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        /* Quick Action Cards in Side Panel */
+        .action-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .privacy-wipe-btn {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 0.65rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .privacy-wipe-btn:hover {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+        }
+
+        .side-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.55rem 0.85rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .side-btn:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+        }
+
+        /* Read-only Document Specs */
+        .specs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            font-size: 0.82rem;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .spec-key {
+            color: var(--text-muted);
+        }
+
+        .spec-val {
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: right;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Bottom Action Bar */
+        .studio-footer-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 PDF Metadata">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">PDF Metadata</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+                        <span>All tools</span>
+                        <i data-lucide="chevron-down" style="width: 13px; height: 13px;"></i>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <i data-lucide="home" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">PDF Metadata</h1>
+        <p class="tool-desc">View, edit, or wipe document properties and hidden tracking data.</p>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <i data-lucide="info" style="width: 32px; height: 32px;"></i>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your PDF file here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Reads hidden metadata instantly in your browser with zero server uploads
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <i data-lucide="folder-open" style="width: 18px; height: 18px;"></i>
+                <span>Select PDF File</span>
+            </button>
+        </div>
+
+        <!-- 2. Interactive Metadata Studio -->
+        <div id="metadata-studio">
+            <!-- File Summary Bar -->
+            <div class="file-summary-bar">
+                <div class="file-summary-left">
+                    <div class="file-icon-box">
+                        <i data-lucide="file-text" style="width: 22px; height: 22px;"></i>
+                    </div>
+                    <div>
+                        <div class="file-name-label" id="doc-name">document.pdf</div>
+                        <div class="file-size-label" id="doc-meta-info">0 MB • 0 Pages</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-secondary" id="btn-change-file" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+                    <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                    <span>Change File</span>
+                </button>
+            </div>
+
+            <!-- Studio Grid -->
+            <div class="studio-grid">
+                <!-- Left Form: Editable Fields -->
+                <div class="form-panel">
+                    <div class="panel-heading">
+                        <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+                        <span>Editable Metadata Fields</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="meta-title">
+                            <span>Document Title</span>
+                        </label>
+                        <input type="text" id="meta-title" class="form-input" placeholder="e.g., Annual Financial Report 2026">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="meta-author">
+                            <span>Author / Organization</span>
+                        </label>
+                        <input type="text" id="meta-author" class="form-input" placeholder="e.g., John Doe or Spac2 Inc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="meta-subject">
+                            <span>Subject / Description</span>
+                        </label>
+                        <input type="text" id="meta-subject" class="form-input" placeholder="e.g., Quarterly executive overview">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="meta-keywords">
+                            <span>Keywords</span>
+                            <span class="form-hint">Separate with commas</span>
+                        </label>
+                        <input type="text" id="meta-keywords" class="form-input" placeholder="e.g., report, finance, quarterly, audit">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="meta-creator">
+                            <span>Creator Application</span>
+                            <span class="form-hint">App used to write original file</span>
+                        </label>
+                        <input type="text" id="meta-creator" class="form-input" placeholder="e.g., Microsoft Word, Adobe InDesign">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="meta-producer">
+                            <span>PDF Producer</span>
+                            <span class="form-hint">Engine used to generate PDF</span>
+                        </label>
+                        <input type="text" id="meta-producer" class="form-input" placeholder="e.g., Spac2 PDF Engine">
+                    </div>
+                </div>
+
+                <!-- Right Side: Quick Privacy Actions & System Info -->
+                <div class="side-panel">
+                    <!-- Privacy Sanitizer Card -->
+                    <div class="action-card">
+                        <div class="panel-heading" style="color: #f87171;">
+                            <i data-lucide="shield-alert" style="width: 14px; height: 14px;"></i>
+                            <span>Privacy Sanitizer</span>
+                        </div>
+                        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+                            Remove hidden personal names, software versions, and tracking timestamps before sending documents to external parties.
+                        </p>
+                        <button type="button" class="privacy-wipe-btn" id="btn-wipe-all" title="Clear all metadata fields to blank">
+                            <i data-lucide="trash-2" style="width: 15px; height: 15px;"></i>
+                            <span>Wipe All Hidden Metadata</span>
+                        </button>
+                        <button type="button" class="side-btn" id="btn-reset-original" title="Restore original document metadata">
+                            <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                            <span>Reset to Original Values</span>
+                        </button>
+                    </div>
+
+                    <!-- System Properties Card -->
+                    <div class="action-card">
+                        <div class="panel-heading">
+                            <i data-lucide="file-code" style="width: 14px; height: 14px;"></i>
+                            <span>Document Specifications</span>
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item">
+                                <span class="spec-key">Page Count:</span>
+                                <span class="spec-val" id="spec-pages">0</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-key">File Size:</span>
+                                <span class="spec-val" id="spec-size">0 KB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-key">Created Date:</span>
+                                <span class="spec-val" id="spec-created">—</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-key">Modified Date:</span>
+                                <span class="spec-val" id="spec-modified">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Action Bar -->
+            <div class="studio-footer-bar">
+                <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="check-circle" style="width: 14px; height: 14px; color: #4ade80;"></i>
+                    <span>Modifications are applied natively without touching page contents</span>
+                </div>
+
+                <button type="button" class="btn-primary" id="btn-save-metadata" style="padding: 0.75rem 1.75rem; font-size: 0.95rem;">
+                    <i data-lucide="download" style="width: 18px; height: 18px;"></i>
+                    <span>Save & Download PDF</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>Document Property Inspection & Sanitization</h3>
+                <p>
+                    Inspect author tags, creation dates, application origins, and keywords. Update properties for professional publishing or completely strip hidden tracking tags to protect identity and confidentiality before distributing PDFs.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Manage PDF Metadata in 3 Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Document</h4>
+                        <p>Select your PDF file. All embedded metadata is extracted and displayed in real time.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Edit or Sanitize</h4>
+                        <p>Modify document details or click 'Wipe All Hidden Metadata' for privacy.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Download Updated File</h4>
+                        <p>Export your updated PDF file with clean, standardized metadata tags.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/metadata">PDF Metadata</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+                <a href="/apps/pdf-hub/ocr">OCR PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native PDF Metadata inspection & sanitization. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF-Lib & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Metadata Controller Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const metadataStudio = document.getElementById("metadata-studio");
+
+            // Form inputs
+            const metaTitle = document.getElementById("meta-title");
+            const metaAuthor = document.getElementById("meta-author");
+            const metaSubject = document.getElementById("meta-subject");
+            const metaKeywords = document.getElementById("meta-keywords");
+            const metaCreator = document.getElementById("meta-creator");
+            const metaProducer = document.getElementById("meta-producer");
+
+            // Specs
+            const docName = document.getElementById("doc-name");
+            const docMetaInfo = document.getElementById("doc-meta-info");
+            const specPages = document.getElementById("spec-pages");
+            const specSize = document.getElementById("spec-size");
+            const specCreated = document.getElementById("spec-created");
+            const specModified = document.getElementById("spec-modified");
+
+            // Buttons
+            const btnChangeFile = document.getElementById("btn-change-file");
+            const btnWipeAll = document.getElementById("btn-wipe-all");
+            const btnResetOriginal = document.getElementById("btn-reset-original");
+            const btnSaveMetadata = document.getElementById("btn-save-metadata");
+
+            // State
+            let loadedFile = null;
+            let loadedBuffer = null;
+            let originalMetadata = {};
+
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please select a valid PDF file.", "error");
+                    return;
+                }
+                loadPdfMetadata(file);
+            });
+
+            btnChangeFile.addEventListener("click", () => {
+                metadataStudio.style.display = "none";
+                dropzone.style.display = "block";
+                fileInput.value = "";
+                loadedFile = null;
+                loadedBuffer = null;
+            });
+
+            async function loadPdfMetadata(file) {
+                try {
+                    showToast("Reading metadata...", "info");
+                    loadedFile = file;
+                    loadedBuffer = await file.arrayBuffer();
+
+                    // Parse document with PDF-Lib
+                    const pdfDoc = await PDFLib.PDFDocument.load(loadedBuffer.slice(0));
+
+                    const title = pdfDoc.getTitle() || "";
+                    const author = pdfDoc.getAuthor() || "";
+                    const subject = pdfDoc.getSubject() || "";
+                    const keywords = pdfDoc.getKeywords() || "";
+                    const creator = pdfDoc.getCreator() || "";
+                    const producer = pdfDoc.getProducer() || "";
+                    const creationDate = pdfDoc.getCreationDate();
+                    const modDate = pdfDoc.getModificationDate();
+                    const pageCount = pdfDoc.getPageCount();
+
+                    // Format dates
+                    const formatDate = (d) => d ? new Date(d).toLocaleDateString() + " " + new Date(d).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "Not specified";
+
+                    originalMetadata = {
+                        title,
+                        author,
+                        subject,
+                        keywords,
+                        creator,
+                        producer,
+                        creationDate,
+                        modDate
+                    };
+
+                    // Populate Inputs
+                    metaTitle.value = title;
+                    metaAuthor.value = author;
+                    metaSubject.value = subject;
+                    metaKeywords.value = keywords;
+                    metaCreator.value = creator;
+                    metaProducer.value = producer;
+
+                    // Populate Specs
+                    docName.textContent = file.name;
+                    docMetaInfo.textContent = `${formatBytes(file.size)} • ${pageCount} ${pageCount === 1 ? 'Page' : 'Pages'}`;
+                    specPages.textContent = pageCount;
+                    specSize.textContent = formatBytes(file.size);
+                    specCreated.textContent = formatDate(creationDate);
+                    specModified.textContent = formatDate(modDate);
+
+                    dropzone.style.display = "none";
+                    metadataStudio.style.display = "block";
+                    showToast("Metadata loaded successfully!", "success");
+                } catch (err) {
+                    console.error("Failed to read metadata:", err);
+                    showToast("Could not read document properties: " + err.message, "error");
+                }
+            }
+
+            // Wipe All Metadata
+            btnWipeAll.addEventListener("click", () => {
+                metaTitle.value = "";
+                metaAuthor.value = "";
+                metaSubject.value = "";
+                metaKeywords.value = "";
+                metaCreator.value = "";
+                metaProducer.value = "";
+                showToast("All metadata fields cleared for privacy!", "info");
+            });
+
+            // Reset to Original Values
+            btnResetOriginal.addEventListener("click", () => {
+                metaTitle.value = originalMetadata.title || "";
+                metaAuthor.value = originalMetadata.author || "";
+                metaSubject.value = originalMetadata.subject || "";
+                metaKeywords.value = originalMetadata.keywords || "";
+                metaCreator.value = originalMetadata.creator || "";
+                metaProducer.value = originalMetadata.producer || "";
+                showToast("Restored original document metadata.", "info");
+            });
+
+            // Save & Download
+            btnSaveMetadata.addEventListener("click", async () => {
+                if (!loadedBuffer) return;
+
+                try {
+                    showToast("Applying metadata...", "info");
+                    const pdfDoc = await PDFLib.PDFDocument.load(loadedBuffer.slice(0));
+
+                    // Set values
+                    pdfDoc.setTitle(metaTitle.value.trim());
+                    pdfDoc.setAuthor(metaAuthor.value.trim());
+                    pdfDoc.setSubject(metaSubject.value.trim());
+                    pdfDoc.setCreator(metaCreator.value.trim());
+                    pdfDoc.setProducer(metaProducer.value.trim());
+
+                    // Parse keywords
+                    const kwStr = metaKeywords.value.trim();
+                    if (kwStr) {
+                        const kwArr = kwStr.split(",").map(k => k.trim()).filter(Boolean);
+                        pdfDoc.setKeywords(kwArr);
+                    } else {
+                        pdfDoc.setKeywords([]);
+                    }
+
+                    // Always update modification date
+                    pdfDoc.setModificationDate(new Date());
+
+                    // Save with object streams
+                    const savedBytes = await pdfDoc.save({ useObjectStreams: true });
+                    const outName = loadedFile.name.replace(/\.pdf$/i, "") + "-metadata.pdf";
+
+                    downloadBlob(new Blob([savedBytes], { type: "application/pdf" }), outName);
+                    showToast("Updated PDF downloaded successfully!", "success");
+                } catch (err) {
+                    console.error("Failed to update metadata:", err);
+                    showToast("Failed to save metadata: " + err.message, "error");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — Split PDF — Separate & Extract Pages Online</title>
+    <meta name="title" content="Spac2 PDF — Split PDF — Separate & Extract Pages Online">
+    <meta name="description"
+        content="Free online PDF splitter: Split PDF documents into separate files by custom page ranges, extract selected pages visually, or burst every page into individual PDFs with zero server uploads.">
+    <meta name="keywords" content="Split PDF, extract PDF pages, separate PDF, split pages online, cut PDF, burst PDF, client-side PDF splitter, free PDF tools">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/split/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/split/">
+    <meta property="og:title" content="Spac2 PDF — Split PDF — Separate & Extract Pages Online">
+    <meta property="og:description"
+        content="Split PDF documents by custom ranges, extract individual pages visually, or burst all pages into a ZIP archive 100% in your browser.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .svg-icon {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        /* Split Studio */
+        #split-studio {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInStudio {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* File Summary Bar */
+        .file-summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: var(--card-glow);
+        }
+
+        .file-meta-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .file-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .file-name-text {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            max-width: 380px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-sub-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+
+        /* Split Mode Selector Tabs */
+        .split-mode-nav {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .split-mode-nav {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mode-tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.35rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .mode-tab-btn.active {
+            background: var(--bg-main);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .mode-tab-btn.active .mode-tab-title {
+            color: var(--accent-red);
+        }
+
+        .mode-tab-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .mode-tab-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Mode Content Cards */
+        .mode-content-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            box-shadow: var(--card-glow);
+        }
+
+        /* Mode 1: Range Split Rows */
+        .ranges-list-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .range-row-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .range-row-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .range-tag-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+
+        .range-inputs-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .range-input {
+            width: 80px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: var(--radius-sm);
+            padding: 0.45rem 0.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .range-input:focus {
+            border-color: var(--accent-red);
+        }
+
+        .btn-remove-range {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            transition: color 0.2s ease;
+        }
+
+        .btn-remove-range:hover {
+            color: var(--accent-red);
+        }
+
+        .range-actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Mode 2: Visual Pages Grid */
+        .grid-toolbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quick-select-btns {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            padding: 0.35rem 0.65rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+        }
+
+        .pages-thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.25rem;
+            max-height: 520px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            background: #141414;
+            border: 1px solid var(--border-color);
+        }
+
+        .page-thumb-card {
+            background: var(--bg-card);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+            user-select: none;
+        }
+
+        .page-thumb-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .page-thumb-card.selected {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        .thumb-canvas-box {
+            width: 100%;
+            height: 160px;
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .thumb-canvas-box canvas {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
+
+        .thumb-check-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(30, 30, 30, 0.85);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .page-thumb-card.selected .thumb-check-badge {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            color: #ffffff;
+        }
+
+        .thumb-footer-row {
+            margin-top: 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .page-thumb-card.selected .thumb-footer-row {
+            color: var(--accent-red);
+        }
+
+        /* Mode 3: Burst All Pages */
+        .burst-banner-box {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .burst-icon-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================================
+           STICKY / FIXED ACTION BAR (Cố định thanh xử lý luôn thấy rõ)
+           ============================================================ */
+        .studio-footer-action-bar {
+            background: rgba(24, 24, 27, 0.94);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 0.95rem 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 14px 38px -6px rgba(0, 0, 0, 0.65);
+            position: sticky;
+            bottom: 16px;
+            z-index: 50;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="light"] .studio-footer-action-bar {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Native PDF vector preservation badge */
+        .vector-preservation-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 9999px;
+            padding: 0.42rem 1rem;
+            user-select: none;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+        }
+
+        .vector-preservation-badge svg {
+            color: #10b981;
+            flex-shrink: 0;
+        }
+
+        /* Results Modal / Screen */
+        #results-studio {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--card-glow);
+            margin-bottom: 3rem;
+        }
+
+        .results-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0 2rem;
+            text-align: left;
+        }
+
+        .result-file-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            .workspace-wrap {
+                padding: 0 0.85rem 4rem;
+            }
+
+            .studio-footer-action-bar {
+                bottom: 12px;
+                padding: 0.75rem 0.85rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.65rem;
+                border-radius: 16px;
+            }
+
+            .vector-preservation-badge {
+                justify-content: center;
+                font-size: 0.78rem;
+                padding: 0.35rem 0.75rem;
+            }
+
+            #btn-execute-split {
+                width: 100%;
+                justify-content: center;
+                padding: 0.85rem;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px;"><polyline points="15 18 9 12 15 6"/></svg>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Split PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Split PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>All tools</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">Split PDF</h1>
+        <p class="tool-desc">Extract pages or split your document into multiple files.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 34px; height: 34px; color: var(--accent-red);"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your PDF document here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Fast client-side vector page splitting without data loss
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+                <span>Select PDF File</span>
+            </button>
+        </div>
+
+        <!-- 2. Split Studio -->
+        <div id="split-studio">
+            <!-- File Summary Card -->
+            <div class="file-summary-card">
+                <div class="file-meta-left">
+                    <div class="file-icon-box">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px;"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <div>
+                        <div class="file-name-text" id="summary-file-name">document.pdf</div>
+                        <div class="file-sub-text" id="summary-file-meta">0 MB • 0 Pages</div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-secondary" id="btn-change-file" style="padding: 0.45rem 0.85rem; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                    <span>Change File</span>
+                </button>
+            </div>
+
+            <!-- Mode Selector Nav -->
+            <div class="split-mode-nav">
+                <!-- Mode 1 -->
+                <button type="button" class="mode-tab-btn active" data-mode="range">
+                    <div class="mode-tab-title">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        <span>Split by Range</span>
+                    </div>
+                    <span class="mode-tab-sub">Define custom page boundaries</span>
+                </button>
+
+                <!-- Mode 2 -->
+                <button type="button" class="mode-tab-btn" data-mode="extract">
+                    <div class="mode-tab-title">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        <span>Extract Pages</span>
+                    </div>
+                    <span class="mode-tab-sub">Visually pick specific pages</span>
+                </button>
+
+                <!-- Mode 3 -->
+                <button type="button" class="mode-tab-btn" data-mode="burst">
+                    <div class="mode-tab-title">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                        <span>Burst All Pages</span>
+                    </div>
+                    <span class="mode-tab-sub">Split each page into a separate PDF</span>
+                </button>
+            </div>
+
+            <!-- Panel 1: Split by Range -->
+            <div class="mode-content-panel" id="panel-range">
+                <div style="margin-bottom: 1.25rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem;">
+                        Define Custom Page Ranges
+                    </h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                        Each range will be extracted into a separate PDF file, or merged into one single document.
+                    </p>
+                </div>
+
+                <div class="ranges-list-wrap" id="ranges-list-wrap">
+                    <!-- Dynamic range rows will be injected here -->
+                </div>
+
+                <div class="range-actions-row">
+                    <button type="button" class="btn-secondary" id="btn-add-range" style="padding: 0.5rem 1rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        <span>Add Another Range</span>
+                    </button>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--text-secondary); cursor: pointer;">
+                        <input type="checkbox" id="chk-merge-ranges">
+                        <span>Merge all extracted ranges into a single PDF</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Panel 2: Extract Selected Pages (Visual Selection Grid) -->
+            <div class="mode-content-panel" id="panel-extract" style="display: none;">
+                <div class="grid-toolbar-row">
+                    <div>
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">
+                            Select Pages to Extract
+                        </h3>
+                        <p style="font-size: 0.82rem; color: var(--text-secondary);">
+                            Click any thumbnail to toggle selection (<span id="selected-count-label" style="color: var(--accent-red); font-weight: 700;">0 selected</span>).
+                        </p>
+                    </div>
+
+                    <div class="quick-select-btns">
+                        <button type="button" class="quick-btn" id="btn-select-all">Select All</button>
+                        <button type="button" class="quick-btn" id="btn-deselect-all">Deselect All</button>
+                        <button type="button" class="quick-btn" id="btn-select-odd">Odd Pages</button>
+                        <button type="button" class="quick-btn" id="btn-select-even">Even Pages</button>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Grid -->
+                <div class="pages-thumbnail-grid" id="pages-thumbnail-grid">
+                    <!-- Injected page cards -->
+                </div>
+
+                <div style="margin-top: 1.25rem; display: flex; align-items: center; justify-content: flex-end;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--text-secondary); cursor: pointer;">
+                        <input type="checkbox" id="chk-extract-separate">
+                        <span>Save each selected page as an individual file (ZIP)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Panel 3: Burst All Pages -->
+            <div class="mode-content-panel" id="panel-burst" style="display: none;">
+                <div class="burst-banner-box">
+                    <div class="burst-icon-wrap">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 32px; height: 32px;"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">
+                        Burst All Pages Into Individual PDFs
+                    </h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); max-width: 500px; line-height: 1.6;">
+                        This document has <strong id="burst-total-pages-label" style="color: var(--accent-red);">0 pages</strong>. Every page will be exported as an independent PDF and packaged into a convenient ZIP archive.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Studio Action Bar (Sticky / Fixed Dock) -->
+            <div class="studio-footer-action-bar">
+                <div class="vector-preservation-badge">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 17px; height: 17px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    <span>Native PDF vector preservation (no pixelation)</span>
+                </div>
+
+                <button type="button" class="btn-primary" id="btn-execute-split" style="padding: 0.8rem 2.2rem; font-size: 0.98rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px;"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+                    <span id="btn-execute-text">Split PDF Now</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Results Screen -->
+        <div id="results-studio">
+            <div style="display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981; margin: 0 auto 1rem;">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 32px; height: 32px;"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem;">
+                PDF Split Successfully!
+            </h2>
+            <p id="results-desc-text" style="font-size: 0.95rem; color: var(--text-secondary);">
+                Your files have been extracted and processed.
+            </p>
+
+            <!-- Results List Grid -->
+            <div class="results-list-grid" id="results-list-grid"></div>
+
+            <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <button type="button" class="btn-secondary" id="btn-split-another" style="padding: 0.65rem 1.4rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                    <span>Split Another PDF</span>
+                </button>
+                <button type="button" class="btn-primary" id="btn-download-all-results-zip" style="padding: 0.65rem 1.75rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+                    <span>Download All as ZIP</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+            <div class="tool-info-header">
+                <h3>Precise, Lossless PDF Splitting</h3>
+                <p>
+                    Extract specific pages, slice documents into separate sections by custom ranges, or burst entire documents into individual page PDFs with 100% local processing speed.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Split PDF Documents in 3 Easy Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Document</h4>
+                        <p>Select any PDF file. Rendered securely in your browser with instant page count detection.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Select Split Method</h4>
+                        <p>Choose between custom page intervals, visual thumbnail selection, or bursting every single page.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Download Split Files</h4>
+                        <p>Get your individual split PDF files or download the entire batch in a single organized ZIP archive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/image-to-pdf">Image to PDF</a>
+                <a href="/apps/pdf-hub/pdf-to-image">PDF to Image</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native vector page extraction. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js & PDF-Lib & JSZip & Shared Helpers -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Split Engine Script -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        const SVG_TRASH = `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`;
+        const SVG_CHECK = `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="20 6 9 17 4 12"/></svg>`;
+        const SVG_DOC = `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>`;
+        const SVG_DOWNLOAD = `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Dropzone & File Input
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+
+            // Studios
+            const splitStudio = document.getElementById("split-studio");
+            const resultsStudio = document.getElementById("results-studio");
+
+            // Summary Card
+            const summaryFileName = document.getElementById("summary-file-name");
+            const summaryFileMeta = document.getElementById("summary-file-meta");
+            const btnChangeFile = document.getElementById("btn-change-file");
+
+            // Mode Tabs & Panels
+            const modeTabBtns = document.querySelectorAll(".mode-tab-btn");
+            const panelRange = document.getElementById("panel-range");
+            const panelExtract = document.getElementById("panel-extract");
+            const panelBurst = document.getElementById("panel-burst");
+
+            // Mode 1: Range Split Elements
+            const rangesListWrap = document.getElementById("ranges-list-wrap");
+            const btnAddRange = document.getElementById("btn-add-range");
+            const chkMergeRanges = document.getElementById("chk-merge-ranges");
+
+            // Mode 2: Extract Elements
+            const pagesThumbnailGrid = document.getElementById("pages-thumbnail-grid");
+            const selectedCountLabel = document.getElementById("selected-count-label");
+            const btnSelectAll = document.getElementById("btn-select-all");
+            const btnDeselectAll = document.getElementById("btn-deselect-all");
+            const btnSelectOdd = document.getElementById("btn-select-odd");
+            const btnSelectEven = document.getElementById("btn-select-even");
+            const chkExtractSeparate = document.getElementById("chk-extract-separate");
+
+            // Mode 3: Burst Elements
+            const burstTotalPagesLabel = document.getElementById("burst-total-pages-label");
+
+            // Action Bar
+            const btnExecuteSplit = document.getElementById("btn-execute-split");
+            const btnExecuteText = document.getElementById("btn-execute-text");
+
+            // Results Elements
+            const resultsDescText = document.getElementById("results-desc-text");
+            const resultsListGrid = document.getElementById("results-list-grid");
+            const btnSplitAnother = document.getElementById("btn-split-another");
+            const btnDownloadAllResultsZip = document.getElementById("btn-download-all-results-zip");
+
+            // State
+            let loadedFile = null;
+            let loadedBuffer = null;
+            let pdfJsDoc = null;
+            let totalPages = 0;
+            let currentMode = "range"; // 'range' | 'extract' | 'burst'
+
+            // Range items: [ { id, from, to } ]
+            let rangesList = [];
+
+            // Visual extracted page selections: Set of 1-based page numbers
+            let selectedPagesSet = new Set();
+
+            // Generated output files: [ { name, blob, size, pageCount } ]
+            let outputFilesList = [];
+
+            // ==========================================
+            // DROPZONE & LOAD FILE
+            // ==========================================
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please upload a valid PDF document.", "error");
+                    return;
+                }
+                loadFile(file);
+            });
+
+            async function loadFile(file) {
+                try {
+                    showToast("Analyzing PDF structure...", "info");
+                    loadedFile = file;
+                    loadedBuffer = await file.arrayBuffer();
+
+                    const loadingTask = pdfjsLib.getDocument({ data: loadedBuffer.slice(0) });
+                    pdfJsDoc = await loadingTask.promise;
+                    totalPages = pdfJsDoc.numPages;
+
+                    summaryFileName.textContent = file.name;
+                    summaryFileMeta.textContent = `${formatBytes(file.size)} • ${totalPages} ${totalPages === 1 ? 'Page' : 'Pages'}`;
+                    burstTotalPagesLabel.textContent = `${totalPages} ${totalPages === 1 ? 'page' : 'pages'}`;
+
+                    // Initialize Default Ranges
+                    initDefaultRanges();
+
+                    // Render Visual Grid Thumbnails
+                    selectedPagesSet.clear();
+                    renderVisualPagesGrid();
+
+                    dropzone.style.display = "none";
+                    resultsStudio.style.display = "none";
+                    splitStudio.style.display = "flex";
+
+                    showToast(`Loaded ${file.name} successfully`, "success");
+                } catch (err) {
+                    console.error("PDF load error:", err);
+                    showToast("Failed to load PDF: " + err.message, "error");
+                }
+            }
+
+            btnChangeFile.addEventListener("click", resetToUpload);
+            btnSplitAnother.addEventListener("click", resetToUpload);
+
+            function resetToUpload() {
+                loadedFile = null;
+                loadedBuffer = null;
+                pdfJsDoc = null;
+                totalPages = 0;
+                rangesList = [];
+                selectedPagesSet.clear();
+                outputFilesList = [];
+                fileInput.value = "";
+
+                splitStudio.style.display = "none";
+                resultsStudio.style.display = "none";
+                dropzone.style.display = "block";
+            }
+
+            // ==========================================
+            // MODE TABS SWITCHER
+            // ==========================================
+            modeTabBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    modeTabBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentMode = btn.getAttribute("data-mode");
+
+                    panelRange.style.display = currentMode === "range" ? "block" : "none";
+                    panelExtract.style.display = currentMode === "extract" ? "block" : "none";
+                    panelBurst.style.display = currentMode === "burst" ? "block" : "none";
+
+                    updateExecuteButtonText();
+                });
+            });
+
+            function updateExecuteButtonText() {
+                if (currentMode === "range") {
+                    btnExecuteText.textContent = chkMergeRanges.checked ? "Merge & Export Ranges" : "Split Ranges Now";
+                } else if (currentMode === "extract") {
+                    btnExecuteText.textContent = `Extract ${selectedPagesSet.size} Selected Pages`;
+                } else if (currentMode === "burst") {
+                    btnExecuteText.textContent = `Burst All ${totalPages} Pages (ZIP)`;
+                }
+            }
+
+            chkMergeRanges.addEventListener("change", updateExecuteButtonText);
+
+            // ==========================================
+            // MODE 1: RANGE SPLIT LOGIC
+            // ==========================================
+            function initDefaultRanges() {
+                rangesList = [];
+                if (totalPages <= 2) {
+                    rangesList.push({ id: 1, from: 1, to: totalPages });
+                } else {
+                    const mid = Math.ceil(totalPages / 2);
+                    rangesList.push({ id: 1, from: 1, to: mid });
+                    rangesList.push({ id: 2, from: mid + 1, to: totalPages });
+                }
+                renderRangesList();
+            }
+
+            function renderRangesList() {
+                rangesListWrap.innerHTML = "";
+
+                rangesList.forEach((range, index) => {
+                    const row = document.createElement("div");
+                    row.className = "range-row-card";
+                    row.innerHTML = `
+                        <div class="range-row-info">
+                            <span class="range-tag-badge">Part ${index + 1}</span>
+                            <div class="range-inputs-group">
+                                <span style="font-size: 0.85rem; color: var(--text-secondary);">From page</span>
+                                <input type="number" class="range-input inp-range-from" min="1" max="${totalPages}" value="${range.from}" data-id="${range.id}">
+                                <span style="font-size: 0.85rem; color: var(--text-secondary);">to</span>
+                                <input type="number" class="range-input inp-range-to" min="1" max="${totalPages}" value="${range.to}" data-id="${range.id}">
+                            </div>
+                        </div>
+
+                        ${rangesList.length > 1 ? `
+                            <button type="button" class="btn-remove-range" data-id="${range.id}" title="Remove range">
+                                ${SVG_TRASH}
+                            </button>
+                        ` : ''}
+                    `;
+
+                    row.querySelector(".inp-range-from").addEventListener("change", (e) => {
+                        let val = parseInt(e.target.value, 10) || 1;
+                        val = Math.max(1, Math.min(totalPages, val));
+                        e.target.value = val;
+                        range.from = val;
+                    });
+
+                    row.querySelector(".inp-range-to").addEventListener("change", (e) => {
+                        let val = parseInt(e.target.value, 10) || totalPages;
+                        val = Math.max(1, Math.min(totalPages, val));
+                        e.target.value = val;
+                        range.to = val;
+                    });
+
+                    const delBtn = row.querySelector(".btn-remove-range");
+                    if (delBtn) {
+                        delBtn.addEventListener("click", () => {
+                            rangesList = rangesList.filter(r => r.id !== range.id);
+                            renderRangesList();
+                        });
+                    }
+
+                    rangesListWrap.appendChild(row);
+                });
+            }
+
+            btnAddRange.addEventListener("click", () => {
+                const nextId = Date.now();
+                const lastRange = rangesList[rangesList.length - 1];
+                let nextFrom = lastRange ? Math.min(totalPages, lastRange.to + 1) : 1;
+                let nextTo = totalPages;
+
+                rangesList.push({
+                    id: nextId,
+                    from: nextFrom,
+                    to: nextTo
+                });
+                renderRangesList();
+            });
+
+            // ==========================================
+            // MODE 2: VISUAL PAGE SELECTION LOGIC
+            // ==========================================
+            async function renderVisualPagesGrid() {
+                pagesThumbnailGrid.innerHTML = "";
+                updateSelectedCountUI();
+
+                for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                    const card = document.createElement("div");
+                    card.className = "page-thumb-card";
+                    card.setAttribute("data-page", pageNum);
+                    card.innerHTML = `
+                        <div class="thumb-canvas-box">
+                            <canvas id="thumb-canvas-${pageNum}"></canvas>
+                            <div class="thumb-check-badge">
+                                ${SVG_CHECK}
+                            </div>
+                        </div>
+                        <div class="thumb-footer-row">Page ${pageNum}</div>
+                    `;
+
+                    card.addEventListener("click", () => {
+                        togglePageSelection(pageNum, card);
+                    });
+
+                    pagesThumbnailGrid.appendChild(card);
+                    renderPageThumbnail(pageNum);
+                }
+            }
+
+            async function renderPageThumbnail(pageNum) {
+                try {
+                    const page = await pdfJsDoc.getPage(pageNum);
+                    const canvas = document.getElementById(`thumb-canvas-${pageNum}`);
+                    if (!canvas) return;
+
+                    const ctx = canvas.getContext("2d");
+                    const viewport = page.getViewport({ scale: 0.35 });
+
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    await page.render({
+                        canvasContext: ctx,
+                        viewport: viewport
+                    }).promise;
+                } catch (e) { }
+            }
+
+            function togglePageSelection(pageNum, cardElement) {
+                if (selectedPagesSet.has(pageNum)) {
+                    selectedPagesSet.delete(pageNum);
+                    cardElement.classList.remove("selected");
+                } else {
+                    selectedPagesSet.add(pageNum);
+                    cardElement.classList.add("selected");
+                }
+                updateSelectedCountUI();
+                updateExecuteButtonText();
+            }
+
+            function updateSelectedCountUI() {
+                selectedCountLabel.textContent = `${selectedPagesSet.size} selected`;
+            }
+
+            btnSelectAll.addEventListener("click", () => {
+                for (let i = 1; i <= totalPages; i++) selectedPagesSet.add(i);
+                document.querySelectorAll(".page-thumb-card").forEach(c => c.classList.add("selected"));
+                updateSelectedCountUI();
+                updateExecuteButtonText();
+            });
+
+            btnDeselectAll.addEventListener("click", () => {
+                selectedPagesSet.clear();
+                document.querySelectorAll(".page-thumb-card").forEach(c => c.classList.remove("selected"));
+                updateSelectedCountUI();
+                updateExecuteButtonText();
+            });
+
+            btnSelectOdd.addEventListener("click", () => {
+                selectedPagesSet.clear();
+                document.querySelectorAll(".page-thumb-card").forEach((c, idx) => {
+                    const p = idx + 1;
+                    if (p % 2 !== 0) {
+                        selectedPagesSet.add(p);
+                        c.classList.add("selected");
+                    } else {
+                        c.classList.remove("selected");
+                    }
+                });
+                updateSelectedCountUI();
+                updateExecuteButtonText();
+            });
+
+            btnSelectEven.addEventListener("click", () => {
+                selectedPagesSet.clear();
+                document.querySelectorAll(".page-thumb-card").forEach((c, idx) => {
+                    const p = idx + 1;
+                    if (p % 2 === 0) {
+                        selectedPagesSet.add(p);
+                        c.classList.add("selected");
+                    } else {
+                        c.classList.remove("selected");
+                    }
+                });
+                updateSelectedCountUI();
+                updateExecuteButtonText();
+            });
+
+            // ==========================================
+            // EXECUTE SPLIT (PDF-LIB VECTOR ENGINE)
+            // ==========================================
+            btnExecuteSplit.addEventListener("click", async () => {
+                if (!loadedBuffer) return;
+
+                try {
+                    btnExecuteSplit.disabled = true;
+                    showToast("Processing document with PDF-Lib...", "info");
+                    outputFilesList = [];
+
+                    const srcDoc = await PDFLib.PDFDocument.load(loadedBuffer);
+                    const baseName = loadedFile.name.replace(/\.pdf$/i, "");
+
+                    // MODE 1: RANGE SPLIT
+                    if (currentMode === "range") {
+                        if (rangesList.length === 0) {
+                            showToast("Please add at least one page range.", "error");
+                            return;
+                        }
+
+                        // Check if merging into a single PDF
+                        if (chkMergeRanges.checked) {
+                            const mergedDoc = await PDFLib.PDFDocument.create();
+                            let totalExtractedPages = 0;
+
+                            for (let r of rangesList) {
+                                const start = Math.min(r.from, r.to);
+                                const end = Math.max(r.from, r.to);
+                                const pageIndices = [];
+                                for (let p = start; p <= end; p++) {
+                                    if (p >= 1 && p <= totalPages) pageIndices.push(p - 1);
+                                }
+                                const copiedPages = await mergedDoc.copyPages(srcDoc, pageIndices);
+                                copiedPages.forEach(cp => mergedDoc.addPage(cp));
+                                totalExtractedPages += copiedPages.length;
+                            }
+
+                            const pdfBytes = await mergedDoc.save();
+                            const fileName = `${baseName}-ranges-merged.pdf`;
+                            outputFilesList.push({
+                                name: fileName,
+                                blob: new Blob([pdfBytes], { type: "application/pdf" }),
+                                size: pdfBytes.byteLength,
+                                pageCount: totalExtractedPages
+                            });
+                        } else {
+                            // Separate file for each range
+                            for (let i = 0; i < rangesList.length; i++) {
+                                const r = rangesList[i];
+                                const start = Math.min(r.from, r.to);
+                                const end = Math.max(r.from, r.to);
+                                const pageIndices = [];
+                                for (let p = start; p <= end; p++) {
+                                    if (p >= 1 && p <= totalPages) pageIndices.push(p - 1);
+                                }
+
+                                const partDoc = await PDFLib.PDFDocument.create();
+                                const copiedPages = await partDoc.copyPages(srcDoc, pageIndices);
+                                copiedPages.forEach(cp => partDoc.addPage(cp));
+
+                                const pdfBytes = await partDoc.save();
+                                const fileName = `${baseName}-part-${i + 1}-pages-${start}-to-${end}.pdf`;
+                                outputFilesList.push({
+                                    name: fileName,
+                                    blob: new Blob([pdfBytes], { type: "application/pdf" }),
+                                    size: pdfBytes.byteLength,
+                                    pageCount: copiedPages.length
+                                });
+                            }
+                        }
+                    }
+
+                    // MODE 2: VISUAL EXTRACTION
+                    else if (currentMode === "extract") {
+                        if (selectedPagesSet.size === 0) {
+                            showToast("Please select at least one page to extract.", "error");
+                            return;
+                        }
+
+                        const sortedPages = Array.from(selectedPagesSet).sort((a, b) => a - b);
+
+                        if (chkExtractSeparate.checked) {
+                            // Extract each selected page as individual file
+                            for (let pageNum of sortedPages) {
+                                const singleDoc = await PDFLib.PDFDocument.create();
+                                const copiedPages = await singleDoc.copyPages(srcDoc, [pageNum - 1]);
+                                singleDoc.addPage(copiedPages[0]);
+
+                                const pdfBytes = await singleDoc.save();
+                                const fileName = `${baseName}-page-${pageNum}.pdf`;
+                                outputFilesList.push({
+                                    name: fileName,
+                                    blob: new Blob([pdfBytes], { type: "application/pdf" }),
+                                    size: pdfBytes.byteLength,
+                                    pageCount: 1
+                                });
+                            }
+                        } else {
+                            // Combine all selected pages into single document
+                            const combinedDoc = await PDFLib.PDFDocument.create();
+                            const pageIndices = sortedPages.map(p => p - 1);
+                            const copiedPages = await combinedDoc.copyPages(srcDoc, pageIndices);
+                            copiedPages.forEach(cp => combinedDoc.addPage(cp));
+
+                            const pdfBytes = await combinedDoc.save();
+                            const fileName = `${baseName}-extracted-${sortedPages.length}pages.pdf`;
+                            outputFilesList.push({
+                                name: fileName,
+                                blob: new Blob([pdfBytes], { type: "application/pdf" }),
+                                size: pdfBytes.byteLength,
+                                pageCount: copiedPages.length
+                            });
+                        }
+                    }
+
+                    // MODE 3: BURST ALL PAGES
+                    else if (currentMode === "burst") {
+                        for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                            const singleDoc = await PDFLib.PDFDocument.create();
+                            const copiedPages = await singleDoc.copyPages(srcDoc, [pageNum - 1]);
+                            singleDoc.addPage(copiedPages[0]);
+
+                            const pdfBytes = await singleDoc.save();
+                            const fileName = `${baseName}-page-${pageNum}.pdf`;
+                            outputFilesList.push({
+                                name: fileName,
+                                blob: new Blob([pdfBytes], { type: "application/pdf" }),
+                                size: pdfBytes.byteLength,
+                                pageCount: 1
+                            });
+                        }
+                    }
+
+                    // If exactly 1 file was generated, trigger immediate download
+                    if (outputFilesList.length === 1) {
+                        downloadBlob(outputFilesList[0].blob, outputFilesList[0].name);
+                    }
+
+                    // Show Results Studio
+                    displayResultsScreen();
+                    showToast(`Successfully created ${outputFilesList.length} PDF ${outputFilesList.length === 1 ? 'file' : 'files'}!`, "success");
+                } catch (err) {
+                    console.error("Split execution error:", err);
+                    showToast("Failed to split PDF: " + err.message, "error");
+                } finally {
+                    btnExecuteSplit.disabled = false;
+                }
+            });
+
+            // ==========================================
+            // RESULTS DISPLAY & ZIP PACKAGING
+            // ==========================================
+            function displayResultsScreen() {
+                splitStudio.style.display = "none";
+                resultsStudio.style.display = "block";
+
+                resultsDescText.textContent = `Generated ${outputFilesList.length} ${outputFilesList.length === 1 ? 'document' : 'documents'}. Download individually or package all in a ZIP archive.`;
+                resultsListGrid.innerHTML = "";
+
+                outputFilesList.forEach((fileObj, idx) => {
+                    const card = document.createElement("div");
+                    card.className = "result-file-card";
+                    card.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 0.65rem; min-width: 0;">
+                            <div style="color: var(--accent-red); flex-shrink: 0;">
+                                ${SVG_DOC}
+                            </div>
+                            <div style="min-width: 0;">
+                                <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px;" title="${fileObj.name}">
+                                    ${fileObj.name}
+                                </div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                    ${fileObj.pageCount} ${fileObj.pageCount === 1 ? 'page' : 'pages'} • ${formatBytes(fileObj.size)}
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-secondary btn-dl-single" data-idx="${idx}" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;" title="Download this file">
+                            ${SVG_DOWNLOAD}
+                        </button>
+                    `;
+
+                    card.querySelector(".btn-dl-single").addEventListener("click", () => {
+                        downloadBlob(fileObj.blob, fileObj.name);
+                        showToast(`Downloaded ${fileObj.name}`, "success");
+                    });
+
+                    resultsListGrid.appendChild(card);
+                });
+
+                // Hide ZIP button if only 1 file
+                btnDownloadAllResultsZip.style.display = outputFilesList.length > 1 ? "inline-flex" : "none";
+            }
+
+            btnDownloadAllResultsZip.addEventListener("click", async () => {
+                if (outputFilesList.length === 0) return;
+
+                if (typeof JSZip === "undefined") {
+                    showToast("ZIP library not loaded. Downloading individually...", "info");
+                    outputFilesList.forEach(f => downloadBlob(f.blob, f.name));
+                    return;
+                }
+
+                showToast("Packaging ZIP archive...", "info");
+                try {
+                    const zip = new JSZip();
+                    const folderName = loadedFile.name.replace(/\.pdf$/i, "") + "-split";
+                    const folder = zip.folder(folderName);
+
+                    outputFilesList.forEach(f => {
+                        folder.file(f.name, f.blob);
+                    });
+
+                    const zipBlob = await zip.generateAsync({ type: "blob" });
+                    downloadBlob(zipBlob, `${folderName}.zip`);
+                    showToast("ZIP archive downloaded successfully!", "success");
+                } catch (err) {
+                    console.error("ZIP creation error:", err);
+                    showToast("Failed to create ZIP: " + err.message, "error");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

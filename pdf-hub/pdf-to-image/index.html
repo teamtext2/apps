@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — PDF to Image — Export PNG & JPG Photos</title>
+    <meta name="title" content="Spac2 PDF — PDF to Image — Export PNG & JPG Photos">
+    <meta name="description"
+        content="Free online PDF to image converter: Extract and render each PDF page into high-resolution PNG, JPG, or WebP images (150/300 DPI). Download single photos or a ZIP archive with 100% client-side privacy.">
+    <meta name="keywords" content="PDF to Image, convert PDF to PNG, PDF to JPG, extract images from PDF, PDF to picture, 300 DPI PDF render, client-side PDF tool">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/pdf-to-image/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/pdf-to-image/">
+    <meta property="og:title" content="Spac2 PDF — PDF to Image — Export PNG & JPG Photos">
+    <meta property="og:description"
+        content="Render high-resolution PNG or JPG images from your PDF files directly in your browser. Fast, private, and unlimited.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .svg-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+            transition: padding 0.3s ease;
+        }
+
+        /* Full App Workspace in Studio Mode */
+        body.in-studio-mode .tool-header-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .tool-info-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .workspace-wrap {
+            padding-top: 1.25rem;
+        }
+
+        /* App Button Utilities */
+        .app-btn-secondary {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 10px;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .app-btn-secondary:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .app-btn-secondary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-execute-app {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.92rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px -3px rgba(239, 68, 68, 0.45);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .btn-execute-app:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px -3px rgba(239, 68, 68, 0.6);
+            filter: brightness(1.08);
+        }
+
+        .btn-execute-app:active {
+            transform: scale(0.97);
+        }
+
+        /* Config Studio Container */
+        #config-studio {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.45);
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInStudio {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        [data-theme="light"] #config-studio {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* File Summary Bar */
+        .file-summary-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 0.85rem 1.15rem;
+            margin-bottom: 1.75rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .file-summary-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .file-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .file-name-label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            max-width: 380px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1.3;
+        }
+
+        .file-size-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .meta-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.1rem 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* Settings Grid */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .setting-box {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.15rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .setting-box:focus-within {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+        }
+
+        .setting-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .setting-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .studio-select,
+        .studio-input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.6rem 0.85rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .studio-select:focus,
+        .studio-input:focus {
+            border-color: var(--accent-red);
+            background: var(--bg-card-hover);
+        }
+
+        /* Progress Screen */
+        #progress-studio {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.45);
+            animation: fadeInStudio 0.3s ease;
+        }
+
+        .progress-pulse-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            animation: pulseIcon 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-main);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 1.5rem auto;
+            max-width: 480px;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            transition: width 0.2s ease;
+        }
+
+        /* Result Gallery Studio */
+        #gallery-studio {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-top-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 0.9rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.45);
+            position: sticky;
+            top: 72px;
+            z-index: 40;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: all 0.25s ease;
+        }
+
+        [data-theme="light"] .gallery-top-bar {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .gallery-info-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-count-badge {
+            font-size: 0.8rem;
+            color: #4ade80;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.28);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .gallery-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.2s ease, 
+                        box-shadow 0.25s ease;
+            user-select: none;
+        }
+
+        .gallery-card:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .gallery-preview-box {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 0.65rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+        }
+
+        .gallery-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .page-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(24, 24, 27, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 9999px;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-details-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.65rem;
+            padding: 0 0.15rem;
+        }
+
+        .card-dimen-tag, .card-size-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.12rem 0.4rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .btn-download-single {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-download-single:hover {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-download-single:active {
+            transform: scale(0.97);
+        }
+
+        /* Mobile Sticky Gallery Export Dock */
+        .gallery-mobile-bottom-bar {
+            display: none;
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================================
+           MOBILE APP OPTIMIZATIONS (<= 768px)
+           ============================================================ */
+        @media (max-width: 768px) {
+            .workspace-wrap {
+                padding: 0 0.85rem 4rem;
+            }
+
+            body.in-studio-mode .workspace-wrap {
+                padding: 0 0.65rem 6.5rem;
+            }
+
+            .tool-header-section {
+                padding: 2.25rem 1rem 1.5rem;
+            }
+
+            /* Config Studio Mobile */
+            #config-studio {
+                padding: 1.25rem 1rem;
+                border-radius: 16px;
+                margin-bottom: 1.5rem;
+            }
+
+            .file-summary-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0.75rem 0.85rem;
+                gap: 0.75rem;
+            }
+
+            .file-summary-left {
+                width: 100%;
+                gap: 0.65rem;
+            }
+
+            .file-name-label {
+                max-width: 220px;
+                font-size: 0.9rem;
+            }
+
+            .file-summary-bar .app-btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+                gap: 0.85rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .setting-box {
+                padding: 0.9rem 1rem;
+                border-radius: 12px;
+            }
+
+            #btn-start-convert {
+                width: 100%;
+                padding: 0.85rem;
+                font-size: 0.95rem;
+                border-radius: 12px;
+            }
+
+            /* Gallery Studio Mobile */
+            .gallery-top-bar {
+                padding: 0.75rem 0.85rem;
+                border-radius: 14px;
+                top: 65px;
+            }
+
+            .gallery-info-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .gallery-top-bar .btn-execute-app {
+                display: none; /* Hidden on top ribbon on mobile */
+            }
+
+            /* Sticky Mobile Bottom Dock */
+            .gallery-mobile-bottom-bar {
+                display: block;
+                position: sticky;
+                bottom: 12px;
+                z-index: 60;
+                background: rgba(24, 24, 27, 0.94);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                border: 1px solid rgba(255, 255, 255, 0.16);
+                border-radius: 16px;
+                padding: 0.75rem;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+                margin-top: 1rem;
+            }
+
+            [data-theme="light"] .gallery-mobile-bottom-bar {
+                background: rgba(255, 255, 255, 0.95);
+                border: 1px solid rgba(0, 0, 0, 0.12);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .gallery-mobile-bottom-bar .btn-execute-app {
+                width: 100%;
+                justify-content: center;
+                padding: 0.85rem;
+                font-size: 0.95rem;
+                border-radius: 12px;
+            }
+
+            /* Responsive 2-column gallery grid */
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .gallery-card {
+                padding: 0.55rem;
+                border-radius: 12px;
+            }
+
+            .gallery-preview-box {
+                height: 160px;
+                margin-bottom: 0.5rem;
+            }
+
+            .card-details-row {
+                font-size: 0.7rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .btn-download-single {
+                padding: 0.45rem;
+                font-size: 0.76rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px;"><polyline points="15 18 9 12 15 6"/></svg>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 PDF to Image">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">PDF to Image</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>All tools</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">PDF to Image</h1>
+        <p class="tool-desc">Render PDF pages into high-resolution PNG, JPG, or WebP images.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 36px; height: 36px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your PDF file here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Ultra-fast in-memory rendering via WebAssembly and PDF.js
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <span>Select PDF File</span>
+            </button>
+        </div>
+
+        <!-- 2. Configuration Studio -->
+        <div id="config-studio">
+            <div class="file-summary-bar">
+                <div class="file-summary-left">
+                    <div class="file-icon-box">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13v4M9 15h2a1 1 0 0 0 0-2H9"/></svg>
+                    </div>
+                    <div>
+                        <div class="file-name-label" id="file-name-label">document.pdf</div>
+                        <div class="file-size-label" id="file-size-label">
+                            <span class="meta-pill" id="file-size-pill">0 MB</span>
+                            <span class="meta-pill" id="file-pages-pill">0 Pages</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="app-btn-secondary" id="btn-change-file">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <span>Change File</span>
+                </button>
+            </div>
+
+            <!-- Settings Grid -->
+            <div class="settings-grid">
+                <!-- Image Format -->
+                <div class="setting-box">
+                    <div class="setting-header">
+                        <span class="setting-title">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            Export Format
+                        </span>
+                    </div>
+                    <select class="studio-select" id="select-format">
+                        <option value="image/png" selected>PNG (Sharpest, Lossless)</option>
+                        <option value="image/jpeg">JPG (Lightweight, High Quality)</option>
+                        <option value="image/webp">WebP (Modern, Compact)</option>
+                    </select>
+                </div>
+
+                <!-- DPI Resolution -->
+                <div class="setting-box">
+                    <div class="setting-header">
+                        <span class="setting-title">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><circle cx="12" cy="12" r="10"/><path d="m12 6 4 6h-8l4-6z"/></svg>
+                            Render Resolution
+                        </span>
+                    </div>
+                    <select class="studio-select" id="select-dpi">
+                        <option value="1.0">Standard Screen (72 DPI)</option>
+                        <option value="2.083" selected>High Definition (150 DPI)</option>
+                        <option value="4.166">Ultra Print Quality (300 DPI)</option>
+                    </select>
+                </div>
+
+                <!-- Page Scope -->
+                <div class="setting-box">
+                    <div class="setting-header">
+                        <span class="setting-title">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                            Page Range
+                        </span>
+                    </div>
+                    <input type="text" class="studio-input" id="inp-page-range" value="all" placeholder="all or e.g., 1-5, 8">
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div style="display: flex; justify-content: flex-end;">
+                <button type="button" class="btn-execute-app" id="btn-start-convert">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg>
+                    <span>Convert to Images Now</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Progress Card -->
+        <div id="progress-studio">
+            <div class="progress-pulse-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 28px; height: 28px;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+                Rendering PDF Pages...
+            </h3>
+            <p id="progress-status-text" style="font-size: 0.9rem; color: var(--text-secondary);">
+                Extracting high-resolution graphics...
+            </p>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <p id="progress-percent" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-red);">0%</p>
+        </div>
+
+        <!-- 4. Result Gallery Studio -->
+        <div id="gallery-studio">
+            <div class="gallery-top-bar">
+                <div class="gallery-info-group">
+                    <button type="button" class="app-btn-secondary" id="btn-convert-another">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                        <span>Convert Another</span>
+                    </button>
+                    <div class="gallery-count-badge" id="gallery-count-badge">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 13px; height: 13px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        <span id="gallery-count-text">0 Pages Rendered</span>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-execute-app" id="btn-download-all-zip">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
+                    <span>Download All as ZIP</span>
+                </button>
+            </div>
+
+            <!-- Gallery Cards Grid -->
+            <div class="gallery-grid" id="gallery-grid"></div>
+
+            <!-- Sticky Mobile Bottom Bar -->
+            <div class="gallery-mobile-bottom-bar" id="mobile-gallery-dock">
+                <button type="button" class="btn-execute-app" id="btn-download-all-zip-mobile">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
+                    <span>Download All as ZIP</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>High-DPI PDF Rasterization Engine</h3>
+                <p>
+                    Convert entire PDF documents or selected pages into crystal-clear pictures up to 300 DPI for presentations, social media, and web publications without transmitting documents to any server.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Convert PDF to Images in 3 Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Document</h4>
+                        <p>Select any PDF file. Rendered directly on your device with hardware acceleration.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Select Format & DPI</h4>
+                        <p>Choose PNG or JPG format and pick between 72, 150, or 300 DPI resolution.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Download Images</h4>
+                        <p>Download single pages as photos or grab all pages in one organized ZIP archive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/image-to-pdf">Image to PDF</a>
+                <a href="/apps/pdf-hub/pdf-to-image">PDF to Image</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. High-DPI hardware canvas rendering. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js & JSZip & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- PDF to Image Controller -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+
+            // Studios
+            const configStudio = document.getElementById("config-studio");
+            const progressStudio = document.getElementById("progress-studio");
+            const galleryStudio = document.getElementById("gallery-studio");
+
+            // Elements
+            const fileNameLabel = document.getElementById("file-name-label");
+            const fileSizePill = document.getElementById("file-size-pill");
+            const filePagesPill = document.getElementById("file-pages-pill");
+            const btnChangeFile = document.getElementById("btn-change-file");
+            const btnConvertAnother = document.getElementById("btn-convert-another");
+            const btnStartConvert = document.getElementById("btn-start-convert");
+            const btnDownloadAllZip = document.getElementById("btn-download-all-zip");
+            const btnDownloadAllZipMobile = document.getElementById("btn-download-all-zip-mobile");
+
+            const selectFormat = document.getElementById("select-format");
+            const selectDpi = document.getElementById("select-dpi");
+            const inpPageRange = document.getElementById("inp-page-range");
+
+            const progressBarFill = document.getElementById("progress-bar-fill");
+            const progressPercent = document.getElementById("progress-percent");
+            const progressStatusText = document.getElementById("progress-status-text");
+
+            const galleryGrid = document.getElementById("gallery-grid");
+            const galleryCountText = document.getElementById("gallery-count-text");
+
+            // State
+            let loadedFile = null;
+            let loadedBuffer = null;
+            let pdfDoc = null;
+            let totalPages = 0;
+
+            // Rendered images list: [ { pageNum, blob, dataUrl, width, height, filename } ]
+            let renderedImages = [];
+
+            // Native SVG Icons Library
+            const SVG_ICONS = {
+                download: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+                layers: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 12px; height: 12px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`
+            };
+
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please upload a valid PDF document.", "error");
+                    return;
+                }
+                loadFile(file);
+            });
+
+            async function loadFile(file) {
+                try {
+                    showToast("Reading PDF document...", "info");
+                    loadedFile = file;
+                    loadedBuffer = await file.arrayBuffer();
+
+                    const loadingTask = pdfjsLib.getDocument({ data: loadedBuffer.slice(0) });
+                    pdfDoc = await loadingTask.promise;
+                    totalPages = pdfDoc.numPages;
+
+                    fileNameLabel.textContent = file.name;
+                    fileNameLabel.title = file.name;
+                    if (fileSizePill) fileSizePill.textContent = formatBytes(file.size);
+                    if (filePagesPill) filePagesPill.textContent = `${totalPages} ${totalPages === 1 ? 'Page' : 'Pages'}`;
+
+                    document.body.classList.add("in-studio-mode");
+                    dropzone.style.display = "none";
+                    galleryStudio.style.display = "none";
+                    progressStudio.style.display = "none";
+                    configStudio.style.display = "block";
+
+                    showToast(`Loaded ${file.name} successfully`, "success");
+                } catch (err) {
+                    console.error("PDF load error:", err);
+                    document.body.classList.remove("in-studio-mode");
+                    showToast("Failed to load PDF: " + err.message, "error");
+                }
+            }
+
+            btnChangeFile.addEventListener("click", resetUpload);
+            btnConvertAnother.addEventListener("click", resetUpload);
+
+            function resetUpload() {
+                loadedFile = null;
+                loadedBuffer = null;
+                pdfDoc = null;
+                renderedImages = [];
+                fileInput.value = "";
+                document.body.classList.remove("in-studio-mode");
+                configStudio.style.display = "none";
+                progressStudio.style.display = "none";
+                galleryStudio.style.display = "none";
+                dropzone.style.display = "block";
+            }
+
+            // Parse Page Range helper
+            function parseTargetPages(rangeStr, maxPages) {
+                const s = rangeStr.trim().toLowerCase();
+                if (!s || s === "all") return Array.from({ length: maxPages }, (_, i) => i + 1);
+
+                const pages = [];
+                const parts = s.split(",");
+
+                for (let part of parts) {
+                    part = part.trim();
+                    if (!part) continue;
+
+                    if (part.includes("-")) {
+                        const [startS, endS] = part.split("-");
+                        const start = Math.max(1, parseInt(startS, 10) || 1);
+                        const end = Math.min(maxPages, parseInt(endS, 10) || maxPages);
+                        for (let p = start; p <= end; p++) {
+                            if (!pages.includes(p)) pages.push(p);
+                        }
+                    } else {
+                        const p = parseInt(part, 10);
+                        if (p >= 1 && p <= maxPages && !pages.includes(p)) {
+                            pages.push(p);
+                        }
+                    }
+                }
+
+                return pages.length > 0 ? pages : Array.from({ length: maxPages }, (_, i) => i + 1);
+            }
+
+            // ============================================================
+            // CONVERT TO IMAGES ENGINE
+            // ============================================================
+            btnStartConvert.addEventListener("click", async () => {
+                if (!pdfDoc) return;
+
+                const targetPages = parseTargetPages(inpPageRange.value, totalPages);
+                if (targetPages.length === 0) {
+                    showToast("Invalid page range specified.", "error");
+                    return;
+                }
+
+                configStudio.style.display = "none";
+                progressStudio.style.display = "block";
+                progressBarFill.style.width = "0%";
+                progressPercent.textContent = "0%";
+
+                renderedImages = [];
+                const format = selectFormat.value; // 'image/png' | 'image/jpeg' | 'image/webp'
+                const scale = parseFloat(selectDpi.value) || 2.083;
+                const ext = format === "image/png" ? "png" : format === "image/webp" ? "webp" : "jpg";
+                const baseName = loadedFile.name.replace(/\.pdf$/i, "");
+
+                const offscreenCanvas = document.createElement("canvas");
+                const offCtx = offscreenCanvas.getContext("2d");
+
+                try {
+                    for (let idx = 0; idx < targetPages.length; idx++) {
+                        const pageNum = targetPages[idx];
+                        progressStatusText.textContent = `Rendering page ${pageNum} of ${totalPages}...`;
+                        const pct = Math.round(((idx + 1) / targetPages.length) * 100);
+                        progressBarFill.style.width = `${pct}%`;
+                        progressPercent.textContent = `${pct}%`;
+
+                        const page = await pdfDoc.getPage(pageNum);
+                        const viewport = page.getViewport({ scale: scale });
+
+                        offscreenCanvas.width = viewport.width;
+                        offscreenCanvas.height = viewport.height;
+
+                        // Fill white background for JPEGs
+                        if (format !== "image/png") {
+                            offCtx.fillStyle = "#ffffff";
+                            offCtx.fillRect(0, 0, viewport.width, viewport.height);
+                        }
+
+                        await page.render({
+                            canvasContext: offCtx,
+                            viewport: viewport
+                        }).promise;
+
+                        const dataUrl = offscreenCanvas.toDataURL(format, 0.92);
+
+                        // Convert dataURL to Blob for ZIP and size checking
+                        const byteString = atob(dataUrl.split(",")[1]);
+                        const ab = new ArrayBuffer(byteString.length);
+                        const ia = new Uint8Array(ab);
+                        for (let i = 0; i < byteString.length; i++) {
+                            ia[i] = byteString.charCodeAt(i);
+                        }
+                        const blob = new Blob([ab], { type: format });
+
+                        renderedImages.push({
+                            pageNum: pageNum,
+                            blob: blob,
+                            dataUrl: dataUrl,
+                            width: Math.round(viewport.width),
+                            height: Math.round(viewport.height),
+                            filename: `${baseName}-page-${pageNum}.${ext}`
+                        });
+                    }
+
+                    // Show Gallery
+                    progressStudio.style.display = "none";
+                    galleryStudio.style.display = "flex";
+                    renderGalleryGrid();
+                    showToast(`Rendered ${renderedImages.length} images successfully!`, "success");
+                } catch (err) {
+                    console.error("Rendering error:", err);
+                    progressStudio.style.display = "none";
+                    configStudio.style.display = "block";
+                    showToast("Failed to render pages: " + err.message, "error");
+                }
+            });
+
+            // Render Gallery Grid
+            function renderGalleryGrid() {
+                galleryGrid.innerHTML = "";
+                if (galleryCountText) {
+                    galleryCountText.textContent = `${renderedImages.length} ${renderedImages.length === 1 ? 'Page' : 'Pages'} Rendered`;
+                }
+
+                renderedImages.forEach((imgObj, idx) => {
+                    const card = document.createElement("div");
+                    card.className = "gallery-card";
+                    card.innerHTML = `
+                        <div class="gallery-preview-box">
+                            <span class="page-badge">
+                                ${SVG_ICONS.layers}
+                                Page ${imgObj.pageNum}
+                            </span>
+                            <img src="${imgObj.dataUrl}" class="gallery-img" alt="Page ${imgObj.pageNum}">
+                        </div>
+                        <div class="card-details-row">
+                            <span class="card-dimen-tag">${imgObj.width} × ${imgObj.height} px</span>
+                            <span class="card-size-tag">${formatBytes(imgObj.blob.size)}</span>
+                        </div>
+                        <button type="button" class="btn-download-single" data-index="${idx}">
+                            ${SVG_ICONS.download}
+                            <span>Download Image</span>
+                        </button>
+                    `;
+
+                    card.querySelector(".btn-download-single").addEventListener("click", () => {
+                        downloadBlob(imgObj.blob, imgObj.filename);
+                        showToast(`Downloaded page ${imgObj.pageNum}`, "success");
+                    });
+
+                    galleryGrid.appendChild(card);
+                });
+            }
+
+            // Download All as ZIP
+            async function executeZipDownload() {
+                if (renderedImages.length === 0) return;
+
+                if (typeof JSZip === "undefined") {
+                    showToast("ZIP library not loaded. Downloading files individually...", "info");
+                    renderedImages.forEach(img => downloadBlob(img.blob, img.filename));
+                    return;
+                }
+
+                showToast("Packaging ZIP archive...", "info");
+                try {
+                    const zip = new JSZip();
+                    const folderName = loadedFile.name.replace(/\.pdf$/i, "") + "-images";
+                    const folder = zip.folder(folderName);
+
+                    renderedImages.forEach(img => {
+                        folder.file(img.filename, img.blob);
+                    });
+
+                    const zipBlob = await zip.generateAsync({ type: "blob" });
+                    downloadBlob(zipBlob, `${folderName}.zip`);
+                    showToast("ZIP archive downloaded successfully!", "success");
+                } catch (err) {
+                    console.error("ZIP creation error:", err);
+                    showToast("Failed to create ZIP: " + err.message, "error");
+                }
+            }
+
+            btnDownloadAllZip.addEventListener("click", executeZipDownload);
+            if (btnDownloadAllZipMobile) {
+                btnDownloadAllZipMobile.addEventListener("click", executeZipDownload);
+            }
+        });
+    </script>
+</body>
+
+</html>

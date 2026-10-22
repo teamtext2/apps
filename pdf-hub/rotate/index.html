@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — Rotate PDF — Rotate Pages 90°, 180° or 270°</title>
+    <meta name="title" content="Spac2 PDF — Rotate PDF — Rotate Pages 90°, 180° or 270°">
+    <meta name="description"
+        content="Free online PDF rotator: Rotate PDF documents permanently by 90, 180, or 270 degrees clockwise or counter-clockwise. Rotate all pages or specific sheets with 100% client-side privacy.">
+    <meta name="keywords" content="Rotate PDF, flip PDF, rotate pages online, rotate PDF clockwise, change PDF orientation, client-side PDF tool">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/rotate/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/rotate/">
+    <meta property="og:title" content="Spac2 PDF — Rotate PDF — Rotate Pages 90°, 180° or 270°">
+    <meta property="og:description"
+        content="Rotate all pages or individual sheets permanently with zero quality loss directly in your browser.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        /* Rotate Studio */
+        #rotate-studio {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Top Action Bar */
+        .rotate-toolbar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: var(--card-glow);
+            position: sticky;
+            top: 65px;
+            z-index: 30;
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: var(--radius-sm);
+            padding: 0.45rem 0.8rem;
+            font-size: 0.84rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+        }
+
+        /* Pages Grid */
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .page-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .page-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .page-preview-box {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #141414;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+
+        .page-thumb-canvas {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-badge-pill {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            z-index: 10;
+        }
+
+        .angle-badge-pill {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: var(--accent-red);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.15rem 0.45rem;
+            border-radius: 9999px;
+            z-index: 10;
+        }
+
+        .card-actions-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-rotate-mini {
+            flex: 1;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            padding: 0.35rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-rotate-mini:hover {
+            color: var(--text-primary);
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Rotate PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Rotate PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+                        <span>All tools</span>
+                        <i data-lucide="chevron-down" style="width: 13px; height: 13px;"></i>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <i data-lucide="home" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">Rotate PDF</h1>
+        <p class="tool-desc">Rotate pages permanently by 90°, 180°, or 270°.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <i data-lucide="rotate-cw" style="width: 32px; height: 32px;"></i>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your PDF document here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Fast vector rotation without image degradation
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <i data-lucide="folder-open" style="width: 18px; height: 18px;"></i>
+                <span>Select PDF File</span>
+            </button>
+        </div>
+
+        <!-- 2. Rotate Studio -->
+        <div id="rotate-studio">
+            <!-- Toolbar -->
+            <div class="rotate-toolbar">
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" id="btn-change-file">
+                        <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                        <span>Change File</span>
+                    </button>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); padding: 0 0.5rem;" id="doc-meta-label">
+                        0 Pages
+                    </div>
+                </div>
+
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" id="btn-rotate-all-right">
+                        <i data-lucide="rotate-cw" style="width: 15px; height: 15px; color: var(--accent-red);"></i>
+                        <span>Rotate All +90°</span>
+                    </button>
+                    <button type="button" class="toolbar-btn" id="btn-rotate-all-left">
+                        <i data-lucide="rotate-ccw" style="width: 15px; height: 15px;"></i>
+                        <span>Rotate All -90°</span>
+                    </button>
+                    <button type="button" class="toolbar-btn" id="btn-rotate-all-180">
+                        <i data-lucide="repeat" style="width: 15px; height: 15px;"></i>
+                        <span>Flip 180°</span>
+                    </button>
+                </div>
+
+                <button type="button" class="btn-primary" id="btn-save-pdf" style="padding: 0.5rem 1.4rem; font-size: 0.88rem;">
+                    <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                    <span>Save & Download PDF</span>
+                </button>
+            </div>
+
+            <!-- Pages Grid -->
+            <div class="pages-grid" id="pages-grid"></div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>Lossless Vector PDF Rotation</h3>
+                <p>
+                    Adjust page orientation metadata directly in your browser without recompressing images or destroying existing digital text and bookmarks.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Rotate PDF Documents in 3 Easy Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Document</h4>
+                        <p>Select any PDF file. Rendered securely in your browser with instant page count detection.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Adjust Orientation</h4>
+                        <p>Rotate all pages collectively or use the individual page buttons to adjust specific sheets.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Download Rotated PDF</h4>
+                        <p>Click 'Save & Download PDF' to export your permanently oriented document with 100% vector clarity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/rotate">Rotate PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/metadata">PDF Metadata</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native page dictionary orientation update. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js & PDF-Lib & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Rotate Controller Script -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const rotateStudio = document.getElementById("rotate-studio");
+            const pagesGrid = document.getElementById("pages-grid");
+            const docMetaLabel = document.getElementById("doc-meta-label");
+
+            const btnChangeFile = document.getElementById("btn-change-file");
+            const btnRotateAllRight = document.getElementById("btn-rotate-all-right");
+            const btnRotateAllLeft = document.getElementById("btn-rotate-all-left");
+            const btnRotateAll180 = document.getElementById("btn-rotate-all-180");
+            const btnSavePdf = document.getElementById("btn-save-pdf");
+
+            let loadedFile = null;
+            let loadedBuffer = null;
+            let pdfJsDoc = null;
+            let totalPages = 0;
+
+            // State per page: [ { pageNum, initialRotation, addedRotation } ]
+            let pageStates = [];
+
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please upload a valid PDF document.", "error");
+                    return;
+                }
+                loadFile(file);
+            });
+
+            async function loadFile(file) {
+                try {
+                    showToast("Loading pages...", "info");
+                    loadedFile = file;
+                    loadedBuffer = await file.arrayBuffer();
+
+                    const loadingTask = pdfjsLib.getDocument({ data: loadedBuffer.slice(0) });
+                    pdfJsDoc = await loadingTask.promise;
+                    totalPages = pdfJsDoc.numPages;
+
+                    docMetaLabel.textContent = `${file.name} • ${totalPages} ${totalPages === 1 ? 'Page' : 'Pages'}`;
+
+                    pageStates = [];
+                    for (let p = 1; p <= totalPages; p++) {
+                        const page = await pdfJsDoc.getPage(p);
+                        pageStates.push({
+                            pageNum: p,
+                            initialRotation: page.rotate || 0,
+                            addedRotation: 0
+                        });
+                    }
+
+                    dropzone.style.display = "none";
+                    rotateStudio.style.display = "flex";
+
+                    renderPagesGrid();
+                    showToast(`Loaded ${file.name} successfully`, "success");
+                } catch (err) {
+                    console.error("PDF load error:", err);
+                    showToast("Failed to load PDF: " + err.message, "error");
+                }
+            }
+
+            btnChangeFile.addEventListener("click", () => {
+                loadedFile = null;
+                loadedBuffer = null;
+                pdfJsDoc = null;
+                pageStates = [];
+                fileInput.value = "";
+                rotateStudio.style.display = "none";
+                dropzone.style.display = "block";
+            });
+
+            // Global Rotations
+            btnRotateAllRight.addEventListener("click", () => {
+                pageStates.forEach(ps => ps.addedRotation = (ps.addedRotation + 90) % 360);
+                updateCardVisualRotations();
+            });
+
+            btnRotateAllLeft.addEventListener("click", () => {
+                pageStates.forEach(ps => ps.addedRotation = (ps.addedRotation - 90 + 360) % 360);
+                updateCardVisualRotations();
+            });
+
+            btnRotateAll180.addEventListener("click", () => {
+                pageStates.forEach(ps => ps.addedRotation = (ps.addedRotation + 180) % 360);
+                updateCardVisualRotations();
+            });
+
+            function renderPagesGrid() {
+                pagesGrid.innerHTML = "";
+
+                pageStates.forEach((ps, idx) => {
+                    const card = document.createElement("div");
+                    card.className = "page-card";
+                    card.id = `page-card-${ps.pageNum}`;
+
+                    const effectiveAngle = (ps.initialRotation + ps.addedRotation) % 360;
+
+                    card.innerHTML = `
+                        <div class="page-preview-box">
+                            <span class="page-badge-pill">Page ${ps.pageNum}</span>
+                            <span class="angle-badge-pill" id="angle-badge-${ps.pageNum}">${effectiveAngle}°</span>
+                            <canvas id="thumb-canvas-${ps.pageNum}" class="page-thumb-canvas"></canvas>
+                        </div>
+                        <div class="card-actions-row">
+                            <button type="button" class="btn-rotate-mini btn-rot-left" data-page="${ps.pageNum}" title="Rotate -90°">
+                                <i data-lucide="rotate-ccw" style="width: 13px; height: 13px;"></i>
+                                <span>-90°</span>
+                            </button>
+                            <button type="button" class="btn-rotate-mini btn-rot-right" data-page="${ps.pageNum}" title="Rotate +90°">
+                                <i data-lucide="rotate-cw" style="width: 13px; height: 13px;"></i>
+                                <span>+90°</span>
+                            </button>
+                        </div>
+                    `;
+
+                    // Listeners
+                    card.querySelector(".btn-rot-left").addEventListener("click", () => {
+                        ps.addedRotation = (ps.addedRotation - 90 + 360) % 360;
+                        updateSingleCardVisual(ps);
+                    });
+
+                    card.querySelector(".btn-rot-right").addEventListener("click", () => {
+                        ps.addedRotation = (ps.addedRotation + 90) % 360;
+                        updateSingleCardVisual(ps);
+                    });
+
+                    pagesGrid.appendChild(card);
+                    renderPageThumbnail(ps.pageNum);
+                });
+
+                if (window.lucide) window.lucide.createIcons({ root: pagesGrid });
+            }
+
+            async function renderPageThumbnail(pageNum) {
+                try {
+                    const page = await pdfJsDoc.getPage(pageNum);
+                    const canvas = document.getElementById(`thumb-canvas-${pageNum}`);
+                    if (!canvas) return;
+
+                    const ctx = canvas.getContext("2d");
+                    const viewport = page.getViewport({ scale: 0.45 });
+
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    await page.render({
+                        canvasContext: ctx,
+                        viewport: viewport
+                    }).promise;
+                } catch (e) { }
+            }
+
+            function updateCardVisualRotations() {
+                pageStates.forEach(ps => updateSingleCardVisual(ps));
+            }
+
+            function updateSingleCardVisual(ps) {
+                const canvas = document.getElementById(`thumb-canvas-${ps.pageNum}`);
+                const badge = document.getElementById(`angle-badge-${ps.pageNum}`);
+                if (!canvas) return;
+
+                const effectiveAngle = (ps.initialRotation + ps.addedRotation) % 360;
+                canvas.style.transform = `rotate(${ps.addedRotation}deg)`;
+                if (badge) badge.textContent = `${effectiveAngle}°`;
+            }
+
+            // Save PDF using PDF-Lib
+            btnSavePdf.addEventListener("click", async () => {
+                if (!loadedBuffer) return;
+
+                try {
+                    btnSavePdf.disabled = true;
+                    showToast("Updating orientation metadata in PDF...", "info");
+
+                    const pdfDoc = await PDFLib.PDFDocument.load(loadedBuffer);
+                    const pages = pdfDoc.getPages();
+
+                    for (let ps of pageStates) {
+                        const page = pages[ps.pageNum - 1];
+                        if (page) {
+                            const newAngle = (ps.initialRotation + ps.addedRotation) % 360;
+                            page.setRotation(PDFLib.degrees(newAngle));
+                        }
+                    }
+
+                    const pdfBytes = await pdfDoc.save();
+                    const baseName = loadedFile.name.replace(/\.pdf$/i, "");
+                    downloadBlob(new Blob([pdfBytes], { type: "application/pdf" }), `${baseName}-rotated.pdf`);
+
+                    showToast("Rotated PDF downloaded successfully!", "success");
+                } catch (err) {
+                    console.error("Rotate save error:", err);
+                    showToast("Failed to rotate PDF: " + err.message, "error");
+                } finally {
+                    btnSavePdf.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

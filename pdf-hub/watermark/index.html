@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — Watermark PDF — Add Text, Logo & Page Numbers</title>
+    <meta name="title" content="Spac2 PDF — Watermark PDF — Add Text, Logo & Page Numbers">
+    <meta name="description"
+        content="Free online PDF watermark tool: Stamp custom text watermarks (CONFIDENTIAL, DRAFT), embed company logo stamps, or insert automated page numbers. 100% private and processed on your device.">
+    <meta name="keywords" content="Watermark PDF, add watermark, stamp PDF, PDF page numbers, confidential stamp, logo watermark PDF, draft watermark, client-side PDF tool">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/watermark/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/watermark/">
+    <meta property="og:title" content="Spac2 PDF — Watermark PDF — Add Text, Logo & Page Numbers">
+    <meta property="og:description"
+        content="Stamp confidential text, logos, or page numbers on your PDF files with real-time live preview. 100% client-side privacy.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        /* Watermark Studio Container */
+        #watermark-studio {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Top Header Card */
+        .file-summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: var(--card-glow);
+        }
+
+        .file-summary-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .file-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .file-name-text {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            max-width: 340px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-sub-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+
+        /* Studio Split Grid (Controls vs Live Preview) */
+        .studio-two-column-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 992px) {
+            .studio-two-column-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Controls Panel */
+        .controls-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--card-glow);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Watermark Type Tabs */
+        .wm-type-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.4rem;
+            background: var(--bg-main);
+            padding: 0.35rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .wm-tab-btn {
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.55rem 0.4rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .wm-tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .wm-tab-btn.active {
+            background: var(--bg-card);
+            color: var(--accent-red);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Form Fields */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.6rem 0.75rem;
+            font-size: 0.88rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: var(--accent-red);
+        }
+
+        /* Preset Chips */
+        .preset-chips-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.25rem;
+        }
+
+        .chip-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            padding: 0.25rem 0.65rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .chip-btn:hover {
+            color: #ffffff;
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Sliders */
+        .range-slider-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .form-range {
+            flex: 1;
+            accent-color: var(--accent-red);
+            cursor: pointer;
+        }
+
+        .range-val-badge {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            min-width: 44px;
+            text-align: right;
+        }
+
+        /* 9-Point Anchor Position Grid */
+        .anchor-matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            width: 150px;
+            margin-top: 0.25rem;
+        }
+
+        .anchor-dot-btn {
+            height: 34px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .anchor-dot-btn:hover {
+            border-color: var(--border-hover);
+        }
+
+        .anchor-dot-btn.active {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        .anchor-dot-btn::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            transition: background 0.15s ease;
+        }
+
+        .anchor-dot-btn.active::after {
+            background: #ffffff;
+        }
+
+        /* Color Row */
+        .color-selector-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-radio-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .color-radio-btn.active {
+            border-color: #ffffff;
+            transform: scale(1.15);
+        }
+
+        /* Live Preview Container */
+        .preview-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--card-glow);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .preview-top-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .preview-nav-btns {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .preview-viewport-box {
+            background: #141414;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 520px;
+            overflow: auto;
+            position: relative;
+        }
+
+        /* PDF Page Preview Wrapper */
+        .preview-page-canvas-wrap {
+            position: relative;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            line-height: 0;
+            overflow: hidden;
+        }
+
+        #pdf-preview-canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Live Overlay Layer */
+        #live-watermark-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Watermark PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Watermark PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+                        <span>All tools</span>
+                        <i data-lucide="chevron-down" style="width: 13px; height: 13px;"></i>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <i data-lucide="home" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">Watermark PDF</h1>
+        <p class="tool-desc">Add text stamps, company logos, or page numbers with live preview.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <i data-lucide="stamp" style="width: 32px; height: 32px;"></i>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your PDF document here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Private client-side watermark stamping with vector fidelity
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <i data-lucide="folder-open" style="width: 18px; height: 18px;"></i>
+                <span>Select PDF File</span>
+            </button>
+        </div>
+
+        <!-- 2. Watermark Studio -->
+        <div id="watermark-studio">
+            <!-- File Summary Bar -->
+            <div class="file-summary-card">
+                <div class="file-summary-left">
+                    <div class="file-icon-box">
+                        <i data-lucide="file-text" style="width: 22px; height: 22px;"></i>
+                    </div>
+                    <div>
+                        <div class="file-name-text" id="doc-name-label">document.pdf</div>
+                        <div class="file-sub-text" id="doc-meta-label">0 MB • 0 Pages</div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-secondary" id="btn-change-file" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+                    <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                    <span>Change File</span>
+                </button>
+            </div>
+
+            <!-- Two Column Layout: Controls vs Preview -->
+            <div class="studio-two-column-layout">
+                <!-- Left: Watermark Controls -->
+                <div class="controls-card">
+                    <!-- Tab Selector -->
+                    <div class="wm-type-tabs">
+                        <button type="button" class="wm-tab-btn active" data-type="text">
+                            <i data-lucide="type" style="width: 14px; height: 14px;"></i>
+                            <span>Text Stamp</span>
+                        </button>
+                        <button type="button" class="wm-tab-btn" data-type="image">
+                            <i data-lucide="image" style="width: 14px; height: 14px;"></i>
+                            <span>Logo Stamp</span>
+                        </button>
+                        <button type="button" class="wm-tab-btn" data-type="numbers">
+                            <i data-lucide="hash" style="width: 14px; height: 14px;"></i>
+                            <span>Page Numbers</span>
+                        </button>
+                    </div>
+
+                    <!-- TAB 1: TEXT WATERMARK CONTROLS -->
+                    <div id="controls-text" class="wm-controls-section">
+                        <!-- Text Input -->
+                        <div class="form-group">
+                            <label class="form-label" for="inp-wm-text">Watermark Text</label>
+                            <input type="text" class="form-input" id="inp-wm-text" value="CONFIDENTIAL" placeholder="Enter text...">
+                            <!-- Quick Chips -->
+                            <div class="preset-chips-row">
+                                <button type="button" class="chip-btn" data-preset="CONFIDENTIAL">CONFIDENTIAL</button>
+                                <button type="button" class="chip-btn" data-preset="DRAFT">DRAFT</button>
+                                <button type="button" class="chip-btn" data-preset="DO NOT COPY">DO NOT COPY</button>
+                                <button type="button" class="chip-btn" data-preset="TOP SECRET">TOP SECRET</button>
+                                <button type="button" class="chip-btn" data-preset="SAMPLE">SAMPLE</button>
+                            </div>
+                        </div>
+
+                        <!-- Font Size -->
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label class="form-label">
+                                <span>Font Size</span>
+                                <span class="range-val-badge" id="val-font-size">52 px</span>
+                            </label>
+                            <div class="range-slider-wrap">
+                                <input type="range" class="form-range" id="range-font-size" min="16" max="110" value="52">
+                            </div>
+                        </div>
+
+                        <!-- Rotation Angle -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>Rotation Angle</span>
+                                <span class="range-val-badge" id="val-rotation">45°</span>
+                            </label>
+                            <div class="range-slider-wrap">
+                                <input type="range" class="form-range" id="range-rotation" min="-90" max="90" value="45">
+                            </div>
+                        </div>
+
+                        <!-- Opacity -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>Transparency / Opacity</span>
+                                <span class="range-val-badge" id="val-opacity">25%</span>
+                            </label>
+                            <div class="range-slider-wrap">
+                                <input type="range" class="form-range" id="range-opacity" min="5" max="100" value="25">
+                            </div>
+                        </div>
+
+                        <!-- Color -->
+                        <div class="form-group">
+                            <label class="form-label">Stamp Color</label>
+                            <div class="color-selector-row">
+                                <button type="button" class="color-radio-btn active" data-color="#dc2626" style="background: #dc2626;" title="Red"></button>
+                                <button type="button" class="color-radio-btn" data-color="#4b5563" style="background: #4b5563;" title="Gray"></button>
+                                <button type="button" class="color-radio-btn" data-color="#000000" style="background: #000000;" title="Black"></button>
+                                <button type="button" class="color-radio-btn" data-color="#2563eb" style="background: #2563eb;" title="Blue"></button>
+                                <button type="button" class="color-radio-btn" data-color="#16a34a" style="background: #16a34a;" title="Green"></button>
+                                <button type="button" class="color-radio-btn" data-color="#d97706" style="background: #d97706;" title="Amber"></button>
+                            </div>
+                        </div>
+
+                        <!-- Position Grid & Mosaic -->
+                        <div class="form-group">
+                            <label class="form-label">Position Placement</label>
+                            <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;">
+                                <div class="anchor-matrix-grid" id="text-anchor-matrix">
+                                    <button type="button" class="anchor-dot-btn" data-pos="top-left" title="Top Left"></button>
+                                    <button type="button" class="anchor-dot-btn" data-pos="top-center" title="Top Center"></button>
+                                    <button type="button" class="anchor-dot-btn" data-pos="top-right" title="Top Right"></button>
+                                    <button type="button" class="anchor-dot-btn" data-pos="center-left" title="Center Left"></button>
+                                    <button type="button" class="anchor-dot-btn active" data-pos="center" title="Center"></button>
+                                    <button type="button" class="anchor-dot-btn" data-pos="center-right" title="Center Right"></button>
+                                    <button type="button" class="anchor-dot-btn" data-pos="bottom-left" title="Bottom Left"></button>
+                                    <button type="button" class="anchor-dot-btn" data-pos="bottom-center" title="Bottom Center"></button>
+                                    <button type="button" class="anchor-dot-btn" data-pos="bottom-right" title="Bottom Right"></button>
+                                </div>
+
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem; color: var(--text-secondary);">
+                                    <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                                        <input type="checkbox" id="chk-mosaic-repeat">
+                                        <span>Repeat mosaic across entire page</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                                        <input type="checkbox" id="chk-behind-content">
+                                        <span>Place behind text layer</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: IMAGE LOGO WATERMARK CONTROLS -->
+                    <div id="controls-image" class="wm-controls-section" style="display: none;">
+                        <input type="file" id="logo-file-input" accept="image/png,image/jpeg,image/webp,image/svg+xml" style="display: none;">
+                        <div class="dropzone-container" style="padding: 1.5rem; border-width: 2px; cursor: pointer;" onclick="document.getElementById('logo-file-input').click()">
+                            <i data-lucide="upload-cloud" style="width: 28px; height: 28px; color: var(--accent-red); margin-bottom: 0.35rem;"></i>
+                            <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-primary);">Click to Upload Logo Image</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">PNG with transparency recommended</div>
+                        </div>
+
+                        <!-- Image Scale -->
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label class="form-label">
+                                <span>Logo Size</span>
+                                <span class="range-val-badge" id="val-img-scale">30%</span>
+                            </label>
+                            <div class="range-slider-wrap">
+                                <input type="range" class="form-range" id="range-img-scale" min="10" max="100" value="30">
+                            </div>
+                        </div>
+
+                        <!-- Image Opacity -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>Transparency / Opacity</span>
+                                <span class="range-val-badge" id="val-img-opacity">35%</span>
+                            </label>
+                            <div class="range-slider-wrap">
+                                <input type="range" class="form-range" id="range-img-opacity" min="5" max="100" value="35">
+                            </div>
+                        </div>
+
+                        <!-- Image Rotation -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span>Rotation Angle</span>
+                                <span class="range-val-badge" id="val-img-rotation">0°</span>
+                            </label>
+                            <div class="range-slider-wrap">
+                                <input type="range" class="form-range" id="range-img-rotation" min="-90" max="90" value="0">
+                            </div>
+                        </div>
+
+                        <!-- Image Position Grid -->
+                        <div class="form-group">
+                            <label class="form-label">Placement Position</label>
+                            <div class="anchor-matrix-grid" id="img-anchor-matrix">
+                                <button type="button" class="anchor-dot-btn" data-pos="top-left" title="Top Left"></button>
+                                <button type="button" class="anchor-dot-btn" data-pos="top-center" title="Top Center"></button>
+                                <button type="button" class="anchor-dot-btn" data-pos="top-right" title="Top Right"></button>
+                                <button type="button" class="anchor-dot-btn" data-pos="center-left" title="Center Left"></button>
+                                <button type="button" class="anchor-dot-btn active" data-pos="center" title="Center"></button>
+                                <button type="button" class="anchor-dot-btn" data-pos="center-right" title="Center Right"></button>
+                                <button type="button" class="anchor-dot-btn" data-pos="bottom-left" title="Bottom Left"></button>
+                                <button type="button" class="anchor-dot-btn" data-pos="bottom-center" title="Bottom Center"></button>
+                                <button type="button" class="anchor-dot-btn" data-pos="bottom-right" title="Bottom Right"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: PAGE NUMBERS CONTROLS -->
+                    <div id="controls-numbers" class="wm-controls-section" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">Format Style</label>
+                            <select class="form-select" id="select-num-format">
+                                <option value="page_x_of_y" selected>Page {n} of {total} (e.g. Page 1 of 12)</option>
+                                <option value="x_slash_y">{n} / {total} (e.g. 1 / 12)</option>
+                                <option value="page_x">Page {n} (e.g. Page 1)</option>
+                                <option value="dash_x_dash">- {n} - (e.g. - 1 -)</option>
+                                <option value="x_only">{n} (e.g. 1)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label class="form-label">Position on Page</label>
+                            <select class="form-select" id="select-num-pos">
+                                <option value="bottom-center" selected>Bottom Center</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="top-right">Top Right</option>
+                                <option value="top-center">Top Center</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Font Size</label>
+                            <div class="range-slider-wrap">
+                                <input type="range" class="form-range" id="range-num-size" min="9" max="22" value="11">
+                                <span class="range-val-badge" id="val-num-size">11 pt</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Start Page Filter</label>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="number" class="form-input" id="inp-num-start" value="1" min="1" style="width: 80px; text-align: center;">
+                                <span style="font-size: 0.82rem; color: var(--text-muted);">(Skip cover page if set to 2)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Apply Button -->
+                    <div style="margin-top: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                        <button type="button" class="btn-primary" id="btn-export-watermarked-pdf" style="width: 100%; padding: 0.75rem; font-size: 0.95rem;">
+                            <i data-lucide="download" style="width: 18px; height: 18px;"></i>
+                            <span>Apply & Download PDF</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Interactive Live Preview -->
+                <div class="preview-card">
+                    <div class="preview-top-toolbar">
+                        <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 0.4rem;">
+                            <i data-lucide="eye" style="width: 16px; height: 16px; color: var(--accent-red);"></i>
+                            <span>Live Page Preview</span>
+                        </div>
+
+                        <!-- Page Nav Controls -->
+                        <div class="preview-nav-btns">
+                            <button type="button" class="btn-secondary" id="btn-preview-prev" style="padding: 0.35rem 0.65rem;" title="Previous page">
+                                <i data-lucide="chevron-left" style="width: 15px; height: 15px;"></i>
+                            </button>
+                            <span id="preview-page-label" style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); min-width: 85px; text-align: center;">
+                                Page 1 / 1
+                            </span>
+                            <button type="button" class="btn-secondary" id="btn-preview-next" style="padding: 0.35rem 0.65rem;" title="Next page">
+                                <i data-lucide="chevron-right" style="width: 15px; height: 15px;"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Viewport Box -->
+                    <div class="preview-viewport-box" id="preview-viewport-box">
+                        <div class="preview-page-canvas-wrap" id="preview-page-canvas-wrap">
+                            <canvas id="pdf-preview-canvas"></canvas>
+                            <!-- Live Watermark Overlay -->
+                            <div id="live-watermark-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>Vector-Crisp Watermarking & Page Numbering</h3>
+                <p>
+                    Protect intellectual property with custom text stamps, company logos, and automated pagination across all pages. Real-time visual feedback with zero quality loss and absolute local privacy.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Watermark PDF Documents in 3 Easy Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Document</h4>
+                        <p>Select any PDF document. Rendered privately on your device with instant live page preview.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Customize Stamp</h4>
+                        <p>Type text, pick colors, adjust opacity, rotate, or upload an image logo and inspect changes live.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Download Watermarked PDF</h4>
+                        <p>Export the protected document with sharp vector preservation and zero server uploads.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/image-to-pdf">Image to PDF</a>
+                <a href="/apps/pdf-hub/pdf-to-image">PDF to Image</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+                <a href="/apps/pdf-hub/watermark">Watermark PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native vector watermark embedding. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js & PDF-Lib & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Watermark Engine Controller -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Dropzone & File Input
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+
+            // Studio & Summary
+            const watermarkStudio = document.getElementById("watermark-studio");
+            const docNameLabel = document.getElementById("doc-name-label");
+            const docMetaLabel = document.getElementById("doc-meta-label");
+            const btnChangeFile = document.getElementById("btn-change-file");
+
+            // Watermark Type Tabs
+            const wmTabBtns = document.querySelectorAll(".wm-tab-btn");
+            const controlsText = document.getElementById("controls-text");
+            const controlsImage = document.getElementById("controls-image");
+            const controlsNumbers = document.getElementById("controls-numbers");
+
+            // Text Controls
+            const inpWmText = document.getElementById("inp-wm-text");
+            const rangeFontSize = document.getElementById("range-font-size");
+            const valFontSize = document.getElementById("val-font-size");
+            const rangeRotation = document.getElementById("range-rotation");
+            const valRotation = document.getElementById("val-rotation");
+            const rangeOpacity = document.getElementById("range-opacity");
+            const valOpacity = document.getElementById("val-opacity");
+            const colorRadioBtns = document.querySelectorAll(".color-radio-btn");
+            const textAnchorBtns = document.querySelectorAll("#text-anchor-matrix .anchor-dot-btn");
+            const chkMosaicRepeat = document.getElementById("chk-mosaic-repeat");
+            const chkBehindContent = document.getElementById("chk-behind-content");
+            const presetChips = document.querySelectorAll(".chip-btn");
+
+            // Image Controls
+            const logoFileInput = document.getElementById("logo-file-input");
+            const rangeImgScale = document.getElementById("range-img-scale");
+            const valImgScale = document.getElementById("val-img-scale");
+            const rangeImgOpacity = document.getElementById("range-img-opacity");
+            const valImgOpacity = document.getElementById("val-img-opacity");
+            const rangeImgRotation = document.getElementById("range-img-rotation");
+            const valImgRotation = document.getElementById("val-img-rotation");
+            const imgAnchorBtns = document.querySelectorAll("#img-anchor-matrix .anchor-dot-btn");
+
+            // Numbers Controls
+            const selectNumFormat = document.getElementById("select-num-format");
+            const selectNumPos = document.getElementById("select-num-pos");
+            const rangeNumSize = document.getElementById("range-num-size");
+            const valNumSize = document.getElementById("val-num-size");
+            const inpNumStart = document.getElementById("inp-num-start");
+
+            // Preview Elements
+            const previewPageCanvasWrap = document.getElementById("preview-page-canvas-wrap");
+            const pdfPreviewCanvas = document.getElementById("pdf-preview-canvas");
+            const previewCtx = pdfPreviewCanvas.getContext("2d");
+            const liveWatermarkOverlay = document.getElementById("live-watermark-overlay");
+            const btnPreviewPrev = document.getElementById("btn-preview-prev");
+            const btnPreviewNext = document.getElementById("btn-preview-next");
+            const previewPageLabel = document.getElementById("preview-page-label");
+
+            // Export Button
+            const btnExportWatermarkedPdf = document.getElementById("btn-export-watermarked-pdf");
+
+            // State
+            let loadedFile = null;
+            let loadedBuffer = null;
+            let pdfJsDoc = null;
+            let totalPages = 1;
+            let currentPreviewPage = 1;
+            let activeRenderTask = null;
+
+            // Watermark Settings State
+            let wmType = "text"; // 'text' | 'image' | 'numbers'
+
+            let textSettings = {
+                text: "CONFIDENTIAL",
+                fontSize: 52,
+                rotation: 45,
+                opacity: 0.25,
+                color: "#dc2626",
+                position: "center",
+                mosaic: false,
+                behind: false
+            };
+
+            let imageSettings = {
+                dataUrl: null,
+                imgElement: null,
+                scale: 30,
+                opacity: 0.35,
+                rotation: 0,
+                position: "center"
+            };
+
+            let numberSettings = {
+                format: "page_x_of_y",
+                position: "bottom-center",
+                size: 11,
+                startPage: 1
+            };
+
+            // ==========================================
+            // FILE UPLOAD
+            // ==========================================
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please upload a valid PDF document.", "error");
+                    return;
+                }
+                loadFile(file);
+            });
+
+            async function loadFile(file) {
+                try {
+                    showToast("Loading document...", "info");
+                    loadedFile = file;
+                    loadedBuffer = await file.arrayBuffer();
+
+                    const loadingTask = pdfjsLib.getDocument({ data: loadedBuffer.slice(0) });
+                    pdfJsDoc = await loadingTask.promise;
+                    totalPages = pdfJsDoc.numPages;
+                    currentPreviewPage = 1;
+
+                    docNameLabel.textContent = file.name;
+                    docMetaLabel.textContent = `${formatBytes(file.size)} • ${totalPages} ${totalPages === 1 ? 'Page' : 'Pages'}`;
+
+                    dropzone.style.display = "none";
+                    watermarkStudio.style.display = "flex";
+
+                    await renderPreviewPage();
+                    showToast(`Loaded ${file.name} successfully`, "success");
+                } catch (err) {
+                    console.error("PDF load error:", err);
+                    showToast("Failed to load PDF: " + err.message, "error");
+                }
+            }
+
+            btnChangeFile.addEventListener("click", () => {
+                loadedFile = null;
+                loadedBuffer = null;
+                pdfJsDoc = null;
+                fileInput.value = "";
+                watermarkStudio.style.display = "none";
+                dropzone.style.display = "block";
+            });
+
+            // ==========================================
+            // TABS SWITCHING
+            // ==========================================
+            wmTabBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    wmTabBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    wmType = btn.getAttribute("data-type");
+
+                    controlsText.style.display = wmType === "text" ? "block" : "none";
+                    controlsImage.style.display = wmType === "image" ? "block" : "none";
+                    controlsNumbers.style.display = wmType === "numbers" ? "block" : "none";
+
+                    updateLiveOverlay();
+                });
+            });
+
+            // ==========================================
+            // TEXT SETTINGS EVENTS
+            // ==========================================
+            inpWmText.addEventListener("input", (e) => {
+                textSettings.text = e.target.value;
+                updateLiveOverlay();
+            });
+
+            presetChips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    const text = chip.getAttribute("data-preset");
+                    inpWmText.value = text;
+                    textSettings.text = text;
+                    updateLiveOverlay();
+                });
+            });
+
+            rangeFontSize.addEventListener("input", (e) => {
+                textSettings.fontSize = parseInt(e.target.value, 10);
+                valFontSize.textContent = `${textSettings.fontSize} px`;
+                updateLiveOverlay();
+            });
+
+            rangeRotation.addEventListener("input", (e) => {
+                textSettings.rotation = parseInt(e.target.value, 10);
+                valRotation.textContent = `${textSettings.rotation}°`;
+                updateLiveOverlay();
+            });
+
+            rangeOpacity.addEventListener("input", (e) => {
+                const pct = parseInt(e.target.value, 10);
+                textSettings.opacity = pct / 100;
+                valOpacity.textContent = `${pct}%`;
+                updateLiveOverlay();
+            });
+
+            colorRadioBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    colorRadioBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    textSettings.color = btn.getAttribute("data-color");
+                    updateLiveOverlay();
+                });
+            });
+
+            textAnchorBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    textAnchorBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    textSettings.position = btn.getAttribute("data-pos");
+                    updateLiveOverlay();
+                });
+            });
+
+            chkMosaicRepeat.addEventListener("change", (e) => {
+                textSettings.mosaic = e.target.checked;
+                updateLiveOverlay();
+            });
+
+            chkBehindContent.addEventListener("change", (e) => {
+                textSettings.behind = e.target.checked;
+            });
+
+            // ==========================================
+            // IMAGE SETTINGS EVENTS
+            // ==========================================
+            logoFileInput.addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        imageSettings.dataUrl = event.target.result;
+                        imageSettings.imgElement = img;
+                        updateLiveOverlay();
+                        showToast("Logo image loaded successfully", "success");
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+
+            rangeImgScale.addEventListener("input", (e) => {
+                imageSettings.scale = parseInt(e.target.value, 10);
+                valImgScale.textContent = `${imageSettings.scale}%`;
+                updateLiveOverlay();
+            });
+
+            rangeImgOpacity.addEventListener("input", (e) => {
+                const pct = parseInt(e.target.value, 10);
+                imageSettings.opacity = pct / 100;
+                valImgOpacity.textContent = `${pct}%`;
+                updateLiveOverlay();
+            });
+
+            rangeImgRotation.addEventListener("input", (e) => {
+                imageSettings.rotation = parseInt(e.target.value, 10);
+                valImgRotation.textContent = `${imageSettings.rotation}°`;
+                updateLiveOverlay();
+            });
+
+            imgAnchorBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    imgAnchorBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    imageSettings.position = btn.getAttribute("data-pos");
+                    updateLiveOverlay();
+                });
+            });
+
+            // ==========================================
+            // NUMBERS SETTINGS EVENTS
+            // ==========================================
+            selectNumFormat.addEventListener("change", (e) => {
+                numberSettings.format = e.target.value;
+                updateLiveOverlay();
+            });
+
+            selectNumPos.addEventListener("change", (e) => {
+                numberSettings.position = e.target.value;
+                updateLiveOverlay();
+            });
+
+            rangeNumSize.addEventListener("input", (e) => {
+                numberSettings.size = parseInt(e.target.value, 10);
+                valNumSize.textContent = `${numberSettings.size} pt`;
+                updateLiveOverlay();
+            });
+
+            inpNumStart.addEventListener("input", (e) => {
+                numberSettings.startPage = Math.max(1, parseInt(e.target.value, 10) || 1);
+                updateLiveOverlay();
+            });
+
+            // ==========================================
+            // LIVE PAGE RENDERING (PDF.JS)
+            // ==========================================
+            async function renderPreviewPage() {
+                if (!pdfJsDoc) return;
+
+                if (activeRenderTask) {
+                    try { activeRenderTask.cancel(); } catch (e) { }
+                }
+
+                previewPageLabel.textContent = `Page ${currentPreviewPage} / ${totalPages}`;
+                btnPreviewPrev.disabled = currentPreviewPage <= 1;
+                btnPreviewNext.disabled = currentPreviewPage >= totalPages;
+
+                try {
+                    const page = await pdfJsDoc.getPage(currentPreviewPage);
+                    const unscaledViewport = page.getViewport({ scale: 1.0 });
+
+                    // Scale to fit viewport container cleanly (~460px width)
+                    const containerWidth = 460;
+                    const scale = containerWidth / unscaledViewport.width;
+                    const viewport = page.getViewport({ scale: scale });
+
+                    pdfPreviewCanvas.width = viewport.width;
+                    pdfPreviewCanvas.height = viewport.height;
+                    pdfPreviewCanvas.style.width = `${viewport.width}px`;
+                    pdfPreviewCanvas.style.height = `${viewport.height}px`;
+
+                    previewPageCanvasWrap.style.width = `${viewport.width}px`;
+                    previewPageCanvasWrap.style.height = `${viewport.height}px`;
+
+                    activeRenderTask = page.render({
+                        canvasContext: previewCtx,
+                        viewport: viewport
+                    });
+                    await activeRenderTask.promise;
+                    activeRenderTask = null;
+
+                    updateLiveOverlay();
+                } catch (err) {
+                    if (err.name !== "RenderingCancelledException") {
+                        console.error("Preview render error:", err);
+                    }
+                }
+            }
+
+            btnPreviewPrev.addEventListener("click", () => {
+                if (currentPreviewPage > 1) {
+                    currentPreviewPage--;
+                    renderPreviewPage();
+                }
+            });
+
+            btnPreviewNext.addEventListener("click", () => {
+                if (currentPreviewPage < totalPages) {
+                    currentPreviewPage++;
+                    renderPreviewPage();
+                }
+            });
+
+            // ==========================================
+            // LIVE WATERMARK OVERLAY (DOM)
+            // ==========================================
+            function updateLiveOverlay() {
+                liveWatermarkOverlay.innerHTML = "";
+
+                // TYPE 1: TEXT WATERMARK
+                if (wmType === "text") {
+                    if (!textSettings.text.trim()) return;
+
+                    if (textSettings.mosaic) {
+                        // Repeating Mosaic Grid
+                        const mosaicWrap = document.createElement("div");
+                        mosaicWrap.style.width = "100%";
+                        mosaicWrap.style.height = "100%";
+                        mosaicWrap.style.display = "grid";
+                        mosaicWrap.style.gridTemplateColumns = "repeat(3, 1fr)";
+                        mosaicWrap.style.gridTemplateRows = "repeat(4, 1fr)";
+                        mosaicWrap.style.opacity = textSettings.opacity;
+
+                        for (let i = 0; i < 12; i++) {
+                            const item = document.createElement("div");
+                            item.style.display = "flex";
+                            item.style.alignItems = "center";
+                            item.style.justifyContent = "center";
+                            item.style.transform = `rotate(${textSettings.rotation}deg)`;
+                            item.style.fontFamily = "Helvetica, Arial, sans-serif";
+                            item.style.fontWeight = "800";
+                            item.style.fontSize = `${Math.round(textSettings.fontSize * 0.45)}px`;
+                            item.style.color = textSettings.color;
+                            item.style.whiteSpace = "nowrap";
+                            item.textContent = textSettings.text;
+                            mosaicWrap.appendChild(item);
+                        }
+
+                        liveWatermarkOverlay.appendChild(mosaicWrap);
+                    } else {
+                        // Single Anchor Position
+                        const stamp = document.createElement("div");
+                        stamp.style.position = "absolute";
+                        stamp.style.fontFamily = "Helvetica, Arial, sans-serif";
+                        stamp.style.fontWeight = "800";
+                        stamp.style.fontSize = `${Math.round(textSettings.fontSize * 0.55)}px`;
+                        stamp.style.color = textSettings.color;
+                        stamp.style.opacity = textSettings.opacity;
+                        stamp.style.transform = `translate(-50%, -50%) rotate(${textSettings.rotation}deg)`;
+                        stamp.style.whiteSpace = "nowrap";
+                        stamp.textContent = textSettings.text;
+
+                        const pos = getAnchorCoords(textSettings.position);
+                        stamp.style.left = `${pos.xPercent}%`;
+                        stamp.style.top = `${pos.yPercent}%`;
+
+                        liveWatermarkOverlay.appendChild(stamp);
+                    }
+                }
+
+                // TYPE 2: IMAGE LOGO WATERMARK
+                else if (wmType === "image") {
+                    if (!imageSettings.dataUrl) {
+                        const hint = document.createElement("div");
+                        hint.style.position = "absolute";
+                        hint.style.top = "50%";
+                        hint.style.left = "50%";
+                        hint.style.transform = "translate(-50%, -50%)";
+                        hint.style.padding = "0.5rem 1rem";
+                        hint.style.background = "rgba(0,0,0,0.6)";
+                        hint.style.color = "#ffffff";
+                        hint.style.borderRadius = "4px";
+                        hint.style.fontSize = "0.8rem";
+                        hint.textContent = "Upload a logo image to preview";
+                        liveWatermarkOverlay.appendChild(hint);
+                        return;
+                    }
+
+                    const imgBox = document.createElement("div");
+                    imgBox.style.position = "absolute";
+                    const pos = getAnchorCoords(imageSettings.position);
+                    imgBox.style.left = `${pos.xPercent}%`;
+                    imgBox.style.top = `${pos.yPercent}%`;
+                    imgBox.style.transform = `translate(-50%, -50%) rotate(${imageSettings.rotation}deg)`;
+                    imgBox.style.opacity = imageSettings.opacity;
+
+                    const img = document.createElement("img");
+                    img.src = imageSettings.dataUrl;
+                    const wPx = Math.round(400 * (imageSettings.scale / 100));
+                    img.style.width = `${wPx}px`;
+                    img.style.height = "auto";
+                    img.style.display = "block";
+
+                    imgBox.appendChild(img);
+                    liveWatermarkOverlay.appendChild(imgBox);
+                }
+
+                // TYPE 3: PAGE NUMBERS
+                else if (wmType === "numbers") {
+                    if (currentPreviewPage < numberSettings.startPage) return;
+
+                    const numText = formatPageNumberText(currentPreviewPage, totalPages, numberSettings.format);
+                    const tag = document.createElement("div");
+                    tag.style.position = "absolute";
+                    tag.style.fontFamily = "Helvetica, Arial, sans-serif";
+                    tag.style.fontSize = `${numberSettings.size}px`;
+                    tag.style.color = "#374151";
+                    tag.style.fontWeight = "600";
+                    tag.textContent = numText;
+
+                    if (numberSettings.position === "bottom-center") {
+                        tag.style.bottom = "12px";
+                        tag.style.left = "50%";
+                        tag.style.transform = "translateX(-50%)";
+                    } else if (numberSettings.position === "bottom-right") {
+                        tag.style.bottom = "12px";
+                        tag.style.right = "20px";
+                    } else if (numberSettings.position === "bottom-left") {
+                        tag.style.bottom = "12px";
+                        tag.style.left = "20px";
+                    } else if (numberSettings.position === "top-right") {
+                        tag.style.top = "12px";
+                        tag.style.right = "20px";
+                    } else if (numberSettings.position === "top-center") {
+                        tag.style.top = "12px";
+                        tag.style.left = "50%";
+                        tag.style.transform = "translateX(-50%)";
+                    }
+
+                    liveWatermarkOverlay.appendChild(tag);
+                }
+            }
+
+            function getAnchorCoords(pos) {
+                switch (pos) {
+                    case "top-left": return { xPercent: 20, yPercent: 15 };
+                    case "top-center": return { xPercent: 50, yPercent: 15 };
+                    case "top-right": return { xPercent: 80, yPercent: 15 };
+                    case "center-left": return { xPercent: 20, yPercent: 50 };
+                    case "center": return { xPercent: 50, yPercent: 50 };
+                    case "center-right": return { xPercent: 80, yPercent: 50 };
+                    case "bottom-left": return { xPercent: 20, yPercent: 85 };
+                    case "bottom-center": return { xPercent: 50, yPercent: 85 };
+                    case "bottom-right": return { xPercent: 80, yPercent: 85 };
+                    default: return { xPercent: 50, yPercent: 50 };
+                }
+            }
+
+            function formatPageNumberText(n, total, format) {
+                switch (format) {
+                    case "page_x_of_y": return `Page ${n} of ${total}`;
+                    case "x_slash_y": return `${n} / ${total}`;
+                    case "page_x": return `Page ${n}`;
+                    case "dash_x_dash": return `- ${n} -`;
+                    case "x_only": return `${n}`;
+                    default: return `Page ${n} of ${total}`;
+                }
+            }
+
+            // Hex to PDF-Lib RGB Helper
+            function hexToRgb(hex) {
+                hex = hex.replace("#", "");
+                if (hex.length === 3) {
+                    hex = hex.split("").map(c => c + c).join("");
+                }
+                const num = parseInt(hex, 16);
+                return {
+                    r: ((num >> 16) & 255) / 255,
+                    g: ((num >> 8) & 255) / 255,
+                    b: (num & 255) / 255
+                };
+            }
+
+            // ==========================================
+            // EXPORT ENGINE (PDF-LIB VECTOR EMBEDDING)
+            // ==========================================
+            btnExportWatermarkedPdf.addEventListener("click", async () => {
+                if (!loadedBuffer) return;
+
+                if (wmType === "image" && !imageSettings.dataUrl) {
+                    showToast("Please upload an image logo first.", "error");
+                    return;
+                }
+
+                try {
+                    btnExportWatermarkedPdf.disabled = true;
+                    showToast("Embedding watermark onto PDF pages...", "info");
+
+                    const pdfDoc = await PDFLib.PDFDocument.load(loadedBuffer);
+                    const pages = pdfDoc.getPages();
+                    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+                    const numFont = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+
+                    // Pre-embed Image if Image Watermark
+                    let embeddedImage = null;
+                    if (wmType === "image") {
+                        const byteString = atob(imageSettings.dataUrl.split(",")[1]);
+                        const ab = new ArrayBuffer(byteString.length);
+                        const ia = new Uint8Array(ab);
+                        for (let i = 0; i < byteString.length; i++) {
+                            ia[i] = byteString.charCodeAt(i);
+                        }
+
+                        if (imageSettings.dataUrl.startsWith("data:image/jpeg")) {
+                            embeddedImage = await pdfDoc.embedJpg(ab);
+                        } else {
+                            embeddedImage = await pdfDoc.embedPng(ab);
+                        }
+                    }
+
+                    // Process each page
+                    for (let idx = 0; idx < pages.length; idx++) {
+                        const page = pages[idx];
+                        const { width: pWidth, height: pHeight } = page.getSize();
+                        const pageNum = idx + 1;
+
+                        // 1. TEXT WATERMARK
+                        if (wmType === "text" && textSettings.text.trim()) {
+                            const rgb = hexToRgb(textSettings.color);
+                            const text = textSettings.text;
+                            const textWidth = font.widthOfTextAtSize(text, textSettings.fontSize);
+                            const textHeight = font.heightAtSize(textSettings.fontSize);
+
+                            if (textSettings.mosaic) {
+                                // 3x4 Mosaic Grid
+                                const cols = 3;
+                                const rows = 4;
+                                const colStep = pWidth / cols;
+                                const rowStep = pHeight / rows;
+
+                                for (let c = 0; c < cols; c++) {
+                                    for (let r = 0; r < rows; r++) {
+                                        const cx = (c + 0.5) * colStep;
+                                        const cy = (r + 0.5) * rowStep;
+
+                                        page.drawText(text, {
+                                            x: cx - textWidth / 2,
+                                            y: cy - textHeight / 2,
+                                            size: textSettings.fontSize * 0.75,
+                                            font: font,
+                                            color: PDFLib.rgb(rgb.r, rgb.g, rgb.b),
+                                            opacity: textSettings.opacity,
+                                            rotate: PDFLib.degrees(textSettings.rotation)
+                                        });
+                                    }
+                                }
+                            } else {
+                                // Single Position
+                                const anchor = getAnchorCoords(textSettings.position);
+                                const targetX = (anchor.xPercent / 100) * pWidth;
+                                const targetY = (1 - (anchor.yPercent / 100)) * pHeight;
+
+                                page.drawText(text, {
+                                    x: targetX - textWidth / 2,
+                                    y: targetY - textHeight / 2,
+                                    size: textSettings.fontSize,
+                                    font: font,
+                                    color: PDFLib.rgb(rgb.r, rgb.g, rgb.b),
+                                    opacity: textSettings.opacity,
+                                    rotate: PDFLib.degrees(textSettings.rotation)
+                                });
+                            }
+                        }
+
+                        // 2. IMAGE WATERMARK
+                        else if (wmType === "image" && embeddedImage) {
+                            const imgAspect = embeddedImage.width / embeddedImage.height;
+                            const targetWidth = (pWidth * (imageSettings.scale / 100));
+                            const targetHeight = targetWidth / imgAspect;
+
+                            const anchor = getAnchorCoords(imageSettings.position);
+                            const targetX = (anchor.xPercent / 100) * pWidth;
+                            const targetY = (1 - (anchor.yPercent / 100)) * pHeight;
+
+                            page.drawImage(embeddedImage, {
+                                x: targetX - targetWidth / 2,
+                                y: targetY - targetHeight / 2,
+                                width: targetWidth,
+                                height: targetHeight,
+                                opacity: imageSettings.opacity,
+                                rotate: PDFLib.degrees(imageSettings.rotation)
+                            });
+                        }
+
+                        // 3. PAGE NUMBERS
+                        else if (wmType === "numbers") {
+                            if (pageNum >= numberSettings.startPage) {
+                                const numText = formatPageNumberText(pageNum, totalPages, numberSettings.format);
+                                const numWidth = numFont.widthOfTextAtSize(numText, numberSettings.size);
+                                let nx = 0;
+                                let ny = 25; // default bottom margin
+
+                                if (numberSettings.position === "bottom-center") {
+                                    nx = (pWidth - numWidth) / 2;
+                                    ny = 25;
+                                } else if (numberSettings.position === "bottom-right") {
+                                    nx = pWidth - numWidth - 35;
+                                    ny = 25;
+                                } else if (numberSettings.position === "bottom-left") {
+                                    nx = 35;
+                                    ny = 25;
+                                } else if (numberSettings.position === "top-right") {
+                                    nx = pWidth - numWidth - 35;
+                                    ny = pHeight - 35;
+                                } else if (numberSettings.position === "top-center") {
+                                    nx = (pWidth - numWidth) / 2;
+                                    ny = pHeight - 35;
+                                }
+
+                                page.drawText(numText, {
+                                    x: nx,
+                                    y: ny,
+                                    size: numberSettings.size,
+                                    font: numFont,
+                                    color: PDFLib.rgb(0.2, 0.2, 0.2),
+                                    opacity: 0.85
+                                });
+                            }
+                        }
+                    }
+
+                    const outputPdfBytes = await pdfDoc.save();
+                    const baseName = loadedFile.name.replace(/\.pdf$/i, "");
+                    downloadBlob(new Blob([outputPdfBytes], { type: "application/pdf" }), `${baseName}-watermarked.pdf`);
+
+                    showToast("PDF watermarked and downloaded successfully!", "success");
+                } catch (err) {
+                    console.error("Watermark export error:", err);
+                    showToast("Failed to watermark PDF: " + err.message, "error");
+                } finally {
+                    btnExportWatermarkedPdf.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

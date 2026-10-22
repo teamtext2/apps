@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — Organize PDF — Reorder, Rotate & Delete Pages</title>
+    <meta name="title" content="Spac2 PDF — Organize PDF — Reorder, Rotate & Delete Pages">
+    <meta name="description"
+        content="Free online PDF page organizer: Preview document thumbnails, drag and drop to reorder pages, rotate 90 degrees, delete unwanted sheets, or duplicate pages with 100% client-side privacy.">
+    <meta name="keywords" content="Organize PDF, reorder PDF pages, rotate PDF, delete PDF pages, rearrange PDF, client-side PDF tool">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/organize/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/organize/">
+    <meta property="og:title" content="Spac2 PDF — Organize PDF — Reorder, Rotate & Delete Pages">
+    <meta property="og:description"
+        content="Sort, rotate, and delete PDF pages with visual drag-and-drop thumbnails right in your browser. 100% secure.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .svg-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+            transition: padding 0.3s ease;
+        }
+
+        /* Full App Workspace in Studio Mode */
+        body.in-studio-mode .tool-header-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .tool-info-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .workspace-wrap {
+            padding-top: 1.25rem;
+        }
+
+        /* Organize Studio Container */
+        #organize-studio {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInStudio {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Native App Studio Toolbar (Ribbon) */
+        .studio-controls-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 0.9rem 1.25rem;
+            box-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.45);
+            position: sticky;
+            top: 72px;
+            z-index: 40;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: all 0.25s ease;
+        }
+
+        [data-theme="light"] .studio-controls-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .studio-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Document Context Left */
+        .studio-doc-context {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        .app-btn-secondary {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 10px;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .app-btn-secondary:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .app-btn-secondary:active {
+            transform: scale(0.97);
+        }
+
+        .doc-meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.35rem 0.75rem;
+            max-width: 280px;
+            min-width: 0;
+        }
+
+        .doc-type-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .doc-title-badge {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .page-status-pill {
+            font-size: 0.8rem;
+            color: #4ade80;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.28);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        /* Quick Action Tools Right */
+        .studio-actions-ribbon {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+        }
+
+        .studio-tools-cluster {
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .app-btn-tool {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            border-radius: 9px;
+            padding: 0.48rem 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .app-btn-tool:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .app-btn-tool:active {
+            transform: scale(0.96);
+        }
+
+        /* App Primary Action Button */
+        .btn-execute-app {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.55rem 1.35rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px -3px rgba(239, 68, 68, 0.45);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .btn-execute-app:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px -3px rgba(239, 68, 68, 0.6);
+            filter: brightness(1.08);
+        }
+
+        .btn-execute-app:active {
+            transform: scale(0.97);
+        }
+
+        /* Thumbnails Grid */
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+        }
+
+        /* Modern App Page Card */
+        .page-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            cursor: grab;
+            position: relative;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.2s ease, 
+                        box-shadow 0.25s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+
+        .page-card:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .page-card.dragging {
+            opacity: 0.35;
+            border: 2px dashed var(--accent-red);
+            box-shadow: 0 16px 36px rgba(239, 68, 68, 0.25);
+            cursor: grabbing;
+        }
+
+        .page-card.drag-over {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.08);
+            transform: scale(1.03);
+        }
+
+        .page-card.deleted {
+            opacity: 0.5;
+            filter: grayscale(85%);
+            border-style: dashed;
+            border-color: rgba(239, 68, 68, 0.6);
+            background: rgba(239, 68, 68, 0.03);
+        }
+
+        .card-top-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.6rem;
+            padding: 0 0.15rem;
+        }
+
+        .card-drag-handle {
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px;
+            border-radius: 4px;
+            cursor: grab;
+            transition: color 0.15s ease, background 0.15s ease;
+        }
+
+        .card-drag-handle:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .page-num-badge {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+            padding: 0.18rem 0.55rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            letter-spacing: -0.01em;
+        }
+
+        /* Canvas preview wrapper */
+        .thumb-wrapper {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 0.65rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .thumb-canvas {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .deleted-stamp {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-12deg);
+            background: rgba(239, 68, 68, 0.95);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            align-items: center;
+        }
+
+        .page-card.deleted .deleted-stamp {
+            display: inline-flex;
+        }
+
+        /* Card bottom bar */
+        .card-bottom-bar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-actions-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            width: 100%;
+        }
+
+        .card-action-btn {
+            flex: 1;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0;
+        }
+
+        .card-action-btn:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .card-action-btn:active {
+            transform: scale(0.92);
+        }
+
+        .card-action-btn.btn-rot-left:hover {
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.4);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .card-action-btn.btn-rot-right:hover {
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.4);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .card-action-btn.btn-duplicate:hover {
+            color: #a78bfa;
+            border-color: rgba(167, 139, 250, 0.4);
+            background: rgba(167, 139, 250, 0.1);
+        }
+
+        .card-action-btn.btn-delete:hover {
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.4);
+            background: rgba(239, 68, 68, 0.12);
+        }
+
+        .card-action-btn.btn-delete.is-restore {
+            color: #4ade80;
+            border-color: rgba(74, 222, 128, 0.3);
+            background: rgba(74, 222, 128, 0.08);
+        }
+
+        .card-action-btn.btn-delete.is-restore:hover {
+            background: rgba(74, 222, 128, 0.2);
+            color: #86efac;
+            border-color: rgba(74, 222, 128, 0.5);
+        }
+
+        /* Mobile Sticky Export Dock */
+        .organize-mobile-bottom-bar {
+            display: none;
+        }
+
+        /* Loading state */
+        .loading-banner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-glow);
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-red);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ============================================================
+           MOBILE APP OPTIMIZATIONS (<= 768px)
+           ============================================================ */
+        @media (max-width: 768px) {
+            .workspace-wrap {
+                padding: 0 0.85rem 4rem;
+            }
+
+            body.in-studio-mode .workspace-wrap {
+                padding: 0 0.65rem 6.5rem;
+            }
+
+            .studio-controls-card {
+                padding: 0.75rem 0.85rem;
+                border-radius: 14px;
+                top: 65px;
+            }
+
+            .studio-top-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.65rem;
+            }
+
+            .studio-doc-context {
+                width: 100%;
+                justify-content: space-between;
+                gap: 0.5rem;
+            }
+
+            .doc-meta-badge {
+                flex-grow: 1;
+                max-width: none;
+                padding: 0.3rem 0.55rem;
+            }
+
+            .app-btn-secondary {
+                padding: 0.4rem 0.65rem;
+                font-size: 0.78rem;
+            }
+
+            .page-status-pill {
+                padding: 0.3rem 0.55rem;
+                font-size: 0.75rem;
+            }
+
+            /* Scrollable tools cluster on mobile */
+            .studio-actions-ribbon {
+                width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 2px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .studio-actions-ribbon::-webkit-scrollbar {
+                display: none;
+            }
+
+            .studio-tools-cluster {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                gap: 2px;
+            }
+
+            .app-btn-tool {
+                flex: 1;
+                justify-content: center;
+                padding: 0.42rem 0.45rem;
+                font-size: 0.76rem;
+                gap: 0.3rem;
+            }
+
+            .studio-actions-ribbon .btn-execute-app {
+                display: none; /* Hide in top ribbon on mobile */
+            }
+
+            /* Sticky Mobile Bottom Dock */
+            .organize-mobile-bottom-bar {
+                display: block;
+                position: sticky;
+                bottom: 12px;
+                z-index: 60;
+                background: rgba(24, 24, 27, 0.94);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                border: 1px solid rgba(255, 255, 255, 0.16);
+                border-radius: 16px;
+                padding: 0.75rem;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+                margin-top: 1rem;
+            }
+
+            [data-theme="light"] .organize-mobile-bottom-bar {
+                background: rgba(255, 255, 255, 0.95);
+                border: 1px solid rgba(0, 0, 0, 0.12);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .organize-mobile-bottom-bar .btn-execute-app {
+                width: 100%;
+                justify-content: center;
+                padding: 0.85rem;
+                font-size: 0.95rem;
+                border-radius: 12px;
+            }
+
+            /* Responsive 2-column thumbnails grid */
+            .pages-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .page-card {
+                padding: 0.55rem;
+                border-radius: 12px;
+            }
+
+            .thumb-wrapper {
+                height: 160px;
+                margin-bottom: 0.5rem;
+            }
+
+            .card-action-btn {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px;"><polyline points="15 18 9 12 15 6"/></svg>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Organize PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Organize PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>All tools</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">Organize PDF</h1>
+        <p class="tool-desc">Reorder, rotate, duplicate, or delete pages with visual thumbnails.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 36px; height: 36px;"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your PDF file here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Visual thumbnail editor loads in seconds right in your browser
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <span>Select PDF File</span>
+            </button>
+        </div>
+
+        <!-- 2. Loading Banner -->
+        <div id="loading-banner" class="loading-banner">
+            <div class="spinner"></div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);" id="loading-text">
+                Generating page thumbnails...
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                Rendering pages locally on your device hardware
+            </p>
+        </div>
+
+        <!-- 3. Interactive Organize Studio -->
+        <div id="organize-studio">
+            <!-- Studio Controls Card (App Ribbon) -->
+            <div class="studio-controls-card">
+                <div class="studio-top-row">
+                    <!-- Left: Document Context -->
+                    <div class="studio-doc-context">
+                        <button type="button" class="app-btn-secondary" id="btn-change-doc" title="Choose another document">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            <span>Change File</span>
+                        </button>
+                        <div class="doc-meta-badge">
+                            <div class="doc-type-icon">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13v4M9 15h2a1 1 0 0 0 0-2H9"/></svg>
+                            </div>
+                            <span class="doc-title-badge" id="studio-filename" title="document.pdf">document.pdf</span>
+                        </div>
+                        <div class="page-status-pill" id="page-status-pill">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 13px; height: 13px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                            <span id="page-status-text">0 of 0 pages kept</span>
+                        </div>
+                    </div>
+
+                    <!-- Right / Actions: Desktop Global Actions -->
+                    <div class="studio-actions-ribbon">
+                        <div class="studio-tools-cluster">
+                            <button type="button" class="app-btn-tool" id="btn-rotate-all-right" title="Rotate all pages 90° clockwise">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.9 1 6.7 2.4L21 8"/><polyline points="21 3 21 8 16 8"/></svg>
+                                <span>Rotate All +90°</span>
+                            </button>
+                            <button type="button" class="app-btn-tool" id="btn-reverse-all" title="Reverse page sequence">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 3v18M3 7l4-4 4 4M17 21V3M21 17l-4 4-4-4"/></svg>
+                                <span>Reverse Order</span>
+                            </button>
+                            <button type="button" class="app-btn-tool" id="btn-reset-pages" title="Restore original order and orientation">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.7 2.4L3 8"/><polyline points="3 3 3 8 8 8"/><path d="M12 7v5l3 3"/></svg>
+                                <span>Reset All</span>
+                            </button>
+                        </div>
+                        <button type="button" class="btn-execute-app" id="btn-save-organized">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <span>Save & Download PDF</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pages Grid Container -->
+            <div class="pages-grid" id="pages-grid"></div>
+
+            <!-- Sticky Mobile Bottom Bar -->
+            <div class="organize-mobile-bottom-bar" id="mobile-export-dock">
+                <button type="button" class="btn-execute-app" id="btn-save-organized-mobile">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Save & Download PDF</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>Visual Drag-and-Drop Page Management</h3>
+                <p>
+                    Reorder document flow, delete obsolete pages, duplicate sheets, and reorient upside-down pages visually with real-time thumbnail cards and zero cloud uploads.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Organize PDF Pages in 3 Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Document</h4>
+                        <p>Select any PDF. Every page is rendered into an interactive visual thumbnail card.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Rearrange & Rotate</h4>
+                        <p>Drag thumbnails to change order, rotate individual pages, or delete unnecessary sheets.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Save Organized PDF</h4>
+                        <p>Download your restructured document with clean vector preservation and zero quality loss.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/metadata">PDF Metadata</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+                <a href="/apps/pdf-hub/ocr">OCR PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native page tree reorganization & rotation. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js & PDF-Lib & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Organize Studio Controller -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const loadingBanner = document.getElementById("loading-banner");
+            const loadingText = document.getElementById("loading-text");
+            const organizeStudio = document.getElementById("organize-studio");
+            const pagesGrid = document.getElementById("pages-grid");
+
+            // Controls
+            const btnChangeDoc = document.getElementById("btn-change-doc");
+            const studioFilename = document.getElementById("studio-filename");
+            const pageStatusText = document.getElementById("page-status-text");
+            const btnRotateAllRight = document.getElementById("btn-rotate-all-right");
+            const btnReverseAll = document.getElementById("btn-reverse-all");
+            const btnResetPages = document.getElementById("btn-reset-pages");
+            const btnSaveOrganized = document.getElementById("btn-save-organized");
+            const btnSaveOrganizedMobile = document.getElementById("btn-save-organized-mobile");
+
+            // State
+            let originalBuffer = null;
+            let originalFileName = "document.pdf";
+            let pdfDoc = null;
+            let totalPages = 0;
+
+            // Array of page model items:
+            // { id, origPageIndex (0-based), rotation: 0, isDeleted: false, thumbDataUrl: null }
+            let pageItems = [];
+
+            // Native Crisp SVG Icons
+            const SVG_ICONS = {
+                grip: `<svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px;"><circle cx="9" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="15" cy="19" r="1.5"/></svg>`,
+                rotateCcw: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 15px; height: 15px;"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.7 2.4L3 8"/><polyline points="3 3 3 8 8 8"/></svg>`,
+                rotateCw: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 15px; height: 15px;"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.9 1 6.7 2.4L21 8"/><polyline points="21 3 21 8 16 8"/></svg>`,
+                duplicate: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
+                trash: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>`,
+                restore: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 15px; height: 15px;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>`
+            };
+
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                const file = files[0];
+                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                    showToast("Please upload a valid PDF file.", "error");
+                    return;
+                }
+                loadPdfForOrganizing(file);
+            });
+
+            btnChangeDoc.addEventListener("click", () => {
+                if (confirm("Close document and choose another file?")) {
+                    document.body.classList.remove("in-studio-mode");
+                    organizeStudio.style.display = "none";
+                    dropzone.style.display = "block";
+                    fileInput.value = "";
+                    originalBuffer = null;
+                    pageItems = [];
+                }
+            });
+
+            async function loadPdfForOrganizing(file) {
+                try {
+                    dropzone.style.display = "none";
+                    loadingBanner.style.display = "flex";
+                    loadingText.textContent = `Reading ${file.name}...`;
+
+                    originalFileName = file.name;
+                    originalBuffer = await file.arrayBuffer();
+
+                    const loadingTask = pdfjsLib.getDocument({ data: originalBuffer.slice(0) });
+                    pdfDoc = await loadingTask.promise;
+                    totalPages = pdfDoc.numPages;
+
+                    studioFilename.textContent = file.name;
+                    studioFilename.title = file.name;
+                    pageItems = [];
+
+                    // Render thumbnails for each page
+                    const offscreenCanvas = document.createElement("canvas");
+                    const offCtx = offscreenCanvas.getContext("2d");
+
+                    for (let p = 1; p <= totalPages; p++) {
+                        loadingText.textContent = `Rendering page ${p} of ${totalPages}...`;
+                        const page = await pdfDoc.getPage(p);
+
+                        // Scale to ~220px width for sharp crisp thumbnail
+                        const unscaled = page.getViewport({ scale: 1.0 });
+                        const scale = 220 / unscaled.width;
+                        const viewport = page.getViewport({ scale: scale });
+
+                        offscreenCanvas.width = viewport.width;
+                        offscreenCanvas.height = viewport.height;
+
+                        await page.render({
+                            canvasContext: offCtx,
+                            viewport: viewport
+                        }).promise;
+
+                        const thumbDataUrl = offscreenCanvas.toDataURL("image/jpeg", 0.85);
+
+                        pageItems.push({
+                            id: "page_" + p + "_" + Math.random().toString(36).substr(2, 6),
+                            origPageIndex: p - 1,
+                            rotation: 0,
+                            isDeleted: false,
+                            thumbDataUrl: thumbDataUrl
+                        });
+                    }
+
+                    loadingBanner.style.display = "none";
+                    document.body.classList.add("in-studio-mode");
+                    organizeStudio.style.display = "flex";
+
+                    renderPagesGrid();
+                    showToast(`Ready! Loaded ${totalPages} pages.`, "success");
+                } catch (err) {
+                    console.error("Load error:", err);
+                    loadingBanner.style.display = "none";
+                    dropzone.style.display = "block";
+                    document.body.classList.remove("in-studio-mode");
+                    showToast("Failed to load PDF: " + err.message, "error");
+                }
+            }
+
+            // Render Thumbnails Grid
+            function renderPagesGrid() {
+                pagesGrid.innerHTML = "";
+
+                let activeCount = 0;
+
+                pageItems.forEach((item, idx) => {
+                    if (!item.isDeleted) activeCount++;
+
+                    const card = document.createElement("div");
+                    card.className = "page-card" + (item.isDeleted ? " deleted" : "");
+                    card.draggable = !item.isDeleted;
+                    card.dataset.index = idx;
+
+                    card.innerHTML = `
+                        <div class="card-top-header">
+                            <div class="card-drag-handle" title="Drag to rearrange sequence">
+                                ${SVG_ICONS.grip}
+                            </div>
+                            <span class="page-num-badge">Page ${idx + 1}</span>
+                        </div>
+
+                        <div class="thumb-wrapper">
+                            <img src="${item.thumbDataUrl}" class="thumb-canvas" style="transform: rotate(${item.rotation}deg);" alt="Page ${idx + 1}">
+                            <div class="deleted-stamp">Removed</div>
+                        </div>
+
+                        <div class="card-bottom-bar">
+                            <div class="page-actions-group">
+                                <button type="button" class="card-action-btn btn-rot-left" data-index="${idx}" title="Rotate -90°">
+                                    ${SVG_ICONS.rotateCcw}
+                                </button>
+                                <button type="button" class="card-action-btn btn-rot-right" data-index="${idx}" title="Rotate +90°">
+                                    ${SVG_ICONS.rotateCw}
+                                </button>
+                                <button type="button" class="card-action-btn btn-duplicate" data-index="${idx}" title="Duplicate page">
+                                    ${SVG_ICONS.duplicate}
+                                </button>
+                                <button type="button" class="card-action-btn btn-delete ${item.isDeleted ? 'is-restore' : ''}" data-index="${idx}" title="${item.isDeleted ? 'Restore page' : 'Delete page'}">
+                                    ${item.isDeleted ? SVG_ICONS.restore : SVG_ICONS.trash}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    // Drag & drop mechanics
+                    card.addEventListener("dragstart", (e) => {
+                        e.dataTransfer.setData("text/plain", idx);
+                        card.classList.add("dragging");
+                    });
+
+                    card.addEventListener("dragend", () => {
+                        card.classList.remove("dragging");
+                    });
+
+                    card.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        card.classList.add("drag-over");
+                    });
+
+                    card.addEventListener("dragleave", () => {
+                        card.classList.remove("drag-over");
+                    });
+
+                    card.addEventListener("drop", (e) => {
+                        e.preventDefault();
+                        card.classList.remove("drag-over");
+                        const fromIdx = parseInt(e.dataTransfer.getData("text/plain"), 10);
+                        const toIdx = idx;
+
+                        if (fromIdx !== toIdx && !isNaN(fromIdx)) {
+                            const [moved] = pageItems.splice(fromIdx, 1);
+                            pageItems.splice(toIdx, 0, moved);
+                            renderPagesGrid();
+                        }
+                    });
+
+                    pagesGrid.appendChild(card);
+                });
+
+                if (pageStatusText) {
+                    pageStatusText.textContent = `${activeCount} of ${pageItems.length} pages kept`;
+                }
+
+                // Attach Card Events
+                pagesGrid.querySelectorAll(".btn-rot-left").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const i = parseInt(btn.dataset.index, 10);
+                        pageItems[i].rotation = (pageItems[i].rotation - 90) % 360;
+                        renderPagesGrid();
+                    });
+                });
+
+                pagesGrid.querySelectorAll(".btn-rot-right").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const i = parseInt(btn.dataset.index, 10);
+                        pageItems[i].rotation = (pageItems[i].rotation + 90) % 360;
+                        renderPagesGrid();
+                    });
+                });
+
+                pagesGrid.querySelectorAll(".btn-duplicate").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const i = parseInt(btn.dataset.index, 10);
+                        const clone = {
+                            ...pageItems[i],
+                            id: "page_clone_" + Math.random().toString(36).substr(2, 6)
+                        };
+                        pageItems.splice(i + 1, 0, clone);
+                        renderPagesGrid();
+                        showToast(`Duplicated page #${i + 1}`, "info");
+                    });
+                });
+
+                pagesGrid.querySelectorAll(".btn-delete").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const i = parseInt(btn.dataset.index, 10);
+                        pageItems[i].isDeleted = !pageItems[i].isDeleted;
+                        renderPagesGrid();
+                    });
+                });
+            }
+
+            // Global Actions
+            btnRotateAllRight.addEventListener("click", () => {
+                pageItems.forEach(item => {
+                    item.rotation = (item.rotation + 90) % 360;
+                });
+                renderPagesGrid();
+                showToast("Rotated all pages +90°", "info");
+            });
+
+            btnReverseAll.addEventListener("click", () => {
+                pageItems.reverse();
+                renderPagesGrid();
+                showToast("Reversed page sequence", "info");
+            });
+
+            btnResetPages.addEventListener("click", () => {
+                if (confirm("Reset all page orders, rotations, and deletions?")) {
+                    pageItems.sort((a, b) => a.origPageIndex - b.origPageIndex);
+                    pageItems.forEach(item => {
+                        item.rotation = 0;
+                        item.isDeleted = false;
+                    });
+                    renderPagesGrid();
+                    showToast("Restored original document structure", "info");
+                }
+            });
+
+            // ============================================================
+            // SAVE & DOWNLOAD WITH PDF-LIB
+            // ============================================================
+            async function executeSaveOrganizedPdf() {
+                const activePages = pageItems.filter(p => !p.isDeleted);
+                if (activePages.length === 0) {
+                    showToast("Cannot export: all pages have been marked as removed.", "error");
+                    return;
+                }
+
+                showToast("Generating organized PDF...", "info");
+                try {
+                    const srcDoc = await PDFLib.PDFDocument.load(originalBuffer.slice(0));
+                    const outDoc = await PDFLib.PDFDocument.create();
+
+                    for (const item of activePages) {
+                        const [copiedPage] = await outDoc.copyPages(srcDoc, [item.origPageIndex]);
+
+                        // Apply rotation
+                        if (item.rotation !== 0) {
+                            const curAngle = copiedPage.getRotation().angle;
+                            copiedPage.setRotation(PDFLib.degrees((curAngle + item.rotation) % 360));
+                        }
+
+                        outDoc.addPage(copiedPage);
+                    }
+
+                    const outBytes = await outDoc.save({ useObjectStreams: true });
+                    const outName = originalFileName.replace(/\.pdf$/i, "") + "-organized.pdf";
+                    downloadBlob(new Blob([outBytes], { type: "application/pdf" }), outName);
+
+                    showToast(`Exported ${activePages.length} pages successfully!`, "success");
+                } catch (err) {
+                    console.error("Export error:", err);
+                    showToast("Failed to save PDF: " + err.message, "error");
+                }
+            }
+
+            btnSaveOrganized.addEventListener("click", executeSaveOrganizedPdf);
+            if (btnSaveOrganizedMobile) {
+                btnSaveOrganizedMobile.addEventListener("click", executeSaveOrganizedPdf);
+            }
+        });
+    </script>
+</body>
+
+</html>

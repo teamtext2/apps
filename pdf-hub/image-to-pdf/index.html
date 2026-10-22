@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — Image to PDF — Convert JPG, PNG & WebP</title>
+    <meta name="title" content="Spac2 PDF — Image to PDF — Convert JPG, PNG & WebP">
+    <meta name="description"
+        content="Free online image to PDF converter: Turn JPG, PNG, WebP, and BMP photos into a high-quality PDF document. Customize paper sizes (A4, Letter, Auto), margins, and page orientation with 100% client-side privacy.">
+    <meta name="keywords" content="Image to PDF, convert JPG to PDF, PNG to PDF, WebP to PDF, photos to PDF, PDF maker, client-side PDF tool">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/image-to-pdf/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/image-to-pdf/">
+    <meta property="og:title" content="Spac2 PDF — Image to PDF — Convert JPG, PNG & WebP">
+    <meta property="og:description"
+        content="Convert and combine your photos and scans into a single organized PDF document. 100% private in your browser.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .tool-header-section {
+            padding: 3.5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+        }
+
+        /* Studio Container */
+        #img-studio {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Top Settings Bar */
+        .settings-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.15rem 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            box-shadow: var(--card-glow);
+            position: sticky;
+            top: 65px;
+            z-index: 30;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        [data-theme="light"] .settings-bar {
+            background: rgba(255, 255, 255, 0.94);
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .settings-controls-group {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .setting-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .setting-select {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: var(--radius-sm);
+            padding: 0.45rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .setting-select:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+        }
+
+        .setting-select option {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .setting-select {
+            background: #f0f2f5;
+            border-color: rgba(0, 0, 0, 0.12);
+            color: #111827;
+        }
+
+        [data-theme="light"] .setting-select:hover {
+            background: #e5e8ed;
+        }
+
+        [data-theme="light"] .setting-select option {
+            background-color: #ffffff;
+            color: #111827;
+        }
+
+        /* Quick Action Buttons */
+        .btn-sub {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            padding: 0.45rem 0.8rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .btn-sub:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-sub:active {
+            transform: scale(0.97);
+        }
+
+        [data-theme="light"] .btn-sub {
+            background: #f0f2f5;
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--text-secondary);
+        }
+
+        [data-theme="light"] .btn-sub:hover {
+            background: #e2e6ea;
+            color: var(--text-primary);
+            border-color: rgba(0, 0, 0, 0.18);
+        }
+
+        /* Action specific button themes */
+        .btn-sub.btn-add-action {
+            color: #4ade80;
+            border-color: rgba(74, 222, 128, 0.25);
+            background: rgba(74, 222, 128, 0.08);
+        }
+
+        .btn-sub.btn-add-action:hover {
+            background: rgba(74, 222, 128, 0.18);
+            border-color: rgba(74, 222, 128, 0.5);
+            color: #86efac;
+        }
+
+        [data-theme="light"] .btn-sub.btn-add-action {
+            color: #15803d;
+            border-color: rgba(22, 163, 74, 0.3);
+            background: rgba(22, 163, 74, 0.08);
+        }
+
+        [data-theme="light"] .btn-sub.btn-add-action:hover {
+            background: rgba(22, 163, 74, 0.15);
+            color: #166534;
+        }
+
+        .btn-sub.btn-danger-action {
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.25);
+            background: rgba(239, 68, 68, 0.06);
+        }
+
+        .btn-sub.btn-danger-action:hover {
+            background: rgba(239, 68, 68, 0.16);
+            border-color: rgba(239, 68, 68, 0.45);
+            color: #fca5a5;
+        }
+
+        [data-theme="light"] .btn-sub.btn-danger-action {
+            color: #dc2626;
+            border-color: rgba(220, 38, 38, 0.3);
+            background: rgba(220, 38, 38, 0.06);
+        }
+
+        [data-theme="light"] .btn-sub.btn-danger-action:hover {
+            background: rgba(220, 38, 38, 0.14);
+            color: #b91c1c;
+        }
+
+        /* Thumbnails Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .image-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: grab;
+            position: relative;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+
+        .image-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        [data-theme="light"] .image-card {
+            border-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="light"] .image-card:hover {
+            border-color: rgba(0, 0, 0, 0.18);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-card.dragging {
+            opacity: 0.4;
+            border-color: var(--accent-red);
+            cursor: grabbing;
+        }
+
+        .image-card.drag-over {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.08);
+            transform: scale(1.03);
+        }
+
+        .preview-box {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #141414;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        [data-theme="light"] .preview-box {
+            background: #eef1f5;
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .preview-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .order-pill {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            z-index: 10;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        [data-theme="light"] .order-pill {
+            background: rgba(255, 255, 255, 0.92);
+            color: #111827;
+            border-color: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-details {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .card-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .card-actions-row {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.35rem;
+            width: 100%;
+            justify-content: flex-end;
+            padding-top: 0.4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-mini {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-mini:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+        }
+
+        .btn-mini.danger:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        [data-theme="light"] .btn-mini {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.09);
+            color: var(--text-secondary);
+        }
+
+        [data-theme="light"] .btn-mini:hover {
+            background: rgba(0, 0, 0, 0.08);
+            color: var(--text-primary);
+            border-color: rgba(0, 0, 0, 0.18);
+        }
+
+        [data-theme="light"] .btn-mini.danger:hover {
+            background: rgba(239, 68, 68, 0.12);
+            color: #dc2626;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* Progress Card */
+        #progress-card {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-glow);
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-main);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 1.5rem auto;
+            max-width: 480px;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            transition: width 0.2s ease;
+        }
+
+        /* 3-Step Guide */
+        .steps-section {
+            max-width: 900px;
+            margin: 3.5rem auto 0;
+            padding: 2.5rem 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .step-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Batch Summary Bar & Actions */
+        .settings-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .batch-summary-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            padding: 0.65rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        [data-theme="light"] .batch-summary-bar {
+            background: var(--bg-card);
+            border-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .batch-opt-tip {
+            font-size: 0.76rem;
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 500;
+        }
+
+        [data-theme="light"] .batch-opt-tip {
+            color: #16a34a;
+        }
+
+        body.in-studio-mode .tool-header-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .workspace-wrap {
+            padding-top: 1rem !important;
+        }
+
+        body.in-studio-mode .tool-info-section {
+            display: none !important;
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 860px) {
+            body.in-studio-mode .workspace-wrap {
+                padding: 0.35rem 0.5rem 4rem !important;
+            }
+
+            /* Sleek 2-Row Compact Toolbar on Mobile */
+            .settings-bar {
+                padding: 0.45rem 0.55rem !important;
+                gap: 0.4rem !important;
+                top: 52px !important;
+                border-radius: var(--radius-md) !important;
+                background: rgba(24, 24, 24, 0.94) !important;
+                border: 1px solid var(--border-color) !important;
+                backdrop-filter: blur(16px) !important;
+                -webkit-backdrop-filter: blur(16px) !important;
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.55) !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+                position: sticky !important;
+                z-index: 40 !important;
+            }
+
+            [data-theme="light"] .settings-bar {
+                background: rgba(255, 255, 255, 0.96) !important;
+                border-color: rgba(0, 0, 0, 0.12) !important;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+            }
+
+            /* ROW 1: Action ribbon (Add, Rotate, Sort, Clear, Generate PDF) */
+            .settings-actions-group {
+                order: 1 !important;
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                gap: 0.3rem !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+                scrollbar-width: none !important;
+                -webkit-overflow-scrolling: touch !important;
+                padding-bottom: 2px !important;
+            }
+
+            .settings-actions-group::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .settings-actions-group .btn-sub {
+                height: 30px !important;
+                padding: 0 0.55rem !important;
+                font-size: 0.75rem !important;
+                border-radius: 7px !important;
+                flex-shrink: 0 !important;
+                gap: 0.25rem !important;
+            }
+
+            .settings-actions-group .btn-sub svg,
+            .settings-actions-group .btn-sub i {
+                width: 13px !important;
+                height: 13px !important;
+            }
+
+            .settings-actions-group .btn-primary {
+                height: 30px !important;
+                padding: 0 0.75rem !important;
+                font-size: 0.78rem !important;
+                border-radius: 7px !important;
+                flex-shrink: 0 !important;
+                margin-left: auto !important;
+                gap: 0.3rem !important;
+            }
+
+            .settings-actions-group .btn-primary svg,
+            .settings-actions-group .btn-primary i {
+                width: 13px !important;
+                height: 13px !important;
+            }
+
+            /* ROW 2: Options ribbon (Page Size, Orientation, Margin, Quality) - Horizontal Scroll */
+            .settings-controls-group {
+                order: 2 !important;
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                gap: 0.35rem !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+                scrollbar-width: none !important;
+                -webkit-overflow-scrolling: touch !important;
+                padding-bottom: 2px !important;
+            }
+
+            .settings-controls-group::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .settings-controls-group #btn-add-images {
+                display: none !important; /* already in action row 1 */
+            }
+
+            .setting-item {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 0.25rem !important;
+                background: rgba(255, 255, 255, 0.05) !important;
+                border: 1px solid rgba(255, 255, 255, 0.09) !important;
+                border-radius: 9999px !important;
+                padding: 0.15rem 0.5rem !important;
+                flex-shrink: 0 !important;
+                height: 27px !important;
+            }
+
+            [data-theme="light"] .setting-item {
+                background: rgba(0, 0, 0, 0.05) !important;
+                border: 1px solid rgba(0, 0, 0, 0.09) !important;
+            }
+
+            .setting-label {
+                font-size: 0.65rem !important;
+                font-weight: 700 !important;
+                color: var(--text-muted) !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.02em !important;
+            }
+
+            .setting-select {
+                background: transparent !important;
+                border: none !important;
+                color: var(--text-primary) !important;
+                padding: 0 0.1rem !important;
+                font-size: 0.74rem !important;
+                font-weight: 600 !important;
+                border-radius: 0 !important;
+                outline: none !important;
+                cursor: pointer !important;
+            }
+
+            [data-theme="light"] .setting-select {
+                color: var(--text-primary) !important;
+            }
+
+            .setting-select option {
+                background-color: var(--bg-card);
+                color: var(--text-primary);
+            }
+
+            [data-theme="light"] .setting-select option {
+                background-color: #ffffff;
+                color: #111827;
+            }
+
+            /* Compact Batch Info Bar on mobile */
+            .batch-summary-bar {
+                padding: 0.35rem 0.6rem !important;
+                font-size: 0.72rem !important;
+            }
+
+            #batch-opt-tip {
+                display: none !important;
+            }
+
+            /* Image Grid on Mobile: Clean 2 columns with rich cards */
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.55rem !important;
+                padding: 0 !important;
+            }
+
+            .image-card {
+                padding: 0.45rem !important;
+                border-radius: 10px !important;
+            }
+
+            .preview-box {
+                height: 120px !important;
+                margin-bottom: 0.35rem !important;
+                border-radius: 6px !important;
+            }
+
+            .order-pill {
+                top: 5px !important;
+                left: 5px !important;
+                font-size: 0.65rem !important;
+                padding: 0.08rem 0.35rem !important;
+            }
+
+            .card-name {
+                font-size: 0.75rem !important;
+            }
+
+            .card-meta {
+                font-size: 0.65rem !important;
+            }
+
+            .card-actions-row {
+                gap: 0.2rem !important;
+                padding-top: 0.25rem !important;
+            }
+
+            .btn-mini {
+                width: 25px !important;
+                height: 25px !important;
+                border-radius: 5px !important;
+            }
+
+            .btn-mini svg,
+            .btn-mini i {
+                width: 12px !important;
+                height: 12px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Image to PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Image to PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+                        <span>All tools</span>
+                        <i data-lucide="chevron-down" style="width: 13px; height: 13px;"></i>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Return to PDF Hub -->
+                <a href="/apps/pdf-hub/" class="btn-header-icon" title="Return to PDF Hub" aria-label="PDF Hub Home">
+                    <i data-lucide="home" style="width: 18px; height: 18px;"></i>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description (App Minimalist) -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">Image to PDF</h1>
+        <p class="tool-desc">Convert and combine JPG, PNG, and WebP images into PDF documents.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept="image/*,.jpg,.jpeg,.png,.webp,.bmp" multiple style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <i data-lucide="image" style="width: 32px; height: 32px;"></i>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your images here
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Supports JPG, PNG, WebP, and BMP. Fast local processing.
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <i data-lucide="folder-open" style="width: 18px; height: 18px;"></i>
+                <span>Select Images</span>
+            </button>
+        </div>
+
+        <!-- Hidden input for adding more images inside studio -->
+        <input type="file" id="add-more-input" accept="image/*,.jpg,.jpeg,.png,.webp,.bmp" multiple style="display: none;">
+
+        <!-- 2. Interactive Image Studio -->
+        <div id="img-studio">
+            <!-- Settings Bar (2-Row Compact Studio Ribbon) -->
+            <div class="settings-bar">
+                <!-- ROW 1: Actions & Export Button -->
+                <div class="settings-actions-group">
+                    <button type="button" class="btn-sub btn-add-action" id="btn-add-images" title="Add more images">
+                        <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
+                        <span>Add</span>
+                    </button>
+                    <button type="button" class="btn-sub" id="btn-rotate-all" title="Rotate all images 90° clockwise">
+                        <i data-lucide="rotate-cw" style="width: 14px; height: 14px;"></i>
+                        <span>Rotate All</span>
+                    </button>
+                    <button type="button" class="btn-sub" id="btn-sort-name" title="Sort images by name">
+                        <i data-lucide="arrow-down-up" style="width: 14px; height: 14px;"></i>
+                        <span>Sort</span>
+                    </button>
+                    <button type="button" class="btn-sub btn-danger-action" id="btn-clear-all" title="Clear all images">
+                        <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                        <span>Clear</span>
+                    </button>
+                    <button type="button" class="btn-primary" id="btn-generate-pdf" title="Compile and download PDF">
+                        <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+                        <span>Generate PDF</span>
+                    </button>
+                </div>
+
+                <!-- ROW 2: Layout & Quality Ribbon (Scrollable horizontally) -->
+                <div class="settings-controls-group">
+                    <!-- Page Size -->
+                    <div class="setting-item">
+                        <span class="setting-label">Size:</span>
+                        <select class="setting-select" id="select-page-size">
+                            <option value="auto">Auto (Fit)</option>
+                            <option value="A4" selected>A4</option>
+                            <option value="LETTER">US Letter</option>
+                            <option value="A3">A3</option>
+                            <option value="A5">A5</option>
+                        </select>
+                    </div>
+
+                    <!-- Orientation -->
+                    <div class="setting-item">
+                        <span class="setting-label">Orient:</span>
+                        <select class="setting-select" id="select-orientation">
+                            <option value="auto" selected>Auto-Detect</option>
+                            <option value="portrait">Portrait</option>
+                            <option value="landscape">Landscape</option>
+                        </select>
+                    </div>
+
+                    <!-- Margin -->
+                    <div class="setting-item">
+                        <span class="setting-label">Margin:</span>
+                        <select class="setting-select" id="select-margin">
+                            <option value="0" selected>None (0)</option>
+                            <option value="20">Small (20pt)</option>
+                            <option value="40">Big (40pt)</option>
+                        </select>
+                    </div>
+
+                    <!-- Quality / Large File Optimization -->
+                    <div class="setting-item">
+                        <span class="setting-label">Quality:</span>
+                        <select class="setting-select" id="select-quality" title="Adjust resolution & compression for large files">
+                            <option value="balanced" selected>Balanced (150 DPI)</option>
+                            <option value="original">Original (Full DPI)</option>
+                            <option value="compact">Compact (Small Size)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch Summary Banner -->
+            <div class="batch-summary-bar" id="batch-stats-bar">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                    <i data-lucide="layers" style="width: 15px; height: 15px; color: var(--accent-red);"></i>
+                    <span id="batch-count-info" style="font-weight: 700; color: var(--text-primary);">0 images</span>
+                    <span style="opacity: 0.35;">•</span>
+                    <span id="batch-size-info">0 MB total</span>
+                </div>
+                <div id="batch-opt-tip" class="batch-opt-tip">
+                    <i data-lucide="shield-check" style="width: 13px; height: 13px;"></i>
+                    <span>Optimized streaming & zero-leak memory engine active</span>
+                </div>
+            </div>
+
+            <!-- Image Cards Grid -->
+            <div class="image-grid" id="image-grid"></div>
+        </div>
+
+        <!-- 3. Progress Card -->
+        <div id="progress-card">
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+                Converting Images to PDF...
+            </h3>
+            <p id="progress-status" style="font-size: 0.9rem; color: var(--text-secondary);">
+                Encoding high-resolution pages...
+            </p>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <p id="progress-percent" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-red);">0%</p>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section">
+
+            <div class="tool-info-header">
+                <h3>High-Resolution Picture to PDF Compilation</h3>
+                <p>
+                    Convert photos, scans, screenshots, and graphics into standard PDF documents. Retain original image dimensions or scale to standard A4/Letter paper layouts with custom margins right in your browser.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    How to Convert Images to PDF in 3 Steps
+                </h4>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload Images</h4>
+                        <p>Select multiple JPG, PNG, WebP, or BMP pictures from your phone or computer.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Customize Layout</h4>
+                        <p>Drag to arrange sequence, choose paper format (A4/Letter), orientation, and margins.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Generate & Save</h4>
+                        <p>Click 'Generate PDF' to instantly download your combined document.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/image-to-pdf">Image to PDF</a>
+                <a href="/apps/pdf-hub/pdf-to-image">PDF to Image</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native image embedding with high-DPI scaling. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF-Lib & Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        if (typeof PDFLib === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Image to PDF Controller -->
+    <script>
+        const STANDARD_SIZES = {
+            A4: { width: 595.28, height: 841.89 },
+            LETTER: { width: 612.00, height: 792.00 },
+            A3: { width: 841.89, height: 1190.55 },
+            A5: { width: 419.53, height: 595.28 }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const addMoreInput = document.getElementById("add-more-input");
+            const btnAddImages = document.getElementById("btn-add-images");
+            const imgStudio = document.getElementById("img-studio");
+            const imageGrid = document.getElementById("image-grid");
+            const btnClearAll = document.getElementById("btn-clear-all");
+            const btnGeneratePdf = document.getElementById("btn-generate-pdf");
+            const btnRotateAll = document.getElementById("btn-rotate-all");
+            const btnSortName = document.getElementById("btn-sort-name");
+
+            // Controls
+            const selectPageSize = document.getElementById("select-page-size");
+            const selectOrientation = document.getElementById("select-orientation");
+            const selectMargin = document.getElementById("select-margin");
+            const selectQuality = document.getElementById("select-quality");
+
+            // Batch info
+            const batchCountInfo = document.getElementById("batch-count-info");
+            const batchSizeInfo = document.getElementById("batch-size-info");
+
+            // Progress
+            const progressCard = document.getElementById("progress-card");
+            const progressBarFill = document.getElementById("progress-bar-fill");
+            const progressPercent = document.getElementById("progress-percent");
+            const progressStatus = document.getElementById("progress-status");
+
+            // State: array of items
+            // { id, file, thumbUrl, width, height, rotation: 0 }
+            let imageItems = [];
+            let sortAscending = true;
+
+            setupDropzone(dropzone, fileInput, (files) => {
+                if (!files || files.length === 0) return;
+                processFiles(files);
+            });
+
+            btnAddImages.addEventListener("click", () => {
+                addMoreInput.click();
+            });
+
+            addMoreInput.addEventListener("change", (e) => {
+                if (e.target.files && e.target.files.length > 0) {
+                    processFiles(e.target.files);
+                    addMoreInput.value = "";
+                }
+            });
+
+            // Update live batch stats counter
+            function updateBatchStats() {
+                if (!batchCountInfo || !batchSizeInfo) return;
+                const count = imageItems.length;
+                const totalBytes = imageItems.reduce((acc, it) => acc + (it.file ? it.file.size : 0), 0);
+                batchCountInfo.textContent = `${count} image${count === 1 ? '' : 's'} selected`;
+                batchSizeInfo.textContent = `${formatBytes(totalBytes)} total`;
+            }
+
+            // High-efficiency micro thumbnail generator: Max 320px to prevent DOM memory bloat
+            function generateThumbnail(file) {
+                return new Promise((resolve) => {
+                    const tempUrl = URL.createObjectURL(file);
+                    const img = new Image();
+                    img.onload = () => {
+                        const nw = img.naturalWidth || 800;
+                        const nh = img.naturalHeight || 600;
+
+                        // Downscale to max 320px for crisp, lightweight card preview
+                        const maxThumb = 320;
+                        const scale = Math.min(1.0, maxThumb / Math.max(nw, nh));
+                        const tw = Math.max(1, Math.round(nw * scale));
+                        const th = Math.max(1, Math.round(nh * scale));
+
+                        const canvas = document.createElement("canvas");
+                        canvas.width = tw;
+                        canvas.height = th;
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, tw, th);
+
+                        // Free full-resolution object URL immediately
+                        URL.revokeObjectURL(tempUrl);
+
+                        canvas.toBlob((blob) => {
+                            canvas.width = canvas.height = 0; // Release canvas GPU memory
+                            const thumbUrl = blob ? URL.createObjectURL(blob) : "";
+                            resolve({
+                                width: nw,
+                                height: nh,
+                                thumbUrl: thumbUrl
+                            });
+                        }, "image/jpeg", 0.75);
+                    };
+                    img.onerror = () => {
+                        URL.revokeObjectURL(tempUrl);
+                        resolve({ width: 800, height: 600, thumbUrl: "" });
+                    };
+                    img.src = tempUrl;
+                });
+            }
+
+            async function processFiles(files) {
+                const validImages = Array.from(files).filter(f => f.type.startsWith("image/") || /\.(jpe?g|png|webp|bmp|gif)$/i.test(f.name));
+                if (validImages.length === 0) {
+                    showToast("Please upload valid image files.", "error");
+                    return;
+                }
+
+                showToast(`Queueing ${validImages.length} image(s)...`, "info");
+                document.body.classList.add("in-studio-mode");
+                dropzone.style.display = "none";
+                imgStudio.style.display = "flex";
+
+                // Process in small batches of 3 to avoid freezing UI or spiking RAM
+                const CHUNK_SIZE = 3;
+                for (let i = 0; i < validImages.length; i += CHUNK_SIZE) {
+                    const chunk = validImages.slice(i, i + CHUNK_SIZE);
+                    await Promise.all(chunk.map(async (file) => {
+                        try {
+                            const info = await generateThumbnail(file);
+                            imageItems.push({
+                                id: "img_" + Math.random().toString(36).substring(2, 9),
+                                file: file,
+                                thumbUrl: info.thumbUrl,
+                                width: info.width,
+                                height: info.height,
+                                rotation: 0
+                            });
+                        } catch (err) {
+                            console.error("Error reading image:", file.name, err);
+                        }
+                    }));
+
+                    updateBatchStats();
+                    renderGrid();
+                    await new Promise(r => setTimeout(r, 0)); // Keep UI snappy
+                }
+
+                showToast(`Loaded ${imageItems.length} images into queue`, "success");
+            }
+
+            // Render Image Cards
+            function renderGrid() {
+                imageGrid.innerHTML = "";
+
+                imageItems.forEach((item, idx) => {
+                    const card = document.createElement("div");
+                    card.className = "image-card";
+                    card.draggable = true;
+                    card.dataset.index = idx;
+
+                    const safeName = (item.file.name || "image")
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#039;");
+
+                    card.innerHTML = `
+                        <div class="order-pill">#${idx + 1}</div>
+                        <div class="preview-box">
+                            <img src="${item.thumbUrl || ''}" class="preview-img" style="transform: rotate(${item.rotation}deg);" alt="${safeName}">
+                        </div>
+                        <div class="card-details">
+                            <div class="card-name" title="${safeName}">${safeName}</div>
+                            <div class="card-meta">
+                                <span>${item.width} × ${item.height}</span>
+                                <span>${formatBytes(item.file.size)}</span>
+                            </div>
+                            <div class="card-actions-row">
+                                <button type="button" class="btn-mini btn-rot-left" data-index="${idx}" title="Rotate -90°">
+                                    <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                                </button>
+                                <button type="button" class="btn-mini btn-rot-right" data-index="${idx}" title="Rotate +90°">
+                                    <i data-lucide="rotate-cw" style="width: 14px; height: 14px;"></i>
+                                </button>
+                                <button type="button" class="btn-mini danger btn-delete" data-index="${idx}" title="Remove image">
+                                    <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    // Drag & drop mechanics
+                    card.addEventListener("dragstart", (e) => {
+                        e.dataTransfer.setData("text/plain", idx);
+                        card.classList.add("dragging");
+                    });
+
+                    card.addEventListener("dragend", () => {
+                        card.classList.remove("dragging");
+                    });
+
+                    card.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        card.classList.add("drag-over");
+                    });
+
+                    card.addEventListener("dragleave", () => {
+                        card.classList.remove("drag-over");
+                    });
+
+                    card.addEventListener("drop", (e) => {
+                        e.preventDefault();
+                        card.classList.remove("drag-over");
+                        const fromIdx = parseInt(e.dataTransfer.getData("text/plain"), 10);
+                        const toIdx = idx;
+
+                        if (fromIdx !== toIdx && !isNaN(fromIdx)) {
+                            const [moved] = imageItems.splice(fromIdx, 1);
+                            imageItems.splice(toIdx, 0, moved);
+                            renderGrid();
+                        }
+                    });
+
+                    imageGrid.appendChild(card);
+                });
+
+                if (window.lucide) window.lucide.createIcons({ root: imageGrid });
+
+                // Card actions listeners
+                imageGrid.querySelectorAll(".btn-rot-left").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = parseInt(btn.dataset.index, 10);
+                        imageItems[i].rotation = (imageItems[i].rotation - 90) % 360;
+                        renderGrid();
+                    });
+                });
+
+                imageGrid.querySelectorAll(".btn-rot-right").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = parseInt(btn.dataset.index, 10);
+                        imageItems[i].rotation = (imageItems[i].rotation + 90) % 360;
+                        renderGrid();
+                    });
+                });
+
+                imageGrid.querySelectorAll(".btn-delete").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const i = parseInt(btn.dataset.index, 10);
+                        if (imageItems[i] && imageItems[i].thumbUrl) {
+                            URL.revokeObjectURL(imageItems[i].thumbUrl);
+                        }
+                        imageItems.splice(i, 1);
+                        updateBatchStats();
+                        if (imageItems.length === 0) {
+                            document.body.classList.remove("in-studio-mode");
+                            imgStudio.style.display = "none";
+                            dropzone.style.display = "block";
+                            fileInput.value = "";
+                        } else {
+                            renderGrid();
+                        }
+                    });
+                });
+            }
+
+            // Batch: Rotate All
+            if (btnRotateAll) {
+                btnRotateAll.addEventListener("click", () => {
+                    imageItems.forEach(item => {
+                        item.rotation = (item.rotation + 90) % 360;
+                    });
+                    renderGrid();
+                    showToast("Rotated all images 90°", "info");
+                });
+            }
+
+            // Batch: Sort by Name A-Z / Z-A
+            if (btnSortName) {
+                btnSortName.addEventListener("click", () => {
+                    imageItems.sort((a, b) => {
+                        return sortAscending
+                            ? a.file.name.localeCompare(b.file.name, undefined, { numeric: true, sensitivity: 'base' })
+                            : b.file.name.localeCompare(a.file.name, undefined, { numeric: true, sensitivity: 'base' });
+                    });
+                    sortAscending = !sortAscending;
+                    renderGrid();
+                    showToast(sortAscending ? "Sorted Z to A" : "Sorted A to Z", "info");
+                });
+            }
+
+            // Clear All with clean memory revocation
+            btnClearAll.addEventListener("click", () => {
+                if (confirm("Remove all images from conversion queue?")) {
+                    imageItems.forEach(item => {
+                        if (item.thumbUrl) URL.revokeObjectURL(item.thumbUrl);
+                    });
+                    imageItems = [];
+                    updateBatchStats();
+                    document.body.classList.remove("in-studio-mode");
+                    imgStudio.style.display = "none";
+                    dropzone.style.display = "block";
+                    fileInput.value = "";
+                    showToast("Cleared all images", "info");
+                }
+            });
+
+            // High-Performance Image Preparation & Direct Embedding
+            async function prepareBakedImage(item, qualitySetting) {
+                const isJpeg = item.file.type === "image/jpeg" || /\.jpe?g$/i.test(item.file.name);
+                const isPng = item.file.type === "image/png" || /\.png$/i.test(item.file.name);
+
+                // DIRECT EMBEDDING FAST-PATH:
+                // If user selected "original" quality, unrotated, and native JPG/PNG:
+                // Pass raw arrayBuffer directly without decoding or recompressing in canvas!
+                if (qualitySetting === "original" && item.rotation === 0 && (isJpeg || isPng)) {
+                    const buffer = await item.file.arrayBuffer();
+                    return {
+                        buffer: buffer,
+                        isPng: isPng,
+                        width: item.width,
+                        height: item.height
+                    };
+                }
+
+                // OPTIMIZED CANVAS PATH:
+                // Handles rotation, format conversion (WebP/BMP/GIF -> JPG), and intelligent downscaling
+                return new Promise((resolve, reject) => {
+                    const tempUrl = URL.createObjectURL(item.file);
+                    const img = new Image();
+
+                    img.onload = async () => {
+                        try {
+                            const origW = img.naturalWidth;
+                            const origH = img.naturalHeight;
+
+                            // Determine maximum dimension based on Quality setting
+                            let maxDimension = 4096; // Safe canvas limit for full original
+                            let exportQuality = 0.92;
+
+                            if (qualitySetting === "balanced") {
+                                maxDimension = 2048; // 150-200 DPI equivalent: crisp and lightweight
+                                exportQuality = 0.85;
+                            } else if (qualitySetting === "compact") {
+                                maxDimension = 1280; // 96-120 DPI equivalent: smallest file size
+                                exportQuality = 0.72;
+                            }
+
+                            const maxSide = Math.max(origW, origH);
+                            const scale = maxSide > maxDimension ? (maxDimension / maxSide) : 1.0;
+
+                            const scaledW = Math.max(1, Math.round(origW * scale));
+                            const scaledH = Math.max(1, Math.round(origH * scale));
+
+                            const rad = (item.rotation * Math.PI) / 180;
+                            const isRotated90 = Math.abs(item.rotation % 180) === 90;
+
+                            const finalW = isRotated90 ? scaledH : scaledW;
+                            const finalH = isRotated90 ? scaledW : scaledH;
+
+                            const canvas = document.createElement("canvas");
+                            canvas.width = finalW;
+                            canvas.height = finalH;
+                            const ctx = canvas.getContext("2d");
+
+                            ctx.translate(canvas.width / 2, canvas.height / 2);
+                            ctx.rotate(rad);
+                            ctx.drawImage(img, -scaledW / 2, -scaledH / 2, scaledW, scaledH);
+
+                            URL.revokeObjectURL(tempUrl);
+
+                            // Retain PNG only if original quality requested and is PNG, else use high-efficiency JPEG
+                            const keepPng = isPng && qualitySetting === "original" && item.rotation === 0;
+                            const mimeType = keepPng ? "image/png" : "image/jpeg";
+
+                            canvas.toBlob(async (blob) => {
+                                canvas.width = canvas.height = 0; // Release VRAM immediately
+                                if (!blob) {
+                                    reject(new Error("Image encoding failed"));
+                                    return;
+                                }
+                                const buffer = await blob.arrayBuffer();
+                                resolve({
+                                    buffer: buffer,
+                                    isPng: keepPng,
+                                    width: finalW,
+                                    height: finalH
+                                });
+                            }, mimeType, exportQuality);
+                        } catch (e) {
+                            URL.revokeObjectURL(tempUrl);
+                            reject(e);
+                        }
+                    };
+
+                    img.onerror = () => {
+                        URL.revokeObjectURL(tempUrl);
+                        reject(new Error("Unable to read image for conversion"));
+                    };
+
+                    img.src = tempUrl;
+                });
+            }
+
+            // ============================================================
+            // GENERATE PDF WITH PDF-LIB (Streaming & Memory-Safe)
+            // ============================================================
+            btnGeneratePdf.addEventListener("click", async () => {
+                if (imageItems.length === 0) return;
+
+                imgStudio.style.display = "none";
+                progressCard.style.display = "block";
+                progressBarFill.style.width = "0%";
+                progressPercent.textContent = "0%";
+                progressStatus.textContent = "Initializing PDF compiler...";
+
+                try {
+                    const pdfDoc = await PDFLib.PDFDocument.create();
+                    const total = imageItems.length;
+
+                    const pageSizeSetting = selectPageSize.value;
+                    const orientationSetting = selectOrientation.value;
+                    const margin = parseFloat(selectMargin.value) || 0;
+                    const qualitySetting = selectQuality ? selectQuality.value : "balanced";
+
+                    for (let i = 0; i < total; i++) {
+                        const item = imageItems[i];
+                        progressStatus.textContent = `Processing image ${i + 1} of ${total}: ${item.file.name}...`;
+                        const pct = Math.round(((i + 0.3) / total) * 85);
+                        progressBarFill.style.width = `${pct}%`;
+                        progressPercent.textContent = `${pct}%`;
+
+                        // Prepare baked/optimized image buffer
+                        const baked = await prepareBakedImage(item, qualitySetting);
+
+                        let embeddedImg;
+                        if (baked.isPng) {
+                            embeddedImg = await pdfDoc.embedPng(baked.buffer);
+                        } else {
+                            embeddedImg = await pdfDoc.embedJpg(baked.buffer);
+                        }
+
+                        let pWidth, pHeight;
+
+                        if (pageSizeSetting === "auto") {
+                            // Scale dimensions to reasonable point sizes
+                            const scaleFactor = Math.min(1.0, 1200 / Math.max(baked.width, baked.height));
+                            pWidth = (baked.width * scaleFactor) + (margin * 2);
+                            pHeight = (baked.height * scaleFactor) + (margin * 2);
+                        } else {
+                            const std = STANDARD_SIZES[pageSizeSetting] || STANDARD_SIZES.A4;
+                            let isLandscape = false;
+
+                            if (orientationSetting === "auto") {
+                                isLandscape = baked.width > baked.height;
+                            } else {
+                                isLandscape = orientationSetting === "landscape";
+                            }
+
+                            pWidth = isLandscape ? std.height : std.width;
+                            pHeight = isLandscape ? std.width : std.height;
+                        }
+
+                        const page = pdfDoc.addPage([pWidth, pHeight]);
+
+                        // Calculate aspect fit within page margins
+                        const availW = Math.max(10, pWidth - (margin * 2));
+                        const availH = Math.max(10, pHeight - (margin * 2));
+
+                        const scale = Math.min(availW / baked.width, availH / baked.height);
+                        const drawW = baked.width * scale;
+                        const drawH = baked.height * scale;
+
+                        const drawX = margin + ((availW - drawW) / 2);
+                        const drawY = margin + ((availH - drawH) / 2);
+
+                        page.drawImage(embeddedImg, {
+                            x: drawX,
+                            y: drawY,
+                            width: drawW,
+                            height: drawH
+                        });
+
+                        // Yield to browser event loop so UI is always responsive & GC can free memory
+                        await new Promise(r => setTimeout(r, 12));
+                    }
+
+                    progressStatus.textContent = "Compiling PDF document streams...";
+                    progressBarFill.style.width = "92%";
+                    progressPercent.textContent = "92%";
+                    await new Promise(r => setTimeout(r, 20));
+
+                    const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
+                    progressBarFill.style.width = "100%";
+                    progressPercent.textContent = "100%";
+
+                    const outBlob = new Blob([pdfBytes], { type: "application/pdf" });
+                    downloadBlob(outBlob, `images-combined-${total}p.pdf`);
+
+                    showToast(`Successfully converted ${total} images to PDF!`, "success");
+
+                    setTimeout(() => {
+                        progressCard.style.display = "none";
+                        imgStudio.style.display = "flex";
+                    }, 1200);
+                } catch (err) {
+                    console.error("PDF generation error:", err);
+                    progressCard.style.display = "none";
+                    imgStudio.style.display = "flex";
+                    showToast("Failed to create PDF: " + err.message, "error");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
