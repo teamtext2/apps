@@ -167,18 +167,6 @@ const PDF_TOOLS = [
         keywords: "rotate flip orientation clockwise xoay trang pdf huong trang"
     },
     {
-        id: "protect",
-        title: "Protect PDF",
-        subtitle: "Encrypt with password",
-        url: "/apps/pdf-hub/protect",
-        desc: "Secure sensitive documents with AES password protection and custom permissions directly on your device.",
-        category: "edit",
-        icon: "lock",
-        badge: "Security",
-        tag: "Set password",
-        keywords: "protect encrypt password lock security mat khau khoa bao mat file"
-    },
-    {
         id: "ocr",
         title: "OCR PDF",
         subtitle: "AI optical recognition",
