@@ -81,18 +81,6 @@ const PDF_TOOLS = [
         keywords: "compress shrink optimize reduce file size nen giam dung luong"
     },
     {
-        id: "image-to-pdf",
-        title: "Image to PDF",
-        subtitle: "Convert JPG, PNG, WebP",
-        url: "/apps/pdf-hub/image-to-pdf",
-        desc: "Transform JPG, PNG, WebP images into professional PDF documents with customizable page margins and layouts.",
-        category: "convert",
-        icon: "image",
-        badge: "Multi-format",
-        tag: "JPG, PNG, WebP",
-        keywords: "image to pdf convert jpg png webp picture photo chuyen anh sang pdf"
-    },
-    {
         id: "pdf-to-image",
         title: "PDF to Image",
         subtitle: "Export high-res photos",
@@ -103,6 +91,19 @@ const PDF_TOOLS = [
         badge: "High-DPI",
         tag: "PNG / JPG export",
         keywords: "pdf to image export render png jpg photos chuyen pdf sang anh"
+    },
+    {
+        id: "pdf-to-doc",
+        title: "PDF to Word (DOCX)",
+        subtitle: "Convert to DOCX document",
+        url: "/apps/pdf-hub/pdf-to-doc",
+        desc: "Convert PDF files into Microsoft Word (.docx) documents with 100% Visual Image mode or Editable Text Flow reconstruction.",
+        category: "convert",
+        icon: "file-text",
+        badge: "Word DOCX",
+        hot: true,
+        tag: "Visual or Editable",
+        keywords: "pdf to doc pdf to docx convert word chuyen pdf sang word van ban"
     },
     {
         id: "annotate",
@@ -154,18 +155,7 @@ const PDF_TOOLS = [
         tag: "A4, Letter, A3",
         keywords: "crop resize trim margins paper size dimension cat le doi kho giay"
     },
-    {
-        id: "rotate",
-        title: "Rotate PDF",
-        subtitle: "Rotate 90°, 180° or 270°",
-        url: "/apps/pdf-hub/rotate",
-        desc: "Rotate all pages or specific pages clockwise or counter-clockwise with single-click orientation export.",
-        category: "organize",
-        icon: "rotate-cw",
-        badge: "Fast Rotate",
-        tag: "90° / 180° / 270°",
-        keywords: "rotate flip orientation clockwise xoay trang pdf huong trang"
-    },
+
     {
         id: "ocr",
         title: "OCR PDF",

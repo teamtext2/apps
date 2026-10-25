@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 PDF — PDF to Word (DOCX) — Visual Exact & Editable Document</title>
+    <meta name="title" content="Spac2 PDF — PDF to Word (DOCX) — Visual Exact & Editable Document">
+    <meta name="description"
+        content="Free client-side PDF to Word (DOCX) converter: Convert PDF files to Microsoft Word directly in your browser. Choose between 100% Visual Exact (Image-based) or Editable Flow Text Reconstruction with 100% local privacy.">
+    <meta name="keywords" content="PDF to Word, PDF to DOCX, convert PDF to DOCX, visual exact PDF to Word, editable DOCX, client-side PDF converter, chuyen PDF sang Word">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/pdf-to-doc/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/pdf-to-doc/">
+    <meta property="og:title" content="Spac2 PDF — PDF to Word (DOCX) — Visual Exact & Editable Document">
+    <meta property="og:description"
+        content="Convert PDF to Microsoft Word (.docx) documents directly in your browser. Fast, private, zero server uploads.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+
+    <!-- Dedicated Stylesheet -->
+    <link rel="stylesheet" href="./style.css?v=2.1">
+</head>
+
+<body>
+    <!-- Floating Header Navigation Capsule -->
+    <div class="spac2-header-wrapper">
+        <header class="spac2-header-capsule">
+            <div class="header-left">
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 PDF Hub Home">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">PDF to Word</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>All tools</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Hero Header Section -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">
+            Convert <span class="highlight-gradient">PDF to Word (.docx)</span>
+        </h1>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 40px; height: 40px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3 class="dropzone-title">Drag & drop your PDF here</h3>
+            <p class="dropzone-subtitle">Or click the button below to browse a PDF document from your device</p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <span>Select PDF File</span>
+            </button>
+        </div>
+
+        <p class="dropzone-bottom-desc" id="dropzone-bottom-desc">
+            Convert PDF files into Microsoft Word (.docx) documents directly in your browser. Choose between 100% Visual Exact layout preservation or Editable Flow text reconstruction with zero server uploads.
+        </p>
+
+        <!-- 2. Configuration Studio -->
+        <div id="config-studio">
+            <!-- File Summary Banner -->
+            <div class="file-summary-bar">
+                <div class="file-summary-left">
+                    <div class="file-icon-box">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <div>
+                        <div class="file-name-label" id="file-name-label">document.pdf</div>
+                        <div class="file-size-label">
+                            <span class="meta-pill" id="file-size-pill">0 MB</span>
+                            <span class="meta-pill" id="file-pages-pill">0 Pages</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="app-btn-secondary" id="btn-change-file">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <span>Change PDF File</span>
+                </button>
+            </div>
+
+            <!-- Mode Selection Cards (Interactive 2 Choices) -->
+            <div class="mode-selection-group">
+                <!-- Option 1: Visual Exact (Image-based DOCX) -->
+                <div class="mode-card active" id="mode-card-visual" data-mode="visual">
+                    <div class="mode-card-header">
+                        <div class="mode-card-icon-wrap">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <span class="mode-card-badge badge-visual">100% Exact Layout</span>
+                    </div>
+                    <div class="mode-card-title">
+                        <span>📸 Visual Exact (Image DOCX)</span>
+                    </div>
+                    <div class="mode-card-desc">
+                        Renders each PDF page into a high-DPI image fitted exactly onto Word pages. 100% preservation of fonts, math formulas, background, stamps, signatures, and intricate design.
+                    </div>
+                    <ul class="mode-card-bullets">
+                        <li>
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>100% immune to font loss, broken tables, or shifting lines</span>
+                        </li>
+                        <li>
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Crisp rendering in Microsoft Word, Google Docs & printouts</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Option 2: Editable Flow Reconstruction -->
+                <div class="mode-card" id="mode-card-editable" data-mode="editable">
+                    <div class="mode-card-header">
+                        <div class="mode-card-icon-wrap">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </div>
+                        <span class="mode-card-badge badge-editable">Editable (~75-90%)</span>
+                    </div>
+                    <div class="mode-card-title">
+                        <span>✍️ Editable Flow (Text Reconstruction)</span>
+                    </div>
+                    <div class="mode-card-desc">
+                        Extracts text, lines, paragraphs, and headings into native Word text runs so you can freely type, edit, delete, and copy content.
+                    </div>
+                    <ul class="mode-card-bullets">
+                        <li>
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Native Word text (type, edit, and reformat freely)</span>
+                        </li>
+                        <li>
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Auto-detects headings (H1/H2), line breaks & center alignment</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disclaimer Notice for Editable Flow & Link to OCR -->
+            <div class="disclaimer-callout" id="disclaimer-editable" style="display: none;">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <div>
+                    <strong>About Text Reconstruction:</strong> Because PDF stores characters as independent graphical coordinates, text flow is reconstructed at approximately <strong>75% - 90%</strong> fidelity for editing convenience. For scanned documents without selectable text, the integrated AI OCR will automatically recognize text for you.
+                </div>
+            </div>
+
+            <!-- Dynamic Settings Panel -->
+            <div class="mode-options-panel">
+                <div class="options-section-title">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    <span>Conversion Settings (.DOCX)</span>
+                </div>
+
+                <!-- Settings for Visual Mode -->
+                <div class="options-grid" id="options-visual">
+                    <div class="option-group">
+                        <label class="option-label" for="select-visual-dpi">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m12 6 4 6h-8l4-6z"/></svg>
+                            <span>Page Resolution (DPI)</span>
+                        </label>
+                        <select class="studio-select" id="select-visual-dpi">
+                            <option value="1.5">Office Standard (108 DPI - Fast & Light)</option>
+                            <option value="2.083" selected>Crisp Balanced (150 DPI - Recommended)</option>
+                            <option value="2.777">High-DPI Print Quality (200 DPI)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="option-label" for="select-visual-format">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                            <span>Word Image Compression</span>
+                        </label>
+                        <select class="studio-select" id="select-visual-format">
+                            <option value="image/jpeg" selected>JPEG (Optimized DOCX File Size)</option>
+                            <option value="image/png">PNG (Lossless, Maximum Crispness)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="option-label" for="inp-page-scope">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+                            <span>Page Range</span>
+                        </label>
+                        <input type="text" class="studio-input" id="inp-page-scope" value="all" placeholder="all or e.g. 1-5, 8">
+                    </div>
+                </div>
+
+                <!-- Settings for Editable Mode -->
+                <div class="options-grid" id="options-editable" style="display: none;">
+                    <div class="option-group">
+                        <label class="option-label" for="select-edit-font">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                            <span>Document Font</span>
+                        </label>
+                        <select class="studio-select" id="select-edit-font">
+                            <option value="Calibri" selected>Calibri (Default Microsoft Word)</option>
+                            <option value="Arial">Arial (Clean & Modern)</option>
+                            <option value="Times New Roman">Times New Roman (Academic & Formal)</option>
+                            <option value="Segoe UI">Segoe UI (Windows Fluent)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="option-label">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
+                            <span>Text Flow Options</span>
+                        </label>
+                        <label class="option-toggle-wrap">
+                            <input type="checkbox" id="chk-smart-paragraphs" checked>
+                            <span>Smart Paragraph Grouping (Merge Lines)</span>
+                        </label>
+                        <label class="option-toggle-wrap">
+                            <input type="checkbox" id="chk-detect-headings" checked>
+                            <span>Auto-Detect Headings (H1/H2)</span>
+                        </label>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="option-label" for="inp-page-scope-editable">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+                            <span>Page Range</span>
+                        </label>
+                        <input type="text" class="studio-input" id="inp-page-scope-editable" value="all" placeholder="all or e.g. 1-5, 8">
+                    </div>
+
+                    <!-- OCR & Fallback Options -->
+                    <div class="option-group" style="grid-column: 1 / -1;">
+                        <label class="option-label">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m12 8 4 4-4 4M8 12h8"/></svg>
+                            <span>OCR & Scanned Page Recognition</span>
+                            <span class="ocr-chip">AI Neural Vision</span>
+                        </label>
+                        <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.35rem;">
+                            <label class="option-toggle-wrap">
+                                <input type="checkbox" id="chk-enable-ocr" checked>
+                                <span>Auto-activate AI OCR to extract text if page is a scan / image</span>
+                            </label>
+                            <div id="ocr-lang-wrap" class="ocr-lang-wrap">
+                                <span class="ocr-lang-label">OCR Language:</span>
+                                <select class="studio-select" id="select-ocr-lang">
+                                    <option value="auto" selected>🌐 Auto Detect Language (Recommended)</option>
+                                    <optgroup label="Popular & Multilingual">
+                                        <option value="vie+eng">🇻🇳 Vietnamese + English (vie+eng)</option>
+                                        <option value="eng">🇺🇸 English (eng)</option>
+                                        <option value="vie">🇻🇳 Vietnamese (vie)</option>
+                                        <option value="chi_sim+eng">🇨🇳 Chinese Simplified + English (chi_sim+eng)</option>
+                                        <option value="chi_tra+eng">🇹🇼 Chinese Traditional + English (chi_tra+eng)</option>
+                                        <option value="jpn+eng">🇯🇵 Japanese + English (jpn+eng)</option>
+                                        <option value="kor+eng">🇰🇷 Korean + English (kor+eng)</option>
+                                    </optgroup>
+                                    <optgroup label="European Languages">
+                                        <option value="fra+eng">🇫🇷 French + English (fra+eng)</option>
+                                        <option value="deu+eng">🇩🇪 German + English (deu+eng)</option>
+                                        <option value="spa+eng">🇪🇸 Spanish + English (spa+eng)</option>
+                                        <option value="por+eng">🇵🇹 Portuguese + English (por+eng)</option>
+                                        <option value="ita+eng">🇮🇹 Italian + English (ita+eng)</option>
+                                        <option value="rus+eng">🇷🇺 Russian + English (rus+eng)</option>
+                                    </optgroup>
+                                    <optgroup label="Asian & Middle Eastern">
+                                        <option value="tha+eng">🇹🇭 Thai + English (tha+eng)</option>
+                                        <option value="ind+eng">🇮🇩 Indonesian + English (ind+eng)</option>
+                                        <option value="ara+eng">🇸🇦 Arabic + English (ara+eng)</option>
+                                        <option value="hin+eng">🇮🇳 Hindi + English (hin+eng)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <label class="option-toggle-wrap ocr-sub-toggle">
+                                <input type="checkbox" id="chk-fallback-image" checked>
+                                <span>If text cannot be extracted: Automatically embed high-res page image (Keep 100% of document)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Trigger Button -->
+            <div class="convert-btn-wrap">
+                <button type="button" class="btn-execute-app" id="btn-start-convert">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                    <span>Convert to Word (.docx) Now</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Progress Studio -->
+        <div id="progress-studio">
+            <div class="progress-pulse-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 32px; height: 32px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+            </div>
+            <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;" id="progress-title-text">
+                Converting PDF to Word...
+            </h3>
+            <p id="progress-status-text" style="font-size: 0.92rem; color: var(--text-secondary);">
+                Processing document pages in local memory...
+            </p>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <p id="progress-percent" style="font-size: 0.9rem; font-weight: 700; color: var(--accent-red);">0%</p>
+        </div>
+
+        <!-- 4. Result Studio -->
+        <div id="result-studio">
+            <!-- Success Summary Card -->
+            <div class="result-summary-card">
+                <div class="result-success-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 36px; height: 36px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 style="font-size: 1.55rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem;">
+                    Converted to Word (.docx) Successfully!
+                </h3>
+                <p style="font-size: 0.95rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                    Your document has been compiled into standard Microsoft Word OpenXML (.docx) format compatible with Office 365, Google Docs, and LibreOffice.
+                </p>
+
+                <!-- Stats Row -->
+                <div class="result-stats-row">
+                    <div class="result-stat-item">
+                        <span class="result-stat-val" id="res-mode-val">Visual Exact</span>
+                        <span class="result-stat-lbl">Export Mode</span>
+                    </div>
+                    <div class="result-stat-item">
+                        <span class="result-stat-val" id="res-pages-val">0 Pages</span>
+                        <span class="result-stat-lbl">Pages Converted</span>
+                    </div>
+                    <div class="result-stat-item">
+                        <span class="result-stat-val" id="res-size-val">0 KB</span>
+                        <span class="result-stat-lbl">File Size</span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="result-actions-row">
+                    <button type="button" class="btn-execute-app" id="btn-download-docx">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Download .DOCX File</span>
+                    </button>
+                    <button type="button" class="app-btn-secondary" id="btn-reconfig">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        <span>Reconfigure</span>
+                    </button>
+                    <button type="button" class="app-btn-secondary" id="btn-convert-another">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        <span>Convert Another PDF</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live Document Preview Box -->
+            <div class="preview-box">
+                <div class="preview-header">
+                    <div class="preview-tabs">
+                        <button type="button" class="preview-tab-btn active" id="tab-btn-visual">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            <span>Visual Pages Preview</span>
+                        </button>
+                        <button type="button" class="preview-tab-btn" id="tab-btn-text">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            <span>Extracted Text Stream</span>
+                        </button>
+                    </div>
+
+                    <button type="button" class="btn-quick-copy" id="btn-copy-extracted-text">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span>Copy All Extracted Text</span>
+                    </button>
+                </div>
+
+                <div class="preview-content-area">
+                    <!-- Tab 1: Visual Pages Thumbnails -->
+                    <div id="preview-tab-visual-content" class="visual-preview-grid">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Tab 2: Editable Stream Preview -->
+                    <div id="preview-tab-text-content" style="display: none;">
+                        <div class="editable-text-stream" id="editable-text-stream-box">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Guide & Information Section -->
+        <section class="tool-info-section">
+            <div class="tool-info-header">
+                <h3>In-Browser PDF to Microsoft Word Conversion</h3>
+                <p>
+                    100% Client-side conversion powered by WebAssembly, PDF.js, and OpenXML compilers. All rendering and packaging happens locally on your computer or mobile device without uploading documents to any remote servers.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div class="steps-section">
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Upload PDF</h4>
+                        <p>Drag and drop your PDF document. Processed instantaneously in local device memory.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>Choose Mode</h4>
+                        <p>Select <strong>Visual Exact</strong> (100% layout fidelity) or <strong>Editable Flow</strong> (AI OCR & editable text).</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Download DOCX</h4>
+                        <p>Preview the converted document and click download to get your Microsoft Word file.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <div class="faq-header">
+                    <h3>Frequently Asked Questions (FAQ)</h3>
+                    <p>Details about export modes, OCR accuracy, and document privacy</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent-red);"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>What is the difference between "Visual Exact" and "Editable Flow"?</span>
+                        </div>
+                        <div class="faq-answer">
+                            <strong>Visual Exact Mode (Image DOCX):</strong> Renders each PDF page into a high-DPI image and embeds it seamlessly into Word pages. Fonts, complex tables, stamps, signatures, and math formulas stay 100% identical without formatting shifts.<br><br>
+                            <strong>Editable Flow Mode (Text Reconstruction):</strong> Extracts headings, lines, and paragraphs into native editable Word text. If a page is a scanned image, the built-in AI OCR automatically extracts text so you can freely type, edit, and reformat.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent-red);"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>What if my PDF document is a scan or photo?</span>
+                        </div>
+                        <div class="faq-answer">
+                            Our app includes built-in AI OCR (Tesseract.js). In Editable Flow mode, scanned pages are automatically recognized and converted into editable paragraphs. In Visual Exact mode, scanned pages are preserved with crystal-clear visual quality.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent-red);"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>Will the generated .docx file open in Microsoft Word and Google Docs?</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes. The output strictly conforms to the international standard ECMA-376 Office Open XML (.docx), ensuring 100% compatibility with Microsoft Word, Office 365, Google Docs, WPS Office, and LibreOffice.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent-red);"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>Are my documents uploaded to any remote server?</span>
+                        </div>
+                        <div class="faq-answer">
+                            Never. 100% of PDF decoding, OCR recognition, and DOCX compilation runs locally inside your web browser. Your private documents never leave your personal computer or phone.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/pdf-to-doc">PDF to Word</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/pdf-to-image">PDF to Image</a>
+                <a href="/apps/pdf-hub/annotate">Annotate PDF</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+                <a href="/apps/pdf-hub/watermark">Watermark PDF</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/ocr">OCR PDF</a>
+                <a href="/apps/pdf-hub/metadata">PDF Metadata</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. Native In-Browser DOCX Generator. 100% Client-Side Privacy.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries: PDF.js, DOCX.js, Tesseract.js, Lucide -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Dedicated Application Script -->
+    <script src="./app.js?v=2.0"></script>
+</body>
+
+</html>
