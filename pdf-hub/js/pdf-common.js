@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Spac2 PDF Suite — Shared Javascript Utilities
  */
 
@@ -91,6 +91,19 @@ const PDF_TOOLS = [
         badge: "High-DPI",
         tag: "PNG / JPG export",
         keywords: "pdf to image export render png jpg photos chuyen pdf sang anh"
+    },
+    {
+        id: "images-to-pdf",
+        title: "Images to PDF",
+        subtitle: "Convert JPG, PNG to PDF",
+        url: "/apps/pdf-hub/images-to-pdf",
+        desc: "Convert JPG, PNG, WebP images to high-quality PDF documents with custom page sizes, margins, and reordering.",
+        category: "convert",
+        icon: "image",
+        badge: "Popular",
+        hot: true,
+        tag: "JPG/PNG to PDF",
+        keywords: "images to pdf jpg to pdf png to pdf convert picture photo chuyen anh sang pdf gop anh thanh pdf"
     },
     {
         id: "pdf-to-doc",

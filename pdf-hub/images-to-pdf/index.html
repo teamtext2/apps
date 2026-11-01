@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Spac2 Images to pdf</title>
+    <meta name="title" content="Spac2 PDF — Images to PDF — Convert JPG, PNG & Photos to PDF">
+    <meta name="description"
+        content="Free online Images to PDF converter: Turn JPG, PNG, WEBP, GIF, and photos into professional PDF documents. Custom page sizes (A4, Letter, Fit), margins, orientation, and drag & drop reordering with 100% client-side privacy.">
+    <meta name="keywords"
+        content="Images to PDF, JPG to PDF, PNG to PDF, convert pictures to PDF, photos to PDF, image combiner, client-side PDF tool, free PDF converter">
+    <meta name="author" content="Spac2">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate" />
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/images-to-pdf/">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Spac2 PDF Hub">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/images-to-pdf/">
+    <meta property="og:title" content="Spac2 PDF — Images to PDF — Convert JPG, PNG & Photos to PDF">
+    <meta property="og:description"
+        content="Combine multiple photos and images into a clean PDF document directly in your browser with drag & drop reordering, page margins, and zero server uploads.">
+    <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-JCMEMFLZ14');
+    </script>
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212"
+        crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/pdf-shared.css?v=2">
+    <style>
+        .svg-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .tool-header-section {
+            padding: 3rem 1.5rem 1.75rem;
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .tool-title {
+            font-size: clamp(2rem, 4.5vw, 2.85rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 0.75rem 0 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.75rem;
+        }
+
+        .workspace-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            width: 100%;
+            transition: padding 0.3s ease;
+        }
+
+        body.in-studio-mode .tool-header-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .tool-info-section {
+            display: none !important;
+        }
+
+        body.in-studio-mode .workspace-wrap {
+            padding-top: 1rem;
+        }
+
+        /* App Button Utilities */
+        .app-btn-secondary {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 10px;
+            padding: 0.5rem 0.9rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .app-btn-secondary:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .app-btn-secondary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-execute-app {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem 1.6rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px -3px rgba(239, 68, 68, 0.45);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            user-select: none;
+            width: 100%;
+        }
+
+        .btn-execute-app:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -3px rgba(239, 68, 68, 0.6);
+            filter: brightness(1.08);
+        }
+
+        .btn-execute-app:active {
+            transform: scale(0.97);
+        }
+
+        /* Dropzone Enhancement */
+        .dropzone-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 20px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            background: var(--bg-card);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dropzone-container:hover,
+        .dropzone-container.dragover {
+            border-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .dropzone-icon-wrap {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: var(--accent-red);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            transition: transform 0.25s ease;
+        }
+
+        .dropzone-container:hover .dropzone-icon-wrap {
+            transform: scale(1.08);
+        }
+
+        .dropzone-hints {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .format-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.2rem 0.55rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .paste-badge {
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.28);
+            color: #60a5fa;
+            border-radius: 6px;
+            padding: 0.2rem 0.55rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        /* Config Studio Layout */
+        #config-studio {
+            display: none;
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInStudio {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Top Action Bar in Studio */
+        .studio-top-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 0.85rem 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        [data-theme="light"] .studio-top-bar {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .studio-stats {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .count-pill {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.28);
+            color: var(--accent-red);
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .size-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 0.65rem;
+            border-radius: 9999px;
+        }
+
+        .studio-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* 2-Column Split: Image Canvas & Settings Sidebar */
+        .studio-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 1.75rem;
+            align-items: start;
+        }
+
+        /* Image Grid Container */
+        .images-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 1.25rem;
+            min-height: 460px;
+        }
+
+        .images-grid-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .grid-header-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grid-hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 1.15rem;
+        }
+
+        /* Image Card */
+        .image-card {
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            padding: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+            cursor: grab;
+        }
+
+        .image-card:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.35);
+        }
+
+        .image-card.is-dragging {
+            opacity: 0.4;
+            border-style: dashed;
+            border-color: var(--accent-red);
+            transform: scale(0.96);
+        }
+
+        .image-card.drag-over {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.08);
+            transform: scale(1.02);
+        }
+
+        .card-thumb-wrap {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            background: #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        [data-theme="light"] .card-thumb-wrap {
+            background: #f1f5f9;
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .card-thumb {
+            max-width: 96%;
+            max-height: 96%;
+            object-fit: contain;
+            transition: transform 0.25s ease;
+            pointer-events: none;
+        }
+
+        .card-page-badge {
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .card-actions-bar {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            display: flex;
+            gap: 0.3rem;
+            z-index: 5;
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        .image-card:hover .card-actions-bar {
+            opacity: 1;
+        }
+
+        .card-action-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .card-action-btn:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            transform: scale(1.1);
+        }
+
+        .card-action-btn.btn-rotate:hover {
+            background: #3b82f6;
+            border-color: #3b82f6;
+        }
+
+        .card-action-btn.btn-view:hover {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        .card-footer-info {
+            padding: 0.55rem 0.2rem 0.1rem;
+        }
+
+        .card-name-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1.3;
+        }
+
+        .card-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Sidebar Settings Panel */
+        .settings-sidebar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 1.5rem;
+            position: sticky;
+            top: 86px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 1.35rem;
+        }
+
+        [data-theme="light"] .settings-sidebar {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .setting-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .setting-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Segmented Toggles (iOS / Modern Web Style) */
+        .segmented-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .segmented-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 0.45rem 0.25rem;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .segmented-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .segmented-btn.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+        }
+
+        [data-theme="light"] .segmented-btn.active {
+            background: #ffffff;
+            color: var(--accent-red);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .studio-select,
+        .studio-input {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 10px;
+            padding: 0.6rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .studio-select:focus,
+        .studio-input:focus {
+            border-color: var(--accent-red);
+        }
+
+        /* Progress Modal */
+        #progress-studio {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.45);
+            max-width: 580px;
+            margin: 0 auto 3rem;
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .progress-pulse-icon {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.28);
+            color: var(--accent-red);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            animation: pulseIcon 1.5s infinite;
+        }
+
+        @keyframes pulseIcon {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 0.8;
+            }
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            height: 9px;
+            background: var(--bg-main);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 1.5rem auto 0.75rem;
+            max-width: 440px;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            transition: width 0.2s ease;
+        }
+
+        /* Result Studio */
+        #result-studio {
+            display: none;
+            max-width: 640px;
+            margin: 0 auto 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.45);
+            animation: fadeInStudio 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .result-success-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.14);
+            border: 2px solid rgba(16, 185, 129, 0.35);
+            color: #10b981;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .result-file-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .result-file-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .result-file-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .result-actions-row {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        /* Lightbox Image Preview Modal */
+        #preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            animation: fadeInStudio 0.2s ease;
+        }
+
+        .preview-modal-inner {
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .preview-modal-img {
+            max-width: 85vw;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            object-fit: contain;
+        }
+
+        .preview-modal-close {
+            position: absolute;
+            top: -42px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #ffffff;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .preview-modal-close:hover {
+            background: var(--accent-red);
+        }
+
+        /* Mobile Sticky Convert Dock */
+        .mobile-convert-dock {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .studio-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-sidebar {
+                position: static;
+                margin-top: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .workspace-wrap {
+                padding: 0 0.85rem 4rem;
+            }
+
+            body.in-studio-mode .workspace-wrap {
+                padding: 0 0.75rem 6.5rem;
+            }
+
+            .tool-header-section {
+                padding: 2.25rem 1rem 1.25rem;
+            }
+
+            .studio-top-bar {
+                padding: 0.75rem 0.85rem;
+            }
+
+            .studio-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .studio-actions-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .studio-actions-group .app-btn-secondary {
+                flex: 1;
+                justify-content: center;
+                padding: 0.45rem 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .images-panel {
+                padding: 0.85rem;
+            }
+
+            .images-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .card-thumb-wrap {
+                height: 140px;
+            }
+
+            .mobile-convert-dock {
+                display: block;
+                position: fixed;
+                bottom: 12px;
+                left: 12px;
+                right: 12px;
+                z-index: 60;
+                background: rgba(24, 24, 27, 0.95);
+                backdrop-filter: blur(18px);
+                border: 1px solid rgba(255, 255, 255, 0.16);
+                border-radius: 16px;
+                padding: 0.75rem;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+            }
+
+            [data-theme="light"] .mobile-convert-dock {
+                background: rgba(255, 255, 255, 0.96);
+                border-color: rgba(0, 0, 0, 0.12);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Ambient Overlay -->
+    <div class="spac2-header-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Rounded Header -->
+    <header class="spac2-header-wrapper">
+        <div class="spac2-header-capsule">
+            <div class="header-left">
+                <!-- Nút Back về Spac2 -->
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        style="width: 18px; height: 18px;">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </a>
+
+                <!-- Logo Card & Tên App -->
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 Images to PDF">
+                    <div class="brand-logo-card">
+                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
+                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Spac2</span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-app">Images to PDF</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-right">
+                <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width: 15px; height: 15px;">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" />
+                        </svg>
+                        <span>All tools</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            style="width: 13px; height: 13px;">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+
+                <!-- Ecosystem Link -->
+                <a href="https://spac2.com/" class="btn-header-icon" title="Spac2 Ecosystem"
+                    aria-label="Spac2 Ecosystem">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        style="width: 18px; height: 18px;">
+                        <circle cx="12" cy="12" r="10" />
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                    </svg>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()"
+                    aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        style="width: 18px; height: 18px;">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Description -->
+    <section class="tool-header-section">
+        <h1 class="tool-title">Images to PDF</h1>
+        <p class="tool-desc">Combine JPG, PNG, WebP, and photo files into a unified PDF document with custom page
+            layouts, margins, and drag &amp; drop ordering.</p>
+    </section>
+
+    <!-- Workspace Main -->
+    <main class="workspace-wrap">
+        <!-- 1. Initial Dropzone -->
+        <div id="dropzone" class="dropzone-container">
+            <input type="file" id="file-input"
+                accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,image/svg+xml,image/*" multiple
+                style="display: none;">
+            <div class="dropzone-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    style="width: 38px; height: 38px;">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                </svg>
+            </div>
+            <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                Drag and drop your images here
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Select single or multiple pictures. 100% private &amp; processed locally on your device.
+            </p>
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="width: 18px; height: 18px;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <span>Select Image Files</span>
+            </button>
+            <div class="dropzone-hints">
+                <span class="format-tag">JPG</span>
+                <span class="format-tag">PNG</span>
+                <span class="format-tag">WEBP</span>
+                <span class="format-tag">GIF</span>
+                <span class="format-tag">BMP</span>
+                <span class="format-tag">SVG</span>
+                <span class="paste-badge">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        style="width: 13px; height: 13px;">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <span>Paste with Ctrl+V</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- 2. Configuration & Reorder Studio -->
+        <div id="config-studio">
+            <!-- Studio Ribbon / Toolbar -->
+            <div class="studio-top-bar">
+                <div class="studio-stats">
+                    <span class="count-pill">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width: 14px; height: 14px;">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                        <span id="stat-image-count">0 Images</span>
+                    </span>
+                    <span class="size-pill" id="stat-total-size">0 MB</span>
+                </div>
+                <div class="studio-actions-group">
+                    <button type="button" class="app-btn-secondary" id="btn-add-more">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        <span>Add Images</span>
+                    </button>
+                    <button type="button" class="app-btn-secondary" id="btn-sort-name" title="Sort by filename A-Z">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m3 16 4 4 4-4" />
+                            <path d="M7 20V4" />
+                            <path d="M20 8h-5" />
+                            <path d="M15 10V6.5a2.5 2.5 0 0 1 5 0V10" />
+                            <path d="M15 14h5l-5 6h5" />
+                        </svg>
+                        <span>Sort A-Z</span>
+                    </button>
+                    <button type="button" class="app-btn-secondary" id="btn-rotate-all"
+                        title="Rotate all images 90° clockwise">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+                        </svg>
+                        <span>Rotate All</span>
+                    </button>
+                    <button type="button" class="app-btn-secondary" id="btn-clear-all" title="Remove all images">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                        <span>Clear All</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2-Column Studio Layout -->
+            <div class="studio-layout">
+                <!-- Left: Visual Image Reorder Grid -->
+                <div class="images-panel">
+                    <div class="images-grid-header">
+                        <span class="grid-header-title">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="14" y="14" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                            </svg>
+                            <span>Pages &amp; Reordering</span>
+                        </span>
+                        <span class="grid-hint">Drag cards to rearrange order</span>
+                    </div>
+
+                    <div class="images-grid" id="images-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Settings Sidebar (iLovePDF Style) -->
+                <div class="settings-sidebar">
+                    <div class="sidebar-title">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width: 18px; height: 18px; color: var(--accent-red);">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                        <span>PDF Settings</span>
+                    </div>
+
+                    <!-- Page Orientation -->
+                    <div class="setting-group">
+                        <label class="setting-label">Page Orientation</label>
+                        <div class="segmented-group" id="seg-orientation">
+                            <button type="button" class="segmented-btn active" data-val="auto">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" style="width: 14px; height: 14px;">
+                                    <rect x="4" y="3" width="16" height="18" rx="2" />
+                                    <line x1="8" y1="8" x2="16" y2="8" />
+                                </svg>
+                                <span>Auto</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-val="portrait">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" style="width: 14px; height: 14px;">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" />
+                                </svg>
+                                <span>Portrait</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-val="landscape">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" style="width: 14px; height: 14px;">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                                </svg>
+                                <span>Landscape</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Page Size -->
+                    <div class="setting-group">
+                        <label class="setting-label">Page Size</label>
+                        <select class="studio-select" id="select-page-size">
+                            <option value="fit" selected>Fit (Same as image dimension)</option>
+                            <option value="a4">A4 (210 × 297 mm)</option>
+                            <option value="letter">US Letter (8.5 × 11 in)</option>
+                            <option value="a3">A3 (297 × 420 mm)</option>
+                            <option value="legal">Legal (8.5 × 14 in)</option>
+                        </select>
+                    </div>
+
+                    <!-- Margins -->
+                    <div class="setting-group">
+                        <label class="setting-label">Page Margins</label>
+                        <div class="segmented-group" id="seg-margin">
+                            <button type="button" class="segmented-btn active" data-val="0">
+                                <span>No Margin</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-val="18">
+                                <span>Small (5mm)</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-val="36">
+                                <span>Big (12mm)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Image Scaling (only relevant when paper format selected) -->
+                    <div class="setting-group" id="group-image-fit">
+                        <label class="setting-label">Image Fit</label>
+                        <select class="studio-select" id="select-image-fit">
+                            <option value="contain" selected>Fit Page (Preserve aspect ratio)</option>
+                            <option value="fill">Fill Page (Stretch to margin edges)</option>
+                        </select>
+                    </div>
+
+                    <!-- Compression Quality -->
+                    <div class="setting-group">
+                        <label class="setting-label">Image Quality</label>
+                        <select class="studio-select" id="select-quality">
+                            <option value="0.92">High Quality (Crystal clear)</option>
+                            <option value="0.80" selected>Medium (Balanced file size)</option>
+                            <option value="0.60">Low (Smallest file size)</option>
+                        </select>
+                    </div>
+
+                    <!-- Output Filename -->
+                    <div class="setting-group">
+                        <label class="setting-label">Output Filename</label>
+                        <input type="text" class="studio-input" id="inp-filename" value="images-combined.pdf"
+                            placeholder="document.pdf">
+                    </div>
+
+                    <!-- Primary Action Button -->
+                    <div style="margin-top: 0.5rem;">
+                        <button type="button" class="btn-execute-app" id="btn-convert-pdf">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" style="width: 18px; height: 18px;">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <path d="M12 18v-6" />
+                                <path d="m9 15 3 3 3-3" />
+                            </svg>
+                            <span>Convert to PDF</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Sticky Convert Dock -->
+        <div class="mobile-convert-dock" id="mobile-dock">
+            <button type="button" class="btn-execute-app" id="btn-convert-pdf-mobile">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    style="width: 18px; height: 18px;">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <path d="M12 18v-6" />
+                    <path d="m9 15 3 3 3-3" />
+                </svg>
+                <span>Convert to PDF</span>
+            </button>
+        </div>
+
+        <!-- 3. Progress Modal Studio -->
+        <div id="progress-studio">
+            <div class="progress-pulse-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="width: 32px; height: 32px;">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                </svg>
+            </div>
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+                Compiling PDF Document...
+            </h3>
+            <p id="progress-status-text" style="font-size: 0.9rem; color: var(--text-secondary);">
+                Processing and embedding images...
+            </p>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <p id="progress-percent"
+                style="font-size: 0.88rem; font-weight: 700; color: var(--accent-red); margin-top: 0.35rem;">0%</p>
+        </div>
+
+        <!-- 4. Result Studio -->
+        <div id="result-studio">
+            <div class="result-success-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    style="width: 36px; height: 36px;">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+            </div>
+            <h3 style="font-size: 1.45rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.35rem;">
+                PDF Created Successfully!
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                Your images have been converted into a unified, high-quality PDF.
+            </p>
+
+            <div class="result-file-card">
+                <div class="result-file-left">
+                    <div class="result-file-icon">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            style="width: 24px; height: 24px;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <path d="M9 13v4M9 15h2a1 1 0 0 0 0-2H9" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div id="result-filename"
+                            style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">
+                            images-combined.pdf</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;" id="result-meta">0
+                            Pages • 0 MB</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-actions-row">
+                <button type="button" class="btn-execute-app" id="btn-download-pdf"
+                    style="width: auto; padding: 0.75rem 2rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        style="width: 18px; height: 18px;">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Download PDF</span>
+                </button>
+                <button type="button" class="app-btn-secondary" id="btn-preview-pdf" style="padding: 0.75rem 1.25rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <span>Preview in New Tab</span>
+                </button>
+                <button type="button" class="app-btn-secondary" id="btn-start-over" style="padding: 0.75rem 1.25rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                        <path d="M21 3v5h-5" />
+                        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+                        <path d="M3 21v-5h5" />
+                    </svg>
+                    <span>Convert More</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Lightbox Modal for Image Fullscreen Preview -->
+        <div id="preview-modal">
+            <div class="preview-modal-inner">
+                <button type="button" class="preview-modal-close" id="btn-close-modal">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+                <img id="modal-image" class="preview-modal-img" src="" alt="Preview">
+            </div>
+        </div>
+
+        <!-- Bottom Information & Guide Section -->
+        <section class="tool-info-section"
+            style="max-width: 960px; margin: 4rem auto 0; padding-top: 2.5rem; border-top: 1px solid var(--border-color);">
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem;">
+                    Universal Client-Side Image to PDF Converter
+                </h3>
+                <p
+                    style="font-size: 0.95rem; color: var(--text-secondary); max-width: 720px; margin: 0 auto; line-height: 1.6;">
+                    Transform single or batch photos into standard PDF documents directly inside your browser. No files
+                    are uploaded to any server, guaranteeing total privacy, maximum speed, and zero file size caps.
+                </p>
+            </div>
+
+            <!-- 3-Step Guide -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 3.5rem;">
+                <div
+                    style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem;">
+                    <div
+                        style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-gradient); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 1rem;">
+                        1</div>
+                    <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem;">
+                        Select or Paste Images</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">Drop JPG, PNG, WEBP,
+                        or SVG images, or copy any screenshot and press Ctrl+V to paste directly.</p>
+                </div>
+                <div
+                    style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem;">
+                    <div
+                        style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-gradient); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 1rem;">
+                        2</div>
+                    <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem;">
+                        Reorder &amp; Configure</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">Drag thumbnails to
+                        change order, rotate individual pages, choose A4 / Letter format, and set margins.</p>
+                </div>
+                <div
+                    style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem;">
+                    <div
+                        style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-gradient); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 1rem;">
+                        3</div>
+                    <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem;">
+                        Generate &amp; Download</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">Instant in-memory
+                        compilation via WebAssembly and pdf-lib. Download your ready PDF instantly.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pdf-footer">
+        <div class="pdf-footer-content">
+            <div class="pdf-footer-links">
+                <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="/apps/pdf-hub/images-to-pdf">Images to PDF</a>
+                <a href="/apps/pdf-hub/merge">Merge PDF</a>
+                <a href="/apps/pdf-hub/split">Split PDF</a>
+                <a href="/apps/pdf-hub/organize">Organize PDF</a>
+                <a href="/apps/pdf-hub/compress">Compress PDF</a>
+                <a href="/apps/pdf-hub/pdf-to-image">PDF to Image</a>
+                <a href="/apps/pdf-hub/sign">Sign PDF</a>
+            </div>
+            <div class="footer-privacy-text">
+                100% Client-Side • Local Device Processing • Zero Server Uploads
+            </div>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                © 2026 Spac2 Ecosystem. High-DPI hardware canvas rendering. 100% Client-Side.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/pdf-common.js?v=2"></script>
+
+    <!-- Images to PDF Controller -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // State
+            let imageItems = []; // Array of { id, file, name, size, type, dataUrl, width, height, rotation }
+            let generatedPdfBlob = null;
+            let generatedPdfUrl = null;
+
+            // DOM Elements
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("file-input");
+            const configStudio = document.getElementById("config-studio");
+            const progressStudio = document.getElementById("progress-studio");
+            const resultStudio = document.getElementById("result-studio");
+            const imagesGrid = document.getElementById("images-grid");
+            const statImageCount = document.getElementById("stat-image-count");
+            const statTotalSize = document.getElementById("stat-total-size");
+
+            // Buttons
+            const btnAddMore = document.getElementById("btn-add-more");
+            const btnSortName = document.getElementById("btn-sort-name");
+            const btnRotateAll = document.getElementById("btn-rotate-all");
+            const btnClearAll = document.getElementById("btn-clear-all");
+            const btnConvertPdf = document.getElementById("btn-convert-pdf");
+            const btnConvertPdfMobile = document.getElementById("btn-convert-pdf-mobile");
+            const btnDownloadPdf = document.getElementById("btn-download-pdf");
+            const btnPreviewPdf = document.getElementById("btn-preview-pdf");
+            const btnStartOver = document.getElementById("btn-start-over");
+            const mobileDock = document.getElementById("mobile-dock");
+
+            // Settings Elements
+            const segOrientation = document.getElementById("seg-orientation");
+            const selectPageSize = document.getElementById("select-page-size");
+            const segMargin = document.getElementById("seg-margin");
+            const selectImageFit = document.getElementById("select-image-fit");
+            const selectQuality = document.getElementById("select-quality");
+            const inpFilename = document.getElementById("inp-filename");
+
+            // Modal
+            const previewModal = document.getElementById("preview-modal");
+            const modalImage = document.getElementById("modal-image");
+            const btnCloseModal = document.getElementById("btn-close-modal");
+
+            // Setting Values
+            let settingOrientation = "auto";
+            let settingMargin = 0;
+
+            // Initialize Lucide Icons if available
+            if (typeof lucide !== "undefined") {
+                lucide.createIcons();
+            }
+
+            // Segmented Controls Handlers
+            segOrientation.querySelectorAll(".segmented-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    segOrientation.querySelectorAll(".segmented-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    settingOrientation = btn.getAttribute("data-val");
+                });
+            });
+
+            segMargin.querySelectorAll(".segmented-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    segMargin.querySelectorAll(".segmented-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    settingMargin = parseInt(btn.getAttribute("data-val"), 10);
+                });
+            });
+
+            // File selection & Dropzone
+            dropzone.addEventListener("click", () => fileInput.click());
+            btnAddMore.addEventListener("click", () => fileInput.click());
+
+            dropzone.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropzone.classList.add("dragover");
+            });
+
+            dropzone.addEventListener("dragleave", () => {
+                dropzone.classList.remove("dragover");
+            });
+
+            dropzone.addEventListener("drop", (e) => {
+                e.preventDefault();
+                dropzone.classList.remove("dragover");
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                    handleFiles(Array.from(e.dataTransfer.files));
+                }
+            });
+
+            fileInput.addEventListener("change", () => {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    handleFiles(Array.from(fileInput.files));
+                    fileInput.value = "";
+                }
+            });
+
+            // Clipboard Paste support (Ctrl + V)
+            window.addEventListener("paste", (e) => {
+                const items = e.clipboardData?.items;
+                if (!items) return;
+
+                const pastedFiles = [];
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf("image") !== -1) {
+                        const file = items[i].getAsFile();
+                        if (file) {
+                            const ext = file.type.split("/")[1] || "png";
+                            const namedFile = new File([file], `pasted-image-${Date.now()}-${i + 1}.${ext}`, { type: file.type });
+                            pastedFiles.push(namedFile);
+                        }
+                    }
+                }
+
+                if (pastedFiles.length > 0) {
+                    handleFiles(pastedFiles);
+                    showToast(`Pasted ${pastedFiles.length} image${pastedFiles.length > 1 ? 's' : ''} from clipboard!`, "success");
+                }
+            });
+
+            // Process uploaded files
+            async function handleFiles(files) {
+                const validImages = files.filter(f => f.type.startsWith("image/") || /\.(jpg|jpeg|png|webp|gif|bmp|svg|avif)$/i.test(f.name));
+
+                if (validImages.length === 0) {
+                    showToast("Please select valid image files (JPG, PNG, WebP, GIF, SVG).", "error");
+                    return;
+                }
+
+                showToast(`Loading ${validImages.length} image${validImages.length > 1 ? 's' : ''}...`, "info");
+
+                for (const file of validImages) {
+                    try {
+                        const item = await readFileAsImage(file);
+                        imageItems.push(item);
+                    } catch (err) {
+                        console.error("Failed to read image:", file.name, err);
+                    }
+                }
+
+                updateStudioView();
+            }
+
+            // Read file into image metadata & dataURL
+            function readFileAsImage(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const dataUrl = e.target.result;
+                        const img = new Image();
+                        img.onload = () => {
+                            resolve({
+                                id: 'img_' + Math.random().toString(36).substr(2, 9),
+                                file: file,
+                                name: file.name,
+                                size: file.size,
+                                type: file.type,
+                                dataUrl: dataUrl,
+                                width: img.naturalWidth || 800,
+                                height: img.naturalHeight || 600,
+                                rotation: 0
+                            });
+                        };
+                        img.onerror = () => reject(new Error("Image decode failed"));
+                        img.src = dataUrl;
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Update Studio View
+            function updateStudioView() {
+                if (imageItems.length === 0) {
+                    document.body.classList.remove("in-studio-mode");
+                    dropzone.style.display = "block";
+                    configStudio.style.display = "none";
+                    mobileDock.style.display = "none";
+                    return;
+                }
+
+                document.body.classList.add("in-studio-mode");
+                dropzone.style.display = "none";
+                configStudio.style.display = "block";
+                resultStudio.style.display = "none";
+
+                // Update Stats
+                const totalBytes = imageItems.reduce((acc, curr) => acc + curr.size, 0);
+                statImageCount.textContent = `${imageItems.length} ${imageItems.length === 1 ? 'Image' : 'Images'}`;
+                statTotalSize.textContent = formatBytes(totalBytes);
+
+                renderGrid();
+            }
+
+            // Render Images Grid
+            function renderGrid() {
+                imagesGrid.innerHTML = "";
+
+                imageItems.forEach((item, index) => {
+                    const card = document.createElement("div");
+                    card.className = "image-card";
+                    card.draggable = true;
+                    card.dataset.id = item.id;
+                    card.dataset.index = index;
+
+                    card.innerHTML = `
+                        <div class="card-thumb-wrap">
+                            <span class="card-page-badge">
+                                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;"><rect x="4" y="3" width="16" height="18" rx="2"/></svg>
+                                <span>#${index + 1}</span>
+                            </span>
+                            <div class="card-actions-bar">
+                                <button type="button" class="card-action-btn btn-view" title="Preview full image" data-action="view">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </button>
+                                <button type="button" class="card-action-btn btn-rotate" title="Rotate 90° clockwise" data-action="rotate">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                </button>
+                                <button type="button" class="card-action-btn btn-delete" title="Remove image" data-action="delete">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                </button>
+                            </div>
+                            <img src="${item.dataUrl}" class="card-thumb" style="transform: rotate(${item.rotation}deg);" alt="${item.name}">
+                        </div>
+                        <div class="card-footer-info">
+                            <div class="card-name-label" title="${item.name}">${item.name}</div>
+                            <div class="card-meta-row">
+                                <span>${item.rotation % 180 === 0 ? item.width : item.height} × ${item.rotation % 180 === 0 ? item.height : item.width} px</span>
+                                <span>${formatBytes(item.size)}</span>
+                            </div>
+                        </div>
+                    `;
+
+                    // Actions
+                    card.querySelector('[data-action="view"]').addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        modalImage.src = item.dataUrl;
+                        modalImage.style.transform = `rotate(${item.rotation}deg)`;
+                        previewModal.style.display = "flex";
+                    });
+
+                    card.querySelector('[data-action="rotate"]').addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        item.rotation = (item.rotation + 90) % 360;
+                        renderGrid();
+                    });
+
+                    card.querySelector('[data-action="delete"]').addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        imageItems.splice(index, 1);
+                        updateStudioView();
+                    });
+
+                    // Drag and Drop reordering
+                    setupDragAndDrop(card, index);
+
+                    imagesGrid.appendChild(card);
+                });
+            }
+
+            // HTML5 Drag & Drop Reordering
+            let draggedIndex = null;
+
+            function setupDragAndDrop(card, index) {
+                card.addEventListener("dragstart", (e) => {
+                    draggedIndex = index;
+                    card.classList.add("is-dragging");
+                    e.dataTransfer.effectAllowed = "move";
+                    e.dataTransfer.setData("text/plain", index);
+                });
+
+                card.addEventListener("dragend", () => {
+                    card.classList.remove("is-dragging");
+                    document.querySelectorAll(".image-card").forEach(c => c.classList.remove("drag-over"));
+                });
+
+                card.addEventListener("dragover", (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = "move";
+                    card.classList.add("drag-over");
+                });
+
+                card.addEventListener("dragleave", () => {
+                    card.classList.remove("drag-over");
+                });
+
+                card.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    card.classList.remove("drag-over");
+                    const targetIndex = index;
+                    if (draggedIndex !== null && draggedIndex !== targetIndex) {
+                        const movedItem = imageItems.splice(draggedIndex, 1)[0];
+                        imageItems.splice(targetIndex, 0, movedItem);
+                        renderGrid();
+                    }
+                });
+            }
+
+            // Toolbar Operations
+            btnSortName.addEventListener("click", () => {
+                imageItems.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+                renderGrid();
+                showToast("Sorted images A-Z by filename", "info");
+            });
+
+            btnRotateAll.addEventListener("click", () => {
+                imageItems.forEach(item => {
+                    item.rotation = (item.rotation + 90) % 360;
+                });
+                renderGrid();
+                showToast("Rotated all images 90°", "info");
+            });
+
+            btnClearAll.addEventListener("click", () => {
+                if (confirm("Are you sure you want to remove all loaded images?")) {
+                    imageItems = [];
+                    updateStudioView();
+                }
+            });
+
+            // Lightbox Modal
+            btnCloseModal.addEventListener("click", () => {
+                previewModal.style.display = "none";
+            });
+            previewModal.addEventListener("click", (e) => {
+                if (e.target === previewModal) {
+                    previewModal.style.display = "none";
+                }
+            });
+
+            // Convert to PDF Engine
+            async function executeConversion() {
+                if (imageItems.length === 0) return;
+
+                if (typeof PDFLib === "undefined") {
+                    showToast("PDF generation library is still loading, please wait...", "error");
+                    return;
+                }
+
+                // Show progress modal
+                configStudio.style.display = "none";
+                progressStudio.style.display = "block";
+                resultStudio.style.display = "none";
+                mobileDock.style.display = "none";
+
+                const progressBarFill = document.getElementById("progress-bar-fill");
+                const progressPercent = document.getElementById("progress-percent");
+                const progressStatusText = document.getElementById("progress-status-text");
+
+                progressBarFill.style.width = "0%";
+                progressPercent.textContent = "0%";
+
+                try {
+                    const { PDFDocument } = PDFLib;
+                    const pdfDoc = await PDFDocument.create();
+
+                    const pageSizeSetting = selectPageSize.value;
+                    const fitSetting = selectImageFit.value;
+                    const quality = parseFloat(selectQuality.value) || 0.85;
+                    const margin = settingMargin;
+
+                    // Standard Dimensions in Points (72 dpi)
+                    const SIZES = {
+                        a4: [595.28, 841.89],
+                        letter: [612.00, 792.00],
+                        a3: [841.89, 1190.55],
+                        legal: [612.00, 1008.00]
+                    };
+
+                    const total = imageItems.length;
+
+                    for (let i = 0; i < total; i++) {
+                        const item = imageItems[i];
+                        const progress = Math.round(((i + 0.5) / total) * 100);
+                        progressBarFill.style.width = `${progress}%`;
+                        progressPercent.textContent = `${progress}%`;
+                        progressStatusText.textContent = `Processing image ${i + 1} of ${total}: ${item.name}...`;
+
+                        // Render image onto offscreen canvas with rotation and quality compression
+                        const processedImageData = await processImageToCanvas(item, quality);
+
+                        // Embed into PDF
+                        let embeddedImage;
+                        if (processedImageData.isPng) {
+                            embeddedImage = await pdfDoc.embedPng(processedImageData.dataUrl);
+                        } else {
+                            embeddedImage = await pdfDoc.embedJpg(processedImageData.dataUrl);
+                        }
+
+                        const imgW = processedImageData.width;
+                        const imgH = processedImageData.height;
+
+                        // Calculate Page Dimensions
+                        let pWidth, pHeight;
+
+                        if (pageSizeSetting === "fit") {
+                            // Exact image dimensions
+                            pWidth = imgW;
+                            pHeight = imgH;
+                        } else {
+                            // Standard preset format
+                            const baseSize = SIZES[pageSizeSetting] || SIZES.a4;
+                            let isLandscape = false;
+
+                            if (settingOrientation === "auto") {
+                                isLandscape = imgW > imgH;
+                            } else if (settingOrientation === "landscape") {
+                                isLandscape = true;
+                            } else {
+                                isLandscape = false;
+                            }
+
+                            pWidth = isLandscape ? Math.max(baseSize[0], baseSize[1]) : Math.min(baseSize[0], baseSize[1]);
+                            pHeight = isLandscape ? Math.min(baseSize[0], baseSize[1]) : Math.max(baseSize[0], baseSize[1]);
+                        }
+
+                        // Add Page
+                        const page = pdfDoc.addPage([pWidth, pHeight]);
+
+                        // Placement Calculation
+                        if (pageSizeSetting === "fit") {
+                            page.drawImage(embeddedImage, {
+                                x: 0,
+                                y: 0,
+                                width: pWidth,
+                                height: pHeight
+                            });
+                        } else {
+                            const availW = Math.max(10, pWidth - (margin * 2));
+                            const availH = Math.max(10, pHeight - (margin * 2));
+
+                            let drawW, drawH;
+
+                            if (fitSetting === "fill") {
+                                drawW = availW;
+                                drawH = availH;
+                            } else {
+                                // Contain / Fit ratio
+                                const scale = Math.min(availW / imgW, availH / imgH);
+                                drawW = imgW * scale;
+                                drawH = imgH * scale;
+                            }
+
+                            const drawX = margin + (availW - drawW) / 2;
+                            const drawY = margin + (availH - drawH) / 2;
+
+                            page.drawImage(embeddedImage, {
+                                x: drawX,
+                                y: drawY,
+                                width: drawW,
+                                height: drawH
+                            });
+                        }
+
+                        // Micro delay for responsive UI
+                        await new Promise(r => setTimeout(r, 10));
+                    }
+
+                    progressStatusText.textContent = "Writing final PDF file...";
+                    progressBarFill.style.width = "100%";
+                    progressPercent.textContent = "100%";
+
+                    const pdfBytes = await pdfDoc.save();
+                    generatedPdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
+
+                    if (generatedPdfUrl) {
+                        URL.revokeObjectURL(generatedPdfUrl);
+                    }
+                    generatedPdfUrl = URL.createObjectURL(generatedPdfBlob);
+
+                    // Show Result Studio
+                    setTimeout(() => {
+                        progressStudio.style.display = "none";
+                        resultStudio.style.display = "block";
+
+                        let outFilename = inpFilename.value.trim();
+                        if (!outFilename.toLowerCase().endsWith(".pdf")) {
+                            outFilename += ".pdf";
+                        }
+
+                        document.getElementById("result-filename").textContent = outFilename;
+                        document.getElementById("result-meta").textContent = `${imageItems.length} Pages • ${formatBytes(generatedPdfBlob.size)}`;
+
+                        showToast("PDF document created successfully!", "success");
+                    }, 400);
+
+                } catch (err) {
+                    console.error("PDF generation error:", err);
+                    progressStudio.style.display = "none";
+                    configStudio.style.display = "block";
+                    showToast("Failed to compile PDF: " + err.message, "error");
+                }
+            }
+
+            // Process Image with Canvas (handles rotation, formats, quality)
+            function processImageToCanvas(item, quality) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const rot = item.rotation % 360;
+                        const isRotated90 = (rot === 90 || rot === 270);
+
+                        const canvas = document.createElement("canvas");
+                        const ctx = canvas.getContext("2d");
+
+                        const width = isRotated90 ? img.naturalHeight : img.naturalWidth;
+                        const height = isRotated90 ? img.naturalWidth : img.naturalHeight;
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        ctx.translate(canvas.width / 2, canvas.height / 2);
+                        ctx.rotate((rot * Math.PI) / 180);
+                        ctx.drawImage(img, -img.naturalWidth / 2, -img.naturalHeight / 2);
+
+                        // If PNG with transparency or SVG, we can keep PNG format or JPG
+                        const isPng = item.type === "image/png" && rot === 0 && quality > 0.9;
+                        const format = isPng ? "image/png" : "image/jpeg";
+                        const dataUrl = canvas.toDataURL(format, isPng ? undefined : quality);
+
+                        resolve({
+                            dataUrl,
+                            width,
+                            height,
+                            isPng
+                        });
+                    };
+                    img.onerror = () => reject(new Error("Image render failed for " + item.name));
+                    img.src = item.dataUrl;
+                });
+            }
+
+            btnConvertPdf.addEventListener("click", executeConversion);
+            btnConvertPdfMobile.addEventListener("click", executeConversion);
+
+            // Download PDF
+            btnDownloadPdf.addEventListener("click", () => {
+                if (!generatedPdfBlob) return;
+                let outFilename = inpFilename.value.trim();
+                if (!outFilename.toLowerCase().endsWith(".pdf")) {
+                    outFilename += ".pdf";
+                }
+                downloadBlob(generatedPdfBlob, outFilename);
+                showToast("Downloading " + outFilename, "success");
+            });
+
+            // Preview in New Tab
+            btnPreviewPdf.addEventListener("click", () => {
+                if (!generatedPdfUrl) return;
+                window.open(generatedPdfUrl, "_blank");
+            });
+
+            // Start Over
+            btnStartOver.addEventListener("click", () => {
+                resultStudio.style.display = "none";
+                configStudio.style.display = "block";
+                updateStudioView();
+            });
+
+            // Utility byte formatter
+            function formatBytes(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+        });
+    </script>
+</body>
+
+</html>
