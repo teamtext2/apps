@@ -802,6 +802,63 @@
             background: var(--accent-red);
         }
 
+        .card-order-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.45rem;
+            padding-top: 0.45rem;
+            border-top: 1px solid var(--border-color);
+            gap: 0.25rem;
+        }
+
+        .card-order-btn {
+            width: 28px;
+            height: 26px;
+            border-radius: 6px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .card-order-btn:hover:not(:disabled),
+        .card-order-btn:active:not(:disabled) {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+        }
+
+        .card-order-btn:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .card-order-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        html,
+        body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+        }
+
+        /* Mobile Settings Quick Banner */
+        .mobile-settings-banner {
+            display: none;
+        }
+
         /* Mobile Sticky Convert Dock */
         .mobile-convert-dock {
             display: none;
@@ -810,81 +867,520 @@
         /* Responsive */
         @media (max-width: 960px) {
             .studio-layout {
-                grid-template-columns: 1fr;
+                display: flex !important;
+                flex-direction: column !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                gap: 1rem !important;
+            }
+
+            .images-panel,
+            .settings-sidebar {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
             }
 
             .settings-sidebar {
                 position: static;
-                margin-top: 1.5rem;
+                margin-top: 1rem;
             }
         }
 
         @media (max-width: 768px) {
+
+            /* Header on Mobile: ẩn Tool Switcher & Compass, chỉ giữ nút Sáng/Tối */
+            .spac2-header-wrapper .header-right .tool-switcher,
+            .spac2-header-wrapper .header-right .btn-header-icon:not(#theme-toggle-btn) {
+                display: none !important;
+            }
+
+            .spac2-header-capsule {
+                height: 44px !important;
+                padding: 0 0.65rem !important;
+            }
+
+            .brand-name {
+                font-size: 0.9rem !important;
+            }
+
+            .brand-app {
+                font-size: 0.82rem !important;
+            }
+
+            .brand-logo-card {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
             .workspace-wrap {
-                padding: 0 0.85rem 4rem;
+                padding: 0 0.65rem 4rem !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+                overflow-x: hidden !important;
             }
 
             body.in-studio-mode .workspace-wrap {
-                padding: 0 0.75rem 6.5rem;
+                padding: 0 0.65rem 6.5rem !important;
             }
 
+            /* Minimal Hero */
             .tool-header-section {
-                padding: 2.25rem 1rem 1.25rem;
+                padding: 1.5rem 0.75rem 0.75rem !important;
             }
 
+            .tool-title {
+                font-size: 1.6rem !important;
+                margin: 0.25rem 0 0.35rem !important;
+            }
+
+            .tool-desc {
+                font-size: 0.85rem !important;
+                line-height: 1.45 !important;
+                margin-bottom: 0.85rem !important;
+            }
+
+            /* Compact Dropzone */
+            .dropzone-container {
+                padding: 1.75rem 1rem !important;
+                border-radius: 16px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .dropzone-icon-wrap {
+                width: 52px !important;
+                height: 52px !important;
+                border-radius: 14px !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .dropzone-container h3 {
+                font-size: 1.15rem !important;
+                margin-bottom: 0.35rem !important;
+            }
+
+            .dropzone-container p {
+                font-size: 0.82rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .dropzone-hints {
+                gap: 0.35rem !important;
+                margin-top: 1rem !important;
+            }
+
+            /* Compact Top Ribbon Toolbar */
             .studio-top-bar {
-                padding: 0.75rem 0.85rem;
+                padding: 0.65rem 0.75rem !important;
+                border-radius: 14px !important;
+                margin-bottom: 0.85rem !important;
+                gap: 0.5rem !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
             }
 
             .studio-stats {
-                width: 100%;
-                justify-content: space-between;
+                width: 100% !important;
+                justify-content: space-between !important;
             }
 
             .studio-actions-group {
-                width: 100%;
-                justify-content: space-between;
+                width: 100% !important;
+                display: grid !important;
+                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+                gap: 0.25rem !important;
             }
 
             .studio-actions-group .app-btn-secondary {
-                flex: 1;
-                justify-content: center;
-                padding: 0.45rem 0.5rem;
-                font-size: 0.75rem;
+                padding: 0.45rem 0.15rem !important;
+                font-size: 0.72rem !important;
+                justify-content: center !important;
+                border-radius: 8px !important;
+                gap: 0.2rem !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
             }
 
+            .studio-actions-group .app-btn-secondary span {
+                font-size: 0.7rem !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+            }
+
+            /* 1. KHỐI PAGES & REORDERING (LƯỚI ẢNH) */
             .images-panel {
-                padding: 0.85rem;
+                padding: 0.75rem !important;
+                border-radius: 16px !important;
+                min-height: auto !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
             }
 
+            .images-grid-header {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 0.25rem !important;
+                margin-bottom: 0.65rem !important;
+                padding-bottom: 0.45rem !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .grid-header-title {
+                font-size: 0.88rem !important;
+            }
+
+            .grid-hint {
+                font-size: 0.7rem !important;
+            }
+
+            /* Quick Settings Banner */
+            .mobile-settings-banner {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                background: var(--bg-surface) !important;
+                border: 1px solid var(--border-color) !important;
+                border-radius: 12px !important;
+                padding: 0.5rem 0.75rem !important;
+                margin-bottom: 0.75rem !important;
+                gap: 0.5rem !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+            }
+
+            .mobile-settings-info {
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.45rem !important;
+                color: var(--text-secondary) !important;
+                font-size: 0.76rem !important;
+                font-weight: 600 !important;
+                min-width: 0 !important;
+                flex: 1 1 auto !important;
+                overflow: hidden !important;
+            }
+
+            .mobile-settings-info span {
+                display: block !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+                min-width: 0 !important;
+            }
+
+            .btn-jump-settings {
+                background: rgba(239, 68, 68, 0.12) !important;
+                border: 1px solid rgba(239, 68, 68, 0.25) !important;
+                color: var(--accent-red) !important;
+                border-radius: 8px !important;
+                padding: 0.3rem 0.55rem !important;
+                font-size: 0.72rem !important;
+                font-weight: 700 !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.25rem !important;
+                cursor: pointer !important;
+                flex-shrink: 0 !important;
+                white-space: nowrap !important;
+            }
+
+            .btn-jump-settings:active {
+                transform: scale(0.96);
+            }
+
+            /* Image Grid 2 Cột chuẩn không tràn */
             .images-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 0.6rem !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            .image-card {
+                padding: 0.45rem !important;
+                border-radius: 12px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
             }
 
             .card-thumb-wrap {
-                height: 140px;
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 135px !important;
+                border-radius: 8px !important;
+                overflow: hidden !important;
+                position: relative !important;
             }
 
+            .card-thumb {
+                max-width: 95% !important;
+                max-height: 95% !important;
+            }
+
+            .card-actions-bar {
+                top: 5px !important;
+                right: 5px !important;
+                gap: 0.25rem !important;
+                opacity: 1 !important;
+            }
+
+            .card-action-btn {
+                width: 26px !important;
+                height: 26px !important;
+            }
+
+            .card-page-badge {
+                top: 5px !important;
+                left: 5px !important;
+                padding: 0.15rem 0.4rem !important;
+                font-size: 0.68rem !important;
+            }
+
+            .card-footer-info {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+                padding: 0.4rem 0.1rem 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            .card-name-label {
+                font-size: 0.74rem !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+                display: block !important;
+            }
+
+            .card-meta-row {
+                font-size: 0.66rem !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+                display: flex !important;
+                justify-content: space-between !important;
+            }
+
+            .card-meta-row span {
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+            }
+
+            .card-order-controls {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+                gap: 0.2rem !important;
+                padding-top: 0.35rem !important;
+                margin-top: 0.35rem !important;
+            }
+
+            .card-order-btn {
+                width: 26px !important;
+                height: 24px !important;
+                flex: 0 0 26px !important;
+            }
+
+            .card-order-label {
+                font-size: 0.68rem !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+            }
+
+            /* 2. KHỐI PDF SETTINGS (CÀI ĐẶT) */
+            .settings-sidebar {
+                padding: 1.15rem 0.85rem !important;
+                border-radius: 16px !important;
+                margin-top: 0.85rem !important;
+                gap: 1rem !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+            }
+
+            .sidebar-title {
+                font-size: 0.95rem !important;
+                padding-bottom: 0.55rem !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .setting-group {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            .setting-label {
+                font-size: 0.74rem !important;
+            }
+
+            /* Segmented 3 nút bấm (Orientation & Margins) không tràn */
+            .segmented-group {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+                gap: 3px !important;
+                padding: 3px !important;
+            }
+
+            .segmented-btn {
+                min-width: 0 !important;
+                max-width: 100% !important;
+                padding: 0.45rem 0.15rem !important;
+                font-size: 0.72rem !important;
+                min-height: 40px !important;
+                overflow: hidden !important;
+                box-sizing: border-box !important;
+            }
+
+            .segmented-btn span {
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+                max-width: 100% !important;
+                display: block !important;
+                font-size: 0.72rem !important;
+            }
+
+            .studio-select,
+            .studio-input {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 42px !important;
+                font-size: 0.84rem !important;
+                padding: 0.5rem 0.75rem !important;
+                box-sizing: border-box !important;
+                min-width: 0 !important;
+            }
+
+            .settings-sidebar .btn-execute-app {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Mobile Sticky Floating Dock */
             .mobile-convert-dock {
-                display: block;
+                display: none;
                 position: fixed;
                 bottom: 12px;
                 left: 12px;
                 right: 12px;
-                z-index: 60;
-                background: rgba(24, 24, 27, 0.95);
-                backdrop-filter: blur(18px);
+                z-index: 90;
+                background: rgba(20, 20, 20, 0.92);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 border: 1px solid rgba(255, 255, 255, 0.16);
                 border-radius: 16px;
-                padding: 0.75rem;
-                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+                padding: 0.65rem;
+                box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+            }
+
+            body.in-studio-mode .mobile-convert-dock {
+                display: block;
             }
 
             [data-theme="light"] .mobile-convert-dock {
-                background: rgba(255, 255, 255, 0.96);
-                border-color: rgba(0, 0, 0, 0.12);
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+                background: rgba(255, 255, 255, 0.95);
+                border-color: rgba(0, 0, 0, 0.1);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            }
+
+            .mobile-convert-dock .btn-execute-app {
+                padding: 0.8rem 1rem;
+                font-size: 0.92rem;
+                border-radius: 12px;
+            }
+
+            /* Result Screen */
+            #result-studio {
+                padding: 1.75rem 1.15rem !important;
+                border-radius: 16px !important;
+            }
+
+            .result-actions-row {
+                flex-direction: column !important;
+                gap: 0.65rem !important;
+                width: 100% !important;
+            }
+
+            .result-actions-row button {
+                width: 100% !important;
+                justify-content: center !important;
+                padding: 0.75rem 1rem !important;
+            }
+
+            /* Lightbox Modal */
+            #preview-modal {
+                padding: 0.75rem !important;
+            }
+
+            .preview-modal-close {
+                top: -38px !important;
+                right: 4px !important;
+                width: 32px !important;
+                height: 32px !important;
+            }
+
+            .preview-modal-img {
+                max-width: 96vw !important;
+                max-height: 80vh !important;
+            }
+
+            /* Elevated Toast */
+            .pdf-toast-container,
+            #toast-container {
+                bottom: 84px !important;
+            }
+
+            /* Bottom info section */
+            .tool-info-section {
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+                box-sizing: border-box !important;
+                margin-top: 2rem !important;
+                padding-top: 1.5rem !important;
+            }
+
+            .tool-info-section>div[style*="grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
             }
         }
     </style>
@@ -1085,7 +1581,27 @@
                             </svg>
                             <span>Pages &amp; Reordering</span>
                         </span>
-                        <span class="grid-hint">Drag cards to rearrange order</span>
+                        <span class="grid-hint">Drag or tap ◀ ▶ to reorder</span>
+                    </div>
+
+                    <!-- Quick Settings Banner for Mobile -->
+                    <div class="mobile-settings-banner" id="mobile-settings-banner">
+                        <div class="mobile-settings-info">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                style="width: 14px; height: 14px; color: var(--accent-red); flex-shrink: 0;">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                            </svg>
+                            <span id="mobile-settings-text">Fit • Auto • 0 Margin</span>
+                        </div>
+                        <button type="button" class="btn-jump-settings" id="btn-jump-settings">
+                            <span>PDF Setup</span>
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" style="width: 12px; height: 12px;">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </button>
                     </div>
 
                     <div class="images-grid" id="images-grid">
@@ -1151,13 +1667,13 @@
                         <label class="setting-label">Page Margins</label>
                         <div class="segmented-group" id="seg-margin">
                             <button type="button" class="segmented-btn active" data-val="0">
-                                <span>No Margin</span>
+                                <span>None (0)</span>
                             </button>
                             <button type="button" class="segmented-btn" data-val="18">
                                 <span>Small (5mm)</span>
                             </button>
                             <button type="button" class="segmented-btn" data-val="36">
-                                <span>Big (12mm)</span>
+                                <span>Large (12mm)</span>
                             </button>
                         </div>
                     </div>
@@ -1198,7 +1714,7 @@
                                 <path d="M12 18v-6" />
                                 <path d="m9 15 3 3 3-3" />
                             </svg>
-                            <span>Convert to PDF</span>
+                            <span id="mobile-dock-btn-label">Convert to PDF</span>
                         </button>
                     </div>
                 </div>
@@ -1215,7 +1731,7 @@
                     <path d="M12 18v-6" />
                     <path d="m9 15 3 3 3-3" />
                 </svg>
-                <span>Convert to PDF</span>
+                <span id="mobile-dock-btn-label">Convert to PDF</span>
             </button>
         </div>
 
@@ -1456,6 +1972,7 @@
                     segOrientation.querySelectorAll(".segmented-btn").forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
                     settingOrientation = btn.getAttribute("data-val");
+                    updateMobileSettingsSummary();
                 });
             });
 
@@ -1464,8 +1981,40 @@
                     segMargin.querySelectorAll(".segmented-btn").forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
                     settingMargin = parseInt(btn.getAttribute("data-val"), 10);
+                    updateMobileSettingsSummary();
                 });
             });
+
+            selectPageSize.addEventListener("change", () => {
+                updateMobileSettingsSummary();
+            });
+
+            // Mobile Quick Settings Banner Jump
+            const btnJumpSettings = document.getElementById("btn-jump-settings");
+            if (btnJumpSettings) {
+                btnJumpSettings.addEventListener("click", () => {
+                    const sidebar = document.querySelector(".settings-sidebar");
+                    if (sidebar) {
+                        sidebar.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
+            }
+
+            // Update Mobile Summary Info
+            function updateMobileSettingsSummary() {
+                const bannerText = document.getElementById("mobile-settings-text");
+                if (bannerText) {
+                    const sizeName = selectPageSize.options[selectPageSize.selectedIndex]?.text.split("(")[0].trim() || "Fit";
+                    const orientName = settingOrientation.charAt(0).toUpperCase() + settingOrientation.slice(1);
+                    const marginName = settingMargin === 0 ? "0 Margin" : `${settingMargin === 18 ? '5mm' : '12mm'} Margin`;
+                    bannerText.textContent = `${sizeName} • ${orientName} • ${marginName}`;
+                }
+
+                const dockLabel = document.getElementById("mobile-dock-btn-label");
+                if (dockLabel) {
+                    dockLabel.textContent = `Convert ${imageItems.length} ${imageItems.length === 1 ? 'Image' : 'Images'} to PDF`;
+                }
+            }
 
             // File selection & Dropzone
             dropzone.addEventListener("click", () => fileInput.click());
@@ -1583,11 +2132,13 @@
                 dropzone.style.display = "none";
                 configStudio.style.display = "block";
                 resultStudio.style.display = "none";
+                mobileDock.style.display = "";
 
                 // Update Stats
                 const totalBytes = imageItems.reduce((acc, curr) => acc + curr.size, 0);
                 statImageCount.textContent = `${imageItems.length} ${imageItems.length === 1 ? 'Image' : 'Images'}`;
                 statTotalSize.textContent = formatBytes(totalBytes);
+                updateMobileSettingsSummary();
 
                 renderGrid();
             }
@@ -1628,6 +2179,15 @@
                                 <span>${item.rotation % 180 === 0 ? item.width : item.height} × ${item.rotation % 180 === 0 ? item.height : item.width} px</span>
                                 <span>${formatBytes(item.size)}</span>
                             </div>
+                            <div class="card-order-controls">
+                                <button type="button" class="card-order-btn" data-action="move-left" ${index === 0 ? 'disabled' : ''} title="Move left">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px;"><polyline points="15 18 9 12 15 6"/></svg>
+                                </button>
+                                <span class="card-order-label">Page ${index + 1}</span>
+                                <button type="button" class="card-order-btn" data-action="move-right" ${index === imageItems.length - 1 ? 'disabled' : ''} title="Move right">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px;"><polyline points="9 18 15 12 9 6"/></svg>
+                                </button>
+                            </div>
                         </div>
                     `;
 
@@ -1650,6 +2210,28 @@
                         imageItems.splice(index, 1);
                         updateStudioView();
                     });
+
+                    const btnMoveLeft = card.querySelector('[data-action="move-left"]');
+                    if (btnMoveLeft && index > 0) {
+                        btnMoveLeft.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            const tmp = imageItems[index - 1];
+                            imageItems[index - 1] = imageItems[index];
+                            imageItems[index] = tmp;
+                            renderGrid();
+                        });
+                    }
+
+                    const btnMoveRight = card.querySelector('[data-action="move-right"]');
+                    if (btnMoveRight && index < imageItems.length - 1) {
+                        btnMoveRight.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            const tmp = imageItems[index + 1];
+                            imageItems[index + 1] = imageItems[index];
+                            imageItems[index] = tmp;
+                            renderGrid();
+                        });
+                    }
 
                     // Drag and Drop reordering
                     setupDragAndDrop(card, index);
