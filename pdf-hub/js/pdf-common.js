@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Spac2 PDF Suite — Shared Javascript Utilities
  */
 
@@ -198,13 +198,13 @@ const PDF_TOOLS = [
 
 // Initialize theme
 function initTheme() {
-    const savedTheme = localStorage.getItem("spac2_theme") || "dark";
+    const savedTheme = localStorage.getItem("spac2_theme") || "light";
     document.documentElement.setAttribute("data-theme", savedTheme);
     updateThemeIcon(savedTheme);
 }
 
 function toggleTheme() {
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const current = document.documentElement.getAttribute("data-theme") || "light";
     const next = current === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("spac2_theme", next);

@@ -1,10 +1,16 @@
-﻿<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Spac2 PDF Hub</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("spac2_theme") || "light";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+        })();
+    </script>
     <meta name="title" content="Spac2 PDF Hub — Free, Private & Standardized Online PDF Suite">
     <meta name="description"
         content="Complete client-side PDF suite: Merge, split, compress, convert images to PDF, PDF to image, sign, annotate, watermark, and optical OCR without uploading files to any server.">
@@ -36,13 +42,15 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-JCMEMFLZ14');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-JCMEMFLZ14');
     </script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212"
+        crossorigin="anonymous"></script>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/pdf-shared.css?v=3">
@@ -502,12 +510,91 @@
             .tool-grid {
                 gap: 0.45rem !important;
             }
+
             .tool-card {
                 padding: 0.75rem 0.55rem !important;
             }
+
             .tool-card-title {
                 font-size: 0.88rem !important;
             }
+        }
+
+        /* Light Mode Enhancements */
+        [data-theme="light"] .metrics-bar {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        [data-theme="light"] .search-box input {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="light"] .search-box input:focus {
+            background: #ffffff;
+            box-shadow: 0 4px 24px rgba(239, 68, 68, 0.18);
+        }
+
+        [data-theme="light"] .search-box .clear-btn {
+            background: rgba(0, 0, 0, 0.06);
+            color: var(--text-muted);
+        }
+
+        [data-theme="light"] .search-box .clear-btn:hover {
+            background: rgba(0, 0, 0, 0.12);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .search-box .kbd-hint {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.08);
+            color: var(--text-muted);
+        }
+
+        [data-theme="light"] .step-badge {
+            background: #f1f5f9;
+        }
+
+        [data-theme="light"] .tool-card {
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        [data-theme="light"] .tool-card:hover {
+            box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.1), var(--accent-glow);
+            background: #ffffff;
+        }
+
+        [data-theme="light"] .tool-card-icon {
+            background: #f8fafc;
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .tool-card-badge {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.08);
+            color: var(--text-secondary);
+        }
+
+        [data-theme="light"] .feature-box {
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        [data-theme="light"] .feature-box:hover {
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="light"] .faq-item {
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="light"] .workflow-section {
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
         }
     </style>
 
@@ -570,13 +657,15 @@
                 </div>
 
                 <!-- Ecosystem Link -->
-                <a href="https://spac2.com/" class="btn-header-icon" title="Spac2 Ecosystem" aria-label="Spac2 Ecosystem">
+                <a href="https://spac2.com/" class="btn-header-icon" title="Spac2 Ecosystem"
+                    aria-label="Spac2 Ecosystem">
                     <i data-lucide="compass" style="width: 18px; height: 18px;"></i>
                 </a>
 
                 <!-- Theme Toggle -->
-                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
-                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()"
+                    aria-label="Toggle Theme" title="Toggle Light / Dark mode">
+                    <i data-lucide="moon" style="width: 18px; height: 18px;"></i>
                 </button>
             </div>
         </div>
@@ -595,8 +684,7 @@
         <div class="search-filter-wrapper">
             <div class="search-box">
                 <i data-lucide="search" class="search-icon" style="width: 18px; height: 18px;"></i>
-                <input type="text" id="tool-search-input" placeholder="Spac2 Search..."
-                    autocomplete="off">
+                <input type="text" id="tool-search-input" placeholder="Spac2 Search..." autocomplete="off">
                 <button type="button" id="clear-search-btn" class="clear-btn" title="Clear search">
                     <i data-lucide="x" style="width: 14px; height: 14px;"></i>
                 </button>
@@ -612,7 +700,8 @@
                 <i data-lucide="layers" style="width: 20px; height: 20px; color: var(--accent-red);"></i>
                 <span>Tool Directory</span>
             </h2>
-            <span id="tools-count" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">14 tools</span>
+            <span id="tools-count" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">14
+                tools</span>
         </div>
 
         <!-- Tool Cards Container (Structured by Categories or Filtered) -->
@@ -620,23 +709,31 @@
 
         <!-- Empty State -->
         <div id="empty-state" class="empty-state">
-            <i data-lucide="search-x" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 1rem;"></i>
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">No matching tools found</h3>
-            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Try searching for different keywords like "merge", "compress", "image", or "sign".</p>
-            <button type="button" class="btn-secondary" onclick="document.getElementById('tool-search-input').value=''; document.getElementById('tool-search-input').dispatchEvent(new Event('input'));">
+            <i data-lucide="search-x"
+                style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 1rem;"></i>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">No
+                matching tools found</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Try searching for
+                different keywords like "merge", "compress", "image", or "sign".</p>
+            <button type="button" class="btn-secondary"
+                onclick="document.getElementById('tool-search-input').value=''; document.getElementById('tool-search-input').dispatchEvent(new Event('input'));">
                 <i data-lucide="rotate-ccw" style="width: 16px; height: 16px;"></i>
                 <span>View all tools</span>
             </button>
         </div>
 
         <!-- Informational & SEO Section (App Style: Bottom Above Footer) -->
-        <section class="hub-info-section" style="max-width: 1000px; margin: 4rem auto 1rem; padding-top: 2.5rem; border-top: 1px solid var(--border-color); text-align: center;">
+        <section class="hub-info-section"
+            style="max-width: 1000px; margin: 4rem auto 1rem; padding-top: 2.5rem; border-top: 1px solid var(--border-color); text-align: center;">
 
             <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
                 Next-Generation In-Browser PDF Engine
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;">
-                Spac2 PDF Hub runs complex document operations via WebAssembly and PDF.js directly on your local CPU and GPU. Enjoy unlimited document handling with zero server queues, zero artificial quotas, and absolute confidentiality.
+            <p
+                style="font-size: 0.92rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;">
+                Spac2 PDF Hub runs complex document operations via WebAssembly and PDF.js directly on your local CPU and
+                GPU. Enjoy unlimited document handling with zero server queues, zero artificial quotas, and absolute
+                confidentiality.
             </p>
 
             <!-- Metric Stats Bar -->
@@ -667,98 +764,108 @@
                     <div class="metric-label">Free Forever</div>
                 </div>
             </div>
-        <section class="workflow-section">
-            <div class="workflow-header">
-                <h3>Standardized 3-Step Workflow</h3>
-                <p>Fast, precise, and completely frictionless with no account required</p>
-            </div>
-            <div class="workflow-grid">
-                <div class="workflow-step">
-                    <div class="step-badge">1</div>
-                    <h4>Select Tool</h4>
-                    <p>Choose the exact task you want to perform from our comprehensive tool directory.</p>
+            <section class="workflow-section">
+                <div class="workflow-header">
+                    <h3>Standardized 3-Step Workflow</h3>
+                    <p>Fast, precise, and completely frictionless with no account required</p>
                 </div>
-                <div class="workflow-step">
-                    <div class="step-badge">2</div>
-                    <h4>Drop Documents</h4>
-                    <p>Drop your PDF or image files directly into the workspace. Processed locally in memory.</p>
+                <div class="workflow-grid">
+                    <div class="workflow-step">
+                        <div class="step-badge">1</div>
+                        <h4>Select Tool</h4>
+                        <p>Choose the exact task you want to perform from our comprehensive tool directory.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-badge">2</div>
+                        <h4>Drop Documents</h4>
+                        <p>Drop your PDF or image files directly into the workspace. Processed locally in memory.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-badge">3</div>
+                        <h4>Download Result</h4>
+                        <p>Preview crisp, standardized documents and download your output files immediately.</p>
+                    </div>
                 </div>
-                <div class="workflow-step">
-                    <div class="step-badge">3</div>
-                    <h4>Download Result</h4>
-                    <p>Preview crisp, standardized documents and download your output files immediately.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Highlights Features -->
-        <div class="features-grid">
-            <div class="feature-box">
-                <i data-lucide="lock" style="width: 24px; height: 24px;"></i>
-                <div>
-                    <h4>100% Private & Secure</h4>
-                    <p>Your documents are never transmitted to any external server. All computations happen entirely inside your local browser memory.</p>
+            <!-- Highlights Features -->
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i data-lucide="lock" style="width: 24px; height: 24px;"></i>
+                    <div>
+                        <h4>100% Private & Secure</h4>
+                        <p>Your documents are never transmitted to any external server. All computations happen entirely
+                            inside your local browser memory.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <i data-lucide="zap" style="width: 24px; height: 24px;"></i>
+                    <div>
+                        <h4>Lightning-Fast Speed</h4>
+                        <p>Eliminate slow upload and download bottlenecks. Tap directly into the multi-core processing
+                            power of your computer or mobile device.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <i data-lucide="shield" style="width: 24px; height: 24px;"></i>
+                    <div>
+                        <h4>Adobe PDF Standard</h4>
+                        <p>Outputs comply strictly with international ISO 32000 PDF specifications for seamless
+                            rendering across Acrobat, browsers, and printers.</p>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <i data-lucide="infinity" style="width: 24px; height: 24px;"></i>
+                    <div>
+                        <h4>Free Forever & Unlimited</h4>
+                        <p>No document limits, no forced branding watermarks, no sign-ups, and no hidden subscriptions.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="feature-box">
-                <i data-lucide="zap" style="width: 24px; height: 24px;"></i>
-                <div>
-                    <h4>Lightning-Fast Speed</h4>
-                    <p>Eliminate slow upload and download bottlenecks. Tap directly into the multi-core processing power of your computer or mobile device.</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i data-lucide="shield" style="width: 24px; height: 24px;"></i>
-                <div>
-                    <h4>Adobe PDF Standard</h4>
-                    <p>Outputs comply strictly with international ISO 32000 PDF specifications for seamless rendering across Acrobat, browsers, and printers.</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i data-lucide="infinity" style="width: 24px; height: 24px;"></i>
-                <div>
-                    <h4>Free Forever & Unlimited</h4>
-                    <p>No document limits, no forced branding watermarks, no sign-ups, and no hidden subscriptions.</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <div class="faq-header">
-                <h3>Frequently Asked Questions</h3>
-                <p>Everything you need to know about processing documents with Spac2 PDF Hub</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <i data-lucide="help-circle" style="width: 18px; height: 18px; color: var(--accent-red);"></i>
-                        <span>Are my PDF files uploaded or stored on your servers?</span>
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="faq-header">
+                    <h3>Frequently Asked Questions</h3>
+                    <p>Everything you need to know about processing documents with Spac2 PDF Hub</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i data-lucide="help-circle"
+                                style="width: 18px; height: 18px; color: var(--accent-red);"></i>
+                            <span>Are my PDF files uploaded or stored on your servers?</span>
+                        </div>
+                        <div class="faq-answer">
+                            No, absolutely not. All utilities in Spac2 PDF Hub execute 100% client-side via JavaScript
+                            and WebAssembly. Your files stay strictly on your local device.
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        No, absolutely not. All utilities in Spac2 PDF Hub execute 100% client-side via JavaScript and WebAssembly. Your files stay strictly on your local device.
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i data-lucide="help-circle"
+                                style="width: 18px; height: 18px; color: var(--accent-red);"></i>
+                            <span>Is there a file size limit or page count restriction?</span>
+                        </div>
+                        <div class="faq-answer">
+                            Spac2 PDF Hub imposes no artificial size limits. Capabilities scale dynamically with your
+                            device's available memory, smoothly handling large documents with hundreds of pages.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i data-lucide="help-circle"
+                                style="width: 18px; height: 18px; color: var(--accent-red);"></i>
+                            <span>Can I use Spac2 PDF Hub on mobile phones and tablets?</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes. The entire user interface is fully responsive, optimized for smooth touch operations
+                            across iOS, iPadOS, and Android browsers.
+                        </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <i data-lucide="help-circle" style="width: 18px; height: 18px; color: var(--accent-red);"></i>
-                        <span>Is there a file size limit or page count restriction?</span>
-                    </div>
-                    <div class="faq-answer">
-                        Spac2 PDF Hub imposes no artificial size limits. Capabilities scale dynamically with your device's available memory, smoothly handling large documents with hundreds of pages.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <i data-lucide="help-circle" style="width: 18px; height: 18px; color: var(--accent-red);"></i>
-                        <span>Can I use Spac2 PDF Hub on mobile phones and tablets?</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. The entire user interface is fully responsive, optimized for smooth touch operations across iOS, iPadOS, and Android browsers.
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
         </section>
     </main>
 
@@ -785,7 +892,7 @@
                 100% Client-Side • Local Device Processing • Zero Server Uploads
             </div>
             <div style="text-align: center; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-                © 2026 Spac2 Ecosystem. All rights reserved. Standardized Dark Mode (#1F1F1F / #282828 / White) client-side PDF suite.
+                © 2026 Spac2 Ecosystem. All rights reserved. Free & private client-side PDF suite.
             </div>
         </div>
     </footer>
