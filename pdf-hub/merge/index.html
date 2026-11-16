@@ -47,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- All-In-One Self-Contained Stylesheet -->
-    <link rel="stylesheet" href="./css/style.css?v=1">
+    <link rel="stylesheet" href="./css/style.css?v=2">
 </head>
 
 <body>
@@ -60,8 +60,7 @@
                 </a>
                 <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 PDF Hub Home">
                     <div class="brand-logo-card">
-                        <img src="../apple-touch-icon.png" alt="Spac2 Logo" class="brand-logo-img"
-                            onerror="this.src='/apps/pdf-hub/apple-touch-icon.png'">
+                        <img src="https://spac2.com/favicon.ico" alt="Spac2 Logo" class="brand-logo-img">
                     </div>
                     <div class="brand-text">
                         <span class="brand-name">Spac2</span>
@@ -72,15 +71,6 @@
             </div>
 
             <div class="header-right">
-                <!-- Tool Switcher Dropdown -->
-                <div class="tool-switcher">
-                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
-                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                        <span>All tools</span>
-                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
-                    </button>
-                    <div class="tool-dropdown-menu"></div>
-                </div>
 
                 <!-- Theme Toggle -->
                 <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
@@ -98,7 +88,17 @@
         <p class="tool-desc">
             Combine multiple PDF files into a single document. Reorder pages with visual thumbnails, rotate, and merge directly in your browser.
         </p>
-    </section>
+    
+            <!-- Tool Switcher Dropdown -->
+                <div class="tool-switcher">
+                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>All tools</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="tool-dropdown-menu"></div>
+                </div>
+        </section>
 
     <!-- Main Workspace -->
     <main class="workspace-wrap">

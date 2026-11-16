@@ -1799,3 +1799,134 @@ button, a, input, select, textarea {
             color: var(--text-secondary);
             line-height: 1.5;
         }
+/* === Header & Tool Switcher Refinement === */
+.spac2-header-wrapper {
+    padding: calc(0.75rem + env(safe-area-inset-top, 0px)) 1rem 0;
+}
+
+.spac2-header-capsule {
+    border-radius: 9999px !important;
+    padding: 0.45rem 0.65rem !important;
+    background: rgba(34, 34, 38, 0.78) !important;
+    backdrop-filter: blur(28px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.36), 0 2px 8px -2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+[data-theme="light"] .spac2-header-capsule {
+    background: rgba(255, 255, 255, 0.84) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.09), 0 2px 8px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+@media (min-width: 768px) {
+    .spac2-header-capsule {
+        padding: 0.5rem 0.9rem !important;
+    }
+}
+
+.btn-back,
+.btn-header-icon {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 9999px !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+[data-theme="light"] .btn-back,
+[data-theme="light"] .btn-header-icon {
+    background: rgba(15, 23, 42, 0.04) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+.btn-back:hover,
+.btn-header-icon:hover {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: rgba(255, 255, 255, 0.24) !important;
+    transform: translateY(-1px) scale(1.03) !important;
+}
+
+[data-theme="light"] .btn-back:hover,
+[data-theme="light"] .btn-header-icon:hover {
+    background: rgba(15, 23, 42, 0.08) !important;
+    border-color: rgba(15, 23, 42, 0.15) !important;
+}
+
+.brand-logo-card {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 9999px !important;
+    padding: 4px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="light"] .brand-logo-card {
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.06) !important;
+}
+
+.brand-logo-img {
+    border-radius: 9999px !important;
+}
+
+.tool-header-section .tool-switcher,
+.hero-section .tool-switcher {
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 40;
+}
+
+.tool-switcher-btn {
+    border-radius: 9999px !important;
+    padding: 0.48rem 1.15rem !important;
+    height: 40px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+
+[data-theme="light"] .tool-switcher-btn {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(15, 23, 42, 0.1) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.tool-switcher-btn:hover {
+    border-color: rgba(239, 68, 68, 0.45) !important;
+    transform: translateY(-1px);
+}
+
+.tool-switcher-btn span {
+    display: inline !important;
+}
+
+.tool-header-section .tool-dropdown-menu,
+.hero-section .tool-dropdown-menu {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    top: calc(100% + 10px) !important;
+    border-radius: 18px !important;
+    text-align: left;
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.38) !important;
+}
+
+.tool-header-section .tool-dropdown-menu.active,
+.hero-section .tool-dropdown-menu.active {
+    animation: fadeInSwitcherCentered 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInSwitcherCentered {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-6px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
