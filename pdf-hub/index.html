@@ -595,6 +595,162 @@
             background: #ffffff;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
         }
+
+        /* Compact Collapsible Hub Info Toggle & Drawer */
+        .hub-info-wrapper {
+            max-width: 960px;
+            margin: 2.75rem auto 0;
+            text-align: center;
+        }
+
+        .hub-info-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 0.65rem 1.35rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="light"] .hub-info-toggle-btn {
+            background: rgba(255, 255, 255, 0.78);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        }
+
+        .hub-info-toggle-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .hub-info-toggle-btn:active {
+            transform: scale(0.96);
+        }
+
+        .hub-info-toggle-btn .chevron-icon {
+            transition: transform 0.22s ease;
+        }
+
+        .hub-info-toggle-btn[aria-expanded="true"] .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        .hub-info-panel {
+            margin-top: 1.25rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: left;
+            box-shadow: var(--card-glow);
+        }
+
+        .hub-info-panel[hidden] {
+            display: none !important;
+        }
+
+        .hub-info-lead {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hub-info-lead h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .hub-info-lead p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.55;
+        }
+
+        .compact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .compact-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+        }
+
+        .compact-card h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .compact-card p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        .compact-faq {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .compact-faq details {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+        }
+
+        .compact-faq summary {
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            list-style: none;
+        }
+
+        .compact-faq summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .compact-faq p {
+            margin-top: 0.45rem;
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .compact-grid {
+                grid-template-columns: 1fr;
+            }
+            .hub-info-panel {
+                padding: 1.1rem;
+            }
+        }
     </style>
 
     <!-- Schema.org -->
@@ -721,150 +877,56 @@
             </button>
         </div>
 
-        <!-- Informational & SEO Section (App Style: Bottom Above Footer) -->
-        <section class="hub-info-section"
-            style="max-width: 1000px; margin: 4rem auto 1rem; padding-top: 2.5rem; border-top: 1px solid var(--border-color); text-align: center;">
+        <!-- Compact Collapsible Engine Info & FAQ -->
+        <section class="hub-info-wrapper">
+            <button type="button" id="btn-toggle-hub-info" class="hub-info-toggle-btn" aria-expanded="false"
+                aria-controls="hub-info-panel">
+                <span>About Spac2 PDF Engine &amp; FAQ</span>
+                <svg class="chevron-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </button>
 
-            <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
-                Next-Generation In-Browser PDF Engine
-            </h3>
-            <p
-                style="font-size: 0.92rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;">
-                Spac2 PDF Hub runs complex document operations via WebAssembly and PDF.js directly on your local CPU and
-                GPU. Enjoy unlimited document handling with zero server queues, zero artificial quotas, and absolute
-                confidentiality.
-            </p>
+            <div id="hub-info-panel" class="hub-info-panel" hidden>
+                <div class="hub-info-lead">
+                    <h3>Next-Generation In-Browser PDF Engine</h3>
+                    <p>
+                        Spac2 PDF Hub runs via WebAssembly and PDF.js directly on your device—100% client-side, zero
+                        file limits, and free forever with no server uploads.
+                    </p>
+                </div>
 
-            <!-- Metric Stats Bar -->
-            <div class="metrics-bar">
-                <div class="metric-item">
-                    <div class="metric-value">
-                        <span>13</span>
-                        <span class="accent-dot"></span>
+                <div class="compact-grid">
+                    <div class="compact-card">
+                        <h4>1. Select Tool</h4>
+                        <p>Choose the exact task you need from the directory above.</p>
                     </div>
-                    <div class="metric-label">PDF Tools</div>
+                    <div class="compact-card">
+                        <h4>2. Drop Documents</h4>
+                        <p>Files are processed locally in browser memory—never uploaded.</p>
+                    </div>
+                    <div class="compact-card">
+                        <h4>3. Download Result</h4>
+                        <p>Preview your output and download immediately with zero watermarks.</p>
+                    </div>
                 </div>
-                <div class="metric-item">
-                    <div class="metric-value">
-                        <span>100%</span>
-                    </div>
-                    <div class="metric-label">Client-Side</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">
-                        <span>0 MB</span>
-                    </div>
-                    <div class="metric-label">File Limit</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-value">
-                        <span>100%</span>
-                    </div>
-                    <div class="metric-label">Free Forever</div>
+
+                <div class="compact-faq">
+                    <details>
+                        <summary>Are my PDF files uploaded or stored on your servers?</summary>
+                        <p>No. All tools execute 100% client-side via JavaScript and WebAssembly. Your files stay strictly on your device.</p>
+                    </details>
+                    <details>
+                        <summary>Is there a file size limit or page count restriction?</summary>
+                        <p>No artificial limits—performance scales with your device's available memory.</p>
+                    </details>
+                    <details>
+                        <summary>Can I use Spac2 PDF Hub on mobile phones and tablets?</summary>
+                        <p>Yes. Every tool is fully responsive for iOS, iPadOS, and Android browsers.</p>
+                    </details>
                 </div>
             </div>
-            <section class="workflow-section">
-                <div class="workflow-header">
-                    <h3>Standardized 3-Step Workflow</h3>
-                    <p>Fast, precise, and completely frictionless with no account required</p>
-                </div>
-                <div class="workflow-grid">
-                    <div class="workflow-step">
-                        <div class="step-badge">1</div>
-                        <h4>Select Tool</h4>
-                        <p>Choose the exact task you want to perform from our comprehensive tool directory.</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="step-badge">2</div>
-                        <h4>Drop Documents</h4>
-                        <p>Drop your PDF or image files directly into the workspace. Processed locally in memory.</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="step-badge">3</div>
-                        <h4>Download Result</h4>
-                        <p>Preview crisp, standardized documents and download your output files immediately.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Highlights Features -->
-            <div class="features-grid">
-                <div class="feature-box">
-                    <i data-lucide="lock" style="width: 24px; height: 24px;"></i>
-                    <div>
-                        <h4>100% Private & Secure</h4>
-                        <p>Your documents are never transmitted to any external server. All computations happen entirely
-                            inside your local browser memory.</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <i data-lucide="zap" style="width: 24px; height: 24px;"></i>
-                    <div>
-                        <h4>Lightning-Fast Speed</h4>
-                        <p>Eliminate slow upload and download bottlenecks. Tap directly into the multi-core processing
-                            power of your computer or mobile device.</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <i data-lucide="shield" style="width: 24px; height: 24px;"></i>
-                    <div>
-                        <h4>Adobe PDF Standard</h4>
-                        <p>Outputs comply strictly with international ISO 32000 PDF specifications for seamless
-                            rendering across Acrobat, browsers, and printers.</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <i data-lucide="infinity" style="width: 24px; height: 24px;"></i>
-                    <div>
-                        <h4>Free Forever & Unlimited</h4>
-                        <p>No document limits, no forced branding watermarks, no sign-ups, and no hidden subscriptions.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Section -->
-            <section class="faq-section">
-                <div class="faq-header">
-                    <h3>Frequently Asked Questions</h3>
-                    <p>Everything you need to know about processing documents with Spac2 PDF Hub</p>
-                </div>
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i data-lucide="help-circle"
-                                style="width: 18px; height: 18px; color: var(--accent-red);"></i>
-                            <span>Are my PDF files uploaded or stored on your servers?</span>
-                        </div>
-                        <div class="faq-answer">
-                            No, absolutely not. All utilities in Spac2 PDF Hub execute 100% client-side via JavaScript
-                            and WebAssembly. Your files stay strictly on your local device.
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i data-lucide="help-circle"
-                                style="width: 18px; height: 18px; color: var(--accent-red);"></i>
-                            <span>Is there a file size limit or page count restriction?</span>
-                        </div>
-                        <div class="faq-answer">
-                            Spac2 PDF Hub imposes no artificial size limits. Capabilities scale dynamically with your
-                            device's available memory, smoothly handling large documents with hundreds of pages.
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i data-lucide="help-circle"
-                                style="width: 18px; height: 18px; color: var(--accent-red);"></i>
-                            <span>Can I use Spac2 PDF Hub on mobile phones and tablets?</span>
-                        </div>
-                        <div class="faq-answer">
-                            Yes. The entire user interface is fully responsive, optimized for smooth touch operations
-                            across iOS, iPadOS, and Android browsers.
-                        </div>
-                    </div>
-                </div>
-            </section>
         </section>
     </main>
 
@@ -898,8 +960,20 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="js/pdf-common.js?v=3"></script>
+    <script src="js/pdf-common.js?v=4"></script>
     <script src="js/pdf-hub.js?v=3"></script>
+    <script>
+        (function () {
+            var btn = document.getElementById("btn-toggle-hub-info");
+            var panel = document.getElementById("hub-info-panel");
+            if (!btn || !panel) return;
+            btn.addEventListener("click", function () {
+                var expanded = btn.getAttribute("aria-expanded") === "true";
+                btn.setAttribute("aria-expanded", String(!expanded));
+                panel.hidden = expanded;
+            });
+        })();
+    </script>
 </body>
 
 </html>
