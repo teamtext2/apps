@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#FFFFFF">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Spac2 OCR PDF Guide">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Primary SEO Metadata -->
+    <title>Introducing Spac2 OCR PDF: Complete Guide to Extract Text from a PDF File | Spac2</title>
+    <meta name="title" content="Introducing Spac2 OCR PDF: Complete Guide to Extract Text from a PDF File | Spac2">
+    <meta name="description"
+        content="Learn how to extract text from a PDF file for free with Spac2 OCR PDF. A 100% private, browser-based WebAssembly Tesseract.js OCR tool supporting 7 languages, custom page ranges, confidence scoring, and .TXT export.">
+    <meta name="keywords"
+        content="Spac2 OCR PDF, extract text from a PDF file, PDF text extractor, OCR PDF online, PDF to text, Tesseract.js PDF OCR, client-side OCR, scanned PDF to text, spac2.com">
+    <meta name="author" content="Spac2 Engineering Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://spac2.com/apps/pdf-hub/ocr/blog/introduce-end-use-spac2-ocr">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="https://spac2.com/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://spac2.com/apps/pdf-hub/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://spac2.com/apps/pdf-hub/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-JCMEMFLZ14');
+    </script>
+
+    <!-- Umami Analytics -->
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="c4f68426-cd7b-40ed-b788-74c5305b5122"></script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Spac2">
+    <meta property="og:url" content="https://spac2.com/apps/pdf-hub/ocr/blog/introduce-end-use-spac2-ocr">
+    <meta property="og:title" content="Introducing Spac2 OCR PDF: Complete Guide to Extract Text from a PDF File">
+    <meta property="og:description"
+        content="Extract editable text from scanned PDFs, receipts, and photographed documents directly in your browser using WebAssembly AI with 100% local privacy.">
+    <meta property="og:image" content="https://cdn1.spac2.com/app/ocr/preview.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-11-19T15:00:00+07:00">
+    <meta property="article:modified_time" content="2026-11-19T15:00:00+07:00">
+    <meta property="article:author" content="Spac2 Engineering Team">
+    <meta property="article:section" content="Web Applications & Utilities">
+    <meta property="article:tag" content="OCR PDF">
+    <meta property="article:tag" content="Extract Text from PDF">
+    <meta property="article:tag" content="Spac2 PDF Hub">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@spac2com">
+    <meta name="twitter:creator" content="@spac2com">
+    <meta name="twitter:url" content="https://spac2.com/apps/pdf-hub/ocr/blog/introduce-end-use-spac2-ocr">
+    <meta name="twitter:title" content="Introducing Spac2 OCR PDF: Extract Text from a PDF File">
+    <meta name="twitter:description"
+        content="Client-side WebAssembly OCR PDF tool powered by PDF.js and Tesseract.js. Zero server uploads, 7 languages, and instant .TXT export.">
+    <meta name="twitter:image" content="https://cdn1.spac2.com/app/pdf-hub/ocr/preview.png">
+
+    <!-- Schema.org JSON-LD Structured Data for Article, SoftwareApplication & FAQPage -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://spac2.com/apps/pdf-hub/ocr/blog/introduce-end-use-spac2-ocr"
+        },
+        "headline": "Introducing Spac2 OCR PDF: Complete Guide to Extract Text from a PDF File",
+        "description": "Comprehensive introduction and step-by-step user guide for Spac2 OCR PDF — a private, browser-based optical character recognition tool powered by PDF.js and Tesseract.js WebAssembly.",
+        "image": "https://cdn1.spac2.com/app/ocr/preview.png",
+        "author": {
+          "@type": "Organization",
+          "name": "Spac2 Engineering Team",
+          "url": "https://spac2.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Spac2",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://spac2.com/apple-touch-icon.png"
+          }
+        },
+        "datePublished": "2026-11-19T15:00:00+07:00",
+        "dateModified": "2026-11-19T15:00:00+07:00"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Spac2 PDF Hub - Extract text from a PDF file",
+        "operatingSystem": "All",
+        "applicationCategory": "UtilitiesApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "url": "https://spac2.com/apps/pdf-hub/ocr/",
+        "description": "Free client-side OCR PDF tool to extract editable text from scanned documents, receipts, and photographed PDFs directly in your browser."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Are my PDF documents uploaded to a server during OCR?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Spac2 OCR PDF runs 100% client-side inside your browser using PDF.js and Tesseract.js WebAssembly. Your PDF files never leave your device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which languages are supported by Spac2 OCR PDF?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can extract text in 7 built-in languages: English (default), Vietnamese, French, German, Spanish, Chinese Simplified, and Japanese."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I extract text from only specific pages of a large PDF?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Use the Page Range input field to enter 'all' for the entire document or specify custom ranges and individual pages such as '1-3, 5'."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What export options are available after recognition finishes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can review and edit the recognized text directly in the results editor, copy everything to your clipboard in one click, or download a UTF-8 plain text (.TXT) file named after your original PDF."
+            }
+          }
+        ]
+      }
+    ]
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Spac2 Blog Article Editorial Design System -->
+    <style>
+        :root {
+            /* Color Tokens */
+            --bg-page: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --text-primary: #0F172A;
+            --text-content: #334155;
+            --text-muted: #64748B;
+            --text-subtle: #94A3B8;
+            --border-color: #E2E8F0;
+            --border-hover: #CBD5E1;
+            --btn-primary-bg: #0F172A;
+            --btn-primary-hover: #1E293B;
+            --btn-primary-text: #FFFFFF;
+
+            /* Typography Tokens */
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-display: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+            /* Radius Tokens */
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-pill: 9999px;
+
+            /* Layout & Elevation Tokens */
+            --header-max-width: 900px;
+            --article-max-width: 820px;
+            --shadow-header: 0 8px 30px rgba(0, 0, 0, 0.05);
+            --shadow-media: 0 6px 20px rgba(0, 0, 0, 0.04);
+            --transition-base: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-content);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.85;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: clip;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        img,
+        video,
+        iframe {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: var(--text-primary);
+            transition: color var(--transition-base), border-color var(--transition-base), background-color var(--transition-base), transform var(--transition-base);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        summary:focus-visible {
+            outline: 2px solid var(--text-primary);
+            outline-offset: 2px;
+        }
+
+        /* A. Floating Sticky Header */
+        .sticky-header-wrap {
+            position: sticky;
+            top: 14px;
+            z-index: 1000;
+            width: 100%;
+            max-width: var(--header-max-width);
+            margin: 14px auto 0;
+            padding: 0 16px;
+        }
+
+        .floating-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-header);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .header-back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-pill);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .header-back-btn:hover {
+            border-color: var(--border-hover);
+            background: #F1F5F9;
+            transform: translateX(-1.5px);
+        }
+
+        .header-brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            min-width: 0;
+        }
+
+        .header-logo-frame {
+            width: 30px;
+            height: 30px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-page);
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-brand-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-brand-divider {
+            color: var(--text-subtle);
+            font-weight: 600;
+            margin: 0 3px;
+        }
+
+        .header-brand-section {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* B. Article Container */
+        .article-container {
+            width: 100%;
+            max-width: var(--article-max-width);
+            margin: 36px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* C. Article Hero */
+        .article-hero {
+            margin-bottom: 28px;
+        }
+
+        .article-title {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4.4vw, 42px);
+            font-weight: 800;
+            line-height: 1.24;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(16px, 2vw, 18.4px);
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--text-content);
+            margin-bottom: 22px;
+        }
+
+        .article-metadata {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            padding: 14px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .meta-author {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .meta-author-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: var(--radius-pill);
+            background: var(--text-primary);
+            color: var(--btn-primary-text);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+        }
+
+        .meta-dot {
+            color: var(--text-subtle);
+            user-select: none;
+        }
+
+        /* D. Featured Image & Media Cards */
+        .featured-image-wrap {
+            margin: 28px 0 36px;
+        }
+
+        .media-card {
+            background: var(--bg-page);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 10px;
+            box-shadow: var(--shadow-media);
+        }
+
+        .media-card img,
+        .media-card video {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+        }
+
+        .media-card iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            height: auto;
+            border: 0;
+            border-radius: var(--radius-md);
+        }
+
+        .media-caption {
+            margin-top: 10px;
+            padding: 0 6px 2px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* E. Article Content (.prose-section) */
+        .prose-section {
+            font-family: var(--font-body);
+            font-size: 16.5px;
+            line-height: 1.82;
+            color: var(--text-content);
+        }
+
+        .prose-section>*:first-child {
+            margin-top: 0;
+        }
+
+        .prose-section p {
+            margin-bottom: 20px;
+        }
+
+        .prose-section strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .prose-section a {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: underline;
+            text-decoration-color: var(--border-hover);
+            text-underline-offset: 3px;
+        }
+
+        .prose-section a:hover {
+            text-decoration-color: var(--text-primary);
+        }
+
+        .prose-section h2 {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-top: 48px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            scroll-margin-top: 84px;
+        }
+
+        .prose-section h2::before {
+            content: "";
+            width: 4px;
+            height: 22px;
+            margin-top: 0.2em;
+            flex-shrink: 0;
+            border-radius: 4px;
+            background-color: var(--text-primary);
+        }
+
+        .prose-section h3 {
+            font-family: var(--font-display);
+            font-size: clamp(18px, 2.2vw, 21px);
+            font-weight: 700;
+            line-height: 1.38;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            scroll-margin-top: 84px;
+        }
+
+        .prose-section ul,
+        .prose-section ol {
+            margin: 0 0 22px 22px;
+        }
+
+        .prose-section li {
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+
+        .prose-section li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Callout & Notes */
+        .prose-callout {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--text-primary);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin: 26px 0;
+            color: var(--text-content);
+            font-size: 15.8px;
+            line-height: 1.75;
+        }
+
+        .prose-callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Inline Code & Code Blocks */
+        .prose-section code,
+        .prose-section kbd {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 2px 7px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+        }
+
+        .prose-section pre {
+            font-family: var(--font-mono);
+            font-size: 13.5px;
+            line-height: 1.7;
+            background-color: var(--text-primary);
+            color: #E2E8F0;
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            margin: 26px 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .prose-section pre code {
+            background: transparent;
+            border: none;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+
+        /* Responsive Tables */
+        .table-scroll-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0 28px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-page);
+        }
+
+        .prose-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14.5px;
+            line-height: 1.6;
+            min-width: 640px;
+        }
+
+        .prose-table th,
+        .prose-table td {
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+            word-break: normal;
+            overflow-wrap: break-word;
+        }
+
+        .prose-table th {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 12.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
+        .prose-table th:first-child,
+        .prose-table td:first-child {
+            min-width: 160px;
+        }
+
+        .prose-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .status-badge svg {
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .status-badge.is-yes {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .status-badge.is-no {
+            color: var(--text-muted);
+        }
+
+        /* Feature Cards Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 24px 0 28px;
+        }
+
+        .feature-card {
+            padding: 20px;
+            background: var(--bg-page);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: border-color var(--transition-base), background-color var(--transition-base), transform var(--transition-base);
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-hover);
+            background-color: var(--bg-secondary);
+            transform: translateY(-1.5px);
+        }
+
+        .feature-card-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 8px;
+            font-size: 17.5px;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: var(--text-content);
+        }
+
+        /* Step-by-Step Guide */
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 22px 0 28px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 18px 20px;
+            background: var(--bg-page);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: border-color var(--transition-base);
+        }
+
+        .step-item:hover {
+            border-color: var(--border-hover);
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: var(--radius-pill);
+            background: var(--text-primary);
+            color: var(--btn-primary-text);
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-body h3 {
+            margin: 0 0 6px;
+            font-size: 17.5px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .step-body p {
+            margin: 0;
+            font-size: 15.2px;
+            line-height: 1.7;
+            color: var(--text-content);
+        }
+
+        /* FAQ Accordion */
+        .faq-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-page);
+            transition: border-color var(--transition-base);
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-hover);
+        }
+
+        .faq-question {
+            list-style: none;
+            cursor: pointer;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .faq-question::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-question svg {
+            flex-shrink: 0;
+            color: var(--text-muted);
+            transition: transform var(--transition-base);
+        }
+
+        .faq-item[open] .faq-question svg {
+            transform: rotate(180deg);
+            color: var(--text-primary);
+        }
+
+        .faq-answer {
+            padding: 0 20px 18px;
+            font-size: 15.5px;
+            line-height: 1.72;
+            color: var(--text-content);
+        }
+
+        /* F. CTA Banner */
+        .cta-banner {
+            margin-top: 52px;
+            padding: 36px 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .cta-banner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 800;
+            line-height: 1.28;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .cta-banner p {
+            max-width: 560px;
+            font-size: 15.8px;
+            line-height: 1.65;
+            color: var(--text-content);
+            margin: 0;
+        }
+
+        .cta-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .btn-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: var(--radius-pill);
+            background-color: var(--btn-primary-bg);
+            color: var(--btn-primary-text);
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .btn-cta-primary:hover {
+            background-color: var(--btn-primary-hover);
+            color: var(--btn-primary-text);
+            transform: translateY(-1.5px);
+        }
+
+        /* G. Minimalist Footer */
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-page);
+            padding: 36px 20px;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: var(--article-max-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+        }
+
+        .footer-links a {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text-content);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sticky-header-wrap {
+                top: 10px;
+                margin-top: 10px;
+                padding: 0 14px;
+            }
+
+            .article-container {
+                margin-top: 28px;
+                margin-bottom: 64px;
+                padding: 0 18px;
+            }
+
+            .prose-section h2 {
+                margin-top: 38px;
+                margin-bottom: 16px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .feature-card,
+            .step-item {
+                padding: 16px 18px;
+            }
+
+            .cta-banner {
+                padding: 28px 18px;
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sticky-header-wrap {
+                padding: 0 12px;
+            }
+
+            .floating-header {
+                padding: 7px 12px;
+            }
+
+            .article-container {
+                padding: 0 14px;
+                margin-top: 24px;
+                margin-bottom: 56px;
+            }
+
+            .article-title {
+                font-size: 26.4px;
+            }
+
+            .article-subtitle {
+                font-size: 16px;
+            }
+
+            .article-metadata {
+                font-size: 12.5px;
+                gap: 8px 14px;
+            }
+
+            .prose-section {
+                font-size: 16px;
+                line-height: 1.78;
+            }
+
+            .prose-section pre {
+                padding: 14px 16px;
+                font-size: 13px;
+            }
+
+            .media-card {
+                border-radius: 18px;
+                padding: 8px;
+            }
+
+            .media-card img,
+            .media-card video,
+            .media-card iframe {
+                border-radius: 12px;
+            }
+
+            .prose-callout {
+                padding: 14px 16px;
+            }
+
+            .step-item {
+                gap: 12px;
+            }
+
+            .faq-question {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+
+            .faq-answer {
+                padding: 0 16px 16px;
+            }
+
+            .site-footer {
+                padding: 28px 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- A. Floating Sticky Header -->
+    <div class="sticky-header-wrap">
+        <header class="floating-header" aria-label="Article Navigation">
+            <div class="header-left">
+                <a href="/apps/pdf-hub/ocr/" class="header-back-btn" title="Back to Spac2 OCR PDF"
+                    aria-label="Back to Spac2 OCR PDF">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+
+                <a href="https://spac2.com" class="header-brand-link" title="Spac2 Home">
+                    <span class="header-logo-frame">
+                        <img src="https://spac2.com/apps/pdf-hub/android-chrome-192x192.png" alt="Spac2 PDF Hub Logo"
+                            class="header-logo-img" onerror="this.src='https://spac2.com/favicon.ico'">
+                    </span>
+                    <span class="header-brand-text">
+                        Spac2<span class="header-brand-divider">/</span><span class="header-brand-section">Blog</span>
+                    </span>
+                </a>
+            </div>
+        </header>
+    </div>
+
+    <!-- B. Single-Column Article Container -->
+    <main class="article-container">
+        <article>
+            <!-- C. Article Hero -->
+            <header class="article-hero">
+                <h1 class="article-title">
+                    Introducing Spac2 OCR PDF: How to Extract Text from a PDF File Privately
+                </h1>
+                <p class="article-subtitle">
+                    Convert scanned documents, paper invoices, receipts, and photographed PDF pages into editable text
+                    directly inside your browser using WebAssembly AI—with zero server uploads and 100% local privacy.
+                </p>
+
+                <div class="article-metadata">
+                    <span class="meta-author">
+                        <span class="meta-author-icon" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                        <span>By Spac2 Engineering</span>
+                    </span>
+                    <span class="meta-dot" aria-hidden="true">•</span>
+                    <span class="meta-item">
+                        <time datetime="2026-11-19">Updated November 2026</time>
+                    </span>
+                    <span class="meta-dot" aria-hidden="true">•</span>
+                    <span class="meta-item">5 min read</span>
+                    <span class="meta-dot" aria-hidden="true">•</span>
+                    <span class="meta-item">Spac2 PDF Hub</span>
+                </div>
+            </header>
+
+            <!-- D. Featured Image -->
+            <figure class="featured-image-wrap">
+                <a href="/apps/pdf-hub/ocr/" class="media-card" title="Click to launch Spac2 OCR PDF"
+                    style="display: block; text-decoration: none;">
+                    <img src="https://cdn1.spac2.com/app/ocr/preview.png"
+                        alt="Spac2 OCR PDF Interface Preview — Extract Text from a PDF File" fetchpriority="high">
+                </a>
+                <figcaption class="media-caption">
+                    Spac2 OCR PDF — Client-side WebAssembly optical character recognition studio inside Spac2 PDF Hub.
+                </figcaption>
+            </figure>
+
+            <!-- E. Article Content -->
+            <div class="prose-section">
+                <h2 id="what-is-spac2-ocr">What is Spac2 OCR PDF?</h2>
+                <p>
+                    <strong>Spac2 OCR PDF</strong> is a free, browser-based utility inside the
+                    <a href="/apps/pdf-hub/">Spac2 PDF Hub</a> suite built to help you <strong>extract text from a PDF
+                        file</strong> effortlessly—even when the document consists entirely of scanned images,
+                    photographed pages, or flat receipts where text cannot normally be highlighted or copied.
+                </p>
+                <p>
+                    Traditional online OCR converters require uploading confidential contracts, financial statements, or
+                    ID scans to third-party cloud servers. Spac2 OCR PDF takes a completely different approach: it runs
+                    the entire optical character recognition pipeline locally on your device using
+                    <strong>PDF.js</strong> and <strong>Tesseract.js WebAssembly</strong>.
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                        </div>
+                        <h3>100% Client-Side Privacy</h3>
+                        <p>Every PDF page is decoded and recognized locally in browser memory. Sensitive files never
+                            leave your computer or phone.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                        </div>
+                        <h3>7 Recognition Languages</h3>
+                        <p>Supports English, Vietnamese, French, German, Spanish, Chinese Simplified, and Japanese with
+                            dedicated neural language models.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                        </div>
+                        <h3>Custom Page Range Scope</h3>
+                        <p>Process the entire document (<code>all</code>) or target only specific pages and ranges like
+                            <code>1-3, 5</code> to save time on large files.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-card-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                        </div>
+                        <h3>Confidence Score &amp; .TXT Export</h3>
+                        <p>Review OCR confidence percentage, total word count, edit recognized text inline, copy in 1
+                            click, or download a clean <code>.txt</code> file.</p>
+                    </div>
+                </div>
+
+                <div class="prose-callout">
+                    <p>
+                        <strong>Zero Account &amp; Zero File Limits:</strong> Open Spac2 OCR PDF and start extracting
+                        text immediately—no sign-up walls, no daily page caps, and no watermarks.
+                    </p>
+                </div>
+
+                <h2 id="architecture">Under the Hood: How the Browser OCR Engine Works</h2>
+                <p>
+                    Understanding how Spac2 OCR PDF processes your document helps you get the sharpest text recognition
+                    results:
+                </p>
+                <ul>
+                    <li><strong>2.0x High-DPI Canvas Rendering:</strong> When you start OCR, <code>PDF.js</code>
+                        renders each selected page onto an offscreen HTML5 canvas at <code>scale: 2.0</code> over a
+                        clean white background (<code>#ffffff</code>) so small fonts and scanned receipts stay crisp for
+                        character detection.</li>
+                    <li><strong>WebAssembly Neural Recognition:</strong> <code>Tesseract.js v5</code> spawns an
+                        isolated WebAssembly worker using your chosen language model and processes pages sequentially,
+                        updating the live progress bar and status message per page.</li>
+                    <li><strong>Structured Page Output &amp; Quality Metrics:</strong> Recognized text is formatted
+                        with clear <code>--- Page X ---</code> dividers, alongside an averaged confidence badge
+                        (e.g., <code>98% Confidence</code>) and an accurate word counter.</li>
+                    <li><strong>Adaptive Workspace &amp; Theme Support:</strong> Switch seamlessly between Light and
+                        Dark mode via the header toggle, or jump to other PDF tools (Merge, Split, Compress, PDF to
+                        Word, Sign, Watermark) from the <strong>All tools</strong> quick switcher.</li>
+                </ul>
+
+                <h2 id="supported-languages">Supported OCR Languages</h2>
+                <p>
+                    Before starting recognition, select the primary language of your scanned PDF from the
+                    <strong>Document Language</strong> dropdown for optimal accuracy:
+                </p>
+                <ul>
+                    <li><code>eng</code> — <strong>English</strong> (Default)</li>
+                    <li><code>vie</code> — <strong>Vietnamese</strong> (Tiếng Việt)</li>
+                    <li><code>fra</code> — <strong>French</strong> (Français)</li>
+                    <li><code>deu</code> — <strong>German</strong> (Deutsch)</li>
+                    <li><code>spa</code> — <strong>Spanish</strong> (Español)</li>
+                    <li><code>chi_sim</code> — <strong>Chinese Simplified</strong> (简体中文)</li>
+                    <li><code>jpn</code> — <strong>Japanese</strong> (日本語)</li>
+                </ul>
+
+                <h2 id="step-by-step-guide">How to Extract Text from a PDF File: Step-by-Step</h2>
+
+                <div class="steps-list">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-body">
+                            <h3>Upload or Drop Your Scanned PDF</h3>
+                            <p>Open <a href="/apps/pdf-hub/ocr/">spac2.com/apps/pdf-hub/ocr/</a> and drag and drop any
+                                <code>.pdf</code> file onto the dropzone—or click <strong>Select Scanned PDF</strong>
+                                to browse your device. Spac2 immediately reads the file name, size, and total page
+                                count locally.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-body">
+                            <h3>Choose Document Language &amp; Page Range</h3>
+                            <p>In the OCR Studio configuration card, pick the matching <strong>Document
+                                    Language</strong>
+                                and set the <strong>Page Range</strong>. Leave <code>all</code> to scan every page, or
+                                type a custom scope such as <code>1-3, 5</code> to extract text from specific pages
+                                only. Need a different file? Click <strong>Change File</strong> anytime.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-body">
+                            <h3>Run Optical Character Recognition</h3>
+                            <p>Click <strong>Start Optical Recognition</strong>. The Tesseract.js WebAssembly engine
+                                initializes the selected language model and displays real-time progress (page index and
+                                overall percentage) as each page is rendered and scanned.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-body">
+                            <h3>Review, Edit, Copy, or Download .TXT</h3>
+                            <p>Once complete, inspect the confidence score and word count in the Results toolbar. You
+                                can edit any character directly in the text area, click <strong>Copy All</strong> to
+                                copy to your clipboard, click <strong>Download .TXT</strong> to save
+                                <code>&lt;filename&gt;-ocr.txt</code>, or press <strong>OCR Another</strong> to
+                                process a new document.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="comparison">Why Choose Spac2 OCR PDF?</h2>
+                <p>
+                    See how Spac2 OCR PDF compares against cloud-based OCR websites and paid desktop PDF suites:
+                </p>
+
+                <div class="table-scroll-wrap">
+                    <table class="prose-table">
+                        <thead>
+                            <tr>
+                                <th>Feature / Metric</th>
+                                <th>Spac2 OCR PDF</th>
+                                <th>Typical Online OCR Sites</th>
+                                <th>Paid Desktop Suites</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Document Privacy</strong></td>
+                                <td>
+                                    <span class="status-badge is-yes">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        100% Local Browser Processing
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-no">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                        Uploads Files to Remote Servers
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-yes">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        Local Processing
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cost &amp; Limits</strong></td>
+                                <td>
+                                    <span class="status-badge is-yes">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        100% Free, No Daily Cap
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-no">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                        Paywalls &amp; Page Quotas
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-no">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                        Monthly Subscription Required
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Installation Required</strong></td>
+                                <td>
+                                    <span class="status-badge is-yes">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        Instant Web App (Any OS)
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-yes">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        Browser-Based
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-no">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                        Heavy Desktop Installer
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Selective Page Range</strong></td>
+                                <td>
+                                    <span class="status-badge is-yes">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        Custom Ranges (e.g., 1-3, 5)
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-no">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                        Often Locked to Pro Tier
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge is-yes">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        Supported
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="faq">Frequently Asked Questions (FAQ)</h2>
+
+                <div class="faq-group">
+                    <details class="faq-item" open>
+                        <summary class="faq-question">
+                            <span>Are my PDF files uploaded to any server?</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            No. Spac2 OCR PDF runs 100% locally in your browser using <code>PDF.js</code> and
+                            <code>Tesseract.js</code> WebAssembly. Your documents never leave your device, making it
+                            safe for contracts, invoices, IDs, and private notes.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How do I get the best OCR accuracy on scanned documents?</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            Always select the exact <strong>Document Language</strong> matching your PDF before clicking
+                            <strong>Start Optical Recognition</strong>. For example, choose <em>Vietnamese (Tiếng
+                                Việt)</em> for Vietnamese accents or <em>Japanese</em> for Japanese text. Clear,
+                            well-lit scans also yield higher confidence scores.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How does the Page Range syntax work?</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            Type <code>all</code> (default) to scan every page, or enter comma-separated page numbers
+                            and hyphenated ranges like <code>1-3, 5</code> to extract text only from pages 1, 2, 3, and
+                            5.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Can I edit the extracted text before downloading?</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            Yes. The results view displays an editable plain-text area. You can fix any minor typos or
+                            remove page dividers before clicking <strong>Copy All</strong> or <strong>Download
+                                .TXT</strong>.
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- F. CTA Banner -->
+            <section class="cta-banner" aria-label="Launch Spac2 OCR PDF">
+                <h2>Extract Text from Your PDF File Now</h2>
+                <p>
+                    Turn scanned PDFs, receipts, and photographed pages into clean, editable text in seconds—100%
+                    free and private in your browser.
+                </p>
+                <div class="cta-actions">
+                    <a href="/apps/pdf-hub/ocr/" class="btn-cta-primary">
+                        <span>Launch Spac2 OCR PDF</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- G. Minimalist Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <nav class="footer-links" aria-label="Footer Navigation">
+                <a href="https://spac2.com">Spac2 Home</a>
+                <a href="/apps/pdf-hub/">PDF Hub</a>
+                <a href="/apps/pdf-hub/ocr/">OCR PDF App</a>
+                <a href="/blog/terms-of-use">Terms of Use</a>
+                <a href="/blog/privacy-policy">Privacy Policy</a>
+            </nav>
+            <p class="footer-copyright">© 2026 Spac2. Built for modern web computing. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
