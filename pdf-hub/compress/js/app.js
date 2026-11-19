@@ -1,687 +1,512 @@
 /**
- * Spac2 PDF Suite — Shared Javascript Utilities
+ * Spac2 Compress PDF — Client-Side Dual-Engine Compressor
  */
+(function () {
+    "use strict";
 
-const PDF_CATEGORIES = {
-    organize: {
-        id: "organize",
-        name: "Organize & Pages",
-        icon: "layers",
-        desc: "Merge, split, reorder, rotate, and crop PDF pages effortlessly."
-    },
-    convert: {
-        id: "convert",
-        name: "Convert & Compress",
-        icon: "refresh-cw",
-        desc: "Convert images to PDF, export high-res images, and compress file size."
-    },
-    edit: {
-        id: "edit",
-        name: "Edit, Sign & Watermark",
-        icon: "pen-tool",
-        desc: "Annotate pages, apply digital signatures, and add copyright watermarks."
-    },
-    extract: {
-        id: "extract",
-        name: "AI & Data Extraction",
-        icon: "scan-text",
-        desc: "Optical Character Recognition (OCR) and document metadata management."
-    }
-};
+    const PDF_TOOLS = [
+        { id: "ocr", title: "OCR PDF", subtitle: "AI optical recognition", url: "/apps/pdf-hub/ocr/", badge: "AI Vision" },
+        { id: "pdf-to-doc", title: "PDF to Word (DOCX)", subtitle: "Convert to DOCX document", url: "/apps/pdf-hub/pdf-to-doc/", badge: "Word DOCX" },
+        { id: "pdf-to-image", title: "PDF to Images", subtitle: "Export high-res photos", url: "/apps/pdf-hub/pdf-to-image/", badge: "High-DPI" },
+        { id: "images-to-pdf", title: "Images to PDF", subtitle: "Convert JPG, PNG to PDF", url: "/apps/pdf-hub/images-to-pdf/", badge: "Popular" },
+        { id: "compress", title: "Compress PDF", subtitle: "Reduce file size", url: "/apps/pdf-hub/compress/", badge: "Optimization" }
+    ];
 
-const PDF_TOOLS = [
-    {
-        id: "merge",
-        title: "Merge PDF",
-        subtitle: "Combine multiple PDF files",
-        url: "/apps/pdf-hub/merge",
-        desc: "Combine multiple PDF documents into a single unified file with flexible drag-and-drop ordering.",
-        category: "organize",
-        icon: "files",
-        badge: "Popular",
-        hot: true,
-        tag: "Multi-file merge",
-        keywords: "merge combine join pdf files ghep noi gop file"
-    },
-    {
-        id: "split",
-        title: "Split PDF",
-        subtitle: "Extract or divide pages",
-        url: "/apps/pdf-hub/split",
-        desc: "Extract specific page ranges or split each page into standalone individual PDF files.",
-        category: "organize",
-        icon: "scissors",
-        badge: "Utility",
-        tag: "Page ranges",
-        keywords: "split extract divide separate pages tach cat trang"
-    },
-    {
-        id: "organize",
-        title: "Organize PDF",
-        subtitle: "Reorder, rotate & delete",
-        url: "/apps/pdf-hub/organize",
-        desc: "Rearrange page orders, rotate orientations by 90°, delete unwanted pages, or extract selected sheets.",
-        category: "organize",
-        icon: "grid",
-        badge: "Visual",
-        tag: "Drag & drop pages",
-        keywords: "organize reorder sort rotate delete remove pages sap xep xoay trang"
-    },
-    {
-        id: "compress",
-        title: "Compress PDF",
-        subtitle: "Reduce file size",
-        url: "/apps/pdf-hub/compress",
-        desc: "Shrink PDF file size directly in your browser while preserving optimal visual clarity and layout fidelity.",
-        category: "convert",
-        icon: "minimize-2",
-        badge: "Optimization",
-        hot: true,
-        tag: "Max compression",
-        keywords: "compress shrink optimize reduce file size nen giam dung luong"
-    },
-    {
-        id: "pdf-to-image",
-        title: "PDF to Image",
-        subtitle: "Export high-res photos",
-        url: "/apps/pdf-hub/pdf-to-image",
-        desc: "Render and export every PDF page into crystal-clear PNG or JPG images at high resolution (150/300 DPI).",
-        category: "convert",
-        icon: "file-image",
-        badge: "High-DPI",
-        tag: "PNG / JPG export",
-        keywords: "pdf to image export render png jpg photos chuyen pdf sang anh"
-    },
-    {
-        id: "images-to-pdf",
-        title: "Images to PDF",
-        subtitle: "Convert JPG, PNG to PDF",
-        url: "/apps/pdf-hub/images-to-pdf",
-        desc: "Convert JPG, PNG, WebP images to high-quality PDF documents with custom page sizes, margins, and reordering.",
-        category: "convert",
-        icon: "image",
-        badge: "Popular",
-        hot: true,
-        tag: "JPG/PNG to PDF",
-        keywords: "images to pdf jpg to pdf png to pdf convert picture photo chuyen anh sang pdf gop anh thanh pdf"
-    },
-    {
-        id: "pdf-to-doc",
-        title: "PDF to Word (DOCX)",
-        subtitle: "Convert to DOCX document",
-        url: "/apps/pdf-hub/pdf-to-doc",
-        desc: "Convert PDF files into Microsoft Word (.docx) documents with 100% Visual Image mode or Editable Text Flow reconstruction.",
-        category: "convert",
-        icon: "file-text",
-        badge: "Word DOCX",
-        hot: true,
-        tag: "Visual or Editable",
-        keywords: "pdf to doc pdf to docx convert word chuyen pdf sang word van ban"
-    },
-    {
-        id: "annotate",
-        title: "Annotate PDF",
-        subtitle: "Draw, highlight & notes",
-        url: "/apps/pdf-hub/annotate",
-        desc: "Add custom text notes, freehand drawings, colored highlights, shapes, and arrows directly onto documents.",
-        category: "edit",
-        icon: "edit-3",
-        badge: "Editor",
-        hot: true,
-        tag: "Highlight & notes",
-        keywords: "annotate edit highlight draw note mark chu thich ghi chu to sang"
-    },
-    {
-        id: "sign",
-        title: "Sign PDF",
-        subtitle: "Electronic signatures",
-        url: "/apps/pdf-hub/sign",
-        desc: "Draw electronic handwritten signatures or upload official stamp seals to place accurately on documents.",
-        category: "edit",
-        icon: "pen-tool",
-        badge: "Fast Sign",
-        hot: true,
-        tag: "E-signature & seal",
-        keywords: "sign signature e-sign stamp seal ky ten chu ky dien tu"
-    },
-    {
-        id: "watermark",
-        title: "Watermark PDF",
-        subtitle: "Stamp copyright & logo",
-        url: "/apps/pdf-hub/watermark",
-        desc: "Overlay copyright watermarks, insert transparent company logos, and automatically insert page numbers.",
-        category: "edit",
-        icon: "stamp",
-        badge: "Copyright",
-        tag: "Logo & page number",
-        keywords: "watermark stamp logo copyright page number dong dau chu chim ban quyen"
-    },
-    {
-        id: "crop-resize",
-        title: "Crop & Resize PDF",
-        subtitle: "Trim margins & formats",
-        url: "/apps/pdf-hub/crop-resize",
-        desc: "Visually trim whitespace margins, switch paper formats (A4, Letter, A3), and standardize dimensions.",
-        category: "organize",
-        icon: "crop",
-        badge: "Paper Size",
-        tag: "A4, Letter, A3",
-        keywords: "crop resize trim margins paper size dimension cat le doi kho giay"
-    },
+    const SVG = {
+        tool: '<svg class="tool-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        success: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+        error: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+        info: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+    };
 
-    {
-        id: "ocr",
-        title: "OCR PDF",
-        subtitle: "AI optical recognition",
-        url: "/apps/pdf-hub/ocr",
-        desc: "Extract editable text from scanned documents or photographed pages directly within your browser.",
-        category: "extract",
-        icon: "scan",
-        badge: "AI Vision",
-        ai: true,
-        tag: "Scan to text",
-        keywords: "ocr optical character recognition scan image to text ai nhan dien chu quang hoc"
-    },
-    {
-        id: "metadata",
-        title: "PDF Metadata",
-        subtitle: "Edit & strip metadata",
-        url: "/apps/pdf-hub/metadata",
-        desc: "Inspect and edit title, author, and keyword properties, or wipe hidden metadata completely for privacy.",
-        category: "extract",
-        icon: "info",
-        badge: "Privacy",
-        tag: "Wipe hidden data",
-        keywords: "metadata properties author title keywords privacy clean xoa thong tin an"
-    }
-];
-
-// Initialize theme
-function initTheme() {
-    const savedTheme = localStorage.getItem("spac2_theme") || "light";
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    updateThemeIcon(savedTheme);
-}
-
-function toggleTheme() {
-    const current = document.documentElement.getAttribute("data-theme") || "light";
-    const next = current === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("spac2_theme", next);
-    updateThemeIcon(next);
-}
-
-function updateThemeIcon(theme) {
-    const btn = document.getElementById("theme-toggle-btn");
-    if (!btn) return;
-    const icon = btn.querySelector("i");
-    if (icon) {
-        icon.setAttribute("data-lucide", theme === "dark" ? "sun" : "moon");
-        if (window.lucide) window.lucide.createIcons();
-    }
-}
-
-// Toast notification
-function showToast(message, type = "info") {
-    let container = document.getElementById("toast-container");
-    if (!container) {
-        container = document.createElement("div");
-        container.id = "toast-container";
-        document.body.appendChild(container);
+    if (window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
     }
 
-    const toast = document.createElement("div");
-    toast.className = `toast toast-${type}`;
-    const iconName = type === "success" ? "check-circle" : type === "error" ? "alert-circle" : "info";
-    toast.innerHTML = `
-        <i data-lucide="${iconName}" style="width: 18px; height: 18px; shrink: 0;"></i>
-        <span>${message}</span>
-    `;
+    // =========================================================================
+    // Theme Management
+    // =========================================================================
+    function getActiveTheme() {
+        return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+    }
 
-    container.appendChild(toast);
-    if (window.lucide) window.lucide.createIcons({ root: toast });
+    function updateThemeIcons(theme) {
+        const sun = document.getElementById("theme-icon-sun");
+        const moon = document.getElementById("theme-icon-moon");
+        if (!sun || !moon) return;
+        sun.hidden = theme !== "dark";
+        moon.hidden = theme === "dark";
+    }
 
-    setTimeout(() => {
-        toast.style.opacity = "0";
-        toast.style.transform = "translateY(10px) scale(0.95)";
-        toast.style.transition = "all 0.25s ease";
-        setTimeout(() => toast.remove(), 250);
-    }, 3500);
-}
+    function toggleTheme() {
+        const next = getActiveTheme() === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        try {
+            localStorage.setItem("spac2_theme", next);
+        } catch (e) {}
+        updateThemeIcons(next);
+    }
 
-// Format bytes
-function formatBytes(bytes, decimals = 2) {
-    if (!bytes || bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-}
-
-// Download blob
-function downloadBlob(blob, filename) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 100);
-}
-
-// Setup Dropzone
-function setupDropzone(zoneElement, inputElement, onFilesSelected) {
-    if (!zoneElement || !inputElement) return;
-
-    zoneElement.addEventListener("click", () => inputElement.click());
-
-    zoneElement.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        zoneElement.classList.add("drag-over");
-    });
-
-    zoneElement.addEventListener("dragleave", (e) => {
-        e.preventDefault();
-        zoneElement.classList.remove("drag-over");
-    });
-
-    zoneElement.addEventListener("drop", (e) => {
-        e.preventDefault();
-        zoneElement.classList.remove("drag-over");
-        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            onFilesSelected(e.dataTransfer.files);
+    // =========================================================================
+    // Utilities
+    // =========================================================================
+    function showToast(message, type = "info") {
+        let container = document.getElementById("toast-container");
+        if (!container) {
+            container = document.createElement("div");
+            container.id = "toast-container";
+            document.body.appendChild(container);
         }
-    });
 
-    inputElement.addEventListener("change", (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            onFilesSelected(e.target.files);
-        }
-    });
-}
+        const toast = document.createElement("div");
+        toast.className = `toast toast-${type}`;
 
-// Initialize Tool Switcher Dropdown
-function initToolSwitcher() {
-    const switcher = document.querySelector(".tool-switcher");
-    if (!switcher) return;
+        const iconWrap = document.createElement("span");
+        iconWrap.innerHTML = SVG[type] || SVG.info;
 
-    const btn = switcher.querySelector(".tool-switcher-btn");
-    const menu = switcher.querySelector(".tool-dropdown-menu");
-    if (!btn || !menu) return;
+        const textSpan = document.createElement("span");
+        textSpan.textContent = message;
 
-    // Populate items if empty
-    if (menu.children.length === 0) {
-        PDF_TOOLS.forEach(tool => {
+        toast.appendChild(iconWrap.firstChild);
+        toast.appendChild(textSpan);
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translateY(8px) scale(0.96)";
+            toast.style.transition = "all 0.22s ease";
+            setTimeout(() => toast.remove(), 230);
+        }, 3400);
+    }
+
+    function formatBytes(bytes) {
+        if (!bytes || bytes <= 0) return "0 B";
+        const units = ["B", "KB", "MB", "GB"];
+        const i = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+        const value = bytes / Math.pow(1024, i);
+        return `${value < 10 && i > 0 ? value.toFixed(1) : Math.round(value)} ${units[i]}`;
+    }
+
+    function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 150);
+    }
+
+    function canvasToJpegBytes(canvas, quality) {
+        return new Promise((resolve) => {
+            canvas.toBlob(
+                async (blob) => {
+                    if (!blob) return resolve(null);
+                    const buf = await blob.arrayBuffer();
+                    resolve(new Uint8Array(buf));
+                },
+                "image/jpeg",
+                quality
+            );
+        });
+    }
+
+    // =========================================================================
+    // Tool Switcher
+    // =========================================================================
+    function initToolSwitcher() {
+        const btn = document.getElementById("tool-switcher-btn");
+        const menu = document.getElementById("tool-dropdown-menu");
+        if (!btn || !menu) return;
+
+        PDF_TOOLS.forEach((tool) => {
             const item = document.createElement("a");
             item.href = tool.url;
-            item.className = "tool-dropdown-item";
+            item.className = "tool-dropdown-item" + (tool.id === "compress" ? " is-current" : "");
+            item.setAttribute("role", "menuitem");
             item.innerHTML = `
-                <i data-lucide="${tool.icon}" style="width: 16px; height: 16px; flex-shrink: 0; color: var(--accent-red);"></i>
-                <div style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0;">
-                    <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">${tool.title}</span>
-                    <span style="font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${tool.subtitle || ''}</span>
+                ${SVG.tool}
+                <div class="tool-dropdown-text">
+                    <span class="tool-dropdown-title"></span>
+                    <span class="tool-dropdown-sub"></span>
                 </div>
-                <span style="font-size: 0.68rem; color: var(--text-muted); padding: 0.15rem 0.45rem; background: rgba(255, 255, 255, 0.05); border-radius: 9999px; white-space: nowrap;">${tool.badge}</span>
+                <span class="tool-dropdown-badge"></span>
             `;
+            item.querySelector(".tool-dropdown-title").textContent = tool.title;
+            item.querySelector(".tool-dropdown-sub").textContent = tool.subtitle;
+            item.querySelector(".tool-dropdown-badge").textContent = tool.badge;
             menu.appendChild(item);
         });
+
+        function closeMenu() {
+            menu.classList.remove("active");
+            btn.setAttribute("aria-expanded", "false");
+        }
+
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = menu.classList.toggle("active");
+            btn.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!menu.contains(e.target) && e.target !== btn) closeMenu();
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeMenu();
+        });
     }
 
-    btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        menu.classList.toggle("active");
-    });
+    // =========================================================================
+    // Main Application
+    // =========================================================================
+    document.addEventListener("DOMContentLoaded", () => {
+        updateThemeIcons(getActiveTheme());
+        initToolSwitcher();
 
-    document.addEventListener("click", () => {
-        menu.classList.remove("active");
-    });
-}
+        const themeBtn = document.getElementById("theme-toggle-btn");
+        if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
 
-// Document Ready
-document.addEventListener("DOMContentLoaded", () => {
-    initTheme();
-    initToolSwitcher();
-    if (window.lucide) {
-        window.lucide.createIcons();
-    }
-});
+        // Views
+        const dropzone = document.getElementById("dropzone");
+        const fileInput = document.getElementById("file-input");
+        const btnSelectFile = document.getElementById("btn-select-file");
+        const configStudio = document.getElementById("config-studio");
+        const progressStudio = document.getElementById("progress-studio");
+        const resultStudio = document.getElementById("result-studio");
 
-// === App-Specific Script (compress) ===
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        // Summary & Config
+        const fileNameLabel = document.getElementById("file-name-label");
+        const fileSizePill = document.getElementById("file-size-pill");
+        const filePagesPill = document.getElementById("file-pages-pill");
+        const btnChangeFile = document.getElementById("btn-change-file");
+        const presetCards = document.querySelectorAll(".preset-card");
+        const btnToggleAdv = document.getElementById("btn-toggle-advanced");
+        const advPanel = document.getElementById("advanced-panel");
+        const toggleGrayscale = document.getElementById("toggle-grayscale");
+        const btnStartCompress = document.getElementById("btn-start-compress");
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const dropzone = document.getElementById("dropzone");
-            const fileInput = document.getElementById("file-input");
-            const btnSelectFile = document.getElementById("btn-select-file");
+        // Progress
+        const progressBarFill = document.getElementById("progress-bar-fill");
+        const progressBarRole = document.getElementById("progress-bar-role");
+        const progressPercent = document.getElementById("progress-percent");
+        const progressStatusText = document.getElementById("progress-status-text");
+        const btnCancelCompress = document.getElementById("btn-cancel-compress");
 
-            // Studio sections
-            const configStudio = document.getElementById("config-studio");
-            const progressStudio = document.getElementById("progress-studio");
-            const resultStudio = document.getElementById("result-studio");
+        // Results
+        const resOriginalSize = document.getElementById("res-original-size");
+        const resCompressedSize = document.getElementById("res-compressed-size");
+        const resSavedPercent = document.getElementById("res-saved-percent");
+        const resEngineText = document.getElementById("res-engine-text");
+        const resSummaryDesc = document.getElementById("res-summary-desc");
+        const btnDownloadResult = document.getElementById("btn-download-result");
+        const btnBackConfig = document.getElementById("btn-back-config");
+        const btnCompressAnother = document.getElementById("btn-compress-another");
 
-            // Summary elements
-            const fileNameLabel = document.getElementById("file-name-label");
-            const fileSizeLabel = document.getElementById("file-size-label");
-            const btnChangeFile = document.getElementById("btn-change-file");
+        // State
+        let loadedFile = null;
+        let loadedBuffer = null;
+        let pdfDoc = null;
+        let totalPages = 0;
+        let selectedPreset = "recommended";
+        let compressedBlob = null;
+        let isCompressionCancelled = false;
 
-            // Presets
-            const presetCards = document.querySelectorAll(".preset-card");
-            let selectedPreset = "recommended";
+        function setView(viewName) {
+            dropzone.hidden = viewName !== "dropzone";
+            configStudio.hidden = viewName !== "config";
+            progressStudio.hidden = viewName !== "progress";
+            resultStudio.hidden = viewName !== "result";
+            document.body.classList.toggle("in-studio-mode", viewName !== "dropzone");
+        }
 
-            // Advanced options
-            const btnToggleAdv = document.getElementById("btn-toggle-advanced");
-            const advPanel = document.getElementById("advanced-panel");
-            const advArrow = document.getElementById("adv-arrow");
-            const toggleGrayscale = document.getElementById("toggle-grayscale");
+        function resetToUpload() {
+            isCompressionCancelled = true;
+            if (pdfDoc && typeof pdfDoc.destroy === "function") {
+                pdfDoc.destroy().catch(() => {});
+            }
+            loadedFile = null;
+            loadedBuffer = null;
+            pdfDoc = null;
+            totalPages = 0;
+            compressedBlob = null;
+            fileInput.value = "";
+            setView("dropzone");
+        }
 
-            // Actions & Progress
-            const btnStartCompress = document.getElementById("btn-start-compress");
-            const btnCancelCompress = document.getElementById("btn-cancel-compress");
-            const progressBarFill = document.getElementById("progress-bar-fill");
-            const progressPercent = document.getElementById("progress-percent");
-            const progressStatusText = document.getElementById("progress-status-text");
+        // Dropzone Interactions
+        btnSelectFile.addEventListener("click", (e) => {
+            e.stopPropagation();
+            fileInput.click();
+        });
 
-            // Results elements
-            const resOriginalSize = document.getElementById("res-original-size");
-            const resCompressedSize = document.getElementById("res-compressed-size");
-            const resSavedPercent = document.getElementById("res-saved-percent");
-            const resEngineBadge = document.getElementById("res-engine-badge");
-            const resEngineText = document.getElementById("res-engine-text");
-            const resSummaryDesc = document.getElementById("res-summary-desc");
-            const btnDownloadResult = document.getElementById("btn-download-result");
-            const btnCompressAnother = document.getElementById("btn-compress-another");
+        dropzone.addEventListener("click", () => fileInput.click());
 
-            // File & Operation State
-            let loadedFile = null;
-            let loadedBuffer = null;
-            let pdfDoc = null;
-            let totalPages = 0;
-            let compressedBlob = null;
-            let isCompressionCancelled = false;
+        dropzone.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                fileInput.click();
+            }
+        });
 
-            // Prevent double-click issue on button inside dropzone
-            if (btnSelectFile) {
-                btnSelectFile.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    fileInput.click();
-                });
+        dropzone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropzone.classList.add("drag-over");
+        });
+
+        dropzone.addEventListener("dragleave", (e) => {
+            if (!dropzone.contains(e.relatedTarget)) {
+                dropzone.classList.remove("drag-over");
+            }
+        });
+
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropzone.classList.remove("drag-over");
+            if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                initFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener("change", (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                initFile(e.target.files[0]);
+            }
+        });
+
+        async function initFile(file) {
+            if (!file) return;
+            if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+                showToast("Please upload a valid PDF file.", "error");
+                return;
+            }
+            if (!window.pdfjsLib) {
+                showToast("PDF engine failed to load. Please refresh.", "error");
+                return;
             }
 
-            // Setup Dropzone
-            setupDropzone(dropzone, fileInput, (files) => {
-                if (!files || files.length === 0) return;
-                const file = files[0];
-                if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
-                    showToast("Please upload a valid PDF file.", "error");
-                    return;
+            try {
+                showToast("Reading PDF document...", "info");
+                const buffer = await file.arrayBuffer();
+                const doc = await window.pdfjsLib.getDocument({ data: buffer.slice(0) }).promise;
+
+                if (pdfDoc && typeof pdfDoc.destroy === "function") {
+                    pdfDoc.destroy().catch(() => {});
                 }
-                initFile(file);
-            });
 
-            async function initFile(file) {
-                try {
-                    loadedFile = file;
-                    loadedBuffer = await file.arrayBuffer();
+                loadedFile = file;
+                loadedBuffer = buffer;
+                pdfDoc = doc;
+                totalPages = doc.numPages;
 
-                    // Read page count with PDF.js
-                    const loadingTask = pdfjsLib.getDocument({ data: loadedBuffer.slice(0) });
-                    pdfDoc = await loadingTask.promise;
-                    totalPages = pdfDoc.numPages;
+                fileNameLabel.textContent = file.name;
+                fileNameLabel.title = file.name;
+                fileSizePill.textContent = formatBytes(file.size);
+                filePagesPill.textContent = `${totalPages} ${totalPages === 1 ? "Page" : "Pages"}`;
 
-                    // Update UI labels
-                    fileNameLabel.textContent = file.name;
-                    fileSizeLabel.textContent = `${formatBytes(file.size)} • ${totalPages} ${totalPages === 1 ? 'Page' : 'Pages'}`;
-
-                    // Switch to Config Studio
-                    dropzone.style.display = "none";
-                    resultStudio.style.display = "none";
-                    progressStudio.style.display = "none";
-                    configStudio.style.display = "block";
-
-                    showToast(`Loaded ${file.name} successfully`, "info");
-                } catch (err) {
-                    console.error("PDF load error:", err);
-                    showToast("Failed to parse PDF document: " + err.message, "error");
-                }
+                setView("config");
+                showToast(`Loaded ${file.name} (${totalPages} pages)`, "success");
+            } catch (err) {
+                console.error("PDF load error:", err);
+                showToast("Failed to parse PDF: " + (err.message || "Invalid file"), "error");
+                setView("dropzone");
             }
+        }
 
-            // Change file
-            btnChangeFile.addEventListener("click", () => {
-                resetToUpload();
-            });
-
-            btnCompressAnother.addEventListener("click", () => {
-                resetToUpload();
-            });
-
-            function resetToUpload() {
-                loadedFile = null;
-                loadedBuffer = null;
-                pdfDoc = null;
-                compressedBlob = null;
-                isCompressionCancelled = false;
-                fileInput.value = "";
-                configStudio.style.display = "none";
-                progressStudio.style.display = "none";
-                resultStudio.style.display = "none";
-                dropzone.style.display = "block";
-            }
-
-            // Preset selection
-            presetCards.forEach(card => {
-                card.addEventListener("click", () => {
-                    presetCards.forEach(c => c.classList.remove("active"));
-                    card.classList.add("active");
-                    selectedPreset = card.dataset.preset;
+        // Preset Selection
+        presetCards.forEach((card) => {
+            card.addEventListener("click", () => {
+                presetCards.forEach((c) => {
+                    c.classList.remove("active");
+                    c.setAttribute("aria-checked", "false");
                 });
-            });
-
-            // Toggle Advanced Options
-            btnToggleAdv.addEventListener("click", () => {
-                const isOpen = advPanel.style.display === "block";
-                advPanel.style.display = isOpen ? "none" : "block";
-                advArrow.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
-            });
-
-            // Cancel Compression handler
-            if (btnCancelCompress) {
-                btnCancelCompress.addEventListener("click", () => {
-                    isCompressionCancelled = true;
-                    progressStudio.style.display = "none";
-                    configStudio.style.display = "block";
-                    showToast("Compression process stopped", "info");
-                });
-            }
-
-            // Helper to get raw JPEG Uint8Array from canvas via Blob (fast & memory-efficient)
-            function canvasToJpegBytes(canvas, quality) {
-                return new Promise((resolve) => {
-                    canvas.toBlob(async (blob) => {
-                        if (!blob) {
-                            resolve(null);
-                            return;
-                        }
-                        const buf = await blob.arrayBuffer();
-                        resolve(new Uint8Array(buf));
-                    }, "image/jpeg", quality);
-                });
-            }
-
-            // ============================================================
-            // Intelligent Dual-Engine Compression Execution
-            // ============================================================
-            btnStartCompress.addEventListener("click", async () => {
-                if (!loadedBuffer || !pdfDoc) return;
-
-                isCompressionCancelled = false;
-                configStudio.style.display = "none";
-                progressStudio.style.display = "block";
-                progressBarFill.style.width = "0%";
-                progressPercent.textContent = "0%";
-                progressStatusText.textContent = "Analyzing document visual structure...";
-
-                try {
-                    // Compression parameters based on selected preset
-                    let scale = 1.35;
-                    let quality = 0.72;
-
-                    if (selectedPreset === "extreme") {
-                        scale = 1.05;
-                        quality = 0.52;
-                    } else if (selectedPreset === "light") {
-                        scale = 1.80;
-                        quality = 0.86;
-                    }
-
-                    const isGrayscale = toggleGrayscale.checked;
-
-                    // Initialize new PDF-Lib document
-                    const outDoc = await PDFLib.PDFDocument.create();
-                    const offscreenCanvas = document.createElement("canvas");
-                    const offscreenCtx = offscreenCanvas.getContext("2d", { willReadFrequently: isGrayscale });
-
-                    for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-                        if (isCompressionCancelled) return;
-
-                        progressStatusText.textContent = `Optimizing page ${pageNum} of ${totalPages}...`;
-                        const pct = Math.round(((pageNum - 1) / totalPages) * 90);
-                        progressBarFill.style.width = `${pct}%`;
-                        progressPercent.textContent = `${pct}%`;
-
-                        // Render page via PDF.js
-                        const page = await pdfDoc.getPage(pageNum);
-                        const viewport = page.getViewport({ scale: scale });
-
-                        offscreenCanvas.width = viewport.width;
-                        offscreenCanvas.height = viewport.height;
-
-                        await page.render({
-                            canvasContext: offscreenCtx,
-                            viewport: viewport
-                        }).promise;
-
-                        if (isCompressionCancelled) return;
-
-                        // Apply Grayscale filter if enabled
-                        if (isGrayscale) {
-                            const imgData = offscreenCtx.getImageData(0, 0, offscreenCanvas.width, offscreenCanvas.height);
-                            const d = imgData.data;
-                            for (let i = 0; i < d.length; i += 4) {
-                                const gray = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
-                                d[i] = gray;
-                                d[i + 1] = gray;
-                                d[i + 2] = gray;
-                            }
-                            offscreenCtx.putImageData(imgData, 0, 0);
-                        }
-
-                        // Convert to high-speed binary JPEG
-                        const jpegBytes = await canvasToJpegBytes(offscreenCanvas, quality);
-                        if (!jpegBytes || isCompressionCancelled) return;
-
-                        const embeddedImage = await outDoc.embedJpg(jpegBytes);
-
-                        // Original unscaled dimensions in PDF points
-                        const unscaledViewport = page.getViewport({ scale: 1.0 });
-                        const newPage = outDoc.addPage([unscaledViewport.width, unscaledViewport.height]);
-
-                        newPage.drawImage(embeddedImage, {
-                            x: 0,
-                            y: 0,
-                            width: unscaledViewport.width,
-                            height: unscaledViewport.height
-                        });
-                    }
-
-                    if (isCompressionCancelled) return;
-
-                    progressStatusText.textContent = "Deflating stream dictionaries...";
-                    progressBarFill.style.width = "94%";
-                    progressPercent.textContent = "94%";
-
-                    // Save with object stream compression
-                    const rasterBytes = await outDoc.save({ useObjectStreams: true });
-                    if (isCompressionCancelled) return;
-
-                    let finalBytes = rasterBytes;
-                    let engineUsed = "adaptive";
-
-                    // ========================================================
-                    // INTELLIGENT SIZE PROTECTION:
-                    // If rasterized version is larger or near original size
-                    // (typical for pure text/vector PDFs), run Lossless Stream Deflate
-                    // so file size NEVER increases!
-                    // ========================================================
-                    if (rasterBytes.byteLength >= loadedFile.size * 0.95) {
-                        progressStatusText.textContent = "Evaluating lossless stream optimization...";
-                        try {
-                            const streamDoc = await PDFLib.PDFDocument.load(loadedBuffer.slice(0), { ignoreEncryption: true });
-                            streamDoc.setTitle("");
-                            streamDoc.setAuthor("");
-                            streamDoc.setProducer("Spac2 PDF Compressor");
-                            const streamBytes = await streamDoc.save({ useObjectStreams: true });
-
-                            if (streamBytes.byteLength < finalBytes.byteLength && streamBytes.byteLength < loadedFile.size) {
-                                finalBytes = streamBytes;
-                                engineUsed = "lossless";
-                            }
-                        } catch (err) {
-                            console.warn("Lossless fallback skipped:", err);
-                        }
-                    }
-
-                    progressBarFill.style.width = "100%";
-                    progressPercent.textContent = "100%";
-
-                    compressedBlob = new Blob([finalBytes], { type: "application/pdf" });
-
-                    // Calculate stats
-                    const originalSize = loadedFile.size;
-                    const compressedSize = compressedBlob.size;
-                    const savedBytes = Math.max(0, originalSize - compressedSize);
-                    const savedPercent = Math.max(0, Math.round((savedBytes / originalSize) * 100));
-
-                    // Show Results
-                    progressStudio.style.display = "none";
-                    resultStudio.style.display = "block";
-
-                    resOriginalSize.textContent = formatBytes(originalSize);
-                    resCompressedSize.textContent = formatBytes(compressedSize);
-                    resSavedPercent.textContent = savedBytes > 0 ? `-${savedPercent}%` : "0%";
-
-                    if (engineUsed === "lossless") {
-                        resEngineBadge.className = "optimization-badge lossless";
-                        resEngineText.textContent = "Lossless Stream Optimization (100% Text Quality)";
-                        resSummaryDesc.textContent = "Detected text-heavy document. Optimized object streams losslessly to prevent raster blur and ensure zero size bloat.";
-                    } else {
-                        resEngineBadge.className = "optimization-badge";
-                        resEngineText.textContent = `Adaptive Visual Compression (${selectedPreset.toUpperCase()})`;
-                        resSummaryDesc.textContent = `Document visual stream re-encoded. Saved ${formatBytes(savedBytes)} (${savedPercent}%) with crisp readability.`;
-                    }
-
-                    if (savedBytes > 0) {
-                        showToast(`Optimized! Saved ${savedPercent}% (${formatBytes(savedBytes)})`, "success");
-                    } else {
-                        showToast("Document is already at peak optimal compression!", "info");
-                    }
-                } catch (err) {
-                    console.error("Compression error:", err);
-                    progressStudio.style.display = "none";
-                    configStudio.style.display = "block";
-                    showToast("Compression failed: " + err.message, "error");
-                }
-            });
-
-            // Download Handler
-            btnDownloadResult.addEventListener("click", () => {
-                if (!compressedBlob) return;
-                const baseName = loadedFile.name.replace(/\.pdf$/i, "");
-                const outName = `${baseName}-compressed.pdf`;
-                downloadBlob(compressedBlob, outName);
-                showToast("Download started!", "success");
+                card.classList.add("active");
+                card.setAttribute("aria-checked", "true");
+                selectedPreset = card.dataset.preset;
             });
         });
+
+        // Advanced Options Toggle
+        btnToggleAdv.addEventListener("click", () => {
+            const isExpanded = btnToggleAdv.getAttribute("aria-expanded") === "true";
+            btnToggleAdv.setAttribute("aria-expanded", String(!isExpanded));
+            advPanel.hidden = isExpanded;
+        });
+
+        btnChangeFile.addEventListener("click", resetToUpload);
+        btnCompressAnother.addEventListener("click", resetToUpload);
+        btnBackConfig.addEventListener("click", () => setView("config"));
+
+        btnCancelCompress.addEventListener("click", () => {
+            isCompressionCancelled = true;
+            setView("config");
+            showToast("Compression cancelled.", "info");
+        });
+
+        function updateProgress(pct, text) {
+            progressBarFill.style.width = `${pct}%`;
+            progressBarRole.setAttribute("aria-valuenow", String(pct));
+            progressPercent.textContent = `${pct}%`;
+            progressStatusText.textContent = text;
+        }
+
+        // =====================================================================
+        // Dual-Engine Compression Execution
+        // =====================================================================
+        btnStartCompress.addEventListener("click", async () => {
+            if (!loadedBuffer || !pdfDoc) return;
+            if (typeof window.PDFLib === "undefined") {
+                showToast("PDF compression library is still loading...", "error");
+                return;
+            }
+
+            isCompressionCancelled = false;
+            setView("progress");
+            updateProgress(0, "Analyzing document visual structure...");
+
+            try {
+                let scale = 1.35;
+                let quality = 0.72;
+
+                if (selectedPreset === "extreme") {
+                    scale = 1.05;
+                    quality = 0.52;
+                } else if (selectedPreset === "light") {
+                    scale = 1.8;
+                    quality = 0.86;
+                }
+
+                const isGrayscale = toggleGrayscale.checked;
+                const outDoc = await window.PDFLib.PDFDocument.create();
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d", { willReadFrequently: isGrayscale });
+
+                for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                    if (isCompressionCancelled) return;
+
+                    const pct = Math.round(((pageNum - 1) / totalPages) * 90);
+                    updateProgress(pct, `Optimizing page ${pageNum} of ${totalPages}...`);
+
+                    const page = await pdfDoc.getPage(pageNum);
+                    if (isCompressionCancelled) return;
+
+                    const viewport = page.getViewport({ scale });
+                    canvas.width = Math.max(1, Math.round(viewport.width));
+                    canvas.height = Math.max(1, Math.round(viewport.height));
+
+                    // Fill white backdrop so transparent PDFs don't turn black in JPEG
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    await page.render({ canvasContext: ctx, viewport }).promise;
+                    if (isCompressionCancelled) return;
+
+                    if (isGrayscale) {
+                        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                        const d = imgData.data;
+                        for (let i = 0; i < d.length; i += 4) {
+                            const gray = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+                            d[i] = gray;
+                            d[i + 1] = gray;
+                            d[i + 2] = gray;
+                        }
+                        ctx.putImageData(imgData, 0, 0);
+                    }
+
+                    const jpegBytes = await canvasToJpegBytes(canvas, quality);
+                    if (!jpegBytes || isCompressionCancelled) return;
+
+                    const embeddedImage = await outDoc.embedJpg(jpegBytes);
+                    const unscaled = page.getViewport({ scale: 1.0 });
+                    const newPage = outDoc.addPage([unscaled.width, unscaled.height]);
+
+                    newPage.drawImage(embeddedImage, {
+                        x: 0,
+                        y: 0,
+                        width: unscaled.width,
+                        height: unscaled.height
+                    });
+
+                    await new Promise((r) => setTimeout(r, 0));
+                }
+
+                if (isCompressionCancelled) return;
+
+                updateProgress(94, "Deflating stream dictionaries...");
+                const rasterBytes = await outDoc.save({ useObjectStreams: true });
+                if (isCompressionCancelled) return;
+
+                let finalBytes = rasterBytes;
+                let engineUsed = "adaptive";
+
+                if (rasterBytes.byteLength >= loadedFile.size * 0.95) {
+                    updateProgress(97, "Evaluating lossless stream optimization...");
+                    try {
+                        const streamDoc = await window.PDFLib.PDFDocument.load(loadedBuffer.slice(0), {
+                            ignoreEncryption: true
+                        });
+                        streamDoc.setTitle("");
+                        streamDoc.setAuthor("");
+                        streamDoc.setProducer("Spac2 PDF Compressor");
+                        const streamBytes = await streamDoc.save({ useObjectStreams: true });
+
+                        if (streamBytes.byteLength < finalBytes.byteLength && streamBytes.byteLength < loadedFile.size) {
+                            finalBytes = streamBytes;
+                            engineUsed = "lossless";
+                        }
+                    } catch (err) {
+                        console.warn("Lossless fallback skipped:", err);
+                    }
+                }
+
+                updateProgress(100, "Finalizing compressed PDF...");
+                compressedBlob = new Blob([finalBytes], { type: "application/pdf" });
+
+                const originalSize = loadedFile.size;
+                const compressedSize = compressedBlob.size;
+                const savedBytes = Math.max(0, originalSize - compressedSize);
+                const savedPercent = originalSize > 0 ? Math.max(0, Math.round((savedBytes / originalSize) * 100)) : 0;
+
+                resOriginalSize.textContent = formatBytes(originalSize);
+                resCompressedSize.textContent = formatBytes(compressedSize);
+                resSavedPercent.textContent = savedBytes > 0 ? `-${savedPercent}%` : "0%";
+
+                if (engineUsed === "lossless") {
+                    resEngineText.textContent = "Lossless Stream Optimization (100% Text Quality)";
+                    resSummaryDesc.textContent =
+                        "Detected text-heavy document. Optimized object streams losslessly to prevent raster blur and avoid size bloat.";
+                } else {
+                    resEngineText.textContent = `Adaptive Visual Compression (${selectedPreset.toUpperCase()})`;
+                    resSummaryDesc.textContent =
+                        savedBytes > 0
+                            ? `Document visual stream re-encoded. Saved ${formatBytes(savedBytes)} (${savedPercent}%) with crisp readability.`
+                            : "Document is already at optimal size for the selected preset.";
+                }
+
+                setView("result");
+                if (savedBytes > 0) {
+                    showToast(`Optimized! Saved ${savedPercent}% (${formatBytes(savedBytes)})`, "success");
+                } else {
+                    showToast("Document is already at peak optimal compression!", "info");
+                }
+            } catch (err) {
+                if (isCompressionCancelled) return;
+                console.error("Compression error:", err);
+                setView("config");
+                showToast("Compression failed: " + (err.message || "Unknown error"), "error");
+            }
+        });
+
+        btnDownloadResult.addEventListener("click", () => {
+            if (!compressedBlob || !loadedFile) return;
+            const baseName = loadedFile.name.replace(/\.pdf$/i, "");
+            downloadBlob(compressedBlob, `${baseName}-compressed.pdf`);
+            showToast("Download started!", "success");
+        });
+    });
+})();

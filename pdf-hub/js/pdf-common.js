@@ -207,7 +207,7 @@ function initToolSwitcher() {
             item.href = tool.url;
             item.className = "tool-dropdown-item";
             item.innerHTML = `
-                <i data-lucide="${tool.icon}" style="width: 16px; height: 16px; flex-shrink: 0; color: var(--accent-red);"></i>
+                <i data-lucide="${tool.icon}" style="width: 16px; height: 16px; flex-shrink: 0; color: var(--text-primary);"></i>
                 <div style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0;">
                     <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">${tool.title}</span>
                     <span style="font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${tool.subtitle || ''}</span>

@@ -96,4 +96,11 @@
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+  <!-- Spac2 Photopea - Photo Design Online -->
+  <url>
+    <loc>https://spac2.com/apps/photopea/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
 </urlset>

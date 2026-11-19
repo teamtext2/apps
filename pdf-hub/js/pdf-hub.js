@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p class="tool-card-desc">${tool.desc}</p>
             <div class="tool-card-footer">
                 <span class="tool-card-tag">
-                    <i data-lucide="check-circle" style="width: 13px; height: 13px; color: #4ade80;"></i>
+                    <i data-lucide="check-circle" style="width: 13px; height: 13px; color: var(--text-primary);"></i>
                     <span>${tool.tag || "Client-Side"}</span>
                 </span>
                 <span class="tool-card-action">
