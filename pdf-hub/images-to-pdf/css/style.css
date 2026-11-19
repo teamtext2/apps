@@ -14,9 +14,12 @@
     --text-primary: #ffffff;
     --text-secondary: #bdbdc4;
     --text-muted: #84848e;
-    --accent-red: #ef4444;
-    --accent-orange: #f97316;
-    --accent-gradient: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+    --accent-red: #e4e4e7;
+    --accent-orange: #e4e4e7;
+    --accent-gradient: linear-gradient(135deg, #3f3f46 0%, #27272a 100%);
+    --btn-primary-glass: rgba(255, 255, 255, 0.16);
+    --btn-primary-glass-hover: rgba(255, 255, 255, 0.24);
+    --btn-primary-border: rgba(255, 255, 255, 0.28);
     --card-glow: 0 12px 36px -10px rgba(0, 0, 0, 0.55);
     --radius-lg: 18px;
     --radius-md: 12px;
@@ -35,6 +38,12 @@
     --text-primary: #111827;
     --text-secondary: #4b5563;
     --text-muted: #6b7280;
+    --accent-red: #18181b;
+    --accent-orange: #18181b;
+    --accent-gradient: linear-gradient(135deg, #18181b 0%, #3f3f46 100%);
+    --btn-primary-glass: rgba(24, 24, 27, 0.86);
+    --btn-primary-glass-hover: rgba(24, 24, 27, 0.96);
+    --btn-primary-border: rgba(255, 255, 255, 0.22);
     --card-glow: 0 10px 30px -10px rgba(15, 23, 42, 0.1);
 }
 
@@ -239,13 +248,13 @@ select {
 
 .btn-primary,
 .btn-execute-app {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.78) 0%, rgba(249, 115, 22, 0.74) 100%);
+    background: var(--btn-primary-glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     color: #ffffff;
     font-weight: 700;
     font-size: 0.92rem;
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    border: 1px solid var(--btn-primary-border);
     border-radius: 9999px;
     padding: 0.72rem 1.55rem;
     display: inline-flex;
@@ -254,15 +263,15 @@ select {
     gap: 0.5rem;
     cursor: pointer;
     white-space: nowrap;
-    box-shadow: 0 8px 24px -4px rgba(239, 68, 68, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background 0.22s ease, opacity 0.2s ease;
 }
 
 .btn-primary:hover,
 .btn-execute-app:hover:not(:disabled) {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.92) 0%, rgba(249, 115, 22, 0.88) 100%);
+    background: var(--btn-primary-glass-hover);
     transform: translateY(-1px);
-    box-shadow: 0 12px 28px -4px rgba(239, 68, 68, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .btn-primary:active,
@@ -527,7 +536,7 @@ select {
 }
 
 .tool-dropdown-item.is-current {
-    background: rgba(249, 115, 22, 0.12);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .tool-dropdown-icon {
@@ -606,7 +615,7 @@ body.in-studio-mode .workspace-wrap {
 .dropzone-container:hover,
 .dropzone-container.drag-over {
     border-color: var(--accent-orange);
-    background: rgba(249, 115, 22, 0.04);
+    background: rgba(255, 255, 255, 0.03);
     box-shadow: var(--card-glow);
     transform: translateY(-2px);
 }
@@ -616,7 +625,7 @@ body.in-studio-mode .workspace-wrap {
     height: 66px;
     margin: 0 auto 1.25rem;
     border-radius: 18px;
-    background: rgba(249, 115, 22, 0.12);
+    background: rgba(255, 255, 255, 0.08);
     color: var(--accent-orange);
     display: flex;
     align-items: center;
@@ -678,15 +687,15 @@ body.in-studio-mode .workspace-wrap {
     gap: 0.35rem;
     font-size: 0.72rem;
     font-weight: 600;
-    color: #fb923c;
-    background: rgba(249, 115, 22, 0.12);
-    border: 1px solid rgba(249, 115, 22, 0.28);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 0.18rem 0.55rem;
 }
 
 [data-theme="light"] .paste-badge {
-    color: #ea580c;
+    color: var(--text-primary);
 }
 
 .paste-badge .svg-icon {
@@ -739,13 +748,13 @@ body.in-studio-mode .workspace-wrap {
 }
 
 .count-pill {
-    color: #fb923c;
-    background: rgba(249, 115, 22, 0.12);
-    border: 1px solid rgba(249, 115, 22, 0.28);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
 }
 
 [data-theme="light"] .count-pill {
-    color: #ea580c;
+    color: var(--text-primary);
 }
 
 .count-pill .svg-icon {
@@ -848,7 +857,7 @@ body.in-studio-mode .workspace-wrap {
 
 .image-card.drag-over {
     border-color: var(--accent-orange);
-    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.35);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.22);
 }
 
 .card-thumb-wrap {
@@ -919,13 +928,13 @@ body.in-studio-mode .workspace-wrap {
 }
 
 .card-action-btn:hover {
-    background: rgba(249, 115, 22, 0.88);
+    background: rgba(255, 255, 255, 0.22);
     border-color: rgba(255, 255, 255, 0.35);
     transform: scale(1.06);
 }
 
 .card-action-btn.btn-delete:hover {
-    background: rgba(239, 68, 68, 0.9);
+    background: rgba(255, 255, 255, 0.22);
 }
 
 .card-action-btn:active {
@@ -990,7 +999,7 @@ body.in-studio-mode .workspace-wrap {
 }
 
 .card-order-btn:hover:not(:disabled) {
-    background: rgba(249, 115, 22, 0.85);
+    background: var(--btn-primary-glass-hover);
     border-color: rgba(255, 255, 255, 0.28);
     color: #ffffff;
 }
@@ -1080,12 +1089,12 @@ body.in-studio-mode .workspace-wrap {
 }
 
 .segmented-btn.active {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.8) 0%, rgba(249, 115, 22, 0.76) 100%);
+    background: var(--btn-primary-glass);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-color: rgba(255, 255, 255, 0.26);
     color: #ffffff;
-    box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .select-wrap {
@@ -1162,8 +1171,8 @@ body.in-studio-mode .workspace-wrap {
     width: 62px;
     height: 62px;
     border-radius: 18px;
-    background: rgba(249, 115, 22, 0.14);
-    border: 1px solid rgba(249, 115, 22, 0.28);
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid var(--border-color);
     color: var(--accent-orange);
     display: flex;
     align-items: center;
@@ -1237,8 +1246,8 @@ body.in-studio-mode .workspace-wrap {
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    background: rgba(249, 115, 22, 0.12);
-    border: 1px solid rgba(249, 115, 22, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     color: var(--accent-orange);
     display: flex;
     align-items: center;
@@ -1377,7 +1386,7 @@ body.in-studio-mode .workspace-wrap {
     font-weight: 800;
     font-size: 0.9rem;
     margin-bottom: 0.9rem;
-    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .step-item h4 {

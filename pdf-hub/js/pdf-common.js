@@ -67,6 +67,19 @@ const PDF_TOOLS = [
         badge: "High-DPI",
         tag: "PNG / JPG / WebP",
         keywords: "pdf to image pdf to images export render png jpg webp photos chuyen pdf sang anh"
+    },
+    {
+        id: "images-to-pdf",
+        title: "Images to PDF",
+        subtitle: "Convert JPG, PNG to PDF",
+        url: "/apps/pdf-hub/images-to-pdf/",
+        desc: "Convert JPG, PNG, WebP, GIF, and SVG images into a unified PDF document with custom page sizes, margins, and drag & drop ordering.",
+        category: "convert",
+        icon: "image",
+        badge: "Popular",
+        hot: true,
+        tag: "JPG/PNG to PDF",
+        keywords: "images to pdf jpg to pdf png to pdf convert picture photo chuyen anh sang pdf gop anh thanh pdf"
     }
 ];
 
