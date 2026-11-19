@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Spac2 PDF — PDF to Word (DOCX) — Visual Exact & Editable Document</title>
-    <meta name="title" content="Spac2 PDF — PDF to Word (DOCX) — Visual Exact & Editable Document">
+    <title>Spac2 Pdf to Doc (Word)</title>
+    <meta name="title" content="Spac2 Pdf to Doc (Word)">
     <meta name="description"
-        content="Free client-side PDF to Word (DOCX) converter: Convert PDF files to Microsoft Word directly in your browser. Choose between 100% Visual Exact (Image-based) or Editable Flow Text Reconstruction with 100% local privacy.">
-    <meta name="keywords" content="PDF to Word, PDF to DOCX, convert PDF to DOCX, visual exact PDF to Word, editable DOCX, client-side PDF converter, chuyen PDF sang Word">
+        content="Free online Spac2 Pdf to Doc (Word) converter: Convert PDF files to Microsoft Word (.docx) directly in your browser with Visual Exact or Editable Text mode and 100% local privacy.">
+    <meta name="keywords"
+        content="Spac2 Pdf to Doc (Word), PDF to Word, PDF to DOCX, convert PDF to Doc, convert PDF to Word online, visual exact PDF to Word, editable DOCX, client-side PDF converter">
     <meta name="author" content="Spac2">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="google" content="notranslate" />
     <link rel="canonical" href="https://spac2.com/apps/pdf-hub/pdf-to-doc/">
 
@@ -20,16 +21,43 @@
     <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
 
-    <!-- Open Graph -->
+    <!-- Open Graph & Twitter -->
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Spac2 PDF Hub">
     <meta property="og:url" content="https://spac2.com/apps/pdf-hub/pdf-to-doc/">
-    <meta property="og:title" content="Spac2 PDF — PDF to Word (DOCX) — Visual Exact & Editable Document">
+    <meta property="og:title" content="Spac2 Pdf to Doc (Word)">
     <meta property="og:description"
-        content="Convert PDF to Microsoft Word (.docx) documents directly in your browser. Fast, private, zero server uploads.">
+        content="Convert PDF to Microsoft Word (.docx) documents directly in your browser with Visual Exact or Editable Text mode. Fast, private, zero server uploads.">
     <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Spac2 Pdf to Doc (Word)">
+    <meta name="twitter:description"
+        content="Convert PDF to Microsoft Word (.docx) documents directly in your browser with Visual Exact or Editable Text mode. Fast, private, zero server uploads.">
     <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Spac2 Pdf to Doc (Word)",
+            "url": "https://spac2.com/apps/pdf-hub/pdf-to-doc/",
+            "description": "Free client-side PDF to Word (DOCX) converter. Convert PDF files into Microsoft Word documents using Visual Exact or Editable Flow Text reconstruction directly in your browser.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Spac2",
+                "url": "https://spac2.com/"
+            }
+        }
+    </script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
@@ -43,7 +71,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
 
     <!-- Dedicated Stylesheet -->
-    <link rel="stylesheet" href="./css/style.css?v=2">
+    <link rel="stylesheet" href="./css/style.css?v=4">
 </head>
 
 <body>
@@ -67,7 +95,13 @@
 
                 <!-- Theme Toggle Button -->
                 <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
-                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                    <svg id="theme-icon-sun" class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                    <svg id="theme-icon-moon" class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: none;" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
                 </button>
             </div>
         </header>
@@ -143,7 +177,7 @@
                         <span class="mode-card-badge badge-visual">100% Exact Layout</span>
                     </div>
                     <div class="mode-card-title">
-                        <span>📸 Visual Exact (Image DOCX)</span>
+                        <span>Visual Exact (Image DOCX)</span>
                     </div>
                     <div class="mode-card-desc">
                         Renders each PDF page into a high-DPI image fitted exactly onto Word pages. 100% preservation of fonts, math formulas, background, stamps, signatures, and intricate design.
@@ -169,7 +203,7 @@
                         <span class="mode-card-badge badge-editable">Editable (~75-90%)</span>
                     </div>
                     <div class="mode-card-title">
-                        <span>✍️ Editable Flow (Text Reconstruction)</span>
+                        <span>Editable Flow (Text Reconstruction)</span>
                     </div>
                     <div class="mode-card-desc">
                         Extracts text, lines, paragraphs, and headings into native Word text runs so you can freely type, edit, delete, and copy content.
@@ -289,29 +323,29 @@
                             <div id="ocr-lang-wrap" class="ocr-lang-wrap">
                                 <span class="ocr-lang-label">OCR Language:</span>
                                 <select class="studio-select" id="select-ocr-lang">
-                                    <option value="auto" selected>🌐 Auto Detect Language (Recommended)</option>
+                                    <option value="auto" selected>Auto Detect Language (Recommended)</option>
                                     <optgroup label="Popular & Multilingual">
-                                        <option value="vie+eng">🇻🇳 Vietnamese + English (vie+eng)</option>
-                                        <option value="eng">🇺🇸 English (eng)</option>
-                                        <option value="vie">🇻🇳 Vietnamese (vie)</option>
-                                        <option value="chi_sim+eng">🇨🇳 Chinese Simplified + English (chi_sim+eng)</option>
-                                        <option value="chi_tra+eng">🇹🇼 Chinese Traditional + English (chi_tra+eng)</option>
-                                        <option value="jpn+eng">🇯🇵 Japanese + English (jpn+eng)</option>
-                                        <option value="kor+eng">🇰🇷 Korean + English (kor+eng)</option>
+                                        <option value="vie+eng">Vietnamese + English (vie+eng)</option>
+                                        <option value="eng">English (eng)</option>
+                                        <option value="vie">Vietnamese (vie)</option>
+                                        <option value="chi_sim+eng">Chinese Simplified + English (chi_sim+eng)</option>
+                                        <option value="chi_tra+eng">Chinese Traditional + English (chi_tra+eng)</option>
+                                        <option value="jpn+eng">Japanese + English (jpn+eng)</option>
+                                        <option value="kor+eng">Korean + English (kor+eng)</option>
                                     </optgroup>
                                     <optgroup label="European Languages">
-                                        <option value="fra+eng">🇫🇷 French + English (fra+eng)</option>
-                                        <option value="deu+eng">🇩🇪 German + English (deu+eng)</option>
-                                        <option value="spa+eng">🇪🇸 Spanish + English (spa+eng)</option>
-                                        <option value="por+eng">🇵🇹 Portuguese + English (por+eng)</option>
-                                        <option value="ita+eng">🇮🇹 Italian + English (ita+eng)</option>
-                                        <option value="rus+eng">🇷🇺 Russian + English (rus+eng)</option>
+                                        <option value="fra+eng">French + English (fra+eng)</option>
+                                        <option value="deu+eng">German + English (deu+eng)</option>
+                                        <option value="spa+eng">Spanish + English (spa+eng)</option>
+                                        <option value="por+eng">Portuguese + English (por+eng)</option>
+                                        <option value="ita+eng">Italian + English (ita+eng)</option>
+                                        <option value="rus+eng">Russian + English (rus+eng)</option>
                                     </optgroup>
                                     <optgroup label="Asian & Middle Eastern">
-                                        <option value="tha+eng">🇹🇭 Thai + English (tha+eng)</option>
-                                        <option value="ind+eng">🇮🇩 Indonesian + English (ind+eng)</option>
-                                        <option value="ara+eng">🇸🇦 Arabic + English (ara+eng)</option>
-                                        <option value="hin+eng">🇮🇳 Hindi + English (hin+eng)</option>
+                                        <option value="tha+eng">Thai + English (tha+eng)</option>
+                                        <option value="ind+eng">Indonesian + English (ind+eng)</option>
+                                        <option value="ara+eng">Arabic + English (ara+eng)</option>
+                                        <option value="hin+eng">Hindi + English (hin+eng)</option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -520,6 +554,7 @@
         <div class="pdf-footer-content">
             <div class="pdf-footer-links">
                 <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="https://spac2.com/apps/pdf-hub/pdf-to-doc/blog/introduce-end-use-spac2-pdf-to-doc">Introduce End-Use Spac2 PDF-to-Doc</a>
                 <a href="/apps/pdf-hub/pdf-to-doc">PDF to Word</a>
                 <a href="/apps/pdf-hub/merge">Merge PDF</a>
                 <a href="/apps/pdf-hub/split">Split PDF</a>
@@ -542,14 +577,13 @@
         </div>
     </footer>
 
-    <!-- Libraries: PDF.js, DOCX.js, Tesseract.js, Lucide -->
+    <!-- Libraries: PDF.js, DOCX.js, Tesseract.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Dedicated Application Script -->
-    <script src="./js/app.js?v=2.0"></script>
+    <script src="./js/app.js?v=2.1"></script>
 </body>
 
 </html>

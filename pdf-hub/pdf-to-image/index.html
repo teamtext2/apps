@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Spac2 PDF — PDF to Image — Export PNG & JPG Photos</title>
-    <meta name="title" content="Spac2 PDF — PDF to Image — Export PNG & JPG Photos">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Spac2 PDF - PDF to Images</title>
+    <meta name="title" content="Spac2 PDF - PDF to Images">
     <meta name="description"
-        content="Free online PDF to image converter: Extract and render each PDF page into high-resolution PNG, JPG, or WebP images (150/300 DPI). Download single photos or a ZIP archive with 100% client-side privacy.">
-    <meta name="keywords" content="PDF to Image, convert PDF to PNG, PDF to JPG, extract images from PDF, PDF to picture, 300 DPI PDF render, client-side PDF tool">
+        content="Convert PDF to images online for free with Spac2 PDF. Render PDF pages into crisp PNG, JPG, or WebP photos up to 300 DPI and download individually or as ZIP with 100% local privacy.">
+    <meta name="keywords"
+        content="Spac2 PDF, PDF to Images, PDF to Image, convert PDF to PNG, PDF to JPG, PDF to WebP, extract images from PDF, 300 DPI PDF render, client-side PDF tool">
     <meta name="author" content="Spac2">
-    <meta name="robots" content="index, follow">
-    <meta name="google" content="notranslate" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="google" content="notranslate">
     <link rel="canonical" href="https://spac2.com/apps/pdf-hub/pdf-to-image/">
 
     <!-- Favicon & Touch Icons -->
@@ -20,211 +21,358 @@
     <link rel="icon" type="image/png" sizes="192x192" href="../android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../android-chrome-512x512.png">
 
-    <!-- Open Graph -->
+    <!-- Open Graph & Twitter -->
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Spac2 PDF Hub">
     <meta property="og:url" content="https://spac2.com/apps/pdf-hub/pdf-to-image/">
-    <meta property="og:title" content="Spac2 PDF — PDF to Image — Export PNG & JPG Photos">
+    <meta property="og:title" content="Spac2 PDF - PDF to Images">
     <meta property="og:description"
-        content="Render high-resolution PNG or JPG images from your PDF files directly in your browser. Fast, private, and unlimited.">
+        content="Convert PDF to high-resolution PNG, JPG, or WebP images up to 300 DPI directly in your browser. Fast, unlimited, and 100% private.">
     <meta property="og:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Spac2 PDF - PDF to Images">
+    <meta name="twitter:description"
+        content="Convert PDF to high-resolution PNG, JPG, or WebP images up to 300 DPI directly in your browser. Fast, unlimited, and 100% private.">
     <meta name="twitter:image" content="https://spac2.com/apps/pdf-hub/android-chrome-512x512.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Spac2 PDF - PDF to Images",
+            "url": "https://spac2.com/apps/pdf-hub/pdf-to-image/",
+            "description": "Free client-side PDF to images converter. Render PDF pages into high-resolution PNG, JPG, or WebP images (72, 150, 300 DPI) and download as single photos or ZIP.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript and HTML5 Canvas",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Spac2",
+                "url": "https://spac2.com/"
+            },
+            "featureList": [
+                "Convert PDF to PNG, JPG, or WebP images",
+                "72 DPI, 150 DPI, and 300 DPI resolution options",
+                "Custom page range selection",
+                "Batch ZIP archive export",
+                "100% client-side local processing"
+            ]
+        }
+    </script>
+
+    <!-- Prevent Theme Flash -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem("spac2_theme");
+                if (saved === "light" || saved === "dark") {
+                    document.documentElement.setAttribute("data-theme", saved);
+                }
+            } catch (e) {}
+        })();
+    </script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCMEMFLZ14"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-JCMEMFLZ14');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-JCMEMFLZ14');
     </script>
     <script defer src="https://team.spac2.com/pageview/tracker.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4945478341173212"
+        crossorigin="anonymous"></script>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="./css/style.css?v=2">
+    <link rel="stylesheet" href="./css/style.css?v=6">
 </head>
 
 <body>
-        <!-- Header Ambient Overlay -->
+    <!-- Header Ambient Overlay -->
     <div class="spac2-header-overlay" aria-hidden="true"></div>
 
     <!-- Floating Rounded Header -->
     <header class="spac2-header-wrapper">
         <div class="spac2-header-capsule">
             <div class="header-left">
-                <!-- Nút Back về Spac2 -->
-                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
-                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px;"><polyline points="15 18 9 12 15 6"/></svg>
+                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back to Spac2 Home">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
                 </a>
 
-                <!-- Logo Card & Tên App -->
-                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 PDF to Image">
+                <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 PDF Hub">
                     <div class="brand-logo-card">
                         <img src="https://spac2.com/favicon.ico" alt="Spac2 Logo" class="brand-logo-img">
                     </div>
                     <div class="brand-text">
                         <span class="brand-name">Spac2</span>
-                        <span class="brand-divider">|</span>
-                        <span class="brand-app">PDF to Image</span>
+                        <span class="brand-divider" aria-hidden="true">|</span>
+                        <span class="brand-app">PDF to Images</span>
                     </div>
                 </a>
             </div>
 
             <div class="header-right">
-
-                <!-- Theme Toggle -->
-                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light / Dark mode">
-                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <button type="button" id="theme-toggle-btn" class="btn-header-icon" aria-label="Toggle Light or Dark Theme"
+                    title="Toggle Light / Dark mode">
+                    <svg id="theme-icon-sun" class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                    <svg id="theme-icon-moon" class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Header Description (App Minimalist) -->
+    <!-- Tool Hero Header -->
     <section class="tool-header-section">
-        <h1 class="tool-title">PDF to Image</h1>
-        <p class="tool-desc">Render PDF pages into high-resolution PNG, JPG, or WebP images.</p>
-    
-            <!-- Tool Switcher Dropdown -->
-                <div class="tool-switcher">
-                    <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
-                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                        <span>All tools</span>
-                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 13px; height: 13px;"><polyline points="6 9 12 15 18 9"/></svg>
-                    </button>
-                    <div class="tool-dropdown-menu"></div>
-                </div>
-        </section>
+        <h1 class="tool-title">PDF to Images</h1>
+        <p class="tool-desc">Convert PDF pages into high-resolution PNG, JPG, or WebP images.</p>
+
+        <div class="tool-switcher">
+            <button type="button" class="tool-switcher-btn" id="tool-switcher-btn" aria-expanded="false"
+                aria-haspopup="true" title="Quick tool switcher">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                </svg>
+                <span>All tools</span>
+                <svg class="svg-icon chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </button>
+            <div class="tool-dropdown-menu" id="tool-dropdown-menu" role="menu"></div>
+        </div>
+    </section>
 
     <!-- Workspace Main -->
     <main class="workspace-wrap">
         <!-- 1. Initial Dropzone -->
-        <div id="dropzone" class="dropzone-container">
-            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
-            <div class="dropzone-icon-wrap">
-                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 36px; height: 36px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <div id="dropzone" class="dropzone-container" role="button" tabindex="0"
+            aria-label="Upload PDF file by clicking or dragging and dropping">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" hidden>
+            <div class="dropzone-icon-wrap" aria-hidden="true">
+                <svg class="svg-icon dropzone-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                </svg>
             </div>
-            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
-                Drag and drop your PDF file here
-            </h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                Ultra-fast in-memory rendering via WebAssembly and PDF.js
-            </p>
-            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
-                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <h2 class="dropzone-title">Drag and drop your PDF file here</h2>
+            <p class="dropzone-subtitle">Ultra-fast in-memory rendering via WebAssembly and PDF.js</p>
+            <button type="button" class="btn-primary" id="btn-select-file">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                </svg>
                 <span>Select PDF File</span>
             </button>
         </div>
 
         <!-- 2. Configuration Studio -->
-        <div id="config-studio">
+        <section id="config-studio" class="studio-card" aria-label="Conversion Settings" hidden>
             <div class="file-summary-bar">
                 <div class="file-summary-left">
-                    <div class="file-icon-box">
-                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13v4M9 15h2a1 1 0 0 0 0-2H9"/></svg>
+                    <div class="file-icon-box" aria-hidden="true">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <path d="M9 13v4M9 15h2a1 1 0 0 0 0-2H9" />
+                        </svg>
                     </div>
-                    <div>
+                    <div class="file-meta-info">
                         <div class="file-name-label" id="file-name-label">document.pdf</div>
-                        <div class="file-size-label" id="file-size-label">
+                        <div class="file-size-label">
                             <span class="meta-pill" id="file-size-pill">0 MB</span>
                             <span class="meta-pill" id="file-pages-pill">0 Pages</span>
                         </div>
                     </div>
                 </div>
                 <button type="button" class="app-btn-secondary" id="btn-change-file">
-                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
                     <span>Change File</span>
                 </button>
             </div>
 
             <!-- Settings Grid -->
             <div class="settings-grid">
-                <!-- Image Format -->
+                <!-- Export Format -->
                 <div class="setting-box">
-                    <div class="setting-header">
+                    <label class="setting-header" for="select-format">
                         <span class="setting-title">
-                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
                             Export Format
                         </span>
+                    </label>
+                    <div class="select-wrap">
+                        <select class="studio-select" id="select-format">
+                            <option value="image/png" selected>PNG (Sharpest, Lossless)</option>
+                            <option value="image/jpeg">JPG (Lightweight, High Quality)</option>
+                            <option value="image/webp">WebP (Modern, Compact)</option>
+                        </select>
                     </div>
-                    <select class="studio-select" id="select-format">
-                        <option value="image/png" selected>PNG (Sharpest, Lossless)</option>
-                        <option value="image/jpeg">JPG (Lightweight, High Quality)</option>
-                        <option value="image/webp">WebP (Modern, Compact)</option>
-                    </select>
                 </div>
 
                 <!-- DPI Resolution -->
                 <div class="setting-box">
-                    <div class="setting-header">
+                    <label class="setting-header" for="select-dpi">
                         <span class="setting-title">
-                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><circle cx="12" cy="12" r="10"/><path d="m12 6 4 6h-8l4-6z"/></svg>
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="m12 6 4 6h-8l4-6z" />
+                            </svg>
                             Render Resolution
                         </span>
+                    </label>
+                    <div class="select-wrap">
+                        <select class="studio-select" id="select-dpi">
+                            <option value="1.0">Standard Screen (72 DPI)</option>
+                            <option value="2.083" selected>High Definition (150 DPI)</option>
+                            <option value="4.166">Ultra Print Quality (300 DPI)</option>
+                        </select>
                     </div>
-                    <select class="studio-select" id="select-dpi">
-                        <option value="1.0">Standard Screen (72 DPI)</option>
-                        <option value="2.083" selected>High Definition (150 DPI)</option>
-                        <option value="4.166">Ultra Print Quality (300 DPI)</option>
-                    </select>
                 </div>
 
                 <!-- Page Scope -->
                 <div class="setting-box">
                     <div class="setting-header">
-                        <span class="setting-title">
-                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        <label class="setting-title" for="inp-page-range">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                                <polyline points="2 17 12 22 22 17" />
+                                <polyline points="2 12 12 17 22 12" />
+                            </svg>
                             Page Range
-                        </span>
+                        </label>
+                        <span class="setting-hint" id="page-range-hint">All pages</span>
                     </div>
-                    <input type="text" class="studio-input" id="inp-page-range" value="all" placeholder="all or e.g., 1-5, 8">
+                    <input type="text" class="studio-input" id="inp-page-range" value="all"
+                        placeholder="all or e.g., 1-5, 8" autocomplete="off" spellcheck="false">
+                </div>
+
+                <!-- Image Quality (for JPG / WebP) -->
+                <div class="setting-box" id="quality-setting-box" hidden>
+                    <div class="setting-header">
+                        <label class="setting-title" for="inp-quality">
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                aria-hidden="true">
+                                <path d="M12 20V10M18 20V4M6 20v-4" />
+                            </svg>
+                            Compression Quality
+                        </label>
+                        <span class="setting-hint" id="quality-value-label">92%</span>
+                    </div>
+                    <div class="range-wrap">
+                        <input type="range" class="studio-range" id="inp-quality" min="50" max="100" step="2" value="92">
+                    </div>
                 </div>
             </div>
 
-            <!-- Action Button -->
-            <div style="display: flex; justify-content: flex-end;">
+            <!-- Action Footer -->
+            <div class="studio-action-footer">
                 <button type="button" class="btn-execute-app" id="btn-start-convert">
-                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg>
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        aria-hidden="true">
+                        <path
+                            d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                        <path d="M5 3v4M3 5h4M19 17v4M17 19h4" />
+                    </svg>
                     <span>Convert to Images Now</span>
                 </button>
             </div>
-        </div>
+        </section>
 
         <!-- 3. Progress Card -->
-        <div id="progress-studio">
-            <div class="progress-pulse-icon">
-                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 28px; height: 28px;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <section id="progress-studio" class="studio-card" aria-label="Rendering Progress" aria-live="polite" hidden>
+            <div class="progress-pulse-icon" aria-hidden="true">
+                <svg class="svg-icon progress-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                </svg>
             </div>
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
-                Rendering PDF Pages...
-            </h3>
-            <p id="progress-status-text" style="font-size: 0.9rem; color: var(--text-secondary);">
-                Extracting high-resolution graphics...
-            </p>
-            <div class="progress-bar-wrap">
+            <h2 class="progress-title">Rendering PDF Pages...</h2>
+            <p id="progress-status-text" class="progress-subtitle">Extracting high-resolution graphics...</p>
+            <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                id="progress-bar-role">
                 <div class="progress-bar-fill" id="progress-bar-fill"></div>
             </div>
-            <p id="progress-percent" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-red);">0%</p>
-        </div>
+            <div class="progress-footer">
+                <span id="progress-percent" class="progress-percent">0%</span>
+                <button type="button" class="app-btn-secondary" id="btn-cancel-convert">Cancel</button>
+            </div>
+        </section>
 
         <!-- 4. Result Gallery Studio -->
-        <div id="gallery-studio">
+        <section id="gallery-studio" aria-label="Rendered Images Gallery" hidden>
             <div class="gallery-top-bar">
                 <div class="gallery-info-group">
                     <button type="button" class="app-btn-secondary" id="btn-convert-another">
-                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                        <span>Convert Another</span>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            aria-hidden="true">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        <span>New File</span>
+                    </button>
+                    <button type="button" class="app-btn-secondary" id="btn-back-config">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            aria-hidden="true">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                        <span>Settings</span>
                     </button>
                     <div class="gallery-count-badge" id="gallery-count-badge">
-                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 13px; height: 13px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            aria-hidden="true">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                            <polyline points="2 17 12 22 22 17" />
+                            <polyline points="2 12 12 17 22 12" />
+                        </svg>
                         <span id="gallery-count-text">0 Pages Rendered</span>
                     </div>
                 </div>
 
-                <button type="button" class="btn-execute-app" id="btn-download-all-zip">
-                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
+                <button type="button" class="btn-execute-app desktop-zip-btn" id="btn-download-all-zip">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        aria-hidden="true">
+                        <path d="M21 8v13H3V8" />
+                        <path d="M1 3h22v5H1z" />
+                        <path d="M10 12h4" />
+                    </svg>
                     <span>Download All as ZIP</span>
                 </button>
             </div>
@@ -232,44 +380,46 @@
             <!-- Gallery Cards Grid -->
             <div class="gallery-grid" id="gallery-grid"></div>
 
-            <!-- Sticky Mobile Bottom Bar -->
+            <!-- Fixed Mobile Bottom Bar -->
             <div class="gallery-mobile-bottom-bar" id="mobile-gallery-dock">
                 <button type="button" class="btn-execute-app" id="btn-download-all-zip-mobile">
-                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        aria-hidden="true">
+                        <path d="M21 8v13H3V8" />
+                        <path d="M1 3h22v5H1z" />
+                        <path d="M10 12h4" />
+                    </svg>
                     <span>Download All as ZIP</span>
                 </button>
             </div>
-        </div>
+        </section>
 
         <!-- Bottom Information & Guide Section -->
         <section class="tool-info-section">
-
             <div class="tool-info-header">
                 <h3>High-DPI PDF Rasterization Engine</h3>
                 <p>
-                    Convert entire PDF documents or selected pages into crystal-clear pictures up to 300 DPI for presentations, social media, and web publications without transmitting documents to any server.
+                    Convert entire PDF documents or selected pages into crystal-clear pictures up to 300 DPI for
+                    presentations, social media, and web publications without transmitting documents to any server.
                 </p>
             </div>
 
-            <!-- 3-Step Guide -->
             <div class="steps-section">
-                <h4 style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
-                    How to Convert PDF to Images in 3 Steps
-                </h4>
+                <h4 class="steps-heading">How to Convert PDF to Images in 3 Steps</h4>
                 <div class="steps-grid">
                     <div class="step-item">
                         <div class="step-number">1</div>
-                        <h4>Upload Document</h4>
+                        <h5>Upload Document</h5>
                         <p>Select any PDF file. Rendered directly on your device with hardware acceleration.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">2</div>
-                        <h4>Select Format & DPI</h4>
-                        <p>Choose PNG or JPG format and pick between 72, 150, or 300 DPI resolution.</p>
+                        <h5>Select Format &amp; DPI</h5>
+                        <p>Choose PNG, JPG, or WebP format and pick between 72, 150, or 300 DPI resolution.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">3</div>
-                        <h4>Download Images</h4>
+                        <h5>Download Images</h5>
                         <p>Download single pages as photos or grab all pages in one organized ZIP archive.</p>
                     </div>
                 </div>
@@ -277,33 +427,78 @@
         </section>
     </main>
 
+    <!-- Image Preview Lightbox Modal -->
+    <div id="preview-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-page-title"
+        hidden>
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span id="modal-page-title" class="modal-title">Page 1</span>
+                    <span id="modal-page-meta" class="modal-meta"></span>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="app-btn-secondary" id="modal-btn-prev" aria-label="Previous Page"
+                        title="Previous Page">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+                    <button type="button" class="app-btn-secondary" id="modal-btn-next" aria-label="Next Page"
+                        title="Next Page">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-execute-app modal-download-btn" id="modal-btn-download">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>Download</span>
+                    </button>
+                    <button type="button" class="btn-header-icon" id="modal-btn-close" aria-label="Close Preview"
+                        title="Close (Esc)">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <img id="modal-preview-img" src="" alt="Page preview">
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="pdf-footer">
         <div class="pdf-footer-content">
             <div class="pdf-footer-links">
                 <a href="/apps/pdf-hub/">PDF Hub Home</a>
+                <a href="https://spac2.com/apps/pdf-hub/pdf-to-image/blog/introduce-end-use-spac2-pdf-to-image">Introduce End-Use Spac2 PDF-to-Image</a>
                 <a href="/apps/pdf-hub/merge">Merge PDF</a>
                 <a href="/apps/pdf-hub/split">Split PDF</a>
                 <a href="/apps/pdf-hub/organize">Organize PDF</a>
                 <a href="/apps/pdf-hub/compress">Compress PDF</a>
                 <a href="/apps/pdf-hub/pdf-to-image">PDF to Image</a>
-                <a href="/apps/pdf-hub/crop-resize">Crop & Resize</a>
+                <a href="/apps/pdf-hub/crop-resize">Crop &amp; Resize</a>
                 <a href="/apps/pdf-hub/sign">Sign PDF</a>
             </div>
             <div class="footer-privacy-text">
-                100% Client-Side • Local Device Processing • Zero Server Uploads
+                100% Client-Side &bull; Local Device Processing &bull; Zero Server Uploads
             </div>
-            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
-                © 2026 Spac2 Ecosystem. High-DPI hardware canvas rendering. 100% Client-Side.
+            <div class="footer-copyright">
+                &copy; 2026 Spac2 Ecosystem. High-DPI hardware canvas rendering. 100% Client-Side.
             </div>
         </div>
     </footer>
 
-    <!-- Libraries: PDF.js & JSZip & Lucide -->
+    <!-- Libraries: PDF.js & JSZip -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="./js/app.js?v=1"></script>
+    <script src="./js/app.js?v=4"></script>
 </body>
 
 </html>

@@ -44,13 +44,11 @@ function toggleTheme() {
 }
 
 function updateThemeIcon(theme) {
-    const btn = document.getElementById("theme-toggle-btn");
-    if (!btn) return;
-    const icon = btn.querySelector("i");
-    if (icon) {
-        icon.setAttribute("data-lucide", theme === "dark" ? "sun" : "moon");
-        if (window.lucide) window.lucide.createIcons();
-    }
+    const sun = document.getElementById("theme-icon-sun");
+    const moon = document.getElementById("theme-icon-moon");
+    if (!sun || !moon) return;
+    sun.style.display = theme === "dark" ? "block" : "none";
+    moon.style.display = theme === "dark" ? "none" : "block";
 }
 
 // Tool Switcher Dropdown
@@ -62,13 +60,15 @@ function initToolSwitcher() {
     const menu = switcher.querySelector(".tool-dropdown-menu");
     if (!btn || !menu) return;
 
+    const toolSvg = `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; flex-shrink: 0; color: var(--accent-red);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`;
+
     if (menu.children.length === 0) {
         PDF_TOOLS_LIST.forEach(tool => {
             const item = document.createElement("a");
             item.href = tool.url;
             item.className = "tool-dropdown-item";
             item.innerHTML = `
-                <i data-lucide="${tool.icon}" style="width: 16px; height: 16px; flex-shrink: 0; color: var(--accent-red);"></i>
+                ${toolSvg}
                 <div style="flex-grow: 1; min-width: 0;">
                     <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary); display: block;">${tool.title}</span>
                 </div>
@@ -99,14 +99,17 @@ function showToast(message, type = "info") {
 
     const toast = document.createElement("div");
     toast.className = `toast toast-${type}`;
-    const iconName = type === "success" ? "check-circle" : type === "error" ? "alert-circle" : "info";
+    const toastIcons = {
+        success: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px; flex-shrink: 0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+        error: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px; flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+        info: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 18px; height: 18px; flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`
+    };
     toast.innerHTML = `
-        <i data-lucide="${iconName}" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
+        ${toastIcons[type] || toastIcons.info}
         <span>${message}</span>
     `;
 
     container.appendChild(toast);
-    if (window.lucide) window.lucide.createIcons({ root: toast });
 
     setTimeout(() => {
         toast.style.opacity = "0";
