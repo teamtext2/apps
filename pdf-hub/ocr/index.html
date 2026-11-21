@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>Spac2 PDF Hub - Extract text from a PDF file</title>
     <meta name="title" content="Spac2 PDF Hub - Extract text from a PDF file">
     <meta name="description"
@@ -73,109 +73,101 @@
         crossorigin="anonymous"></script>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="./css/style.css?v=2">
+    <link rel="stylesheet" href="./css/style.css?v=3">
 </head>
 
 <body>
-    <!-- Header Ambient Overlay -->
+    <!-- Ambient Monochrome Backdrop -->
+    <div class="ambient-bg" aria-hidden="true"></div>
     <div class="spac2-header-overlay" aria-hidden="true"></div>
 
-    <!-- Floating Rounded Header -->
+    <!-- Floating iOS Frosted-Glass Header -->
     <header class="spac2-header-wrapper">
         <div class="spac2-header-capsule">
             <div class="header-left">
-                <!-- Nút Back về Spac2 -->
-                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back">
-                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                <a href="https://spac2.com/" class="btn-glass-icon btn-back" title="Back to Spac2 Home" aria-label="Back to Spac2 Home">
+                    <i data-lucide="arrow-left"></i>
                 </a>
 
-                <!-- Logo Card & Tên App -->
                 <a href="/apps/pdf-hub/" class="brand-link" title="Spac2 OCR PDF">
                     <div class="brand-logo-card">
                         <img src="https://spac2.com/favicon.ico" alt="Spac2 Logo" class="brand-logo-img">
                     </div>
                     <div class="brand-text">
                         <span class="brand-name">Spac2</span>
-                        <span class="brand-divider">|</span>
+                        <span class="brand-divider" aria-hidden="true">|</span>
                         <span class="brand-app">OCR PDF</span>
                     </div>
                 </a>
             </div>
 
             <div class="header-right">
-
-                <!-- Theme Toggle -->
-                <button type="button" id="theme-toggle-btn" class="btn-header-icon" onclick="toggleTheme()"
-                    aria-label="Toggle Theme" title="Toggle Light / Dark mode">
-                    <i data-lucide="sun" style="width: 18px; height: 18px;"></i>
+                <button type="button" id="theme-toggle-btn" class="btn-glass-icon"
+                    aria-label="Toggle Light or Dark mode" title="Toggle Light / Dark mode">
+                    <i data-lucide="sun"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Header Description (App Minimalist) -->
+    <!-- Tool Hero Section -->
     <section class="tool-header-section">
         <h1 class="tool-title">Extract Text from a PDF File</h1>
-        <p class="tool-desc">Free online OCR PDF tool to extract editable text from scanned documents using WebAssembly
-            AI.</p>
+        <p class="tool-desc">
+            Free online OCR PDF tool to extract editable text from scanned documents using private WebAssembly AI.
+        </p>
 
         <!-- Tool Switcher Dropdown -->
         <div class="tool-switcher">
-            <button type="button" class="tool-switcher-btn" title="Quick tool switcher">
-                <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+            <button type="button" class="btn-glass tool-switcher-btn" aria-expanded="false" aria-haspopup="true"
+                title="Quick tool switcher">
+                <i data-lucide="layout-grid"></i>
                 <span>All tools</span>
-                <i data-lucide="chevron-down" style="width: 13px; height: 13px;"></i>
+                <i data-lucide="chevron-down" class="chevron-icon"></i>
             </button>
-            <div class="tool-dropdown-menu"></div>
+            <div class="tool-dropdown-menu" role="menu"></div>
         </div>
     </section>
 
     <!-- Workspace Main -->
     <main class="workspace-wrap">
         <!-- 1. Initial Dropzone -->
-        <div id="dropzone" class="dropzone-container">
-            <input type="file" id="file-input" accept=".pdf,application/pdf" style="display: none;">
-            <div class="dropzone-icon-wrap">
-                <i data-lucide="scan" style="width: 32px; height: 32px;"></i>
+        <div id="dropzone" class="glass-card dropzone-container" role="button" tabindex="0"
+            aria-label="Upload or drop a PDF file">
+            <input type="file" id="file-input" accept=".pdf,application/pdf" class="sr-only-input">
+            <div class="dropzone-icon-wrap" aria-hidden="true">
+                <i data-lucide="scan"></i>
             </div>
-            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
-                Drag and drop your scanned PDF document here
-            </h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                Private optical text recognition via local Tesseract.js engine
-            </p>
-            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">
-                <i data-lucide="folder-open" style="width: 18px; height: 18px;"></i>
+            <h2 class="dropzone-title">Drag and drop your scanned PDF document here</h2>
+            <p class="dropzone-subtitle">Private optical text recognition via local Tesseract.js engine</p>
+            <button type="button" class="btn-glass btn-glass-primary" id="btn-select-pdf">
+                <i data-lucide="folder-open"></i>
                 <span>Select Scanned PDF</span>
             </button>
         </div>
 
         <!-- 2. OCR Studio -->
-        <div id="ocr-studio">
+        <section id="ocr-studio" aria-live="polite">
             <!-- Config Card -->
-            <div class="ocr-config-card" id="config-card">
+            <div class="glass-card ocr-config-card" id="config-card">
                 <div class="doc-summary-row">
                     <div class="doc-info-left">
-                        <div class="doc-icon-box">
-                            <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+                        <div class="doc-icon-box" aria-hidden="true">
+                            <i data-lucide="file-text"></i>
                         </div>
-                        <div>
-                            <div style="font-size: 1rem; font-weight: 700; color: var(--text-primary);"
-                                id="doc-name-label">document.pdf</div>
-                            <div style="font-size: 0.82rem; color: var(--text-muted);" id="doc-meta-label">0 MB • 0
-                                Pages</div>
+                        <div class="doc-meta-text">
+                            <div class="doc-name-label" id="doc-name-label">document.pdf</div>
+                            <div class="doc-meta-label" id="doc-meta-label">0 MB • 0 Pages</div>
                         </div>
                     </div>
 
-                    <button type="button" class="btn-secondary" id="btn-change-file"
-                        style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
-                        <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                    <button type="button" class="btn-glass btn-glass-sm" id="btn-change-file">
+                        <i data-lucide="rotate-ccw"></i>
                         <span>Change File</span>
                     </button>
                 </div>
 
                 <div class="settings-grid-row">
-                    <!-- Language Selection -->
                     <div class="setting-col">
                         <label for="select-ocr-lang">Document Language</label>
                         <select class="setting-select" id="select-ocr-lang">
@@ -189,88 +181,75 @@
                         </select>
                     </div>
 
-                    <!-- Page Range -->
                     <div class="setting-col">
                         <label for="inp-page-scope">Page Range</label>
                         <input type="text" class="setting-input" id="inp-page-scope" value="all"
-                            placeholder="all or e.g., 1-3, 5">
+                            placeholder="all or e.g., 1-3, 5" autocomplete="off">
                     </div>
                 </div>
 
-                <div style="display: flex; justify-content: flex-end; margin-top: 0.5rem;">
-                    <button type="button" class="btn-primary" id="btn-start-ocr"
-                        style="padding: 0.75rem 2rem; font-size: 0.95rem;">
-                        <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+                <div class="config-actions-row">
+                    <button type="button" class="btn-glass btn-glass-primary btn-glass-lg" id="btn-start-ocr">
+                        <i data-lucide="sparkles"></i>
                         <span>Start Optical Recognition</span>
                     </button>
                 </div>
             </div>
 
             <!-- Progress Card -->
-            <div id="progress-card">
-                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem;">
-                    Optical Character Recognition in Progress...
-                </h3>
-                <p id="progress-status-text" style="font-size: 0.9rem; color: var(--text-secondary);">
-                    Initializing Tesseract.js WebAssembly engine...
+            <div class="glass-card progress-card" id="progress-card">
+                <h2 class="progress-title">Optical Character Recognition in Progress…</h2>
+                <p id="progress-status-text" class="progress-status-text">
+                    Initializing Tesseract.js WebAssembly engine…
                 </p>
-                <div class="progress-bar-wrap">
+                <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                     <div class="progress-bar-fill" id="progress-bar-fill"></div>
                 </div>
-                <p id="progress-pct-label" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-red);">0%
-                </p>
+                <p id="progress-pct-label" class="progress-pct-label">0%</p>
             </div>
 
             <!-- Results Card -->
-            <div id="results-card">
+            <div class="glass-card results-card" id="results-card">
                 <div class="results-toolbar">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                        <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-primary);">Recognized
-                            Text</span>
-                        <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 9999px; padding: 0.2rem 0.6rem; font-size: 0.75rem; color: #10b981; font-weight: 700;"
-                            id="confidence-badge">
-                            98% Confidence
-                        </div>
-                        <span style="font-size: 0.8rem; color: var(--text-muted);" id="stats-label">0 words</span>
+                    <div class="results-meta-group">
+                        <span class="results-heading">Recognized Text</span>
+                        <span class="glass-badge" id="confidence-badge">98% Confidence</span>
+                        <span class="stats-label" id="stats-label">0 words</span>
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 0.6rem;">
-                        <button type="button" class="btn-secondary" id="btn-ocr-another"
-                            style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">
-                            <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                    <div class="results-actions-group">
+                        <button type="button" class="btn-glass btn-glass-sm" id="btn-ocr-another">
+                            <i data-lucide="rotate-ccw"></i>
                             <span>OCR Another</span>
                         </button>
-                        <button type="button" class="btn-secondary" id="btn-copy-ocr"
-                            style="padding: 0.4rem 0.95rem; font-size: 0.82rem;">
-                            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+                        <button type="button" class="btn-glass btn-glass-sm" id="btn-copy-ocr">
+                            <i data-lucide="copy"></i>
                             <span id="copy-btn-text">Copy All</span>
                         </button>
-                        <button type="button" class="btn-primary" id="btn-download-ocr-txt"
-                            style="padding: 0.4rem 1.15rem; font-size: 0.85rem;">
-                            <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+                        <button type="button" class="btn-glass btn-glass-primary btn-glass-sm" id="btn-download-ocr-txt">
+                            <i data-lucide="download"></i>
                             <span>Download .TXT</span>
                         </button>
                     </div>
                 </div>
 
                 <textarea class="ocr-textarea" id="ocr-textarea" spellcheck="false"
+                    aria-label="Recognized OCR text"
                     placeholder="Recognized text will appear here..."></textarea>
             </div>
-        </div>
+        </section>
 
         <!-- Bottom Information & Guide Section -->
         <section class="tool-info-section">
-
             <div class="tool-info-header">
-                <h3>Extract Text from a PDF File with Private OCR</h3>
+                <h2>Extract Text from a PDF File with Private OCR</h2>
                 <p>
                     Easily extract text from a PDF file, scanned documents, paper invoices, books, receipts, and
                     photographed pages into editable plain text (.TXT). Powered by WebAssembly neural networks
                     directly in your browser without uploading sensitive files to any cloud server.
                 </p>
-                <div style="margin-top: 1.15rem;">
-                    <a href="/apps/pdf-hub/ocr/blog/introduce-end-use-spac2-ocr" class="btn-secondary"
-                        style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 1.25rem; font-size: 0.88rem; text-decoration: none;">
+                <div class="info-cta-wrap">
+                    <a href="/apps/pdf-hub/ocr/blog/introduce-end-use-spac2-ocr" class="btn-glass">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
@@ -283,27 +262,23 @@
 
             <!-- 3-Step Guide -->
             <div class="steps-section">
-                <h4
-                    style="font-size: 1.15rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: var(--text-primary);">
-                    How to Extract Text from a PDF File in 3 Easy Steps
-                </h4>
+                <h3 class="steps-heading">How to Extract Text from a PDF File in 3 Easy Steps</h3>
                 <div class="steps-grid">
-                    <div class="step-item">
+                    <article class="glass-card step-item">
                         <div class="step-number">1</div>
                         <h4>Upload Your PDF File</h4>
                         <p>Select any PDF file containing scanned pages, photos of documents, or receipts.</p>
-                    </div>
-                    <div class="step-item">
+                    </article>
+                    <article class="glass-card step-item">
                         <div class="step-number">2</div>
                         <h4>Select Language &amp; Run OCR</h4>
-                        <p>Choose the document language (English, Vietnamese, French, etc.) and start AI text
-                            recognition.</p>
-                    </div>
-                    <div class="step-item">
+                        <p>Choose the document language (English, Vietnamese, French, etc.) and start AI text recognition.</p>
+                    </article>
+                    <article class="glass-card step-item">
                         <div class="step-number">3</div>
                         <h4>Copy or Save Extracted Text</h4>
                         <p>Copy the extracted PDF text in 1 click or download it as a clean plain text (.TXT) file.</p>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -312,7 +287,7 @@
     <!-- Footer -->
     <footer class="pdf-footer">
         <div class="pdf-footer-content">
-            <div class="pdf-footer-links">
+            <nav class="pdf-footer-links" aria-label="PDF Hub Tools">
                 <a href="/apps/pdf-hub/">PDF Hub Home</a>
                 <a href="/apps/pdf-hub/merge">Merge PDF</a>
                 <a href="/apps/pdf-hub/split">Split PDF</a>
@@ -321,11 +296,11 @@
                 <a href="/apps/pdf-hub/ocr">OCR PDF</a>
                 <a href="https://spac2.com/apps/pdf-hub/ocr/blog/introduce-end-use-spac2-ocr">OCR PDF Guide</a>
                 <a href="/apps/pdf-hub/metadata">PDF Metadata</a>
-            </div>
+            </nav>
             <div class="footer-privacy-text">
                 100% Client-Side • Local Device Processing • Zero Server Uploads
             </div>
-            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+            <div class="footer-copyright">
                 © 2026 Spac2 Ecosystem. Client-Side WebAssembly Neural OCR. 100% Privacy.
             </div>
         </div>
@@ -335,7 +310,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="./js/app.js?v=1"></script>
+    <script src="./js/app.js?v=3"></script>
 </body>
 
 </html>

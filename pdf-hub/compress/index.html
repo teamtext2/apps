@@ -61,18 +61,20 @@
         crossorigin="anonymous"></script>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="./css/style.css?v=3">
+    <link rel="stylesheet" href="./css/style.css?v=4">
 </head>
 
 <body>
-    <!-- Header Ambient Overlay -->
+    <!-- Ambient Monochrome Backdrop -->
+    <div class="ambient-bg" aria-hidden="true"></div>
     <div class="spac2-header-overlay" aria-hidden="true"></div>
 
-    <!-- Floating Rounded Header -->
+    <!-- Floating iOS Frosted-Glass Header -->
     <header class="spac2-header-wrapper">
         <div class="spac2-header-capsule">
             <div class="header-left">
-                <a href="https://spac2.com/" class="btn-back" title="Back to Spac2 Home" aria-label="Back to Spac2 Home">
+                <a href="https://spac2.com/" class="btn-glass-icon btn-back" title="Back to Spac2 Home"
+                    aria-label="Back to Spac2 Home">
                     <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <polyline points="15 18 9 12 15 6" />
@@ -92,7 +94,7 @@
             </div>
 
             <div class="header-right">
-                <button type="button" id="theme-toggle-btn" class="btn-header-icon"
+                <button type="button" id="theme-toggle-btn" class="btn-glass-icon"
                     aria-label="Toggle Light or Dark Theme" title="Toggle Light / Dark mode">
                     <svg id="theme-icon-sun" class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -115,7 +117,7 @@
         <p class="tool-desc">Reduce document file size while preserving high visual quality.</p>
 
         <div class="tool-switcher">
-            <button type="button" class="tool-switcher-btn" id="tool-switcher-btn" aria-expanded="false"
+            <button type="button" class="btn-glass tool-switcher-btn" id="tool-switcher-btn" aria-expanded="false"
                 aria-haspopup="true" title="Quick tool switcher">
                 <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -137,9 +139,9 @@
     <!-- Workspace Area -->
     <main class="workspace-wrap">
         <!-- 1. Dropzone Upload Area -->
-        <div id="dropzone" class="dropzone-container" role="button" tabindex="0"
+        <div id="dropzone" class="glass-card dropzone-container" role="button" tabindex="0"
             aria-label="Upload PDF file by clicking or dragging and dropping">
-            <input type="file" id="file-input" accept=".pdf,application/pdf" hidden>
+            <input type="file" id="file-input" accept=".pdf,application/pdf" class="sr-only-input">
             <div class="dropzone-icon-wrap" aria-hidden="true">
                 <svg class="svg-icon dropzone-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -151,10 +153,11 @@
             </div>
             <h2 class="dropzone-title">Drag and drop your PDF file here</h2>
             <p class="dropzone-subtitle">Processed in-memory with WebAssembly for instant client-side compression</p>
-            <button type="button" class="btn-primary" id="btn-select-file">
+            <button type="button" class="btn-glass btn-glass-primary" id="btn-select-file">
                 <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+                    <path
+                        d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
                     <path d="M2 10h20" />
                 </svg>
                 <span>Select PDF File</span>
@@ -162,7 +165,7 @@
         </div>
 
         <!-- 2. Configuration Studio -->
-        <section id="config-studio" class="studio-card" aria-label="Compression Settings" hidden>
+        <section id="config-studio" class="glass-card studio-card" aria-label="Compression Settings" hidden>
             <div class="file-summary-bar">
                 <div class="file-summary-left">
                     <div class="file-icon-box" aria-hidden="true">
@@ -182,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="app-btn-secondary" id="btn-change-file">
+                <button type="button" class="btn-glass btn-glass-sm" id="btn-change-file">
                     <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
@@ -261,7 +264,7 @@
 
             <!-- Advanced Options Toggle -->
             <div class="advanced-wrap">
-                <button type="button" class="app-btn-secondary advanced-toggle-btn" id="btn-toggle-advanced"
+                <button type="button" class="btn-glass btn-glass-sm advanced-toggle-btn" id="btn-toggle-advanced"
                     aria-expanded="false" aria-controls="advanced-panel">
                     <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         aria-hidden="true">
@@ -276,15 +279,15 @@
                         <line x1="17" y1="16" x2="23" y2="16" />
                     </svg>
                     <span>Advanced Tuning Options</span>
-                    <svg id="adv-arrow" class="svg-icon chevron-icon" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                    <svg class="svg-icon chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.4" aria-hidden="true">
                         <polyline points="6 9 12 15 18 9" />
                     </svg>
                 </button>
 
                 <div class="advanced-panel" id="advanced-panel" hidden>
                     <div class="advanced-row">
-                        <div>
+                        <div class="advanced-text-col">
                             <div class="advanced-label">Convert to Grayscale (Black &amp; White)</div>
                             <div class="advanced-hint">Discards color information to reduce file size even further.</div>
                         </div>
@@ -298,7 +301,7 @@
 
             <!-- Action Footer -->
             <div class="studio-action-footer">
-                <button type="button" class="btn-execute-app" id="btn-start-compress">
+                <button type="button" class="btn-glass btn-glass-primary btn-glass-lg" id="btn-start-compress">
                     <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <polyline points="4 14 10 14 10 20" />
@@ -312,7 +315,8 @@
         </section>
 
         <!-- 3. Progress Screen -->
-        <section id="progress-studio" class="studio-card" aria-label="Compression Progress" aria-live="polite" hidden>
+        <section id="progress-studio" class="glass-card studio-card progress-studio" aria-label="Compression Progress"
+            aria-live="polite" hidden>
             <div class="progress-pulse-icon" aria-hidden="true">
                 <svg class="svg-icon progress-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2">
@@ -322,20 +326,22 @@
                     <line x1="3" y1="21" x2="10" y2="14" />
                 </svg>
             </div>
-            <h2 class="progress-title">Optimizing &amp; Compressing PDF...</h2>
-            <p id="progress-status-text" class="progress-subtitle">Analyzing document pages and re-encoding visual layers...</p>
+            <h2 class="progress-title">Optimizing &amp; Compressing PDF…</h2>
+            <p id="progress-status-text" class="progress-subtitle">
+                Analyzing document pages and re-encoding visual layers…
+            </p>
             <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
                 id="progress-bar-role">
                 <div class="progress-bar-fill" id="progress-bar-fill"></div>
             </div>
             <div class="progress-footer">
                 <span id="progress-percent" class="progress-percent">0%</span>
-                <button type="button" class="app-btn-secondary" id="btn-cancel-compress">Cancel</button>
+                <button type="button" class="btn-glass btn-glass-sm" id="btn-cancel-compress">Cancel</button>
             </div>
         </section>
 
         <!-- 4. Result Screen -->
-        <section id="result-studio" class="studio-card" aria-label="Compression Result" hidden>
+        <section id="result-studio" class="glass-card studio-card result-studio" aria-label="Compression Result" hidden>
             <div class="result-success-icon" aria-hidden="true">
                 <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -370,7 +376,7 @@
             </div>
 
             <div class="result-actions-row">
-                <button type="button" class="btn-execute-app" id="btn-download-result">
+                <button type="button" class="btn-glass btn-glass-primary btn-glass-lg" id="btn-download-result">
                     <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                         aria-hidden="true">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -379,7 +385,7 @@
                     </svg>
                     <span>Download Compressed PDF</span>
                 </button>
-                <button type="button" class="app-btn-secondary" id="btn-back-config">
+                <button type="button" class="btn-glass btn-glass-sm" id="btn-back-config">
                     <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         aria-hidden="true">
                         <circle cx="12" cy="12" r="3" />
@@ -388,7 +394,7 @@
                     </svg>
                     <span>Try Another Level</span>
                 </button>
-                <button type="button" class="app-btn-secondary" id="btn-compress-another">
+                <button type="button" class="btn-glass btn-glass-sm" id="btn-compress-another">
                     <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         aria-hidden="true">
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
@@ -407,26 +413,36 @@
                     Re-encode images and strip redundant stream bloat inside your browser memory. Choose custom
                     downsampling presets to meet email attachment limits while maintaining crisp readability.
                 </p>
+                <div class="info-cta-wrap">
+                    <a href="/apps/pdf-hub/compress/blog/introduce-end-use-spac2-compress" class="btn-glass">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
+                        <span>How to Use</span>
+                    </a>
+                </div>
             </div>
 
             <div class="steps-section">
                 <h4 class="steps-heading">How to Compress PDF in 3 Steps</h4>
                 <div class="steps-grid">
-                    <div class="step-item">
+                    <article class="glass-card step-item">
                         <div class="step-number">1</div>
                         <h5>Upload Document</h5>
                         <p>Select or drag and drop any large PDF file that exceeds attachment or web limits.</p>
-                    </div>
-                    <div class="step-item">
+                    </article>
+                    <article class="glass-card step-item">
                         <div class="step-number">2</div>
                         <h5>Choose Preset</h5>
                         <p>Select Extreme, Recommended, or Light compression based on your intended usage.</p>
-                    </div>
-                    <div class="step-item">
+                    </article>
+                    <article class="glass-card step-item">
                         <div class="step-number">3</div>
                         <h5>Download File</h5>
                         <p>Review the exact percentage of space saved and download your optimized PDF instantly.</p>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -435,14 +451,14 @@
     <!-- Footer -->
     <footer class="pdf-footer">
         <div class="pdf-footer-content">
-            <div class="pdf-footer-links">
+            <nav class="pdf-footer-links" aria-label="PDF Hub Tools">
                 <a href="/apps/pdf-hub/">PDF Hub Home</a>
                 <a href="/apps/pdf-hub/ocr">OCR PDF</a>
                 <a href="/apps/pdf-hub/pdf-to-doc">PDF to Word</a>
                 <a href="/apps/pdf-hub/pdf-to-image">PDF to Images</a>
                 <a href="/apps/pdf-hub/images-to-pdf">Images to PDF</a>
                 <a href="/apps/pdf-hub/compress">Compress PDF</a>
-            </div>
+            </nav>
             <div class="footer-privacy-text">
                 100% Client-Side &bull; Local Device Processing &bull; Zero Server Uploads
             </div>
@@ -460,7 +476,7 @@
             document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
         }
     </script>
-    <script src="./js/app.js?v=3"></script>
+    <script src="./js/app.js?v=4"></script>
 </body>
 
 </html>

@@ -5,11 +5,19 @@
     "use strict";
 
     const PDF_TOOLS = [
-        { id: "ocr", title: "OCR PDF", subtitle: "AI optical recognition", url: "/apps/pdf-hub/ocr/", badge: "AI Vision" },
-        { id: "pdf-to-doc", title: "PDF to Word (DOCX)", subtitle: "Convert to DOCX document", url: "/apps/pdf-hub/pdf-to-doc/", badge: "Word DOCX" },
+        { id: "merge", title: "Merge PDF", subtitle: "Combine multiple PDF files", url: "/apps/pdf-hub/merge/", badge: "Popular" },
+        { id: "split", title: "Split PDF", subtitle: "Extract or divide pages", url: "/apps/pdf-hub/split/", badge: "Utility" },
+        { id: "organize", title: "Organize PDF", subtitle: "Reorder, rotate & delete", url: "/apps/pdf-hub/organize/", badge: "Visual" },
+        { id: "compress", title: "Compress PDF", subtitle: "Reduce file size", url: "/apps/pdf-hub/compress/", badge: "Optimization" },
         { id: "pdf-to-image", title: "PDF to Images", subtitle: "Export high-res photos", url: "/apps/pdf-hub/pdf-to-image/", badge: "High-DPI" },
         { id: "images-to-pdf", title: "Images to PDF", subtitle: "Convert JPG, PNG to PDF", url: "/apps/pdf-hub/images-to-pdf/", badge: "Popular" },
-        { id: "compress", title: "Compress PDF", subtitle: "Reduce file size", url: "/apps/pdf-hub/compress/", badge: "Optimization" }
+        { id: "pdf-to-doc", title: "PDF to Word (DOCX)", subtitle: "Convert to DOCX document", url: "/apps/pdf-hub/pdf-to-doc/", badge: "Word DOCX" },
+        { id: "annotate", title: "Annotate PDF", subtitle: "Draw, highlight & notes", url: "/apps/pdf-hub/annotate/", badge: "Editor" },
+        { id: "sign", title: "Sign PDF", subtitle: "Electronic signatures", url: "/apps/pdf-hub/sign/", badge: "Fast Sign" },
+        { id: "watermark", title: "Watermark PDF", subtitle: "Stamp copyright & logo", url: "/apps/pdf-hub/watermark/", badge: "Copyright" },
+        { id: "crop-resize", title: "Crop & Resize PDF", subtitle: "Trim margins & formats", url: "/apps/pdf-hub/crop-resize/", badge: "Paper Size" },
+        { id: "ocr", title: "OCR PDF", subtitle: "AI optical recognition", url: "/apps/pdf-hub/ocr/", badge: "AI Vision" },
+        { id: "metadata", title: "PDF Metadata", subtitle: "Edit & strip metadata", url: "/apps/pdf-hub/metadata/", badge: "Privacy" }
     ];
 
     const SVG = {
@@ -154,7 +162,7 @@
         });
 
         document.addEventListener("click", (e) => {
-            if (!menu.contains(e.target) && e.target !== btn) closeMenu();
+            if (!menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
         });
 
         document.addEventListener("keydown", (e) => {
@@ -245,7 +253,10 @@
             fileInput.click();
         });
 
-        dropzone.addEventListener("click", () => fileInput.click());
+        dropzone.addEventListener("click", (e) => {
+            if (e.target === fileInput) return;
+            fileInput.click();
+        });
 
         dropzone.addEventListener("keydown", (e) => {
             if (e.key === "Enter" || e.key === " ") {

@@ -80,6 +80,19 @@ const PDF_TOOLS = [
         hot: true,
         tag: "JPG/PNG to PDF",
         keywords: "images to pdf jpg to pdf png to pdf convert picture photo chuyen anh sang pdf gop anh thanh pdf"
+    },
+    {
+        id: "compress",
+        title: "Compress PDF",
+        subtitle: "Reduce file size",
+        url: "/apps/pdf-hub/compress/",
+        desc: "Shrink PDF file size directly in your browser with Extreme, Recommended, and Light presets, Grayscale mode, and lossless stream fallback.",
+        category: "convert",
+        icon: "minimize-2",
+        badge: "Optimization",
+        hot: true,
+        tag: "Max compression",
+        keywords: "compress shrink optimize reduce file size nen giam dung luong pdf"
     }
 ];
 
